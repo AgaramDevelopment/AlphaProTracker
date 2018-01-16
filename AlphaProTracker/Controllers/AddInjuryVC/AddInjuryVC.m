@@ -204,6 +204,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebservice =[[WebService alloc]init];
+    
+    self.StSlider.labels = @[@"1", @"2", @"3", @"4", @"5",@"6",@"7"];
+    self.StSlider.maxCount = 7;
+    self.StSlider.trackHeight = 4;
+    self.StSlider.trackCircleRadius = 5;
+    self.StSlider.trackColor = [UIColor grayColor];
+    self.StSlider.sliderCircleColor = [UIColor whiteColor];
+    self.StSlider.labelColor = [UIColor whiteColor];
+    self.StSlider.sliderCircleRadius = self.StSlider.trackCircleRadius+10;
+    
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     RoleCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
@@ -1283,8 +1293,8 @@
                     
                     int a = [VasValue intValue];
                     
-                    self.VasSlider.value = a;
-                    
+                   // self.VasSlider.value = a;
+                     self.StSlider.index = a-1;
                     [self didChandeslidervalue:0];
                     
                     
@@ -1895,8 +1905,9 @@
 }
 -(IBAction)didChandeslidervalue:(UISlider *)sender
 {
-    NSLog(@"slider value = %f", sender.value);
-    selectsliderValue =[NSString stringWithFormat:@"%f",sender.value];
+    //NSLog(@"slider value = %f", sender.value);
+    //selectsliderValue =[NSString stringWithFormat:@"%f",sender.value];
+    selectsliderValue = [NSString stringWithFormat:@"%lu",(unsigned long)self.StSlider.index];
 }
 -(IBAction)didClickxrayBtn:(id)sender
 {

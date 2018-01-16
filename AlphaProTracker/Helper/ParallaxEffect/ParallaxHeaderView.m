@@ -74,7 +74,7 @@ static CGFloat kLabelPaddingDist = 8.0f;
         rect.size.height += delta;
         self.imageScrollView.frame = rect;
         self.clipsToBounds = NO;
-        self.headerTitleLabel.alpha = 1 - (delta) * 1 / kMaxTitleAlphaOffset;
+       // self.headerTitleLabel.alpha = 1 - (delta) * 1 / kMaxTitleAlphaOffset;
     }
 }
 
@@ -100,16 +100,17 @@ static CGFloat kLabelPaddingDist = 8.0f;
     [self.imageScrollView addSubview:imageView];
     
     CGRect labelRect = self.imageScrollView.bounds;
-    labelRect.origin.x = labelRect.origin.y = kLabelPaddingDist;
+    labelRect.origin.x = imageView.frame.origin.x+5;
+    labelRect.origin.y = kLabelPaddingDist+100;
     labelRect.size.width = labelRect.size.width - 2 * kLabelPaddingDist;
     labelRect.size.height = labelRect.size.height - 2 * kLabelPaddingDist;
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:labelRect];
-    headerLabel.textAlignment = NSTextAlignmentCenter;
+    headerLabel.textAlignment = NSTextAlignmentLeft;
     headerLabel.numberOfLines = 0;
     headerLabel.lineBreakMode = NSLineBreakByWordWrapping;
     headerLabel.autoresizingMask = imageView.autoresizingMask;
     headerLabel.textColor = [UIColor whiteColor];
-    headerLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:23];
+    headerLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
     self.headerTitleLabel = headerLabel;
     [self.imageScrollView addSubview:self.headerTitleLabel];
     

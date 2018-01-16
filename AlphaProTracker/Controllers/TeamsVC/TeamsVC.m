@@ -81,7 +81,7 @@
     // Do any additional setup after loading the view.
     
     ParallaxHeaderView *headerView = [ParallaxHeaderView parallaxHeaderViewWithImage:[UIImage imageNamed:@"banner"] forSize:CGSizeMake(self.playersTbl.frame.size.width, 300)];
-    //headerView.headerTitleLabel.text = self.story[@"story"];
+    headerView.headerTitleLabel.text = self.selectTeamname;
     [self.playersTbl setTableHeaderView:headerView];
 
 }

@@ -119,7 +119,7 @@
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
-            if([[responseObject valueForKey:@"Status"] isEqualToString:@"PSUCCESS"])
+            if([[responseObject valueForKey:@"Status"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Status"] != NULL)
             {
                 NSDictionary * objRole =[responseObject valueForKey:@"Roles"];
                 
