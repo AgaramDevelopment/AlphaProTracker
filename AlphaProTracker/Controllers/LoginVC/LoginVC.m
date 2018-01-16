@@ -131,13 +131,15 @@
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Userreferencecode"] forKey:@"Userreferencecode"];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Username"] forKey:@"Username"];
+                [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"Username"];
+                [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"Password"];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"PhotoPath"] forKey:@"PhotoPath"];
                 [[NSUserDefaults standardUserDefaults] setObject:objRoleName forKey:@"RoleName"];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:objRoleCode forKey:@"RoleCode"];
                 
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 
