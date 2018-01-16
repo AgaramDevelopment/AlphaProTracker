@@ -231,6 +231,14 @@
 		ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4E2361F4EAD1000C53F45 /* DashBoardVCCell.m */; };
 		CE3EBB461FFC990200588728 /* AssessmentFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3EBB451FFC990200588728 /* AssessmentFilterView.m */; };
 		CEC26FCD1FFE129B00FF2D74 /* AssessmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC26FCC1FFE129B00FF2D74 /* AssessmentCell.m */; };
+		CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8033200E210400E33513 /* ExcersizeCollectionViewCell.m */; };
+		CEEE8036200E210400E33513 /* ExcersizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE8034200E210400E33513 /* ExcersizeCollectionViewCell.xib */; };
+		CEEE803A200E2BBC00E33513 /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8038200E2BBC00E33513 /* HeaderCollectionReusableView.m */; };
+		CEEE803B200E2BBC00E33513 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE8039200E2BBC00E33513 /* HeaderCollectionReusableView.xib */; };
+		CEEE8040200E3B6D00E33513 /* ExcierseDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE803D200E3B6B00E33513 /* ExcierseDetailVC.xib */; };
+		CEEE8041200E3B6D00E33513 /* ExcierseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEE803F200E3B6C00E33513 /* ExcierseDetailVC.m */; };
+		CEEE8046200E3C3E00E33513 /* ExcersizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8044200E3C3E00E33513 /* ExcersizeViewController.m */; };
+		CEEE8047200E3C3E00E33513 /* ExcersizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE8045200E3C3E00E33513 /* ExcersizeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -653,6 +661,18 @@
 		CE3EBB451FFC990200588728 /* AssessmentFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentFilterView.m; path = Common/Assessment/AssessmentFilterView.m; sourceTree = "<group>"; };
 		CEC26FCB1FFE129B00FF2D74 /* AssessmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentCell.h; path = Subview/AssessmentCell/AssessmentCell.h; sourceTree = "<group>"; };
 		CEC26FCC1FFE129B00FF2D74 /* AssessmentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentCell.m; path = Subview/AssessmentCell/AssessmentCell.m; sourceTree = "<group>"; };
+		CEEE8032200E210400E33513 /* ExcersizeCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcersizeCollectionViewCell.h; sourceTree = "<group>"; };
+		CEEE8033200E210400E33513 /* ExcersizeCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExcersizeCollectionViewCell.m; sourceTree = "<group>"; };
+		CEEE8034200E210400E33513 /* ExcersizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExcersizeCollectionViewCell.xib; sourceTree = "<group>"; };
+		CEEE8037200E2BBC00E33513 /* HeaderCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderCollectionReusableView.h; sourceTree = "<group>"; };
+		CEEE8038200E2BBC00E33513 /* HeaderCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderCollectionReusableView.m; sourceTree = "<group>"; };
+		CEEE8039200E2BBC00E33513 /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		CEEE803D200E3B6B00E33513 /* ExcierseDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcierseDetailVC.xib; sourceTree = "<group>"; };
+		CEEE803E200E3B6C00E33513 /* ExcierseDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcierseDetailVC.h; sourceTree = "<group>"; };
+		CEEE803F200E3B6C00E33513 /* ExcierseDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcierseDetailVC.m; sourceTree = "<group>"; };
+		CEEE8043200E3C3D00E33513 /* ExcersizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcersizeViewController.h; sourceTree = "<group>"; };
+		CEEE8044200E3C3E00E33513 /* ExcersizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcersizeViewController.m; sourceTree = "<group>"; };
+		CEEE8045200E3C3E00E33513 /* ExcersizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcersizeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -797,6 +817,7 @@
 		043B23191F4B1BC700036604 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
+				CEEE8031200E20E200E33513 /* ExcersizeCollectionCell */,
 				18B97996200E125000B94DD4 /* PopviewCell */,
 				CEC26FCA1FFE124500FF2D74 /* AssessmentCell */,
 				04DC336D1FB085C4001BF439 /* EventRecord */,
@@ -829,6 +850,7 @@
 		043B231A1F4B1BD200036604 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CEEE802B200E1DF300E33513 /* ExcersizeVC */,
 				04EBB76A1F88CB7600422202 /* AssignPlayerVC */,
 				041BF51E1F7F5F1F0091611D /* Programvc */,
 				04241DF81F7D237D00A7C46A /* GraphVC */,
@@ -1791,6 +1813,42 @@
 			name = AssessmentCell;
 			sourceTree = "<group>";
 		};
+		CEEE802B200E1DF300E33513 /* ExcersizeVC */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE8043200E3C3D00E33513 /* ExcersizeViewController.h */,
+				CEEE8044200E3C3E00E33513 /* ExcersizeViewController.m */,
+				CEEE8045200E3C3E00E33513 /* ExcersizeViewController.xib */,
+				CEEE8042200E3B7D00E33513 /* ExcierseDetailVC */,
+			);
+			name = ExcersizeVC;
+			path = Controllers/ExcersizeVC;
+			sourceTree = "<group>";
+		};
+		CEEE8031200E20E200E33513 /* ExcersizeCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE8032200E210400E33513 /* ExcersizeCollectionViewCell.h */,
+				CEEE8033200E210400E33513 /* ExcersizeCollectionViewCell.m */,
+				CEEE8034200E210400E33513 /* ExcersizeCollectionViewCell.xib */,
+				CEEE8037200E2BBC00E33513 /* HeaderCollectionReusableView.h */,
+				CEEE8038200E2BBC00E33513 /* HeaderCollectionReusableView.m */,
+				CEEE8039200E2BBC00E33513 /* HeaderCollectionReusableView.xib */,
+			);
+			name = ExcersizeCollectionCell;
+			path = Subview/ExcersizeCollectionCell;
+			sourceTree = "<group>";
+		};
+		CEEE8042200E3B7D00E33513 /* ExcierseDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE803E200E3B6C00E33513 /* ExcierseDetailVC.h */,
+				CEEE803F200E3B6C00E33513 /* ExcierseDetailVC.m */,
+				CEEE803D200E3B6B00E33513 /* ExcierseDetailVC.xib */,
+			);
+			path = ExcierseDetailVC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1864,8 +1922,11 @@
 				ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */,
 				0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */,
 				AC1BC8111F8665A60047AECC /* AADrilldown.js in Resources */,
+				CEEE8036200E210400E33513 /* ExcersizeCollectionViewCell.xib in Resources */,
 				045A49F81FA22192008C1630 /* DailyCalendar.png in Resources */,
+				CEEE803B200E2BBC00E33513 /* HeaderCollectionReusableView.xib in Resources */,
 				ACA768611F4C2AF000ECC17A /* AFNetworkActivityLogger in Resources */,
+				CEEE8047200E3C3E00E33513 /* ExcersizeViewController.xib in Resources */,
 				04DB752E1F7A5E64001CB710 /* IllnessCell.xib in Resources */,
 				ACB567C51F62D7A800F1C45E /* TrainingLoadCell.xib in Resources */,
 				045A49FA1FA22192008C1630 /* redCircle.png in Resources */,
@@ -1877,6 +1938,7 @@
 				045A49FB1FA22192008C1630 /* WeeklyCalendar.png in Resources */,
 				04DD71011F95CBA900E50329 /* agapt_database.sqlite in Resources */,
 				AC1BC8671F8665C20047AECC /* AAChartKit.podspec in Resources */,
+				CEEE8040200E3B6D00E33513 /* ExcierseDetailVC.xib in Resources */,
 				043B230E1F4B1B3900036604 /* Assets.xcassets in Resources */,
 				045A49FC1FA22192008C1630 /* YearlyCalendar.png in Resources */,
 				04DF252B1F74CFDB00DB3AE3 /* TrainingLoadVCCell.xib in Resources */,
@@ -2004,8 +2066,10 @@
 				ACACEFE21F59740C004C28A4 /* TestAssessmentListVC.m in Sources */,
 				04534A561F53FA4100999FBC /* AFHTTPRequestOperationManager.m in Sources */,
 				AC1BC8501F8665B40047AECC /* AAChart.m in Sources */,
+				CEEE8046200E3C3E00E33513 /* ExcersizeViewController.m in Sources */,
 				ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */,
 				ACBD4ADC1F56FE5600AFA25D /* QuestionaryVC.m in Sources */,
+				CEEE803A200E2BBC00E33513 /* HeaderCollectionReusableView.m in Sources */,
 				AC1BC8581F8665B40047AECC /* AAOptions.m in Sources */,
 				AC1BC8531F8665B40047AECC /* AAItemStyle.m in Sources */,
 				ACBBA18B1F614642000F9DC9 /* RecentFitness.m in Sources */,
@@ -2040,6 +2104,7 @@
 				04DB752D1F7A5E64001CB710 /* IllnessCell.m in Sources */,
 				ACACEFEE1F597AFE004C28A4 /* ExpandAssessmentVC.m in Sources */,
 				045A49821FA2202F008C1630 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
+				CEEE8041200E3B6D00E33513 /* ExcierseDetailVC.m in Sources */,
 				045A497D1FA22026008C1630 /* FFMonthCell.m in Sources */,
 				045A49B51FA220B2008C1630 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				045A495A1FA21F9E008C1630 /* FFButtonAddEventWithPopover.m in Sources */,
@@ -2075,6 +2140,7 @@
 				04534A5C1F53FA4100999FBC /* AFURLResponseSerialization.m in Sources */,
 				ACB567C41F62D7A800F1C45E /* TrainingLoadCell.m in Sources */,
 				045A49EE1FA22174008C1630 /* FFEventDetailPopoverController.m in Sources */,
+				CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */,
 				AC1BC85E1F8665B40047AECC /* AASeriesElement.m in Sources */,
 				040B2A8D1F600E0600FB4B93 /* DMLazyScrollView.m in Sources */,
 				045A49971FA22072008C1630 /* FFViewWithHourLines.m in Sources */,
@@ -2214,7 +2280,7 @@
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AlphaProTracker/PrefixHeader.pch";
 				INFOPLIST_FILE = AlphaProTracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.AlphaProTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2236,7 +2302,7 @@
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AlphaProTracker/PrefixHeader.pch";
 				INFOPLIST_FILE = AlphaProTracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.AlphaProTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
