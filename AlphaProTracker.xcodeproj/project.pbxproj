@@ -138,6 +138,8 @@
 		18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97985200DCEC200B94DD4 /* HomeVCCell.m */; };
 		18B97993200DD49E00B94DD4 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97990200DD49E00B94DD4 /* UIImage+ImageEffects.m */; };
 		18B97994200DD49E00B94DD4 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97992200DD49E00B94DD4 /* ParallaxHeaderView.m */; };
+		18B97999200E129E00B94DD4 /* PopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97998200E129E00B94DD4 /* PopViewCell.m */; };
+		18B9799D200E158500B94DD4 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B9799C200E158500B94DD4 /* StepSlider.m */; };
 		AC1BC8041F8663020047AECC /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FC1F8663020047AECC /* AAChartModel.m */; };
 		AC1BC8051F8663020047AECC /* AAChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FE1F8663020047AECC /* AAChartView.m */; };
 		AC1BC8061F8663020047AECC /* AAJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC8011F8663020047AECC /* AAJsonConverter.m */; };
@@ -484,6 +486,10 @@
 		18B97990200DD49E00B94DD4 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Helper/ParallaxEffect/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		18B97991200DD49E00B94DD4 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Helper/ParallaxEffect/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		18B97992200DD49E00B94DD4 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = Helper/ParallaxEffect/ParallaxHeaderView.m; sourceTree = "<group>"; };
+		18B97997200E129E00B94DD4 /* PopViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopViewCell.h; path = Subview/PopCell/PopViewCell.h; sourceTree = "<group>"; };
+		18B97998200E129E00B94DD4 /* PopViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PopViewCell.m; path = Subview/PopCell/PopViewCell.m; sourceTree = "<group>"; };
+		18B9799B200E158500B94DD4 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepSlider.h; path = Helper/slider/StepSlider.h; sourceTree = "<group>"; };
+		18B9799C200E158500B94DD4 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepSlider.m; path = Helper/slider/StepSlider.m; sourceTree = "<group>"; };
 		AC1BC7FA1F8663020047AECC /* AAChartKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartKit.h; path = Helper/AAChart/AAChartConfiger/AAChartKit.h; sourceTree = "<group>"; };
 		AC1BC7FB1F8663020047AECC /* AAChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartModel.h; path = Helper/AAChart/AAChartConfiger/AAChartModel.h; sourceTree = "<group>"; };
 		AC1BC7FC1F8663020047AECC /* AAChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AAChartModel.m; path = Helper/AAChart/AAChartConfiger/AAChartModel.m; sourceTree = "<group>"; };
@@ -791,6 +797,7 @@
 		043B23191F4B1BC700036604 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
+				18B97996200E125000B94DD4 /* PopviewCell */,
 				CEC26FCA1FFE124500FF2D74 /* AssessmentCell */,
 				04DC336D1FB085C4001BF439 /* EventRecord */,
 				04EBB7911F8904B400422202 /* QuestionaryCell */,
@@ -879,6 +886,7 @@
 		043B231D1F4B1BFF00036604 /* Helperview */ = {
 			isa = PBXGroup;
 			children = (
+				18B9799A200E157300B94DD4 /* Slider */,
 				18B9798E200DD48800B94DD4 /* ParallaxEffect */,
 				04E640991FB5A74A006E6C57 /* HeaderSectionFiles */,
 				045A49C81FA220DC008C1630 /* FFConstants.h */,
@@ -1304,6 +1312,24 @@
 				18B97990200DD49E00B94DD4 /* UIImage+ImageEffects.m */,
 			);
 			name = ParallaxEffect;
+			sourceTree = "<group>";
+		};
+		18B97996200E125000B94DD4 /* PopviewCell */ = {
+			isa = PBXGroup;
+			children = (
+				18B97997200E129E00B94DD4 /* PopViewCell.h */,
+				18B97998200E129E00B94DD4 /* PopViewCell.m */,
+			);
+			name = PopviewCell;
+			sourceTree = "<group>";
+		};
+		18B9799A200E157300B94DD4 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				18B9799B200E158500B94DD4 /* StepSlider.h */,
+				18B9799C200E158500B94DD4 /* StepSlider.m */,
+			);
+			name = Slider;
 			sourceTree = "<group>";
 		};
 		AC1BC7F61F8662BA0047AECC /* AAChartKit */ = {
@@ -1885,6 +1911,7 @@
 				04534A5D1F53FA4100999FBC /* AFURLSessionManager.m in Sources */,
 				04534A5A1F53FA4100999FBC /* AFURLConnectionOperation.m in Sources */,
 				04DEBCB31F4BED800070C540 /* WebService.m in Sources */,
+				18B9799D200E158500B94DD4 /* StepSlider.m in Sources */,
 				045A49AC1FA220A8008C1630 /* FFYearCell.m in Sources */,
 				04534A571F53FA4100999FBC /* AFHTTPSessionManager.m in Sources */,
 				AC1BC8651F8665B40047AECC /* AAYAxis.m in Sources */,
@@ -1990,6 +2017,7 @@
 				AC1BC84D1F8665B40047AECC /* AAArea.m in Sources */,
 				045A49D41FA22110008C1630 /* FFDatePopoverController.m in Sources */,
 				045A496F1FA21FF7008C1630 /* FFDayCollectionView.m in Sources */,
+				18B97999200E129E00B94DD4 /* PopViewCell.m in Sources */,
 				045A49611FA21FD3008C1630 /* FFDayHeaderCollectionView.m in Sources */,
 				ACB28C331F58365000E8A865 /* FoodDairyVC.m in Sources */,
 				045A49EF1FA22174008C1630 /* FFEventDetailView.m in Sources */,

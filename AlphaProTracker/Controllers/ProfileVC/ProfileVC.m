@@ -164,7 +164,7 @@
 {
     if(IS_IPHONE_DEVICE)
     {
-        return 10;
+        return 45;
 
     }
     else{

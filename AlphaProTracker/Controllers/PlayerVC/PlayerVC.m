@@ -22,10 +22,6 @@
 #import "SessionDetails.h"
 #import "BowlingLoad.h"
 
-
-
-
-
 @interface PlayerVC ()
 {
     

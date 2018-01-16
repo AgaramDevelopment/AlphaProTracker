@@ -12,6 +12,7 @@
 #import "Config.h"
 #import "AssessmentCell.h"
 #import "SACalendar.h"
+#import "PopViewCell.h"
 @implementation AssessmentFilterView
 {
     NSMutableArray * ModuleArray;
@@ -24,7 +25,10 @@
     BOOL isTeam;
     BOOL isPoPlist;
     BOOL isplayerlist;
+    BOOL isDatePicker;
+    SACalendar *calendar;
 }
+
 
 @synthesize popTblView;
 - (id)initWithFrame:(CGRect)frame
@@ -44,8 +48,10 @@
     self.popTblView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     self.popTblView.hidden = YES;
     self.playerTxt.delegate = self;
+    [self datePickermethod];
     [self allviewSetborder];
     [self moduleWebservice];
+    calendar.hidden = YES;
 }
 
 -(void)allviewSetborder
@@ -203,6 +209,7 @@
     isplayerlist = NO;
     isPoPlist = YES;
     self.popviewyposition.constant = self.moduleView.frame.origin.y;
+
     if(isModule == NO)
     {
         commonArray = [[NSMutableArray alloc]init];
@@ -211,6 +218,7 @@
         isModule =YES;
         [self showAnimate];
         [self.popTblView reloadData];
+
     } else {
         self.popTblView.hidden = YES;
         isModule = NO;
@@ -218,6 +226,8 @@
     }
     isTittle = NO;
     isTeam =NO;
+    calendar.hidden=YES;
+    isDatePicker=NO;
 }
 
 -(IBAction)didClickTittle:(id)sender
@@ -233,6 +243,7 @@
         isTittle =YES;
         [self showAnimate];
         [self.popTblView reloadData];
+
     } else {
         self.popTblView.hidden = YES;
         isTittle = NO;
@@ -240,6 +251,8 @@
     }
     isModule = NO;
     isTeam =NO;
+    calendar.hidden =YES;
+    isDatePicker=NO;
 }
 
 -(IBAction)didClickTeamAction:(id)sender
@@ -255,6 +268,7 @@
         isTeam =YES;
         [self showAnimate];
         [self.popTblView reloadData];
+
     } else {
         self.popTblView.hidden = YES;
         isTeam =NO;
@@ -262,17 +276,56 @@
     }
     isTittle = NO;
     isModule =NO;
+    isDatePicker=NO;
+    calendar.hidden = YES;
+}
+-(void)datePickermethod
+{
+    calendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.dateView.frame.origin.x,self.dateView.frame.origin.y+self.dateView.frame.size.height+5,self.frame.size.width,self.dateView.frame.size.height+210) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
+    
+    calendar.delegate = self;
+    calendar.layer.shadowOpacity = 0.8;
+    calendar.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    calendar.layer.cornerRadius = 8;
+    calendar.layer.masksToBounds = YES;
+    calendar.layer.borderColor = [UIColor lightTextColor].CGColor;
+    calendar.layer.borderWidth = 1;
+    [self addSubview:calendar];
 }
 
 -(IBAction)didClickDate:(id)sender
 {
-    SACalendar *calendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.frame.size.width/3,self.dateView.frame.origin.y+self.dateView.frame.size.height+5,self.dateView.frame.size.width+100,self.dateView.frame.size.height+200) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
     
-    calendar.delegate = self;
-    calendar.layer.cornerRadius = 5;
-    calendar.layer.shadowOpacity = 0.8;
-    calendar.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    [self addSubview:calendar];
+    if(isDatePicker==NO)
+    {
+     calendar.transform = CGAffineTransformMakeScale(1.3, 1.3);
+     calendar.alpha = 0;
+     [UIView animateWithDuration:.25 animations:^{
+        calendar.alpha = 1;
+        calendar.transform = CGAffineTransformMakeScale(1, 1);
+         isDatePicker=YES;
+        
+         calendar.hidden = NO;
+    }];
+    }
+    else
+    {
+        [UIView animateWithDuration:.25 animations:^{
+            calendar.transform = CGAffineTransformMakeScale(1.3, 1.3);
+            calendar.alpha = 0.0;;
+            
+        } completion:^(BOOL finished) {
+            if (finished) {
+                // [self.popTblView removeFromSuperview];
+                calendar.hidden = YES;
+                isDatePicker=NO;
+            }
+        }];
+    }
+     isTeam = NO;
+    isTittle = NO;
+    isModule = NO;
+    self.popTblView.hidden=YES;
 }
 
 -(void) SACalendar:(SACalendar*)calendar didSelectDate:(int)day month:(int)month year:(int)year
@@ -280,8 +333,18 @@
     NSString * selectdate =[NSString stringWithFormat:@"%d-%02d-%02d",year,month,day];
     
     self.datelbl.text = selectdate;
-    //actualdate = selectdate;
-    calendar.hidden = YES;
+   
+    [UIView animateWithDuration:.25 animations:^{
+        calendar.transform = CGAffineTransformMakeScale(1.3, 1.3);
+       
+        calendar.alpha = 0.0;;
+
+    } completion:^(BOOL finished) {
+        if (finished) {
+            // [self.popTblView removeFromSuperview];
+            calendar.hidden = YES;
+        }
+    }];
 }
 
 - (void)showAnimate
@@ -414,7 +477,7 @@
         {
             displayStr = [[commonArray valueForKey:@"AssessmentName"] objectAtIndex:indexPath.row];
         }
-        else
+        else if(isplayerlist)
         {
             displayStr = [[commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
         }
