@@ -134,8 +134,10 @@
 		04F1B95E1F94843C00EFA4A9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */; };
 		04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */; };
 		04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */; };
-		187414E9200CE019003629D3 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187414E8200CE018003629D3 /* ParallaxHeaderView.m */; };
-		187414EC200CE18F003629D3 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 187414EA200CE18E003629D3 /* UIImage+ImageEffects.m */; };
+		18B97981200DCD8C00B94DD4 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B9797E200DCD8C00B94DD4 /* UIImage+ImageEffects.m */; };
+		18B97982200DCD8C00B94DD4 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97980200DCD8C00B94DD4 /* ParallaxHeaderView.m */; };
+		18B97984200DCE6600B94DD4 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97983200DCE6600B94DD4 /* ProfileVC.m */; };
+		18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97985200DCEC200B94DD4 /* HomeVCCell.m */; };
 		AC1BC8041F8663020047AECC /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FC1F8663020047AECC /* AAChartModel.m */; };
 		AC1BC8051F8663020047AECC /* AAChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FE1F8663020047AECC /* AAChartView.m */; };
 		AC1BC8061F8663020047AECC /* AAJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC8011F8663020047AECC /* AAJsonConverter.m */; };
@@ -178,7 +180,6 @@
 		AC87CD9D1F55A74D002AA80E /* assemntCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC87CD9B1F55A74D002AA80E /* assemntCell.m */; };
 		AC87CD9E1F55A74D002AA80E /* assemntCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC87CD9C1F55A74D002AA80E /* assemntCell.xib */; };
 		AC9F541D1F4D42E600BED5CF /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F541C1F4D42E600BED5CF /* HomeVC.m */; };
-		AC9F54211F4D5C7B00BED5CF /* HomeVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F54201F4D5C7B00BED5CF /* HomeVCCell.m */; };
 		ACA768591F4C1E8000ECC17A /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA768581F4C1E8000ECC17A /* LoginVC.m */; };
 		ACA768611F4C2AF000ECC17A /* AFNetworkActivityLogger in Resources */ = {isa = PBXBuildFile; fileRef = ACA7685A1F4C2AF000ECC17A /* AFNetworkActivityLogger */; };
 		ACA768671F4C2AF000ECC17A /* UIKit+AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = ACA768601F4C2AF000ECC17A /* UIKit+AFNetworking */; };
@@ -198,7 +199,6 @@
 		ACB567C41F62D7A800F1C45E /* TrainingLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB567C21F62D7A800F1C45E /* TrainingLoadCell.m */; };
 		ACB567C51F62D7A800F1C45E /* TrainingLoadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACB567C31F62D7A800F1C45E /* TrainingLoadCell.xib */; };
 		ACB964A41F5E817300387AEC /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB964A31F5E817300387AEC /* TeamsVC.m */; };
-		ACBB781C1F5D7975009545BB /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBB781B1F5D7975009545BB /* ProfileVC.m */; };
 		ACBB78211F5D835E009545BB /* ProfileVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBB781F1F5D835E009545BB /* ProfileVCCell.m */; };
 		ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACBB78201F5D835E009545BB /* ProfileVCCell.xib */; };
 		ACBBA17F1F613E1F000F9DC9 /* WellnessRating.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBBA17D1F613E1F000F9DC9 /* WellnessRating.m */; };
@@ -478,10 +478,12 @@
 		04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBMANAGERSYNC.m; path = AppCommon/dbmanagerSync/DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		04FBEE721F7E7D7E007C5BF8 /* PieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieChartView.h; path = Helper/PieChart/PieChartView.h; sourceTree = "<group>"; };
 		04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PieChartView.m; path = Helper/PieChart/PieChartView.m; sourceTree = "<group>"; };
-		187414E7200CE018003629D3 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = Helper/ParallaxEffect/ParallaxHeaderView.h; sourceTree = "<group>"; };
-		187414E8200CE018003629D3 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = Helper/ParallaxEffect/ParallaxHeaderView.m; sourceTree = "<group>"; };
-		187414EA200CE18E003629D3 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Helper/ParallaxEffect/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		187414EB200CE18E003629D3 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Helper/ParallaxEffect/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		18B9797D200DCD8C00B94DD4 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = Helper/ParallaxEffect/ParallaxHeaderView.h; sourceTree = "<group>"; };
+		18B9797E200DCD8C00B94DD4 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Helper/ParallaxEffect/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		18B9797F200DCD8C00B94DD4 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Helper/ParallaxEffect/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		18B97980200DCD8C00B94DD4 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = Helper/ParallaxEffect/ParallaxHeaderView.m; sourceTree = "<group>"; };
+		18B97983200DCE6600B94DD4 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileVC.m; path = Controllers/ProfileVC/ProfileVC.m; sourceTree = "<group>"; };
+		18B97985200DCEC200B94DD4 /* HomeVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeVCCell.m; path = Subview/HomeVCCell/HomeVCCell.m; sourceTree = "<group>"; };
 		AC1BC7FA1F8663020047AECC /* AAChartKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartKit.h; path = Helper/AAChart/AAChartConfiger/AAChartKit.h; sourceTree = "<group>"; };
 		AC1BC7FB1F8663020047AECC /* AAChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartModel.h; path = Helper/AAChart/AAChartConfiger/AAChartModel.h; sourceTree = "<group>"; };
 		AC1BC7FC1F8663020047AECC /* AAChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AAChartModel.m; path = Helper/AAChart/AAChartConfiger/AAChartModel.m; sourceTree = "<group>"; };
@@ -560,7 +562,6 @@
 		AC9F541B1F4D42E600BED5CF /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeVC.h; path = Controllers/HomeVC/HomeVC.h; sourceTree = "<group>"; };
 		AC9F541C1F4D42E600BED5CF /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeVC.m; path = Controllers/HomeVC/HomeVC.m; sourceTree = "<group>"; };
 		AC9F541F1F4D5C7B00BED5CF /* HomeVCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeVCCell.h; path = Subview/HomeVCCell/HomeVCCell.h; sourceTree = "<group>"; };
-		AC9F54201F4D5C7B00BED5CF /* HomeVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeVCCell.m; path = Subview/HomeVCCell/HomeVCCell.m; sourceTree = "<group>"; };
 		ACA768571F4C1E8000ECC17A /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = Controllers/LoginVC/LoginVC.h; sourceTree = "<group>"; };
 		ACA768581F4C1E8000ECC17A /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = Controllers/LoginVC/LoginVC.m; sourceTree = "<group>"; };
 		ACA7685A1F4C2AF000ECC17A /* AFNetworkActivityLogger */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AFNetworkActivityLogger; path = Helper/AFNetworkActivityLogger; sourceTree = "<group>"; };
@@ -597,7 +598,6 @@
 		ACB964A21F5E817300387AEC /* TeamsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamsVC.h; path = Controllers/TeamsVC/TeamsVC.h; sourceTree = "<group>"; };
 		ACB964A31F5E817300387AEC /* TeamsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamsVC.m; path = Controllers/TeamsVC/TeamsVC.m; sourceTree = "<group>"; };
 		ACBB781A1F5D7975009545BB /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileVC.h; path = Controllers/ProfileVC/ProfileVC.h; sourceTree = "<group>"; };
-		ACBB781B1F5D7975009545BB /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileVC.m; path = Controllers/ProfileVC/ProfileVC.m; sourceTree = "<group>"; };
 		ACBB781E1F5D835E009545BB /* ProfileVCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileVCCell.h; path = Subview/ProfileVCCell/ProfileVCCell.h; sourceTree = "<group>"; };
 		ACBB781F1F5D835E009545BB /* ProfileVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileVCCell.m; path = Subview/ProfileVCCell/ProfileVCCell.m; sourceTree = "<group>"; };
 		ACBB78201F5D835E009545BB /* ProfileVCCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileVCCell.xib; path = Subview/ProfileVCCell/ProfileVCCell.xib; sourceTree = "<group>"; };
@@ -1298,10 +1298,10 @@
 		187414E6200CDFD2003629D3 /* ParallaxEffect */ = {
 			isa = PBXGroup;
 			children = (
-				187414EB200CE18E003629D3 /* UIImage+ImageEffects.h */,
-				187414EA200CE18E003629D3 /* UIImage+ImageEffects.m */,
-				187414E7200CE018003629D3 /* ParallaxHeaderView.h */,
-				187414E8200CE018003629D3 /* ParallaxHeaderView.m */,
+				18B9797D200DCD8C00B94DD4 /* ParallaxHeaderView.h */,
+				18B97980200DCD8C00B94DD4 /* ParallaxHeaderView.m */,
+				18B9797F200DCD8C00B94DD4 /* UIImage+ImageEffects.h */,
+				18B9797E200DCD8C00B94DD4 /* UIImage+ImageEffects.m */,
 			);
 			name = ParallaxEffect;
 			sourceTree = "<group>";
@@ -1431,7 +1431,7 @@
 			isa = PBXGroup;
 			children = (
 				AC9F541F1F4D5C7B00BED5CF /* HomeVCCell.h */,
-				AC9F54201F4D5C7B00BED5CF /* HomeVCCell.m */,
+				18B97985200DCEC200B94DD4 /* HomeVCCell.m */,
 			);
 			name = HomeVCCell;
 			sourceTree = "<group>";
@@ -1567,7 +1567,7 @@
 			isa = PBXGroup;
 			children = (
 				ACBB781A1F5D7975009545BB /* ProfileVC.h */,
-				ACBB781B1F5D7975009545BB /* ProfileVC.m */,
+				18B97983200DCE6600B94DD4 /* ProfileVC.m */,
 			);
 			name = ProfileVC;
 			sourceTree = "<group>";
@@ -1890,6 +1890,7 @@
 				AC1BC8651F8665B40047AECC /* AAYAxis.m in Sources */,
 				ACACEFDF1F596DE1004C28A4 /* TestAssessmentEntryVC.m in Sources */,
 				040B2A8E1F600E0600FB4B93 /* SACalendar.m in Sources */,
+				18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */,
 				045A498E1FA2205B008C1630 /* FFWeekHeaderCollectionView.m in Sources */,
 				044730D41F94D41E00871628 /* Utitliy.m in Sources */,
 				04CA664D1F6FD863009F109E /* AddFoodDiaryVC.m in Sources */,
@@ -1929,7 +1930,7 @@
 				04DF252A1F74CFDB00DB3AE3 /* TrainingLoadVCCell.m in Sources */,
 				ACACEFE51F597425004C28A4 /* TestAssessmentViewVC.m in Sources */,
 				045A49C51FA220D2008C1630 /* UIColor+FFMoreColors.m in Sources */,
-				187414EC200CE18F003629D3 /* UIImage+ImageEffects.m in Sources */,
+				18B97984200DCE6600B94DD4 /* ProfileVC.m in Sources */,
 				ACB2686C1F5A7AA4006E69AC /* WellnessRatingVC.m in Sources */,
 				045A49591FA21F9E008C1630 /* FFAddEventPopoverController.m in Sources */,
 				045A49E51FA22132008C1630 /* FFGuestsTableView.m in Sources */,
@@ -1938,6 +1939,7 @@
 				AC1BC8631F8665B40047AECC /* AATooltip.m in Sources */,
 				ACBBA1A31F616942000F9DC9 /* SessionDetails.m in Sources */,
 				04E640AC1FB5A762006E6C57 /* INTUGroupedArraySectionContainer.m in Sources */,
+				18B97982200DCD8C00B94DD4 /* ParallaxHeaderView.m in Sources */,
 				04E640AA1FB5A762006E6C57 /* INTUFruitCategory.m in Sources */,
 				CEC26FCD1FFE129B00FF2D74 /* AssessmentCell.m in Sources */,
 				045A49D31FA22110008C1630 /* FFButtonWithDatePopover.m in Sources */,
@@ -1977,7 +1979,6 @@
 				AC1BC8501F8665B40047AECC /* AAChart.m in Sources */,
 				ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */,
 				ACBD4ADC1F56FE5600AFA25D /* QuestionaryVC.m in Sources */,
-				187414E9200CE019003629D3 /* ParallaxHeaderView.m in Sources */,
 				AC1BC8581F8665B40047AECC /* AAOptions.m in Sources */,
 				AC1BC8531F8665B40047AECC /* AAItemStyle.m in Sources */,
 				ACBBA18B1F614642000F9DC9 /* RecentFitness.m in Sources */,
@@ -1995,7 +1996,6 @@
 				AC1BC8061F8663020047AECC /* AAJsonConverter.m in Sources */,
 				0441B78A1F6ACB4E00A28E19 /* PlannerListVC.m in Sources */,
 				040B2A8C1F600E0600FB4B93 /* DateUtil.m in Sources */,
-				ACBB781C1F5D7975009545BB /* ProfileVC.m in Sources */,
 				ACC2A1A41F5FF52A00210422 /* ViewProfile.m in Sources */,
 				AC1BC85A1F8665B40047AECC /* AAPie.m in Sources */,
 				04DEBCAF1F4BEB190070C540 /* CustomNavigation.m in Sources */,
@@ -2039,6 +2039,7 @@
 				0441B7851F6ACA6B00A28E19 /* PlannerCell.m in Sources */,
 				045A49671FA21FDE008C1630 /* FFDayHeaderCell.m in Sources */,
 				04534A551F53FA4100999FBC /* AFHTTPRequestOperation.m in Sources */,
+				18B97981200DCD8C00B94DD4 /* UIImage+ImageEffects.m in Sources */,
 				045A49541FA21F93008C1630 /* FFCalendarViewController.m in Sources */,
 				ACAE8FEE1F6951D70072FA41 /* XYPieChart.m in Sources */,
 				AC1BC8591F8665B40047AECC /* AAOptions3d.m in Sources */,
@@ -2056,7 +2057,6 @@
 				ACACEFDB1F5920EA004C28A4 /* WLReportFilterVC.m in Sources */,
 				045A49701FA21FF7008C1630 /* FFDayCollectionViewFlowLayout.m in Sources */,
 				AC1BC8541F8665B40047AECC /* AALabels.m in Sources */,
-				AC9F54211F4D5C7B00BED5CF /* HomeVCCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
