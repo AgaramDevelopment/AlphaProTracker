@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SACalendar.h"
-@interface AssessmentFilterView : UIView <SACalendarDelegate>
+@interface AssessmentFilterView : UIView <SACalendarDelegate, UITextFieldDelegate>
 
 @property (nonatomic,strong) NSString *moduleStr;
 
@@ -28,4 +28,6 @@
 @property (nonatomic,strong) IBOutlet UITextField * playerTxt;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewyposition;
+@property (nonatomic, strong) NSArray *searchResult;
+@property(assign) BOOL searchEnabled;
 @end
