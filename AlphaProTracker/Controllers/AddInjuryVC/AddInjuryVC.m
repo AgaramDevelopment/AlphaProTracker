@@ -11,6 +11,7 @@
 #import "Config.h"
 #import "AppCommon.h"
 #import "CustomNavigation.h"
+#import "MultiInjuryVC.h"
 
 
 @interface AddInjuryVC ()<UIImagePickerControllerDelegate,UINavigationBarDelegate>
@@ -214,6 +215,8 @@
     self.StSlider.labelColor = [UIColor whiteColor];
     self.StSlider.sliderCircleRadius = self.StSlider.trackCircleRadius+10;
     
+    
+    
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     RoleCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
@@ -282,8 +285,19 @@
     
 }
 
+-(IBAction)didClickMultiInjuryAction:(id)sender
+{
+    MultiInjuryVC  * objaddinjury=[[MultiInjuryVC alloc]init];
+    objaddinjury = (MultiInjuryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"MultiInjuryVC"];
+    [self.navigationController pushViewController:objaddinjury animated:YES];
+}
+
 -(void)allviewsetBordermethod
 {
+    
+    self.multiInjuryBtn.layer.borderWidth = 0.5f;
+    self.multiInjuryBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    
      self.gameSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.gameSubView.layer.borderWidth=0.5;
     self.gameSubView.layer.masksToBounds=YES;
