@@ -6574,29 +6574,20 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-sN-LWU">
-                                                        <rect key="frame" x="140" y="8" width="212" height="30"/>
-                                                        <subviews>
-                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="BK7-Re-5Ga">
-                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="31"/>
-                                                                <connections>
-                                                                    <action selector="didChandeslidervalue:" destination="dOe-yd-ctV" eventType="valueChanged" id="DvK-ax-yZF"/>
-                                                                </connections>
-                                                            </slider>
-                                                        </subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-sN-LWU" customClass="StepSlider">
+                                                        <rect key="frame" x="140" y="15" width="212" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="0DO-DD-St8"/>
-                                                            <constraint firstAttribute="bottom" secondItem="BK7-Re-5Ga" secondAttribute="bottom" id="DE5-qy-gOm"/>
-                                                            <constraint firstAttribute="trailing" secondItem="BK7-Re-5Ga" secondAttribute="trailing" constant="4" id="VYC-01-zD0"/>
-                                                            <constraint firstItem="BK7-Re-5Ga" firstAttribute="top" secondItem="TQg-sN-LWU" secondAttribute="top" id="WZm-O0-sGU"/>
-                                                            <constraint firstItem="BK7-Re-5Ga" firstAttribute="leading" secondItem="TQg-sN-LWU" secondAttribute="leading" constant="2" id="s7g-9I-hOC"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <action selector="didChandeslidervalue:" destination="dOe-yd-ctV" eventType="valueChanged" id="L92-Yd-zle"/>
+                                                        </connections>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="TQg-sN-LWU" firstAttribute="top" secondItem="T2a-10-CN1" secondAttribute="top" constant="8" id="5NN-kj-YTA"/>
+                                                    <constraint firstItem="TQg-sN-LWU" firstAttribute="top" secondItem="T2a-10-CN1" secondAttribute="top" constant="15" id="5NN-kj-YTA"/>
                                                     <constraint firstAttribute="height" constant="75" id="GTM-A0-gXI"/>
                                                     <constraint firstItem="9Lh-8V-5wg" firstAttribute="leading" secondItem="T2a-10-CN1" secondAttribute="leading" constant="20" id="aQc-7e-GMS"/>
                                                     <constraint firstItem="TQg-sN-LWU" firstAttribute="leading" secondItem="9Lh-8V-5wg" secondAttribute="trailing" constant="11" id="ddg-Z2-7cX"/>
@@ -7823,9 +7814,9 @@
                         <outlet property="MRILbl" destination="2Dq-AW-g3f" id="1Uz-g8-BU6"/>
                         <outlet property="MRIScansSubView" destination="BIp-dR-tqV" id="SGf-La-eFc"/>
                         <outlet property="MRIScansView" destination="Y4Y-5w-zZV" id="gCi-zY-rUf"/>
+                        <outlet property="StSlider" destination="TQg-sN-LWU" id="5fe-xx-0ka"/>
                         <outlet property="TeamLbl" destination="bJ5-Vt-wyP" id="Ubf-0w-cQG"/>
                         <outlet property="TrainingBtn" destination="YAY-m6-O68" id="7sr-b2-qDC"/>
-                        <outlet property="VasSlider" destination="BK7-Re-5Ga" id="xyb-x1-bM5"/>
                         <outlet property="XRaySubView" destination="1lT-Ys-oEE" id="g38-Rb-e8M"/>
                         <outlet property="XRayView" destination="HdS-HA-cVa" id="m6I-wx-zPw"/>
                         <outlet property="allviewHeight" destination="KRh-AA-a1i" id="0zX-no-M0V"/>
@@ -14074,7 +14065,7 @@
         <image name="Ag_logo" width="100" height="100"/>
         <image name="Background" width="1200" height="1920"/>
         <image name="Username_logo" width="27" height="27"/>
-        <image name="banner" width="800" height="420"/>
+        <image name="banner" width="320" height="168"/>
         <image name="ico_add" width="24" height="24"/>
         <image name="ico_addWhite" width="24" height="24"/>
         <image name="ico_calender" width="24" height="24"/>
