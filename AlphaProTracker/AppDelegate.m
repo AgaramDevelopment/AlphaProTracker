@@ -24,7 +24,7 @@
     //UIViewController *rootViewController;
     UIStoryboard *storyBoard;
     
-    NSLog(@"Sathish");
+    NSLog(@"Pandian");
         
         storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
