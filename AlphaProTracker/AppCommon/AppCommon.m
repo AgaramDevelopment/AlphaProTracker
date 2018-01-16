@@ -22,8 +22,6 @@ AppCommon *sharedCommon = nil;
 
 + (AppCommon *)common {
     
-    NSString *reqName;
-    
     if (!sharedCommon) {
         
         sharedCommon = [[self alloc] init];
@@ -354,6 +352,8 @@ AppCommon *sharedCommon = nil;
     menuview.hidden=NO;
     if(isPlayer==YES)
     {
+//        [@"HomeVC",@"Planner",@"WorkLoadVC",@"Illness",@"injury",@"FoodDairyVC",@"PlayerVC"]
+        
         if(indexPath.row==0)
         {
             
@@ -510,9 +510,9 @@ AppCommon *sharedCommon = nil;
         else if(indexPath.subRow==2)
         {
             NSLog(@"questionaire");
-           // [self redirectSelectview:@"QuestionaryVC"];
+            [self redirectSelectview:@"QuestionaryVC"];
             
-            [self QuetionaryScreen:@"Physio"];
+//            [self QuetionaryScreen:@"Physio"];
             
 
         }
@@ -530,17 +530,17 @@ AppCommon *sharedCommon = nil;
         }
         else if( indexPath.subRow==5)
         {
-            NSLog(@"ProgramVC");
-            [self ProgrameScreen:@"Physio"];
+            NSLog(@"Physio ProgramVC");
+            [self redirectSelectview:@"ProgramVC"];
             
             
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
-            //[self redirectSelectview:@"AssignPlayerVC"];
+            [self redirectSelectview:@"AssignPlayerVC"];
             
-            [self AssignScreen:@"Physio"];
+//            [self AssignScreen:@"Physio"];
         }
 
     }
@@ -554,9 +554,9 @@ AppCommon *sharedCommon = nil;
         else if(indexPath.subRow==2)
         {
             NSLog(@"questionaire");
-            //[self redirectSelectview:@"QuestionaryVC"];
+            [self redirectSelectview:@"QuestionaryVC"];
             
-            [self QuetionaryScreen:@"S and C"];
+//            [self QuetionaryScreen:@"S and C"];
             
         }
         else if(indexPath.subRow==3)
@@ -573,18 +573,19 @@ AppCommon *sharedCommon = nil;
         }
         else if( indexPath.subRow==5)
         {
-            NSLog(@"ProgramVC");
+            NSLog(@"Strength and Condition ProgramVC");
+            [self redirectSelectview:@"ProgramVC"];
 
-            [self ProgrameScreen:@"S and C"];
+//            [self ProgrameScreen:@"S and C"];
 
             
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
-            //[self redirectSelectview:@"AssignPlayerVC"];
+            [self redirectSelectview:@"AssignPlayerVC"];
             
-            [self AssignScreen:@"S and C"];
+//            [self AssignScreen:@"S and C"];
         }
 
     }
@@ -599,9 +600,9 @@ AppCommon *sharedCommon = nil;
         else if(indexPath.subRow==2)
         {
             NSLog(@"questionaire");
-            //[self redirectSelectview:@"QuestionaryVC"];
+            [self redirectSelectview:@"QuestionaryVC"];
             
-            [self QuetionaryScreen:@"Coach"];
+//            [self QuetionaryScreen:@"Coach"];
             
         }
         else if(indexPath.subRow==3)
@@ -618,16 +619,17 @@ AppCommon *sharedCommon = nil;
         }
         else if( indexPath.subRow==5)
         {
-            NSLog(@"ProgramVC");
-            
-            [self ProgrameScreen:@"Coach"];
+            NSLog(@"Coach ProgramVC");
+            [self redirectSelectview:@"ProgramVC"];
+
+//            [self ProgrameScreen:@"Coach"];
 
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
-            //[self redirectSelectview:@"AssignPlayerVC"];
-            [self AssignScreen:@"Coach"];
+            [self redirectSelectview:@"AssignPlayerVC"];
+//            [self AssignScreen:@"Coach"];
         }
 
     }
@@ -637,87 +639,16 @@ AppCommon *sharedCommon = nil;
 }
 
 -(void)redirectSelectview:(NSString *)selectViewcontroller
-
 {
-    UIViewController *initViewController;
+    if ([selectViewcontroller isEqualToString:@"LoginVC"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     
-    UIStoryboard *storyBoard;
-    
-    storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    initViewController = [storyBoard instantiateViewControllerWithIdentifier:selectViewcontroller];
-    
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    
-    
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-}
-
-
--(void)ProgrameScreen :(NSString*)name
-{
-    ProgramVC  * objTabVC=[[ProgramVC alloc]init];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSString *ss = @"ProgramVC";
-    UIViewController * initViewController = [storyboard instantiateViewControllerWithIdentifier:ss];
-   navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    objTabVC = (ProgramVC *)[storyboard instantiateViewControllerWithIdentifier:@"ProgramVC"];
-    objTabVC.Screen = name;
-    [navigationController pushViewController:objTabVC animated:NO];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-
-}
-
--(void)QuetionaryScreen :(NSString*)name
-{
-    QuestionaryVC  * objTabVC=[[QuestionaryVC alloc]init];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSString *ss = @"QuestionaryVC";
-    UIViewController * initViewController = [storyboard instantiateViewControllerWithIdentifier:ss];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    objTabVC = (QuestionaryVC *)[storyboard instantiateViewControllerWithIdentifier:@"QuestionaryVC"];
-    objTabVC.Scrname = name;
-    [navigationController pushViewController:objTabVC animated:NO];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
+    UIViewController *initViewController = [appDel.storyBoard instantiateViewControllerWithIdentifier:selectViewcontroller];
+    [appDel.navigationController pushViewController:initViewController animated:YES];
     
 }
-
--(void)AssignScreen :(NSString*)name
-{
-    AssignPlayerVC  * objTabVC=[[AssignPlayerVC alloc]init];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSString *ss = @"AssignPlayerVC";
-    UIViewController * initViewController = [storyboard instantiateViewControllerWithIdentifier:ss];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    objTabVC = (AssignPlayerVC *)[storyboard instantiateViewControllerWithIdentifier:@"AssignPlayerVC"];
-    objTabVC.Scrname = name;
-    [navigationController pushViewController:objTabVC animated:NO];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    
-}
-
-
-
-
 
 #pragma mark - Actions
 
