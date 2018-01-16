@@ -16,6 +16,7 @@
 #import "ProgramVC.h"
 #import "AssignPlayerVC.h"
 #import <sqlite3.h>
+#import "ExcersizeViewController.h"
 
 @implementation AppCommon
 AppCommon *sharedCommon = nil;
@@ -503,44 +504,36 @@ AppCommon *sharedCommon = nil;
     {
         if( indexPath.subRow==1)
         {
-        NSLog(@"Assessment");
-            
+            NSLog(@"Assessment");
             [self redirectSelectview:@"TestAssessmentViewVC"];
         }
         else if(indexPath.subRow==2)
         {
             NSLog(@"questionaire");
             [self redirectSelectview:@"QuestionaryVC"];
-            
-//            [self QuetionaryScreen:@"Physio"];
-            
-
         }
         else if(indexPath.subRow==3)
         {
             NSLog(@"singleplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-
         }
         else if(indexPath.subRow==4)
         {
             NSLog(@"multiplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-
         }
         else if( indexPath.subRow==5)
         {
             NSLog(@"Physio ProgramVC");
-            [self redirectSelectview:@"ProgramVC"];
-            
+//            [self redirectSelectview:@"ProgramVC"];
+            ExcersizeViewController* VC = [ExcersizeViewController new];
+            [appDel.navigationController pushViewController:VC animated:YES];
             
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
             [self redirectSelectview:@"AssignPlayerVC"];
-            
-//            [self AssignScreen:@"Physio"];
         }
 
     }
@@ -555,37 +548,26 @@ AppCommon *sharedCommon = nil;
         {
             NSLog(@"questionaire");
             [self redirectSelectview:@"QuestionaryVC"];
-            
-//            [self QuetionaryScreen:@"S and C"];
-            
         }
         else if(indexPath.subRow==3)
         {
             NSLog(@"singleplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if(indexPath.subRow==4)
         {
             NSLog(@"multiplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if( indexPath.subRow==5)
         {
             NSLog(@"Strength and Condition ProgramVC");
             [self redirectSelectview:@"ProgramVC"];
-
-//            [self ProgrameScreen:@"S and C"];
-
-            
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
             [self redirectSelectview:@"AssignPlayerVC"];
-            
-//            [self AssignScreen:@"S and C"];
         }
 
     }
@@ -601,41 +583,31 @@ AppCommon *sharedCommon = nil;
         {
             NSLog(@"questionaire");
             [self redirectSelectview:@"QuestionaryVC"];
-            
-//            [self QuetionaryScreen:@"Coach"];
-            
         }
         else if(indexPath.subRow==3)
         {
             NSLog(@"singleplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if(indexPath.subRow==4)
         {
             NSLog(@"multiplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if( indexPath.subRow==5)
         {
             NSLog(@"Coach ProgramVC");
             [self redirectSelectview:@"ProgramVC"];
-
-//            [self ProgrameScreen:@"Coach"];
-
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
             [self redirectSelectview:@"AssignPlayerVC"];
-//            [self AssignScreen:@"Coach"];
         }
 
     }
     
     
-    //NSLog(@"Section: %d, Row:%d, Subrow:%d", indexPath.section, indexPath.row, indexPath.subRow);
 }
 
 -(void)redirectSelectview:(NSString *)selectViewcontroller
