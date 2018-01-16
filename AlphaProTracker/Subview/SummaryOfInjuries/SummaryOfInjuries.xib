@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SummaryOfInjuries">
+            <connections>
+                <outlet property="injuryTbl" destination="9dO-IW-nlX" id="l3z-8S-oyC"/>
+                <outlet property="view" destination="O13-gL-ZZG" id="hKr-HR-ePY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="O13-gL-ZZG">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDX-df-MH0">
+                    <rect key="frame" x="5" y="10" width="365" height="45"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVN-4p-9uR">
+                            <rect key="frame" x="0.0" y="0.0" width="182" height="45"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="jA3-KW-lVB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Injury" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFw-PK-dvd">
+                            <rect key="frame" x="183" y="0.0" width="182" height="45"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="BxC-jX-Pam"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="gFw-PK-dvd" firstAttribute="leading" secondItem="oVN-4p-9uR" secondAttribute="trailing" constant="1" id="BGq-6J-mxy"/>
+                        <constraint firstItem="gFw-PK-dvd" firstAttribute="width" secondItem="oVN-4p-9uR" secondAttribute="width" id="BRB-5A-hee"/>
+                        <constraint firstItem="oVN-4p-9uR" firstAttribute="leading" secondItem="QDX-df-MH0" secondAttribute="leading" id="IGc-aJ-eAB"/>
+                        <constraint firstItem="gFw-PK-dvd" firstAttribute="top" secondItem="QDX-df-MH0" secondAttribute="top" id="OOF-GT-LaV"/>
+                        <constraint firstAttribute="height" constant="45" id="Ucp-Ch-L0n"/>
+                        <constraint firstAttribute="trailing" secondItem="gFw-PK-dvd" secondAttribute="trailing" id="W4E-5x-cQ8"/>
+                        <constraint firstItem="oVN-4p-9uR" firstAttribute="top" secondItem="QDX-df-MH0" secondAttribute="top" id="upX-Wd-2Qh"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9dO-IW-nlX">
+                    <rect key="frame" x="5" y="58" width="365" height="312"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="312" id="b4u-Ml-rZd"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="gBn-B2-vdT"/>
+                        <outlet property="delegate" destination="-1" id="Azw-QJ-Owz"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="9dO-IW-nlX" firstAttribute="top" secondItem="QDX-df-MH0" secondAttribute="bottom" constant="3" id="0IH-pA-UAP"/>
+                <constraint firstItem="QDX-df-MH0" firstAttribute="top" secondItem="O13-gL-ZZG" secondAttribute="top" constant="10" id="Gyc-Ik-7Qh"/>
+                <constraint firstAttribute="trailing" secondItem="9dO-IW-nlX" secondAttribute="trailing" constant="5" id="K5o-dF-2bg"/>
+                <constraint firstAttribute="trailing" secondItem="QDX-df-MH0" secondAttribute="trailing" constant="5" id="KRZ-jB-vf9"/>
+                <constraint firstItem="9dO-IW-nlX" firstAttribute="leading" secondItem="O13-gL-ZZG" secondAttribute="leading" constant="5" id="atW-Sq-dPN"/>
+                <constraint firstItem="QDX-df-MH0" firstAttribute="leading" secondItem="O13-gL-ZZG" secondAttribute="leading" constant="5" id="uQD-bS-7Kn"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

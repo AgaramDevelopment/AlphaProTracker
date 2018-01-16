@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+
+
 @interface AppDelegate ()
 
 @end
@@ -17,14 +19,41 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UIViewController *initViewController;
+    //UIViewController *rootViewController;
+    UIStoryboard *storyBoard;
+    
+    
+        
+        storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+    
+    //    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"Skip"]) {
+    //        initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"LoginVC"];
+    //    } else {
+    initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"LoginVC"];
+    
+    //HomeVC
+    // }
+    
+        
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    navigationController.navigationBarHidden = YES;
+    _window.rootViewController = navigationController;
+    
+    [self.window makeKeyAndVisible];
+    
+    
+
+   
     return YES;
 }
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-}
+    }
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -46,6 +75,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 
 @end

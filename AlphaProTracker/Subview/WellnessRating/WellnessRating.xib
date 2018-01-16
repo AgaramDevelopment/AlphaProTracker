@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WellnessRating">
+            <connections>
+                <outlet property="chart3" destination="h9v-hb-pOX" id="kWL-Op-1sV"/>
+                <outlet property="view" destination="rlT-Jb-77n" id="Gpr-Rt-6p7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="rlT-Jb-77n">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe2-DH-5BN">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9v-hb-pOX" customClass="HACBarChart">
+                            <rect key="frame" x="10" y="34" width="355" height="295"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="295" id="OwD-0O-Khu"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="h9v-hb-pOX" firstAttribute="centerX" secondItem="Xe2-DH-5BN" secondAttribute="centerX" id="14G-sY-8j7"/>
+                        <constraint firstAttribute="trailing" secondItem="h9v-hb-pOX" secondAttribute="trailing" constant="10" id="4Xn-on-8La"/>
+                        <constraint firstItem="h9v-hb-pOX" firstAttribute="leading" secondItem="Xe2-DH-5BN" secondAttribute="leading" constant="10" id="Y01-6O-TaP"/>
+                        <constraint firstItem="h9v-hb-pOX" firstAttribute="top" secondItem="Xe2-DH-5BN" secondAttribute="top" constant="34" id="bQf-yJ-qta"/>
+                        <constraint firstAttribute="bottom" secondItem="h9v-hb-pOX" secondAttribute="bottom" constant="338" id="slN-Ci-Eui"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Xe2-DH-5BN" secondAttribute="trailing" id="Gev-ie-dVe"/>
+                <constraint firstAttribute="bottom" secondItem="Xe2-DH-5BN" secondAttribute="bottom" id="e2l-tk-e1k"/>
+                <constraint firstItem="Xe2-DH-5BN" firstAttribute="leading" secondItem="rlT-Jb-77n" secondAttribute="leading" id="myb-Bw-Ykr"/>
+                <constraint firstItem="Xe2-DH-5BN" firstAttribute="top" secondItem="rlT-Jb-77n" secondAttribute="top" id="rpU-tK-H8u"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

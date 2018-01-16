@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecentFitness">
+            <connections>
+                <outlet property="barchartScroll" destination="2z8-TX-NCV" id="qLt-vN-mLt"/>
+                <outlet property="detailsTbl" destination="REI-TD-vk1" id="AEf-SP-aTV"/>
+                <outlet property="dropDownview" destination="Web-2l-uvd" id="9II-Xn-0HH"/>
+                <outlet property="fitnessButton" destination="fjV-mc-uqh" id="cUg-3A-4AM"/>
+                <outlet property="testlbl" destination="7UY-Bd-q8L" id="T3T-YO-Hel"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Web-2l-uvd">
+                    <rect key="frame" x="5" y="10" width="365" height="33"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjV-mc-uqh">
+                            <rect key="frame" x="0.0" y="0.0" width="365" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <action selector="didClickFitnessBtn:" destination="-1" eventType="touchUpInside" id="l5a-yT-1IP"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_cmb" translatesAutoresizingMaskIntoConstraints="NO" id="gkV-5L-nNr">
+                            <rect key="frame" x="340" y="8" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="83e-BA-JsR"/>
+                                <constraint firstAttribute="width" constant="20" id="gEP-eT-Bna"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UY-Bd-q8L">
+                            <rect key="frame" x="5" y="5" width="332" height="23"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="23" id="5vo-Tn-gh9"/>
+                                <constraint firstAttribute="width" constant="332" id="ptX-U5-oJb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.26880886129999998" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="gkV-5L-nNr" secondAttribute="trailing" constant="5" id="388-jq-WJ1"/>
+                        <constraint firstAttribute="height" constant="33" id="CGZ-eH-aUr"/>
+                        <constraint firstItem="7UY-Bd-q8L" firstAttribute="top" secondItem="Web-2l-uvd" secondAttribute="top" constant="5" id="DK4-iv-IVZ"/>
+                        <constraint firstItem="7UY-Bd-q8L" firstAttribute="leading" secondItem="Web-2l-uvd" secondAttribute="leading" constant="5" id="cVd-vD-CCh"/>
+                        <constraint firstAttribute="bottom" secondItem="gkV-5L-nNr" secondAttribute="bottom" constant="5" id="fQf-Lh-eBW"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2z8-TX-NCV">
+                    <rect key="frame" x="5" y="70" width="365" height="268"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="268" id="8yF-Fo-qfy"/>
+                    </constraints>
+                </scrollView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="REI-TD-vk1">
+                    <rect key="frame" x="5" y="44" width="365" height="294"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="294" id="g8r-f9-GYc"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Frh-Iy-Sqq"/>
+                        <outlet property="delegate" destination="-1" id="dKe-ya-owp"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2z8-TX-NCV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="46b-sE-zDl"/>
+                <constraint firstItem="REI-TD-vk1" firstAttribute="top" secondItem="Web-2l-uvd" secondAttribute="bottom" constant="1" id="D6o-ga-VWZ"/>
+                <constraint firstItem="2z8-TX-NCV" firstAttribute="top" secondItem="Web-2l-uvd" secondAttribute="bottom" constant="27" id="Vx9-ed-J1l"/>
+                <constraint firstAttribute="trailing" secondItem="Web-2l-uvd" secondAttribute="trailing" constant="5" id="Yxm-4h-S7b"/>
+                <constraint firstItem="REI-TD-vk1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="cKR-tH-40L"/>
+                <constraint firstAttribute="trailing" secondItem="2z8-TX-NCV" secondAttribute="trailing" constant="5" id="iiw-oj-4gw"/>
+                <constraint firstItem="Web-2l-uvd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="mMG-TU-rK9"/>
+                <constraint firstAttribute="trailing" secondItem="REI-TD-vk1" secondAttribute="trailing" constant="5" id="wED-6e-5Q1"/>
+                <constraint firstItem="Web-2l-uvd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="zID-mf-dHp"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ico_cmb" width="12" height="12"/>
+    </resources>
+</document>
