@@ -128,10 +128,9 @@ typedef enum : NSUInteger
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //[COMMON AddMenuView:self.view];
     self.nameOfMonth.text = @"";
-    
-    
-    
     [self customnavigationmethod];
     
     self.eventTbl.hidden =YES;
@@ -177,6 +176,8 @@ typedef enum : NSUInteger
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
+        [COMMON AddMenuView:self.view];
+
     
 }
 
@@ -1211,8 +1212,7 @@ typedef enum : NSUInteger
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+   [COMMON ShowsideMenuView];
 }
 
 

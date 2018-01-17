@@ -17,8 +17,9 @@
     UIView *loadingView;
     SKSTableView * tableview;
     UIView * menuview;
+    UIView * backgroundTransview;
     UIView * commonview;
-    NSString *nn;
+   // NSString *nn;
     BOOL isPlayer;
     
     
@@ -34,6 +35,7 @@
 -(void)reachabilityNotReachableAlert;
 - (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
 -(void)AddMenuView:(UIView *)view;
+-(void)ShowsideMenuView;
 -(NSString *)GetUsercode;
 -(NSString *) GetClientCode;
 -(NSString *) GetuserReference;

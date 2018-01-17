@@ -147,31 +147,41 @@ AppCommon *sharedCommon = nil;
 }
 -(void)AddMenuView:(UIView *)view
 {
+    //Rightswipe
     
+    UISwipeGestureRecognizer *gestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandlerRight)];
+    [gestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [view addGestureRecognizer:gestureRecognizer];
+    
+    //LeftSwipe
+    UISwipeGestureRecognizer * LeftgestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandlerLeft)];
+    [gestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [view addGestureRecognizer:LeftgestureRecognizer];
     
     //MenuView * menuView;
     
     menuview =[[UIView alloc]init];
     menuview.frame =CGRectMake(view.frame.origin.x,view.frame.origin.y,view.frame.size.width,view.frame.size.height);
-    
-    
     [view addSubview:menuview];
     
     
-    commonview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
-    [menuview addSubview:commonview];
+    backgroundTransview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
+    [menuview addSubview:backgroundTransview];
     
-    [commonview setBackgroundColor:[UIColor blackColor]];
-    commonview.alpha=0.25;
+    [backgroundTransview setBackgroundColor:[UIColor blackColor]];
+    backgroundTransview.alpha=0.20;
+   
+    
+    commonview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
+    [view addSubview:commonview];
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
     [commonview addGestureRecognizer:singleFingerTap];
-    
-   
-    
+    //[commonview setBackgroundColor:[UIColor blackColor]];
+    //commonview.alpha=0.25;
     UIView * profileView = (IS_IPAD)?[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/2,150)]:[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/1.4,150)];
-    [menuview addSubview:profileView];
+    [commonview addSubview:profileView];
     
     UIImageView * bgImg =[[UIImageView alloc]initWithFrame:CGRectMake(profileView.frame.origin.x,profileView.frame.origin.y,profileView.frame.size.width,profileView.frame.size.height)];
     [bgImg setImage:[UIImage imageNamed:@"MenuBgImg"]];
@@ -210,7 +220,7 @@ AppCommon *sharedCommon = nil;
     UIView * tblBackgroundview =(IS_IPAD)?[[UIView alloc]initWithFrame:CGRectMake(0,profileView.frame.origin.y+profileView.frame.size.height,menuview.frame.size.width/2,[UIScreen mainScreen].bounds.size.height-profileView.frame.size.height)] : [[UIView alloc]initWithFrame:CGRectMake(0,profileView.frame.origin.y+profileView.frame.size.height,menuview.frame.size.width/1.4,[UIScreen mainScreen].bounds.size.height-profileView.frame.size.height)];
     
     tblBackgroundview.backgroundColor =[UIColor colorWithRed:(28/255.0f) green:(26/255.0f) blue:(65/255.0f) alpha:1.0f];
-    [menuview addSubview:tblBackgroundview];
+    [commonview addSubview:tblBackgroundview];
     
     tableview =[[SKSTableView alloc]initWithFrame:CGRectMake(0,0,tblBackgroundview.frame.size.width,tblBackgroundview.frame.size.height)];
     tableview.SKSTableViewDelegate = self;
@@ -236,9 +246,6 @@ AppCommon *sharedCommon = nil;
                               @[@"LOGOUT"]]
                           ];
             isPlayer=YES;
-        
-
-    
     }
     else
     {
@@ -260,13 +267,51 @@ AppCommon *sharedCommon = nil;
                               @[@"LOGOUT"]]
                           ];
             isPlayer=NO;
-        
+    }
+    [self swipeHandlerRight];
+    
 
     }
-    
-    
-    }
 
+-(void)ShowsideMenuView
+{
+    [self swipeHandlerLeft];
+
+}
+
+
+-(void)swipeHandlerRight
+{
+    //Your ViewController
+    NSLog(@"RightSwipe");
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         // animations go here
+                          commonview.frame = CGRectMake(-menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
+                     }
+                     completion:^(BOOL finished) {
+                         backgroundTransview.hidden = YES;
+                         menuview.frame = CGRectMake(-menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
+
+                     }];
+}
+-(void)swipeHandlerLeft
+{
+    NSLog(@"LeftSwipe");
+    //Your ViewController
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         // animations go here
+                         backgroundTransview.hidden = NO;
+
+                         commonview.frame = CGRectMake(0,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
+                        
+                     }
+                     completion:^(BOOL finished) {
+                          menuview.frame = CGRectMake(menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
+                         // block fires when animation has finished
+                     }];
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -659,8 +704,9 @@ AppCommon *sharedCommon = nil;
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
-    commonview.hidden=YES;
-    menuview.hidden=YES;
+    //commonview.hidden=YES;
+    //menuview.hidden=YES;
+    [self swipeHandlerRight];
     
 }
 -(void)synDataMethod

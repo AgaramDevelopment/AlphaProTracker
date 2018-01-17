@@ -106,7 +106,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+   // [COMMON AddMenuView:self.view];
     objWebservice = [[WebService alloc]init];
     [self customnavigationmethod];
     
@@ -399,6 +399,10 @@
     //    UIToolbar *toobar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 430, 250, 48)];
     //    toobar.barStyle = UIBarStyleBlack;
     //    [self.listTbl addSubview:toobar];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 - (void)populateCell:(UITableViewCell *)cell
          atIndexPath:(NSIndexPath *)indexPath
@@ -2182,8 +2186,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+    [COMMON ShowsideMenuView];
 }
 
 -(IBAction)HomeBtnAction:(id)sender

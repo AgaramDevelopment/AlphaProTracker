@@ -21,10 +21,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[COMMON AddMenuView:self.view];
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -46,7 +50,7 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+    [COMMON ShowsideMenuView];
     
 }
 

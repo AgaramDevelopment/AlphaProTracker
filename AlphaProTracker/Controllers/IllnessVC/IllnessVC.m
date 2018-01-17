@@ -34,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[COMMON AddMenuView:self.view];
     [self customnavigationmethod];
     objWebservice =[[WebService alloc]init];
     cliendCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
@@ -43,6 +44,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+   
+        [COMMON AddMenuView:self.view];
+    
     [self FetchInjuryListWebService];
 }
 -(void)customnavigationmethod
@@ -64,7 +68,7 @@
 #pragma Button action
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+   [COMMON ShowsideMenuView];
     
 }
 

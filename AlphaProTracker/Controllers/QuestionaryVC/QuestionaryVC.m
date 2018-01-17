@@ -71,9 +71,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    
+    //[COMMON AddMenuView:self.view];
     self.question = [[NSMutableArray alloc]init];
     self.questionCode = [[NSMutableArray alloc]init];
     
@@ -120,14 +118,13 @@
     
     [self questionWebservice:SelectCreatedby :SelectClientCode :SelectUserref :SelectModuleCode];
     
-    
-    
-    
-    
-    
-    
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)customnavigationmethod
 {
@@ -1023,8 +1020,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+   [COMMON ShowsideMenuView];
 }
 -(IBAction)btn_back:(id)sender
 {

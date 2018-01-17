@@ -51,6 +51,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //[COMMON AddMenuView:self.view];
     
     self.ExerciseList = [[NSMutableArray alloc]init];
     self.ExerciseCode = [[NSMutableArray alloc]init];
@@ -101,7 +102,10 @@
     
     [self customnavigationmethod];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
+}
 
 -(void)customnavigationmethod
 {
@@ -839,7 +843,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+   [COMMON ShowsideMenuView];
     
 }
 

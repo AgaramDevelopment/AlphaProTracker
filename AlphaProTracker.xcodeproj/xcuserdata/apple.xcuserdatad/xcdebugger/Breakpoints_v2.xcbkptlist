@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/Controllers/TestAssessmentViewVC/TestAssessmentViewVC.m"
-            timestampString = "537801917.469027"
+            timestampString = "537888578.220809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "537"
+            endingLineNumber = "537"
             landmarkName = "-didClickBackBtn:"
             landmarkType = "7">
          </BreakpointContent>
@@ -36,7 +36,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/Common/Assessment/AssessmentFilterView.m"
-            timestampString = "537877867.772028"
+            timestampString = "537888578.220897"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "351"
@@ -52,7 +52,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/Common/Assessment/AssessmentFilterView.m"
-            timestampString = "537877867.7721111"
+            timestampString = "537888578.220963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "509"
@@ -68,7 +68,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/Common/Assessment/AssessmentFilterView.m"
-            timestampString = "537877867.772177"
+            timestampString = "537888578.221025"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
@@ -84,7 +84,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/Common/Assessment/AssessmentFilterView.m"
-            timestampString = "537877867.77224"
+            timestampString = "537888578.221086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "174"
@@ -100,12 +100,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/AppCommon/AppCommon.m"
-            timestampString = "537877867.772306"
+            timestampString = "537888578.221151"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
+            landmarkName = "-swipeHandlerLeft"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -116,12 +116,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/AppCommon/AppCommon.m"
-            timestampString = "537877867.772377"
+            timestampString = "537888578.221602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "-AddMenuView:"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "-swipeHandlerLeft"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__29-[AppCommon swipeHandlerLeft]_block_invoke.215"
+                  moduleName = "AlphaProTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/AlphaProTracker/AlphaProTracker/AppCommon/AppCommon.m"
+                  timestampString = "537888578.374359"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "313"
+                  endingLineNumber = "313"
+                  offsetFromSymbolStart = "676">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.216"
+                  moduleName = "AlphaProTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/AlphaProTracker/AlphaProTracker/AppCommon/AppCommon.m"
+                  timestampString = "537888578.3778"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "313"
+                  endingLineNumber = "313"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.217"
+                  moduleName = "AlphaProTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/AlphaProTracker/AlphaProTracker/AppCommon/AppCommon.m"
+                  timestampString = "537888578.381265"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "313"
+                  endingLineNumber = "313"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlphaProTracker/AppCommon/AppCommon.m"
+            timestampString = "537888578.2219239"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "-swipeHandlerRight"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -132,28 +195,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlphaProTracker/AppCommon/AppCommon.m"
-            timestampString = "537877867.772438"
+            timestampString = "537888578.222216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "-AddMenuView:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlphaProTracker/AppCommon/AppCommon.m"
-            timestampString = "537877867.772508"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "709"
+            endingLineNumber = "709"
+            landmarkName = "-handleSingleTap:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

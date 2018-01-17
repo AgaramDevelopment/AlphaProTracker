@@ -27,6 +27,7 @@
     [super viewDidLoad];
     
     [self customnavigationmethod];
+    //[COMMON AddMenuView:self.view];
     // Do any additional setup after loading the view.
 }
 
@@ -68,6 +69,10 @@
 
     
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
+}
 -(IBAction)didClickBackBtn:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -98,8 +103,7 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+   [COMMON ShowsideMenuView];
 }
 
 -(IBAction)HomeBtnAction:(id)sender

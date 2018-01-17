@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[COMMON AddMenuView:self.view];
     self.right1view.layer.borderWidth=0.5f;
     self.right1view.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
@@ -53,6 +54,10 @@
     
     [self customnavigationmethod];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
+}
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation;
@@ -70,8 +75,7 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+   [COMMON ShowsideMenuView];
 }
 
 -(IBAction)HomeBtnAction:(id)sender
