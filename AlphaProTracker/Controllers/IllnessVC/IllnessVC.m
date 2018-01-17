@@ -175,7 +175,6 @@
     objaddIllness = (AddIllnessVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"addIllness"];
     objaddIllness.isUpdate =YES;
     objaddIllness.objSelectobjIllnessArray =[self.IllnessListArray objectAtIndex:indexPath.row];
-
     [self.navigationController pushViewController:objaddIllness animated:YES];
 }
 
