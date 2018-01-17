@@ -35,6 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //[COMMON AddMenuView:self.view];
     self.teamslist =[[NSMutableArray alloc]init];
     self.subteamslist =[[NSMutableArray alloc]init];
     [self customnavigationmethod];
@@ -69,6 +71,10 @@
         [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 
 -(void)profileWebservice :(NSString *) cliendcode :(NSString *) usercode
@@ -246,8 +252,7 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+   [COMMON ShowsideMenuView];
 }
 -(IBAction)didClickBackBtn:(id)sender
 {

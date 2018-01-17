@@ -36,6 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[COMMON AddMenuView:self.view];
     
     self.AssessmentNamelbl.text = self.AssessmentName;
     self.DateOfASSElbl.text = self.DateOfASSE;
@@ -64,6 +65,10 @@
     [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.btn_back addTarget:self action:@selector(BackBtn:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)PlayerWebservice :(NSString *) createdby :(NSString *) cliendcode :(NSString *)userref:(NSString*)module
 {
@@ -167,10 +172,6 @@
     
 }
 
-
-
-
-
 -(IBAction)BackBtn:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -183,8 +184,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+    [COMMON ShowsideMenuView];
 }
 -(IBAction)HomeBtnAction:(id)sender
 {

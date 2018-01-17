@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[COMMON AddMenuView:self.view];
     self.gameview.layer.borderWidth=0.5f;
     self.gameview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
@@ -42,6 +43,11 @@
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
+}
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation;
@@ -59,7 +65,7 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+   [COMMON ShowsideMenuView];
     
 }
 

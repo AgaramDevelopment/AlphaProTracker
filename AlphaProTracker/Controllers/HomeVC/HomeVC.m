@@ -56,7 +56,7 @@
     
     //self.view_border.layer.borderWidth = 1;
     //self.view_border.layer.borderColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:0.9f].CGColor;
-    
+    //
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     SelectUserCode = @"USM0000002";
     Playercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
@@ -107,6 +107,11 @@
     objCustomNavigation.menu_btn.hidden = NO;
     [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -318,8 +323,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-
+   [COMMON ShowsideMenuView];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

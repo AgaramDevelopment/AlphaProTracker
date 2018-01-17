@@ -79,7 +79,7 @@
     [super viewDidLoad];
     
     objWebservice = [[WebService alloc]init];
-    
+    //[COMMON AddMenuView:self.view];
     self.mainArray = [[NSMutableArray alloc]init];
     self.rangeArr = [[NSMutableArray alloc]init];
     self.monthArr = [[NSMutableArray alloc]init];
@@ -162,6 +162,10 @@
     [self Filter2Webservice];
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)customnavigationmethod
 {
@@ -688,8 +692,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+   [COMMON ShowsideMenuView];
 }
 
 -(IBAction)HomeBtnAction:(id)sender

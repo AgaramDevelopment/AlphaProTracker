@@ -64,17 +64,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    //if(IS_IPHONE_DEVICE)
-    //{
-    //    self.imgHeight.constant = 176;
-    //}
-   // else
-    //{
-       // self.imgHeight.constant = 230;
-    //}
-
-    
+   // [COMMON AddMenuView:self.view];
     [self customnavigationmethod];
     
     if([self.check isEqualToString:@"main"])
@@ -142,6 +132,10 @@
     [self profileWebservice:SelectClientCode :Selectteamcode:Selectplayercode];
     
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -520,7 +514,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+   [COMMON ShowsideMenuView];
     
 }
 -(IBAction)btn_back:(id)sender

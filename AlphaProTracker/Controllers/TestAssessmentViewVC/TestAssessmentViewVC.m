@@ -79,6 +79,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //[COMMON AddMenuView:self.view];
      objWebService=[[WebService alloc]init];
    // aslist = [[NSMutableArray alloc]init];
     
@@ -119,6 +120,10 @@
     objAssessmentSideView.moduleStr =  self.ModuleCode;
     //objAssessmentSideView.hidden=YES;
     self.assessmentView.hidden = YES;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)customnavigationmethod
 {
@@ -518,8 +523,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+    [COMMON ShowsideMenuView];
 }
 -(IBAction)HomeBtnAction:(id)sender
 {

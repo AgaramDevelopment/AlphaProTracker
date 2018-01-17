@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[COMMON AddMenuView:self.view];
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
 }
@@ -38,10 +39,13 @@
     [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
--(IBAction)MenuBtnAction:(id)sender
+-(void)viewWillAppear:(BOOL)animated
 {
     [COMMON AddMenuView:self.view];
-    
+}
+-(IBAction)MenuBtnAction:(id)sender
+{
+   [COMMON ShowsideMenuView];
 }
 
 -(IBAction)HomeBtnAction:(id)sender

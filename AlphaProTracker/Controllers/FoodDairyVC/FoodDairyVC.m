@@ -70,6 +70,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[COMMON AddMenuView:self.view];
     self.gameview.layer.borderWidth=0.5f;
     self.gameview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
@@ -101,6 +102,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+   
+        [COMMON AddMenuView:self.view];
+    
     if([RoleCode isEqualToString:@"ROL0000003"])
     {
         self.addBtn.hidden=YES;
@@ -182,8 +186,7 @@
 #pragma Button action
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+    [COMMON ShowsideMenuView];
 }
 
 -(IBAction)HomeBtnAction:(id)sender
