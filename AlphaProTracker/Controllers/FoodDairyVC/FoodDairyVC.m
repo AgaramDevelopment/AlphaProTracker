@@ -31,6 +31,8 @@
     BOOL isPlayer;
     BOOL isShowDetails;
     BOOL isDate;
+    
+    CustomNavigation * objCustomNavigation;
 }
 @property (nonatomic,strong) NSMutableArray * gameArray;
 @property (nonatomic,strong) NSMutableArray * TeamArray;
@@ -103,7 +105,8 @@
 {
     if([RoleCode isEqualToString:@"ROL0000003"])
     {
-        self.addBtn.hidden=YES;
+//        self.addBtn.hidden=YES;
+        objCustomNavigation.home_btn.hidden=YES;
         self.fooddiaryTblYposition.constant = self.daterview.frame.origin.y+5;
         self.maindateView.hidden =NO;
         self.mainPlayerView.hidden =NO;
@@ -112,16 +115,18 @@
         
     }
     else{
-        self.addBtn.hidden=NO;
-        self.addBtn.layer.cornerRadius =15;
-        self.addBtn.layer.masksToBounds=YES;
-        self.addBtn.layer.borderColor=[UIColor whiteColor].CGColor;
-        self.addBtn.layer.borderWidth=1.0;
+        objCustomNavigation.home_btn.hidden=NO;
+        
+//        objCustomNavigation.home_btn.layer.cornerRadius =15;
+//        objCustomNavigation.home_btn.layer.masksToBounds=YES;
+//        objCustomNavigation.home_btn.layer.borderColor=[UIColor whiteColor].CGColor;
+//        objCustomNavigation.home_btn.layer.borderWidth=1.0;
+        
         self.maindateView.hidden =YES;
         self.mainGameView.hidden =YES;
         self.mainTeamView.hidden=YES;
         self.mainPlayerView.hidden=YES;
-        self.fooddiaryTblYposition.constant = self.view.frame.origin.y-195;
+        self.fooddiaryTblYposition.constant = self.view.frame.origin.y-185;
         self.foodTblYposition.constant = self.fooddiaryTblYposition.constant+25;
         
         NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -141,22 +146,24 @@
 }
 -(void)customnavigationmethod
 {
-    CustomNavigation * objCustomNavigation;
+    
     
     
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
     [self.view addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"Food Diary";
-    
+    [objCustomNavigation.home_btn setImage:[UIImage imageNamed:@"ico_addWhite"]  forState:UIControlStateNormal];
+     //objCustomNavigation.home_btn = [UIButton buttonWithType:UIButtonTypeContactAdd];
     
     if([self.check isEqualToString:@"main"])
     {
         objCustomNavigation.btn_back.hidden =NO;
         objCustomNavigation.menu_btn.hidden =YES;
         [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+       // objCustomNavigation.btn_back.imageView.image = [UIImage imageNamed:@"ico_addWhite"];
         [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [objCustomNavigation.home_btn addTarget:self action:@selector(didclickAddBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
@@ -164,7 +171,7 @@
         objCustomNavigation.menu_btn.hidden =NO;
         [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
         [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [objCustomNavigation.home_btn addTarget:self action:@selector(didclickAddBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
 
     
@@ -567,15 +574,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if(isShowDetails==YES)
     {
         return 40;
+    } else if (tableView == self.popviewTbl)
+    {
+        return 60;
     }
     else
     {
         return 30;
     }
-    
+
 }
 
 
@@ -619,11 +630,13 @@
         }
         else if (isTeam)
         {
+            cell.textLabel.numberOfLines = 2;
             cell.textLabel.text = [[self.commonArray valueForKey:@"TEAMNAME"] objectAtIndex:indexPath.row];
             
         }
         else if (isPlayer)
         {
+            cell.textLabel.numberOfLines = 2;
             cell.textLabel.text = [[self.commonArray valueForKey:@"ATHLETENAME"] objectAtIndex:indexPath.row];
             
         }
@@ -647,6 +660,7 @@
     }
     else if (isPlayer)
     {
+        
         self.playerLbl.text =[[self.commonArray valueForKey:@"ATHLETENAME"] objectAtIndex:indexPath.row];
         selectPlayerCode =[[self.commonArray valueForKey:@"ATHLETECODE"] objectAtIndex:indexPath.row];
        // [self startFetchTeamByParticipantType:selectParticipantType];
