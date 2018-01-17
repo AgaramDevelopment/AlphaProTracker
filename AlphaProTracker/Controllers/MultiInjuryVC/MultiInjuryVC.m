@@ -56,6 +56,7 @@
     objCustomNavigation.btn_back.hidden =NO;
     objCustomNavigation.home_btn.hidden =YES;
     objCustomNavigation.menu_btn.hidden = YES;
+    
     [objCustomNavigation.btn_back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
    // [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     

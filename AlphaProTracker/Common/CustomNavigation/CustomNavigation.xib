@@ -60,7 +60,7 @@
                             <state key="normal" image="back_btn_icon"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alpha Pro Tracker" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sk-7Q-bfr">
-                            <rect key="frame" x="50" y="20" width="275" height="22"/>
+                            <rect key="frame" x="50" y="20" width="285" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="77e-Gb-HFT"/>
                             </constraints>
@@ -69,10 +69,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOn-Q1-eeW">
-                            <rect key="frame" x="330" y="15" width="40" height="35"/>
+                            <rect key="frame" x="330" y="20" width="30" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="TV5-Kn-YIj"/>
-                                <constraint firstAttribute="height" constant="35" id="chb-3R-zS1"/>
+                                <constraint firstAttribute="width" constant="30" id="TV5-Kn-YIj"/>
+                                <constraint firstAttribute="height" constant="30" id="chb-3R-zS1"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                             <state key="normal" image="home-1"/>
@@ -80,14 +80,14 @@
                     </subviews>
                     <color key="backgroundColor" red="0.10980392156862745" green="0.10196078431372549" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="BOn-Q1-eeW" firstAttribute="leading" secondItem="1Sk-7Q-bfr" secondAttribute="trailing" constant="5" id="1wk-UR-HSa"/>
-                        <constraint firstAttribute="bottom" secondItem="WJg-EU-TWZ" secondAttribute="bottom" constant="7" id="5Wd-4R-Fyx"/>
-                        <constraint firstAttribute="trailing" secondItem="BOn-Q1-eeW" secondAttribute="trailing" constant="5" id="CS3-GT-nOw"/>
+                        <constraint firstItem="BOn-Q1-eeW" firstAttribute="leading" secondItem="1Sk-7Q-bfr" secondAttribute="trailing" constant="-5" id="1wk-UR-HSa"/>
+                        <constraint firstAttribute="bottom" secondItem="WJg-EU-TWZ" secondAttribute="bottom" constant="-1" id="5Wd-4R-Fyx"/>
+                        <constraint firstAttribute="trailing" secondItem="BOn-Q1-eeW" secondAttribute="trailing" constant="15" id="CS3-GT-nOw"/>
                         <constraint firstItem="RKZ-AO-dKB" firstAttribute="leading" secondItem="jhI-tf-RxS" secondAttribute="leading" constant="5" id="MXa-cO-wHU"/>
                         <constraint firstItem="PnP-Qu-uIz" firstAttribute="top" secondItem="jhI-tf-RxS" secondAttribute="top" constant="15" id="Pv8-2G-29x"/>
                         <constraint firstAttribute="trailing" secondItem="WJg-EU-TWZ" secondAttribute="trailing" id="Pww-QC-8xL"/>
                         <constraint firstItem="1Sk-7Q-bfr" firstAttribute="leading" secondItem="PnP-Qu-uIz" secondAttribute="trailing" constant="5" id="RRD-Jh-MhT"/>
-                        <constraint firstItem="BOn-Q1-eeW" firstAttribute="top" secondItem="jhI-tf-RxS" secondAttribute="top" constant="15" id="XrU-mm-Tof"/>
+                        <constraint firstItem="BOn-Q1-eeW" firstAttribute="top" secondItem="jhI-tf-RxS" secondAttribute="top" constant="20" id="XrU-mm-Tof"/>
                         <constraint firstItem="PnP-Qu-uIz" firstAttribute="leading" secondItem="jhI-tf-RxS" secondAttribute="leading" constant="5" id="kBX-FI-F3Q"/>
                         <constraint firstAttribute="bottom" secondItem="RKZ-AO-dKB" secondAttribute="bottom" constant="21" id="u8f-nB-qDj"/>
                         <constraint firstItem="WJg-EU-TWZ" firstAttribute="leading" secondItem="jhI-tf-RxS" secondAttribute="leading" id="vzd-qp-cWU"/>
