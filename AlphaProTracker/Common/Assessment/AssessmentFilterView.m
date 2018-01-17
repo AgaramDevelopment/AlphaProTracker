@@ -20,6 +20,7 @@
     NSMutableArray * TeamArray;
     NSMutableArray * playerArray;
     NSMutableArray * commonArray;
+    NSMutableArray * FetchAssessTitleArray;
     BOOL isModule;
     BOOL isTittle;
     BOOL isTeam;
@@ -162,8 +163,16 @@
                 for(int i=0; objAssessmentArray.count>i;i++)
                 {
                     NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString * moduleCodeStr = [self checkNull:[[objAssessmentArray valueForKey:@"Module"] objectAtIndex:i]];
+                    
+                    NSString * modulenameStr = [self checkNull:[[objAssessmentArray valueForKey:@"ModuleName"] objectAtIndex:i]];
+                    
                     NSString * teamCodeStr = [self checkNull:[[objAssessmentArray valueForKey:@"Assessment"] objectAtIndex:i]];
                     NSString * teamnameStr = [self checkNull:[[objAssessmentArray valueForKey:@"AssessmentName"] objectAtIndex:i]];
+                    
+                    [objDic setObject:moduleCodeStr forKey:@"Module"];
+                    [objDic setObject:modulenameStr forKey:@"ModuleName"];
                     [objDic setObject:teamCodeStr forKey:@"Assessment"];
                     [objDic setObject:teamnameStr forKey:@"AssessmentName"];
                     
@@ -236,15 +245,15 @@
 {
     isplayerlist = NO;
     isPoPlist = YES;
-    self.popviewyposition.constant = self.moduleView.frame.origin.y;
+    self.popviewyposition.constant = self.titleView.frame.origin.y;
     self.popviewWidth.constant = self.titleView.frame.size.width;
-    self.popviewXposition.constant = 155;
+    self.popviewXposition.constant = self.titleView.frame.origin.x;
     
 
     if(isTittle == NO)
     {
         commonArray = [[NSMutableArray alloc]init];
-        commonArray = AssessmentTitleArray;
+        commonArray = FetchAssessTitleArray;
         self.popTblView.hidden = NO;
         isTittle =YES;
         [self showAnimate];
@@ -267,7 +276,7 @@
     isPoPlist = YES;
     self.popviewyposition.constant = self.teamView.frame.origin.y;
     self.popviewXposition.constant = self.teamView.frame.origin.x;
-    self.popviewWidth.constant = self.teamView.frame.size.width;
+    self.popviewWidth.constant =  self.teamView.frame.size.width;
 
     if(isTeam == NO)
     {
@@ -416,7 +425,7 @@
 {
     if(isplayerlist)
     {
-        return 55;
+        return 70;
     } else {
         return 44;
     }
@@ -509,7 +518,17 @@
         if (isModule)
         {
             self.moduleLbl.text = [[commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
+            NSString * moduleCode =  [[commonArray valueForKey:@"Module"] objectAtIndex:indexPath.row];
             //isModule =NO;
+            FetchAssessTitleArray = [[NSMutableArray alloc]init];
+            for(int i=0; i<AssessmentTitleArray.count; i++)
+            {
+                NSDictionary * objDic = [AssessmentTitleArray objectAtIndex:i];
+                if([[objDic valueForKey:@"Module"] isEqualToString:moduleCode])
+                {
+                    [FetchAssessTitleArray addObject:objDic];
+                }
+            }
         }
         else if (isTittle) {
             

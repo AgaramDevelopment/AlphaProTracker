@@ -696,11 +696,8 @@
     AddFoodDiaryVC  * objaddFooddiary=[[AddFoodDiaryVC alloc]init];
     objaddFooddiary = (AddFoodDiaryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddFoodDiary"];
     objaddFooddiary.Isupdate =NO;
-
     objaddFooddiary.mealsArray =self.MealsArray;
-    
     objaddFooddiary.key=@"add";
-    
     [self.navigationController pushViewController:objaddFooddiary animated:YES];
 }
 
