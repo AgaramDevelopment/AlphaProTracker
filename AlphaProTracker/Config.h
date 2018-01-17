@@ -19,7 +19,9 @@
 
 #define IS_IPHONE6_Plus                 (([[UIScreen mainScreen] bounds].size.height-736)?NO:YES)
 
-#define IS_IPAD                         (([[UIScreen mainScreen] bounds].size.height-768)?NO:YES)
+//#define IS_IPAD                         (([[UIScreen mainScreen] bounds].size.height-768)?NO:YES)
+#define IS_IPAD ( [[[UIDevice currentDevice] model] isEqualToString:@"iPad"])
+
 
 // OS Versions
 #define IS_GREATER_IOS7                 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)?YES:NO)

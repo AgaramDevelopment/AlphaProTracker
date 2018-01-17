@@ -170,7 +170,7 @@ AppCommon *sharedCommon = nil;
     
    
     
-    UIView * profileView =[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/2,150)];
+    UIView * profileView = (IS_IPAD)?[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/2,150)]:[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/1.4,150)];
     [menuview addSubview:profileView];
     
     UIImageView * bgImg =[[UIImageView alloc]initWithFrame:CGRectMake(profileView.frame.origin.x,profileView.frame.origin.y,profileView.frame.size.width,profileView.frame.size.height)];
@@ -186,21 +186,29 @@ AppCommon *sharedCommon = nil;
     
     UILabel * userNamelbl =[[UILabel alloc]initWithFrame:CGRectMake(10,profileImg.frame.origin.y+profileImg.frame.size.height,menuview.frame.size.width-10,30)];
     userNamelbl.text=username;
+    userNamelbl.textColor = [UIColor whiteColor];
+    userNamelbl.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
+   
+
     [profileView addSubview:userNamelbl];
     
     UIView * popView =[[UIView alloc]initWithFrame:CGRectMake(10,userNamelbl.frame.origin.y+userNamelbl.frame.size.height,profileView.frame.size.width-20,40)];
 
     UILabel * selectTypelbl =[[UILabel alloc]initWithFrame:CGRectMake(0,0,popView.frame.size.width-30,popView.frame.size.height)];
     selectTypelbl.text =userRolename;
+    selectTypelbl.textColor = [UIColor whiteColor];
+    selectTypelbl.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
+
     [popView addSubview:selectTypelbl];
     
-    UIImageView * dropdownImg =[[UIImageView alloc]initWithFrame:CGRectMake(popView.frame.size.width-20,selectTypelbl.frame.origin.y+5,20,20)];
+    UIImageView * dropdownImg =[[UIImageView alloc]initWithFrame:CGRectMake(popView.frame.size.width-20,selectTypelbl.frame.origin.y+10,20,20)];
     [dropdownImg setImage:[UIImage imageNamed:@"ico_cmb"]];
     [popView addSubview:dropdownImg];
     
     [profileView addSubview:popView];
     
-    UIView * tblBackgroundview =[[UIView alloc]initWithFrame:CGRectMake(0,profileView.frame.origin.y+profileView.frame.size.height,menuview.frame.size.width/2,[UIScreen mainScreen].bounds.size.height-profileView.frame.size.height)];
+    UIView * tblBackgroundview =(IS_IPAD)?[[UIView alloc]initWithFrame:CGRectMake(0,profileView.frame.origin.y+profileView.frame.size.height,menuview.frame.size.width/2,[UIScreen mainScreen].bounds.size.height-profileView.frame.size.height)] : [[UIView alloc]initWithFrame:CGRectMake(0,profileView.frame.origin.y+profileView.frame.size.height,menuview.frame.size.width/1.4,[UIScreen mainScreen].bounds.size.height-profileView.frame.size.height)];
+    
     tblBackgroundview.backgroundColor =[UIColor colorWithRed:(28/255.0f) green:(26/255.0f) blue:(65/255.0f) alpha:1.0f];
     [menuview addSubview:tblBackgroundview];
     
@@ -299,11 +307,12 @@ AppCommon *sharedCommon = nil;
         
         cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
         cell.textLabel.textColor =[UIColor whiteColor];
-        
+        cell.textLabel.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
+
 //        if ((indexPath.section == 0 && (indexPath.row == 2)) || (indexPath.section == 0 && (indexPath.row == 3)) || (indexPath.section == 0 && (indexPath.row == 4)))
 //            cell.expandable = YES;
 //        else
-//            cell.expandable = NO;
+            cell.expandable = NO;
         cell.backgroundColor =[UIColor colorWithRed:(17/255.0f) green:(24/255.0f) blue:(67/255.0f) alpha:0.9];
     }
     else
@@ -314,6 +323,8 @@ AppCommon *sharedCommon = nil;
     
     cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
     cell.textLabel.textColor =[UIColor whiteColor];
+    //[cell.textLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
+    cell.textLabel.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
     
     if ((indexPath.section == 0 && (indexPath.row == 2)) || (indexPath.section == 0 && (indexPath.row == 3)) || (indexPath.section == 0 && (indexPath.row == 4)))
         cell.expandable = YES;
@@ -336,9 +347,9 @@ AppCommon *sharedCommon = nil;
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
     cell.backgroundColor =[UIColor colorWithRed:(17/255.0f) green:(24/255.0f) blue:(67/255.0f) alpha:1.0];
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.textColor =[UIColor whiteColor];
-    
+    //[cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+    cell.textLabel.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
     return cell;
 }
 
