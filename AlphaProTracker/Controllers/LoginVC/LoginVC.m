@@ -168,32 +168,50 @@
 
 - (IBAction)switchAction:(id)sender {
     
-    UISwitch *mySwitch = (UISwitch *)sender;
-    
-    if ([mySwitch isOn]) {
-        
-        self.passwordTxt.secureTextEntry=NO;
-        
-        [self.swt setThumbTintColor:[UIColor colorWithRed: (27/255.0f)  green:(25/255.0f) blue:(68/255.0f) alpha:1.0f]];
-        [self.swt setOnTintColor:[UIColor colorWithRed: (164/255.0f)  green:(179/255.0f) blue:(184/255.0f) alpha:1.0f]];
-        
-        NSLog(@"ON");
-        
-    } else {
-        
-        self.passwordTxt.secureTextEntry=YES;
-        
-        [self.swt setThumbTintColor:[UIColor colorWithRed: (128/255.0f)  green:(128/255.0f) blue:(128/255.0f) alpha:0.3f]];
-        [self.swt setOnTintColor:[UIColor colorWithRed: (164/255.0f)  green:(179/255.0f) blue:(184/255.0f) alpha:1.0f]];
-        
-        NSLog(@"Off");
-        
-    }
+    self.passwordTxt.secureTextEntry= ![sender isOn];
+
+//    UISwitch *mySwitch = (UISwitch *)sender;
+//
+//    if ([mySwitch isOn]) {
+//
+//        self.passwordTxt.secureTextEntry=NO;
+//
+//        [self.swt setThumbTintColor:[UIColor colorWithRed: (27/255.0f)  green:(25/255.0f) blue:(68/255.0f) alpha:1.0f]];
+//        [self.swt setOnTintColor:[UIColor colorWithRed: (164/255.0f)  green:(179/255.0f) blue:(184/255.0f) alpha:1.0f]];
+//
+//        NSLog(@"ON");
+//
+//    } else {
+//
+//        self.passwordTxt.secureTextEntry=YES;
+//
+//        [self.swt setThumbTintColor:[UIColor colorWithRed: (128/255.0f)  green:(128/255.0f) blue:(128/255.0f) alpha:0.3f]];
+//        [self.swt setOnTintColor:[UIColor colorWithRed: (164/255.0f)  green:(179/255.0f) blue:(184/255.0f) alpha:1.0f]];
+//
+//        NSLog(@"Off");
+//
+//    }
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view resignFirstResponder];
+    [_passwordTxt resignFirstResponder];
+    [_userTxt resignFirstResponder];
+
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if(textField.returnKeyType == UIReturnKeyNext && _userTxt.isFirstResponder)
+    {
+        [_userTxt resignFirstResponder];
+        [_passwordTxt becomeFirstResponder];
+    }
+    else
+    {
+        [textField resignFirstResponder];
+    }
+    
     return YES;
 }
 
