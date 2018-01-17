@@ -209,6 +209,8 @@
     isplayerlist = NO;
     isPoPlist = YES;
     self.popviewyposition.constant = self.moduleView.frame.origin.y;
+    self.popviewXposition.constant = self.moduleView.frame.origin.x;
+    self.popviewWidth.constant = self.moduleView.frame.size.width;
 
     if(isModule == NO)
     {
@@ -234,7 +236,11 @@
 {
     isplayerlist = NO;
     isPoPlist = YES;
-    self.popviewyposition.constant = self.titleView.frame.origin.y;
+    self.popviewyposition.constant = self.moduleView.frame.origin.y;
+    self.popviewWidth.constant = self.titleView.frame.size.width;
+    self.popviewXposition.constant = 155;
+    
+
     if(isTittle == NO)
     {
         commonArray = [[NSMutableArray alloc]init];
@@ -260,6 +266,9 @@
     isplayerlist = NO;
     isPoPlist = YES;
     self.popviewyposition.constant = self.teamView.frame.origin.y;
+    self.popviewXposition.constant = self.teamView.frame.origin.x;
+    self.popviewWidth.constant = self.teamView.frame.size.width;
+
     if(isTeam == NO)
     {
         commonArray = [[NSMutableArray alloc]init];
@@ -450,17 +459,17 @@
     
     else
     {
-        static NSString *CellIdentifier = @"CellIdentity";
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        static NSString *CellIdentifier = @"popCell";
+        PopViewCell *cell = (PopViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if(cell == nil){
             
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[PopViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.font = [UIFont fontWithName:@"ArialMT" size:12];
-            cell.textLabel.textColor=[UIColor blackColor];
-            cell.textLabel.textAlignment = NSTextAlignmentCenter;
-            // [cell setBackgroundColor:[UIColor clearColor]];
+//            cell.textLabel.font = [UIFont fontWithName:@"ArialMT" size:12];
+//            cell.textLabel.textColor=[UIColor blackColor];
+//            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+//            // [cell setBackgroundColor:[UIColor clearColor]];
         }
         
         //cell.imageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:indexPath.row]];
@@ -481,7 +490,7 @@
         {
             displayStr = [[commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
         }
-        cell.textLabel.text=displayStr;
+        cell.popNameLbl.text=displayStr;
         return cell;
     }
 }
