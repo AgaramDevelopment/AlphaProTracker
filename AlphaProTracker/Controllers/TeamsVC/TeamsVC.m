@@ -54,21 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //if(IS_IPHONE_DEVICE)
-    //{
-     //   self.imgHeight.constant = 176;
-        
-    //    self.nameYView.constant = 176;
-   // }
-   //  else
-   // {
-   //  self.imgHeight.constant = 230;
-    //    self.nameYView.constant = 230;
-   // }
-
-    
-        
-    
+    //[COMMON AddMenuView:self.view];
     [self profileWebservice:SelectClientCode :SelectUsercode];
     [self customnavigationmethod];
     
@@ -94,6 +80,10 @@
 //    CGRect headerImageFrame = _containerUIView.frame;
 //    headerImageFrame.origin.y = headerImageYOffset;
 //}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [(ParallaxHeaderView *)self.playersTbl.tableHeaderView refreshBlurViewForNewImage];
@@ -304,7 +294,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+   [COMMON ShowsideMenuView];
     
 }
 

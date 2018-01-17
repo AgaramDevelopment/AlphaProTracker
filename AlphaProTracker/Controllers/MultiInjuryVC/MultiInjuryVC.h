@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MultiInjurylistCell.h"
 
 @interface MultiInjuryVC : UIViewController
+
 
 
 @property (nonatomic,strong) IBOutlet UIView * siteView;
@@ -24,6 +26,7 @@
 @property (nonatomic,strong) IBOutlet UIButton * typeBtn;
 
 @property (nonatomic,strong) IBOutlet UIView * multiseliectPopView;
+@property (nonatomic,strong) IBOutlet MultiInjurylistCell * objCell;
 
 
 @property (nonatomic,strong) IBOutlet UITableView * multiSelectTbl;

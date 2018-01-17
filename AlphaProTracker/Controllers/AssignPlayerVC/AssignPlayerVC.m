@@ -50,6 +50,7 @@
     [super viewDidLoad];
     
     objWebservice = [[WebService alloc]init];
+    //[COMMON AddMenuView:self.view];
     
     self.selectedMarks = [[NSMutableArray alloc]init];
     
@@ -84,6 +85,10 @@
     [self ProgramWebservice];
 
     [self customnavigationmethod];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)customnavigationmethod
 {
@@ -681,7 +686,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+    [COMMON ShowsideMenuView];
     
 }
 

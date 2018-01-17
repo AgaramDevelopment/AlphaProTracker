@@ -54,7 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //[COMMON AddMenuView:self.view];
     objWebservice = [[WebService alloc]init];
     
     self.firstArr = [[NSMutableArray alloc]init];
@@ -81,6 +81,10 @@
     
     
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)customnavigationmethod
 {
@@ -248,7 +252,7 @@
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
+    [COMMON ShowsideMenuView];
     
 }
 

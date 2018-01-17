@@ -129,7 +129,7 @@ static const NSInteger tValueLabelTag = 77;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
-    
+    //[COMMON AddMenuView:self.view];
     self.selectedMarks = [[NSMutableArray alloc]init];
     self.markers = [[NSMutableArray alloc]initWithObjects:@"0",@"0",@"0",@"0", nil];
     //self.markers = [[NSMutableArray alloc]init];
@@ -166,6 +166,10 @@ static const NSInteger tValueLabelTag = 77;
     [self metacodeWebservice];
     
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 -(void)samplePieChart
 {
@@ -1429,8 +1433,7 @@ static const NSInteger tValueLabelTag = 77;
 
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+    [COMMON ShowsideMenuView];
 }
 -(IBAction)btn_back:(id)sender
 {

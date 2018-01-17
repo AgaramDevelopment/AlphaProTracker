@@ -131,6 +131,8 @@
 		04EBB7951F8904D500422202 /* QuestionaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBB7931F8904D500422202 /* QuestionaryCell.m */; };
 		04EBB7961F8904D500422202 /* QuestionaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EBB7941F8904D500422202 /* QuestionaryCell.xib */; };
 		04EE9D681F9A20F6007B3278 /* DBAConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE9D671F9A20F6007B3278 /* DBAConnection.m */; };
+		04F11D99200F70F9004A4218 /* MultiInjurylistCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F11D97200F70F9004A4218 /* MultiInjurylistCell.m */; };
+		04F11D9A200F70F9004A4218 /* MultiInjurylistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F11D98200F70F9004A4218 /* MultiInjurylistCell.xib */; };
 		04F1B95E1F94843C00EFA4A9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */; };
 		04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */; };
 		04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */; };
@@ -484,6 +486,9 @@
 		04EBB7941F8904D500422202 /* QuestionaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QuestionaryCell.xib; path = Subview/QuestionaryCell/QuestionaryCell.xib; sourceTree = "<group>"; };
 		04EE9D661F9A20F6007B3278 /* DBAConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBAConnection.h; path = AppCommon/DBAConnection/DBAConnection.h; sourceTree = "<group>"; };
 		04EE9D671F9A20F6007B3278 /* DBAConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBAConnection.m; path = AppCommon/DBAConnection/DBAConnection.m; sourceTree = "<group>"; };
+		04F11D96200F70F9004A4218 /* MultiInjurylistCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MultiInjurylistCell.h; path = Subview/MultiInjurylistCell/MultiInjurylistCell.h; sourceTree = "<group>"; };
+		04F11D97200F70F9004A4218 /* MultiInjurylistCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MultiInjurylistCell.m; path = Subview/MultiInjurylistCell/MultiInjurylistCell.m; sourceTree = "<group>"; };
+		04F11D98200F70F9004A4218 /* MultiInjurylistCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MultiInjurylistCell.xib; path = Subview/MultiInjurylistCell/MultiInjurylistCell.xib; sourceTree = "<group>"; };
 		04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		04F1B9601F9484E100EFA4A9 /* DBMANAGERSYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBMANAGERSYNC.h; path = AppCommon/dbmanagerSync/DBMANAGERSYNC.h; sourceTree = "<group>"; };
 		04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBMANAGERSYNC.m; path = AppCommon/dbmanagerSync/DBMANAGERSYNC.m; sourceTree = "<group>"; };
@@ -821,6 +826,7 @@
 		043B23191F4B1BC700036604 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
+				04F11D95200F70D0004A4218 /* MultiInjurylistCell */,
 				CEEE8031200E20E200E33513 /* ExcersizeCollectionCell */,
 				18B97996200E125000B94DD4 /* PopviewCell */,
 				CEC26FCA1FFE124500FF2D74 /* AssessmentCell */,
@@ -1308,6 +1314,16 @@
 				04EE9D671F9A20F6007B3278 /* DBAConnection.m */,
 			);
 			name = DBAConnection;
+			sourceTree = "<group>";
+		};
+		04F11D95200F70D0004A4218 /* MultiInjurylistCell */ = {
+			isa = PBXGroup;
+			children = (
+				04F11D96200F70F9004A4218 /* MultiInjurylistCell.h */,
+				04F11D97200F70F9004A4218 /* MultiInjurylistCell.m */,
+				04F11D98200F70F9004A4218 /* MultiInjurylistCell.xib */,
+			);
+			name = MultiInjurylistCell;
 			sourceTree = "<group>";
 		};
 		04F1B95F1F9484A500EFA4A9 /* dbmanagerSync */ = {
@@ -1971,6 +1987,7 @@
 				04CA66491F6FA567009F109E /* FoodDairy.xib in Resources */,
 				ACBBA1801F613E1F000F9DC9 /* WellnessRating.xib in Resources */,
 				045A49F91FA22192008C1630 /* MonthlyCalendar.png in Resources */,
+				04F11D9A200F70F9004A4218 /* MultiInjurylistCell.xib in Resources */,
 				AC1BC8161F8665A60047AECC /* AAHighchartsMore.js in Resources */,
 				ACA768671F4C2AF000ECC17A /* UIKit+AFNetworking in Resources */,
 				ACBD4AD81F56CFBC00AFA25D /* SubAssessmentCell.xib in Resources */,
@@ -2078,6 +2095,7 @@
 				04DC33701FB08601001BF439 /* EventRecord.m in Sources */,
 				04DB75321F7A60BB001CB710 /* AddIllnessVC.m in Sources */,
 				04534A6F1F542E2100999FBC /* PlannerAddEvent.m in Sources */,
+				04F11D99200F70F9004A4218 /* MultiInjurylistCell.m in Sources */,
 				045A49B41FA220B2008C1630 /* FFMonthCellForYearCell.m in Sources */,
 				045A49E01FA22128008C1630 /* FFEditEventView.m in Sources */,
 				045A49731FA22002008C1630 /* FFDayCell.m in Sources */,

@@ -38,7 +38,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //self.view_border.layer.borderWidth = 1;
     //self.view_border.layer.borderColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:0.9f].CGColor;
     
@@ -65,6 +64,10 @@
     [objCustomNavigation.btn_back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
 
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [COMMON AddMenuView:self.view];
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -180,8 +183,7 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON AddMenuView:self.view];
-    
+   [COMMON ShowsideMenuView];
 }
 -(IBAction)btn_back:(id)sender
 {
