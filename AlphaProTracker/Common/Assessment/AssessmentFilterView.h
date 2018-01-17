@@ -28,6 +28,8 @@
 @property (nonatomic,strong) IBOutlet UITextField * playerTxt;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewyposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewXposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewWidth;
 @property (nonatomic, strong) NSArray *searchResult;
 @property(assign) BOOL searchEnabled;
 @end
