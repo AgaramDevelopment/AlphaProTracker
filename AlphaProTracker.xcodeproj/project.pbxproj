@@ -34,7 +34,6 @@
 		0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0441B7841F6ACA6B00A28E19 /* PlannerCell.xib */; };
 		0441B78A1F6ACB4E00A28E19 /* PlannerListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0441B7891F6ACB4E00A28E19 /* PlannerListVC.m */; };
 		044730D41F94D41E00871628 /* Utitliy.m in Sources */ = {isa = PBXBuildFile; fileRef = 044730D31F94D41E00871628 /* Utitliy.m */; };
-		04498909200E1C0600E807E8 /* MultiInjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04498908200E1C0600E807E8 /* MultiInjuryVC.m */; };
 		04534A551F53FA4100999FBC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A431F53FA4100999FBC /* AFHTTPRequestOperation.m */; };
 		04534A561F53FA4100999FBC /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A451F53FA4100999FBC /* AFHTTPRequestOperationManager.m */; };
 		04534A571F53FA4100999FBC /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A471F53FA4100999FBC /* AFHTTPSessionManager.m */; };
@@ -135,6 +134,7 @@
 		04F1B95E1F94843C00EFA4A9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */; };
 		04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */; };
 		04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */; };
+		18A982B2200F0F900071727E /* MultiInjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A982B1200F0F900071727E /* MultiInjuryVC.m */; };
 		18B97984200DCE6600B94DD4 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97983200DCE6600B94DD4 /* ProfileVC.m */; };
 		18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97985200DCEC200B94DD4 /* HomeVCCell.m */; };
 		18B97993200DD49E00B94DD4 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97990200DD49E00B94DD4 /* UIImage+ImageEffects.m */; };
@@ -292,8 +292,6 @@
 		0441B7891F6ACB4E00A28E19 /* PlannerListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlannerListVC.m; path = Controllers/PlannerListVC/PlannerListVC.m; sourceTree = "<group>"; };
 		044730D21F94D28E00871628 /* Utitliy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utitliy.h; path = AppCommon/Utitliy.h; sourceTree = "<group>"; };
 		044730D31F94D41E00871628 /* Utitliy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utitliy.m; path = AppCommon/Utitliy.m; sourceTree = "<group>"; };
-		04498907200E1C0600E807E8 /* MultiInjuryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MultiInjuryVC.h; path = Controllers/MultiInjuryVC/MultiInjuryVC.h; sourceTree = "<group>"; };
-		04498908200E1C0600E807E8 /* MultiInjuryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MultiInjuryVC.m; path = Controllers/MultiInjuryVC/MultiInjuryVC.m; sourceTree = "<group>"; };
 		04534A421F53FA4100999FBC /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Helper/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		04534A431F53FA4100999FBC /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Helper/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		04534A441F53FA4100999FBC /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Helper/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -491,6 +489,8 @@
 		04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBMANAGERSYNC.m; path = AppCommon/dbmanagerSync/DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		04FBEE721F7E7D7E007C5BF8 /* PieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieChartView.h; path = Helper/PieChart/PieChartView.h; sourceTree = "<group>"; };
 		04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PieChartView.m; path = Helper/PieChart/PieChartView.m; sourceTree = "<group>"; };
+		18A982B0200F0F900071727E /* MultiInjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiInjuryVC.h; path = Controllers/MultiInjuryVC/MultiInjuryVC.h; sourceTree = "<group>"; };
+		18A982B1200F0F900071727E /* MultiInjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiInjuryVC.m; path = Controllers/MultiInjuryVC/MultiInjuryVC.m; sourceTree = "<group>"; };
 		18B97983200DCE6600B94DD4 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileVC.m; path = Controllers/ProfileVC/ProfileVC.m; sourceTree = "<group>"; };
 		18B97985200DCEC200B94DD4 /* HomeVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeVCCell.m; path = Subview/HomeVCCell/HomeVCCell.m; sourceTree = "<group>"; };
 		18B9798F200DD49E00B94DD4 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = Helper/ParallaxEffect/ParallaxHeaderView.h; sourceTree = "<group>"; };
@@ -766,6 +766,7 @@
 				043B23001F4B1B3800036604 /* AlphaProTracker */,
 				043B22FF1F4B1B3800036604 /* Products */,
 				040EB3631F6D5148005118C7 /* Frameworks */,
+				18A982AE200F09050071727E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -853,6 +854,7 @@
 		043B231A1F4B1BD200036604 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18A982AF200F0F760071727E /* MultiInjuryVC */,
 				CEEE802B200E1DF300E33513 /* ExcersizeVC */,
 				04EBB76A1F88CB7600422202 /* AssignPlayerVC */,
 				041BF51E1F7F5F1F0091611D /* Programvc */,
@@ -979,15 +981,6 @@
 				0441B7891F6ACB4E00A28E19 /* PlannerListVC.m */,
 			);
 			name = PlannerListVC;
-			sourceTree = "<group>";
-		};
-		04498906200E1BE700E807E8 /* MultiInjuryVC */ = {
-			isa = PBXGroup;
-			children = (
-				04498907200E1C0600E807E8 /* MultiInjuryVC.h */,
-				04498908200E1C0600E807E8 /* MultiInjuryVC.m */,
-			);
-			name = MultiInjuryVC;
 			sourceTree = "<group>";
 		};
 		04534A3D1F53F11D00999FBC /* PlannerVC */ = {
@@ -1335,6 +1328,22 @@
 				04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */,
 			);
 			name = PieChart;
+			sourceTree = "<group>";
+		};
+		18A982AE200F09050071727E /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		18A982AF200F0F760071727E /* MultiInjuryVC */ = {
+			isa = PBXGroup;
+			children = (
+				18A982B0200F0F900071727E /* MultiInjuryVC.h */,
+				18A982B1200F0F900071727E /* MultiInjuryVC.m */,
+			);
+			name = MultiInjuryVC;
 			sourceTree = "<group>";
 		};
 		18B9798E200DD48800B94DD4 /* ParallaxEffect */ = {
@@ -2012,6 +2021,7 @@
 				045A49A31FA22095008C1630 /* FFYearCalendarView.m in Sources */,
 				046215E91F4EFAE300A781C2 /* SKSTableView.m in Sources */,
 				AC1BC85B1F8665B40047AECC /* AAPlotLinesElement.m in Sources */,
+				18A982B2200F0F900071727E /* MultiInjuryVC.m in Sources */,
 				04055A8E1F711F870014DC5B /* InjuryListCell.m in Sources */,
 				ACC2A19F1F5FC53B00210422 /* PlayerVC.m in Sources */,
 				ACBBA1971F614E20000F9DC9 /* CtlVsAtl.m in Sources */,
@@ -2141,7 +2151,6 @@
 				04534A5B1F53FA4100999FBC /* AFURLRequestSerialization.m in Sources */,
 				AC1BC8551F8665B40047AECC /* AALegend.m in Sources */,
 				045A49BA1FA220C8008C1630 /* FFBlueButton.m in Sources */,
-				04498909200E1C0600E807E8 /* MultiInjuryVC.m in Sources */,
 				0441B7851F6ACA6B00A28E19 /* PlannerCell.m in Sources */,
 				045A49671FA21FDE008C1630 /* FFDayHeaderCell.m in Sources */,
 				18B97993200DD49E00B94DD4 /* UIImage+ImageEffects.m in Sources */,
