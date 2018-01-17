@@ -298,7 +298,7 @@
     self.multiInjuryBtn.layer.borderWidth = 0.5f;
     self.multiInjuryBtn.layer.borderColor = [UIColor whiteColor].CGColor;
     
-     self.gameSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
+    self.gameSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.gameSubView.layer.borderWidth=0.5;
     self.gameSubView.layer.masksToBounds=YES;
     
