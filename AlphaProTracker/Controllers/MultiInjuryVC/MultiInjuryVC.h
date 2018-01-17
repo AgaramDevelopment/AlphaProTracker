@@ -10,4 +10,23 @@
 
 @interface MultiInjuryVC : UIViewController
 
+
+@property (nonatomic,strong) IBOutlet UIView * siteView;
+@property (nonatomic,strong) IBOutlet UIView * sideView;
+@property (nonatomic,strong) IBOutlet UIView * causeView;
+@property (nonatomic,strong) IBOutlet UIView * locationView;
+@property (nonatomic,strong) IBOutlet UIView * typeView;
+
+@property (nonatomic,strong) IBOutlet UIButton * siteBtn;
+@property (nonatomic,strong) IBOutlet UIButton * sideBtn;
+@property (nonatomic,strong) IBOutlet UIButton * causeBtn;
+@property (nonatomic,strong) IBOutlet UIButton * locationBtn;
+@property (nonatomic,strong) IBOutlet UIButton * typeBtn;
+
+@property (nonatomic,strong) IBOutlet UIView * multiseliectPopView;
+
+
+@property (nonatomic,strong) IBOutlet UITableView * multiSelectTbl;
+@property (nonatomic,strong) IBOutlet UITableView * injuryTbl;
+
 @end
