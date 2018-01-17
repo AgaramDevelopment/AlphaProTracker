@@ -14,4 +14,7 @@
 
 @property (nonatomic,strong)IBOutlet UISlider * VasSlider;
 @property (nonatomic,strong)IBOutlet StepSlider * StSlider;
+
+@property (nonatomic,strong)IBOutlet UIButton * multiInjuryBtn;
+
 @end

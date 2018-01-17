@@ -16,13 +16,12 @@
 #import "ProgramVC.h"
 #import "AssignPlayerVC.h"
 #import <sqlite3.h>
+#import "ExcersizeViewController.h"
 
 @implementation AppCommon
 AppCommon *sharedCommon = nil;
 
 + (AppCommon *)common {
-    
-    NSString *reqName;
     
     if (!sharedCommon) {
         
@@ -354,6 +353,8 @@ AppCommon *sharedCommon = nil;
     menuview.hidden=NO;
     if(isPlayer==YES)
     {
+//        [@"HomeVC",@"Planner",@"WorkLoadVC",@"Illness",@"injury",@"FoodDairyVC",@"PlayerVC"]
+        
         if(indexPath.row==0)
         {
             
@@ -503,44 +504,36 @@ AppCommon *sharedCommon = nil;
     {
         if( indexPath.subRow==1)
         {
-        NSLog(@"Assessment");
-            
+            NSLog(@"Assessment");
             [self redirectSelectview:@"TestAssessmentViewVC"];
         }
         else if(indexPath.subRow==2)
         {
             NSLog(@"questionaire");
-           // [self redirectSelectview:@"QuestionaryVC"];
-            
-            [self QuetionaryScreen:@"Physio"];
-            
-
+            [self redirectSelectview:@"QuestionaryVC"];
         }
         else if(indexPath.subRow==3)
         {
             NSLog(@"singleplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-
         }
         else if(indexPath.subRow==4)
         {
             NSLog(@"multiplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-
         }
         else if( indexPath.subRow==5)
         {
-            NSLog(@"ProgramVC");
-            [self ProgrameScreen:@"Physio"];
-            
+            NSLog(@"Physio ProgramVC");
+//            [self redirectSelectview:@"ProgramVC"];
+            ExcersizeViewController* VC = [ExcersizeViewController new];
+            [appDel.navigationController pushViewController:VC animated:YES];
             
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
-            //[self redirectSelectview:@"AssignPlayerVC"];
-            
-            [self AssignScreen:@"Physio"];
+            [self redirectSelectview:@"AssignPlayerVC"];
         }
 
     }
@@ -554,37 +547,27 @@ AppCommon *sharedCommon = nil;
         else if(indexPath.subRow==2)
         {
             NSLog(@"questionaire");
-            //[self redirectSelectview:@"QuestionaryVC"];
-            
-            [self QuetionaryScreen:@"S and C"];
-            
+            [self redirectSelectview:@"QuestionaryVC"];
         }
         else if(indexPath.subRow==3)
         {
             NSLog(@"singleplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if(indexPath.subRow==4)
         {
             NSLog(@"multiplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if( indexPath.subRow==5)
         {
-            NSLog(@"ProgramVC");
-
-            [self ProgrameScreen:@"S and C"];
-
-            
+            NSLog(@"Strength and Condition ProgramVC");
+            [self redirectSelectview:@"ProgramVC"];
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
-            //[self redirectSelectview:@"AssignPlayerVC"];
-            
-            [self AssignScreen:@"S and C"];
+            [self redirectSelectview:@"AssignPlayerVC"];
         }
 
     }
@@ -599,125 +582,45 @@ AppCommon *sharedCommon = nil;
         else if(indexPath.subRow==2)
         {
             NSLog(@"questionaire");
-            //[self redirectSelectview:@"QuestionaryVC"];
-            
-            [self QuetionaryScreen:@"Coach"];
-            
+            [self redirectSelectview:@"QuestionaryVC"];
         }
         else if(indexPath.subRow==3)
         {
             NSLog(@"singleplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if(indexPath.subRow==4)
         {
             NSLog(@"multiplayer");
             [self redirectSelectview:@"AssessmentSinglePlayerReportVC"];
-            
         }
         else if( indexPath.subRow==5)
         {
-            NSLog(@"ProgramVC");
-            
-            [self ProgrameScreen:@"Coach"];
-
+            NSLog(@"Coach ProgramVC");
+            [self redirectSelectview:@"ProgramVC"];
         }
         else if( indexPath.subRow==6)
         {
             NSLog(@"Assignplayer");
-            //[self redirectSelectview:@"AssignPlayerVC"];
-            [self AssignScreen:@"Coach"];
+            [self redirectSelectview:@"AssignPlayerVC"];
         }
 
     }
     
     
-    //NSLog(@"Section: %d, Row:%d, Subrow:%d", indexPath.section, indexPath.row, indexPath.subRow);
 }
 
 -(void)redirectSelectview:(NSString *)selectViewcontroller
-
 {
-    UIViewController *initViewController;
+    if ([selectViewcontroller isEqualToString:@"LoginVC"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     
-    UIStoryboard *storyBoard;
-    
-    storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    initViewController = [storyBoard instantiateViewControllerWithIdentifier:selectViewcontroller];
-    
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    
-    
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-}
-
-
--(void)ProgrameScreen :(NSString*)name
-{
-    ProgramVC  * objTabVC=[[ProgramVC alloc]init];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSString *ss = @"ProgramVC";
-    UIViewController * initViewController = [storyboard instantiateViewControllerWithIdentifier:ss];
-   navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    objTabVC = (ProgramVC *)[storyboard instantiateViewControllerWithIdentifier:@"ProgramVC"];
-    objTabVC.Screen = name;
-    [navigationController pushViewController:objTabVC animated:NO];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-
-}
-
--(void)QuetionaryScreen :(NSString*)name
-{
-    QuestionaryVC  * objTabVC=[[QuestionaryVC alloc]init];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSString *ss = @"QuestionaryVC";
-    UIViewController * initViewController = [storyboard instantiateViewControllerWithIdentifier:ss];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    objTabVC = (QuestionaryVC *)[storyboard instantiateViewControllerWithIdentifier:@"QuestionaryVC"];
-    objTabVC.Scrname = name;
-    [navigationController pushViewController:objTabVC animated:NO];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
+    UIViewController *initViewController = [appDel.storyBoard instantiateViewControllerWithIdentifier:selectViewcontroller];
+    [appDel.navigationController pushViewController:initViewController animated:YES];
     
 }
-
--(void)AssignScreen :(NSString*)name
-{
-    AssignPlayerVC  * objTabVC=[[AssignPlayerVC alloc]init];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSString *ss = @"AssignPlayerVC";
-    UIViewController * initViewController = [storyboard instantiateViewControllerWithIdentifier:ss];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    objTabVC = (AssignPlayerVC *)[storyboard instantiateViewControllerWithIdentifier:@"AssignPlayerVC"];
-    objTabVC.Scrname = name;
-    [navigationController pushViewController:objTabVC animated:NO];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    navigationController.navigationBarHidden = YES;
-    _window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    
-}
-
-
-
-
 
 #pragma mark - Actions
 

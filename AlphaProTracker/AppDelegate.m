@@ -15,40 +15,38 @@
 @end
 
 @implementation AppDelegate
-
+@synthesize window,storyBoard,navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    UIViewController *initViewController;
-    //UIViewController *rootViewController;
-    UIStoryboard *storyBoard;
+    storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
-    NSLog(@"Pandian");
-        
-        storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
+    UIViewController * initViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"HomeVC" : @"LoginVC")];
     
-    //    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"Skip"]) {
-    //        initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"LoginVC"];
-    //    } else {
-    initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"LoginVC"];
-    
-    //HomeVC
-    // }
-    
-        
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
     navigationController.navigationBarHidden = YES;
-    _window.rootViewController = navigationController;
-    
+    window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     
-    
-
-   
     return YES;
+}
+-(void)redirectSelectview:(NSString *)selectViewcontroller
+{
+    UIViewController *initViewController = [appDel.storyBoard instantiateViewControllerWithIdentifier:selectViewcontroller];
+    
+    for (UIViewController* VC in appDel.navigationController.viewControllers) {
+        if ([initViewController isKindOfClass:VC.classForCoder]) {
+            return;
+        }
+        else{
+            [appDel.navigationController popViewControllerAnimated:NO];
+        }
+    }
+    
+    [appDel.navigationController pushViewController:initViewController animated:YES];
 }
 
 
