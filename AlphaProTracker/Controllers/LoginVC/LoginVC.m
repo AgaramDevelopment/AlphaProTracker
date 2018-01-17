@@ -196,7 +196,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view resignFirstResponder];
-    [_passwordTxt becomeFirstResponder];
+    [_passwordTxt resignFirstResponder];
     [_userTxt resignFirstResponder];
 
 }
