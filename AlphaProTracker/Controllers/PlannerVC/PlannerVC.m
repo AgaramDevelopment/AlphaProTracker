@@ -161,11 +161,19 @@ typedef enum : NSUInteger
 //    //[self displayFFCalendar];
 //    
 //    [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:0]];
+    
+//    saCalendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+27,self.view.frame.size.width,self.view.frame.size.height-340) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
+//
+    self.Tabbar.hidden = NO;
+    self.TabbarPosition.constant = self.MONTH.frame.origin.x;
+    self.TabbarWidth.constant = self.MONTH.frame.size.width;
+//    saCalendar.delegate = self;
+//    [self.view addSubview:saCalendar];
+
 
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
     
     if (!boolDidLoad) {
@@ -173,7 +181,7 @@ typedef enum : NSUInteger
         [self buttonTodayAction:nil];
     }
 
-    [self EventTypeWebservice :usercode:cliendcode:userref];
+//    [self EventTypeWebservice :usercode:cliendcode:userref];
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
@@ -192,8 +200,10 @@ typedef enum : NSUInteger
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
     userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    [self EventTypeWebservice :usercode:cliendcode:userref];
-    
+//    [self EventTypeWebservice :usercode:cliendcode:userref];
+    [self addMonthCalendar];
+    [self setArrayWithEvents:[self arrayWithEvents]];
+
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
@@ -210,11 +220,11 @@ typedef enum : NSUInteger
         [self customNavigationBarLayout];
         [self addCalendarWeek];
         //[self displayFFCalendar];
-     PlannerVC *calendarVc = [PlannerVC new];
-     [calendarVc setProtocol:self];
+//     PlannerVC *calendarVc = [PlannerVC new];
+//     [calendarVc setProtocol:self];
      //[self setArrayWithEvents:[self arrayWithEvents]];
-     [calendarVc setArrayWithEvents:[self arrayWithEvents]];
-        [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:0]];
+     [self setArrayWithEvents:[self arrayWithEvents]];
+    [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:0]];
     
 }
 
@@ -356,10 +366,10 @@ typedef enum : NSUInteger
 /**
  *  Delegate method : get called user has scroll to a new month
  */
--(void) SACalendar:(SACalendar *)calendar didDisplayCalendarForMonth:(int)month year:(int)year{
-    
-    NSLog(@"Displaying : %@ %04i",[DateUtil getMonthString:month],year);
-}
+//-(void) SACalendar:(SACalendar *)calendar didDisplayCalendarForMonth:(int)month year:(int)year{
+//
+//    NSLog(@"Displaying : %@ %04i",[DateUtil getMonthString:month],year);
+//}
 
 -(IBAction)didClickevent:(id)sender
 {
@@ -380,7 +390,6 @@ typedef enum : NSUInteger
     [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
     {
-        
         
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",PlannerEventKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -414,12 +423,15 @@ typedef enum : NSUInteger
                 [mutableDict setObject:@"" forKey:@"EventTypeCode"];
                 [mutableDict setObject:@"All EVENT" forKey:@"EventTypename"];
                 
-                [self.AllEventListArray addObject:mutableDict];
-                for(int i=0; objAlleventArray.count>i;i++)
-                {
-                    NSMutableDictionary * objDic =[objAlleventArray objectAtIndex:i];
-                    [self.AllEventListArray addObject:objDic];
-                }
+                [self.AllEventListArray insertObject:mutableDict atIndex:0];
+                [self.AllEventListArray addObjectsFromArray:objAlleventArray];
+                
+//                [self.AllEventListArray addObject:mutableDict];
+//                for(int i=0; objAlleventArray.count>i;i++)
+//                {
+//                    NSMutableDictionary * objDic =[objAlleventArray objectAtIndex:i];
+//                    [self.AllEventListArray addObject:objDic];
+//                }
                 
                 self.ParticipantsTypeArray =[[NSMutableArray alloc]init];
                 self.ParticipantsTypeArray=[responseObject valueForKey:@"ListParticipantsTypeDetails"];
@@ -500,27 +512,29 @@ typedef enum : NSUInteger
                 NSLog(@"%@",responseObject);
                 self.AllEventDetailListArray = [[NSMutableArray alloc]init];
             
-                self.eventArray =[[NSMutableArray alloc]init];
-                self.eventArray=[responseObject valueForKey:@"lstEventDetailsEntity"];
-                self.AllEventDetailListArray = self.eventArray;
+//                self.eventArray =[[NSMutableArray alloc]init];
+//                self.eventArray=[responseObject valueForKey:@"lstEventDetailsEntity"];
+//                self.AllEventDetailListArray = self.eventArray;
+                [self.AllEventDetailListArray addObjectsFromArray:[responseObject valueForKey:@"lstEventDetailsEntity"]];
                 
-                saCalendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+27,self.view.frame.size.width,self.view.frame.size.height-340) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
+//                saCalendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+27,self.view.frame.size.width,self.view.frame.size.height-340) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
+//
+//                self.Tabbar.hidden = NO;
+//                self.TabbarPosition.constant = self.MONTH.frame.origin.x;
+//                self.TabbarWidth.constant = self.MONTH.frame.size.width;
+////
+////
+//               saCalendar.delegate = self;
+//
+//                [self.view addSubview:saCalendar];
                 
-                self.Tabbar.hidden = NO;
-                self.TabbarPosition.constant = self.MONTH.frame.origin.x;
-                self.TabbarWidth.constant = self.MONTH.frame.size.width;
-//                
-//                
-               saCalendar.delegate = self;
-                
-                [self.view addSubview:saCalendar];
-                
-                if(![self.AllEventDetailListArray isEqual: [NSNull null]])
-                {
-                    [saCalendar SetEventTitle:self.AllEventDetailListArray];
-                }
-                
-                [self setArrayWithEvents:[self arrayWithEvents]];
+//                if(![self.AllEventDetailListArray isEqual: [NSNull null]])
+//                {
+//                    [saCalendar SetEventTitle:self.AllEventDetailListArray];
+//                }
+//
+//                [self setArrayWithEvents:[self arrayWithEvents]];
+                [self MonthAction:nil];
                 
                 
             }
@@ -863,6 +877,17 @@ typedef enum : NSUInteger
 
 #pragma mark - Add Calendars
 
+-(void)addMonthCalendar
+{
+    FFMonthCalendarView* monthly = [[FFMonthCalendarView alloc] initWithFrame:CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+27,self.view.frame.size.width,self.view.frame.size.height-340)];
+    [monthly setProtocol:self];
+    [monthly setDictEvents:dictEvents];
+    [self.view addSubview:monthly];
+    
+
+    
+}
+
 - (void)addCalendarWeek {
     
     //CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -986,8 +1011,8 @@ typedef enum : NSUInteger
 #pragma mark - FFYearCalendarView Protocol
 
 - (void)showMonthCalendar {
-    
-    [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:1]];
+    [self MonthAction:nil];
+//    [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:1]];
 }
 
 #pragma mark - Sending Updated Array to FFCalendarViewController Protocol

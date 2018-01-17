@@ -137,6 +137,14 @@
     
     return cell;
 }
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+//    FFEvent *event = [arrayEvents objectAtIndex:indexPath.row];
+//    [button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+//    [button setEvent:event];
+//    [button setProtocol:self];
+
+}
 
 #pragma mark - UICollectionView Delegate FlowLayout
 
