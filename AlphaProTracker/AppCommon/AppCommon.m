@@ -164,13 +164,9 @@ AppCommon *sharedCommon = nil;
     menuview.frame =CGRectMake(view.frame.origin.x,view.frame.origin.y,view.frame.size.width,view.frame.size.height);
     [view addSubview:menuview];
     
-    commonview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
-    [view addSubview:commonview];
-    
-    
-    backgroundTransview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
-    [menuview addSubview:backgroundTransview];
-    
+    backgroundTransview =[[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)];
+    [view addSubview:backgroundTransview];
+
     [backgroundTransview setBackgroundColor:[UIColor blackColor]];
     backgroundTransview.alpha=0.25;
     UITapGestureRecognizer *singleFingerTap =
@@ -178,7 +174,9 @@ AppCommon *sharedCommon = nil;
                                             action:@selector(handleSingleTap:)];
     [backgroundTransview addGestureRecognizer:singleFingerTap];
     
-    
+    commonview = (IS_IPAD)?[[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width/2,[UIScreen mainScreen].bounds.size.height)] : [[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width/1.4,[UIScreen mainScreen].bounds.size.height)];
+    [view addSubview:commonview];
+    commonview.backgroundColor = [UIColor greenColor];
     
     UIView * profileView = (IS_IPAD)?[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/2,150)]:[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/1.4,150)];
     [commonview addSubview:profileView];
@@ -268,8 +266,9 @@ AppCommon *sharedCommon = nil;
                           ];
             isPlayer=NO;
     }
+    commonview.hidden=YES;
     [self swipeHandlerRight];
-    
+   
 
     }
 
@@ -287,10 +286,11 @@ AppCommon *sharedCommon = nil;
     [UIView animateWithDuration:0.5
                      animations:^{
                          // animations go here
-                          commonview.frame = CGRectMake(-menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
+                         backgroundTransview.hidden = YES;
+
+                         commonview.frame = (IS_IPAD)? CGRectMake(-menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width/2, menuview.frame.size.height): CGRectMake(-menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width/1.4, menuview.frame.size.height);
                      }
                      completion:^(BOOL finished) {
-                         backgroundTransview.hidden = YES;
                          menuview.frame = CGRectMake(-menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
 
                      }];
@@ -302,12 +302,14 @@ AppCommon *sharedCommon = nil;
     [UIView animateWithDuration:0.5
                      animations:^{
                          // animations go here
-                         backgroundTransview.hidden = NO;
+                         commonview.hidden=NO;
 
-                         commonview.frame = CGRectMake(0,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
+                         commonview.frame =(IS_IPAD)? CGRectMake(0,menuview.frame.origin.y, menuview.frame.size.width/2, menuview.frame.size.height): CGRectMake(0,menuview.frame.origin.y, menuview.frame.size.width/1.4, menuview.frame.size.height);
                         
                      }
                      completion:^(BOOL finished) {
+                         backgroundTransview.hidden = NO;
+
                           menuview.frame = CGRectMake(menuview.frame.size.width,menuview.frame.origin.y, menuview.frame.size.width, menuview.frame.size.height);
                          // block fires when animation has finished
                      }];

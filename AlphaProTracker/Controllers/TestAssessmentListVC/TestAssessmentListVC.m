@@ -68,7 +68,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [COMMON AddMenuView:self.view];
+    //[COMMON AddMenuView:self.view];
 }
 -(void)PlayerWebservice :(NSString *) createdby :(NSString *) cliendcode :(NSString *)userref:(NSString*)module
 {

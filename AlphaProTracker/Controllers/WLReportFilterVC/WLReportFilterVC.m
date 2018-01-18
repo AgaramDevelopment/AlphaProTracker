@@ -165,7 +165,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [COMMON AddMenuView:self.view];
+    //[COMMON AddMenuView:self.view];
 }
 -(void)customnavigationmethod
 {

@@ -184,7 +184,7 @@ typedef enum : NSUInteger
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
-        [COMMON AddMenuView:self.view];
+    
 
     
 }
@@ -885,7 +885,7 @@ typedef enum : NSUInteger
     [monthly setDictEvents:dictEvents];
     [self.view addSubview:monthly];
     
-
+[COMMON AddMenuView:self.view];
     
 }
 
