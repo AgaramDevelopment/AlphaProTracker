@@ -164,20 +164,21 @@ AppCommon *sharedCommon = nil;
     menuview.frame =CGRectMake(view.frame.origin.x,view.frame.origin.y,view.frame.size.width,view.frame.size.height);
     [view addSubview:menuview];
     
+    commonview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
+    [view addSubview:commonview];
+    
     
     backgroundTransview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
     [menuview addSubview:backgroundTransview];
     
     [backgroundTransview setBackgroundColor:[UIColor blackColor]];
-    backgroundTransview.alpha=0.20;
-   
+    backgroundTransview.alpha=0.25;
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [backgroundTransview addGestureRecognizer:singleFingerTap];
     
-    commonview =[[UIView alloc]initWithFrame:CGRectMake(menuview.frame.origin.x,menuview.frame.origin.y,menuview.frame.size.width,menuview.frame.size.height)];
-    [view addSubview:commonview];
-//    UITapGestureRecognizer *singleFingerTap =
-//    [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                            action:@selector(handleSingleTap:)];
-//    [commonview addGestureRecognizer:singleFingerTap];
+    
     
     UIView * profileView = (IS_IPAD)?[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/2,150)]:[[UIView alloc]initWithFrame:CGRectMake(0,0,menuview.frame.size.width/1.4,150)];
     [commonview addSubview:profileView];
