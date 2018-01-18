@@ -169,7 +169,7 @@ static const NSInteger tValueLabelTag = 77;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [COMMON AddMenuView:self.view];
+   // [COMMON AddMenuView:self.view];
 }
 -(void)samplePieChart
 {

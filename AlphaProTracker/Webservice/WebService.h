@@ -23,7 +23,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 #pragma Testing Url
 
-#define BASE_URL   @"http://192.168.1.116:8888/AGAPTService.svc/"
+#define BASE_URL   @"http://192.168.1.84:8029/AGAPTService.svc/"
 
 //#define BASE_URL  @"http://13.126.151.253:9001/AGAPTService.svc/"
 
