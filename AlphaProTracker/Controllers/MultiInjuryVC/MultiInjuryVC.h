@@ -26,6 +26,7 @@
 @property (nonatomic,strong) IBOutlet UIButton * typeBtn;
 
 @property (nonatomic,strong) IBOutlet UIView * multiseliectPopView;
+@property (nonatomic,strong) IBOutlet UIView * tapView;
 @property (nonatomic,strong) IBOutlet MultiInjurylistCell * objCell;
 
 

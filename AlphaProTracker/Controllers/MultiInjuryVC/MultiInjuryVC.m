@@ -16,9 +16,12 @@
 {
     BOOL isMulti;
     BOOL isList;
+    
+   // UITapGestureRecognizer *letterTapRecognizer;
 }
 
 @property (strong, nonatomic)  NSMutableArray *selectedMarks;
+//@property (strong, nonatomic)IBOutlet  UITapGestureRecognizer *outerTapRecognizer;
 
 @end
 
@@ -49,8 +52,18 @@
     self.typeView.layer.masksToBounds=YES;
     
     self.multiseliectPopView.hidden = YES;
+    self.selectedMarks = [[NSMutableArray alloc]init];
     
+    UITapGestureRecognizer *outerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highlightLetter:)];
+    [self.tapView addGestureRecognizer:outerTapRecognizer];
     
+}
+
+- (void)highlightLetter:(UITapGestureRecognizer*)sender {
+//    UIView *view = sender.view;
+//    NSLog(@"%d", view.tag);//By tag, you can find out where you had tapped.
+    
+    self.multiseliectPopView.hidden = YES;
 }
 
 -(void)customnavigationmethod
@@ -166,7 +179,7 @@
         
         //self.selectedMarks = [[NSMutableArray alloc]init];
         
-        self.selectedMarks = [[NSMutableArray alloc]init];
+        //
         
         // Check if the cell is currently selected (marked)
         NSString *text = @"text";

@@ -21,9 +21,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 #pragma Local URL
 //#define BASE_URL  @"http://119.226.98.154:8002/FanZone/FanEngagement.svc/"     //@"http://www.dindiguldragons.com:8002/FanZone/FanEngagement.svc/"
 
-#pragma Testing Url
+#pragma Testing Url 
 
-#define BASE_URL   @"http://192.168.1.116:8888/AGAPTService.svc/"
+#define BASE_URL   @"http://192.168.1.84:8029/AGAPTService.svc/"
 
 //#define BASE_URL  @"http://13.126.151.253:9001/AGAPTService.svc/"
 

@@ -55,7 +55,7 @@
     CGFloat posY = (rect.size.height/2) - kCircleRadioUnselected/2;
     
     CGRect unselectedCircleRect = CGRectMake(self.frame.size.width-80, posY, kCircleRadioUnselected, kCircleRadioUnselected);
-    CGRect imageViewRect = CGRectMake(self.frame.size.width-80, rect.size.height/2 - kCircleLeftMargin - 1, kMarkCell/2, kMarkCell/2);
+    CGRect imageViewRect = CGRectMake(self.frame.size.width-83, rect.size.height/2 - kCircleLeftMargin - 3, kMarkCell/2, kMarkCell/2);
     
     imageView.frame = imageViewRect; // Center the imageView
     
