@@ -17,14 +17,7 @@
 		040EB3651F6D5148005118C7 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040EB3641F6D5148005118C7 /* EventKit.framework */; };
 		040EB3671F6D5161005118C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040EB3661F6D5161005118C7 /* CoreGraphics.framework */; };
 		040EB3691F6D5168005118C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040EB3681F6D5168005118C7 /* Foundation.framework */; };
-		04124A6C2010B21200E99E31 /* IntAxisValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A642010B21100E99E31 /* IntAxisValueFormatter.m */; };
-		04124A6D2010B21200E99E31 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A652010B21100E99E31 /* LargeValueFormatter.swift */; };
-		04124A6E2010B21200E99E31 /* HorizontalXLblFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A662010B21100E99E31 /* HorizontalXLblFormatter.m */; };
-		04124A6F2010B21200E99E31 /* DayAxisValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A692010B21200E99E31 /* DayAxisValueFormatter.m */; };
-		04124A702010B21200E99E31 /* DateValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A6A2010B21200E99E31 /* DateValueFormatter.m */; };
-		04124A742010B25500E99E31 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A712010B25400E99E31 /* BalloonMarker.swift */; };
-		04124A752010B25500E99E31 /* XYMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A722010B25400E99E31 /* XYMarkerView.swift */; };
-		04124A762010B25500E99E31 /* RadarMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A732010B25400E99E31 /* RadarMarkerView.swift */; };
+		04124A7A2010D5B100E99E31 /* HorizontalXLblFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A792010D5B100E99E31 /* HorizontalXLblFormatter.m */; };
 		041607431F73993500DABB9E /* AddInjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041607421F73993500DABB9E /* AddInjuryVC.m */; };
 		041BF5211F7F5F320091611D /* ProgramVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041BF5201F7F5F320091611D /* ProgramVC.m */; };
 		041BF5251F7FB4010091611D /* CRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041BF5241F7FB4010091611D /* CRTableViewCell.m */; };
@@ -272,19 +265,8 @@
 		040EB3661F6D5161005118C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		040EB3681F6D5168005118C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		040EB36C1F6D521B005118C7 /* project.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = project.xcworkspace; path = AlphaProTracker.xcodeproj/project.xcworkspace; sourceTree = "<group>"; };
-		04124A622010B21000E99E31 /* AlphaProTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlphaProTracker-Bridging-Header.h"; sourceTree = "<group>"; };
-		04124A632010B21100E99E31 /* IntAxisValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAxisValueFormatter.h; path = Helper/componentsOfHorizontalBar/IntAxisValueFormatter.h; sourceTree = "<group>"; };
-		04124A642010B21100E99E31 /* IntAxisValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntAxisValueFormatter.m; path = Helper/componentsOfHorizontalBar/IntAxisValueFormatter.m; sourceTree = "<group>"; };
-		04124A652010B21100E99E31 /* LargeValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LargeValueFormatter.swift; path = Helper/componentsOfHorizontalBar/LargeValueFormatter.swift; sourceTree = "<group>"; };
-		04124A662010B21100E99E31 /* HorizontalXLblFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HorizontalXLblFormatter.m; path = Helper/componentsOfHorizontalBar/HorizontalXLblFormatter.m; sourceTree = "<group>"; };
-		04124A672010B21100E99E31 /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorizontalXLblFormatter.h; path = Helper/componentsOfHorizontalBar/HorizontalXLblFormatter.h; sourceTree = "<group>"; };
-		04124A682010B21100E99E31 /* DayAxisValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayAxisValueFormatter.h; path = Helper/componentsOfHorizontalBar/DayAxisValueFormatter.h; sourceTree = "<group>"; };
-		04124A692010B21200E99E31 /* DayAxisValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DayAxisValueFormatter.m; path = Helper/componentsOfHorizontalBar/DayAxisValueFormatter.m; sourceTree = "<group>"; };
-		04124A6A2010B21200E99E31 /* DateValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateValueFormatter.m; path = Helper/componentsOfHorizontalBar/DateValueFormatter.m; sourceTree = "<group>"; };
-		04124A6B2010B21200E99E31 /* DateValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateValueFormatter.h; path = Helper/componentsOfHorizontalBar/DateValueFormatter.h; sourceTree = "<group>"; };
-		04124A712010B25400E99E31 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BalloonMarker.swift; path = Helper/componentsOfHorizontalBar/cFormaters/BalloonMarker.swift; sourceTree = "<group>"; };
-		04124A722010B25400E99E31 /* XYMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XYMarkerView.swift; path = Helper/componentsOfHorizontalBar/cFormaters/XYMarkerView.swift; sourceTree = "<group>"; };
-		04124A732010B25400E99E31 /* RadarMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadarMarkerView.swift; path = Helper/componentsOfHorizontalBar/cFormaters/RadarMarkerView.swift; sourceTree = "<group>"; };
+		04124A782010D5B100E99E31 /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalXLblFormatter.h; sourceTree = "<group>"; };
+		04124A792010D5B100E99E31 /* HorizontalXLblFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalXLblFormatter.m; sourceTree = "<group>"; };
 		041607411F73993500DABB9E /* AddInjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddInjuryVC.h; path = Controllers/AddInjuryVC/AddInjuryVC.h; sourceTree = "<group>"; };
 		041607421F73993500DABB9E /* AddInjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddInjuryVC.m; path = Controllers/AddInjuryVC/AddInjuryVC.m; sourceTree = "<group>"; };
 		041BF51F1F7F5F320091611D /* ProgramVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramVC.h; path = Controllers/ProgramVC/ProgramVC.h; sourceTree = "<group>"; };
@@ -756,24 +738,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		04124A612010B20100E99E31 /* componentsOfHorizontalBar */ = {
+		04124A772010D5B100E99E31 /* HbarFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				04124A712010B25400E99E31 /* BalloonMarker.swift */,
-				04124A732010B25400E99E31 /* RadarMarkerView.swift */,
-				04124A722010B25400E99E31 /* XYMarkerView.swift */,
-				04124A6B2010B21200E99E31 /* DateValueFormatter.h */,
-				04124A6A2010B21200E99E31 /* DateValueFormatter.m */,
-				04124A682010B21100E99E31 /* DayAxisValueFormatter.h */,
-				04124A692010B21200E99E31 /* DayAxisValueFormatter.m */,
-				04124A672010B21100E99E31 /* HorizontalXLblFormatter.h */,
-				04124A662010B21100E99E31 /* HorizontalXLblFormatter.m */,
-				04124A632010B21100E99E31 /* IntAxisValueFormatter.h */,
-				04124A642010B21100E99E31 /* IntAxisValueFormatter.m */,
-				04124A652010B21100E99E31 /* LargeValueFormatter.swift */,
-				04124A622010B21000E99E31 /* AlphaProTracker-Bridging-Header.h */,
+				04124A782010D5B100E99E31 /* HorizontalXLblFormatter.h */,
+				04124A792010D5B100E99E31 /* HorizontalXLblFormatter.m */,
 			);
-			name = componentsOfHorizontalBar;
+			name = HbarFormatter;
+			path = Helper/HbarFormatter;
 			sourceTree = "<group>";
 		};
 		041607401F7398FF00DABB9E /* AddInjuryVC */ = {
@@ -967,7 +939,7 @@
 		043B231D1F4B1BFF00036604 /* Helperview */ = {
 			isa = PBXGroup;
 			children = (
-				04124A612010B20100E99E31 /* componentsOfHorizontalBar */,
+				04124A772010D5B100E99E31 /* HbarFormatter */,
 				18B9799A200E157300B94DD4 /* Slider */,
 				18B9798E200DD48800B94DD4 /* ParallaxEffect */,
 				04E640991FB5A74A006E6C57 /* HeaderSectionFiles */,
@@ -2164,7 +2136,6 @@
 				04534A591F53FA4100999FBC /* AFSecurityPolicy.m in Sources */,
 				AC1BC8071F8663020047AECC /* AAOptionsConstructor.m in Sources */,
 				045A49D91FA2211B008C1630 /* FFButtonWithHourPopover.m in Sources */,
-				04124A6C2010B21200E99E31 /* IntAxisValueFormatter.m in Sources */,
 				04DB75281F7A5997001CB710 /* IllnessVC.m in Sources */,
 				04DF252A1F74CFDB00DB3AE3 /* TrainingLoadVCCell.m in Sources */,
 				ACACEFE51F597425004C28A4 /* TestAssessmentViewVC.m in Sources */,
@@ -2191,7 +2162,6 @@
 				045A496A1FA21FEB008C1630 /* FFDayScrollView.m in Sources */,
 				AC87CD9D1F55A74D002AA80E /* assemntCell.m in Sources */,
 				AC1BC8621F8665B40047AECC /* AATitle.m in Sources */,
-				04124A6F2010B21200E99E31 /* DayAxisValueFormatter.m in Sources */,
 				04E640AB1FB5A762006E6C57 /* INTUGroupedArray.m in Sources */,
 				045A49DF1FA22128008C1630 /* FFEditEventPopoverController.m in Sources */,
 				ACC4E2331F4E9BF100C53F45 /* DashBoardVC.m in Sources */,
@@ -2204,7 +2174,6 @@
 				045A495E1FA21FC7008C1630 /* FFDayCalendarView.m in Sources */,
 				AC1BC8611F8665B40047AECC /* AASubtitle.m in Sources */,
 				04CA66421F6F8A0C009F109E /* HACBarLayer.m in Sources */,
-				04124A762010B25500E99E31 /* RadarMarkerView.swift in Sources */,
 				04DC33701FB08601001BF439 /* EventRecord.m in Sources */,
 				04DB75321F7A60BB001CB710 /* AddIllnessVC.m in Sources */,
 				04534A6F1F542E2100999FBC /* PlannerAddEvent.m in Sources */,
@@ -2213,14 +2182,12 @@
 				045A49E01FA22128008C1630 /* FFEditEventView.m in Sources */,
 				045A49731FA22002008C1630 /* FFDayCell.m in Sources */,
 				ACB964A41F5E817300387AEC /* TeamsVC.m in Sources */,
-				04124A6D2010B21200E99E31 /* LargeValueFormatter.swift in Sources */,
 				045A49A81FA2209F008C1630 /* FFYearCollectionView.m in Sources */,
 				04EE9D681F9A20F6007B3278 /* DBAConnection.m in Sources */,
 				ACC1D6F21F6692A6002329A1 /* MCChartInformationView.m in Sources */,
 				ACACEFE21F59740C004C28A4 /* TestAssessmentListVC.m in Sources */,
 				04534A561F53FA4100999FBC /* AFHTTPRequestOperationManager.m in Sources */,
 				AC1BC8501F8665B40047AECC /* AAChart.m in Sources */,
-				04124A6E2010B21200E99E31 /* HorizontalXLblFormatter.m in Sources */,
 				CEEE8046200E3C3E00E33513 /* ExcersizeViewController.m in Sources */,
 				ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */,
 				ACBD4ADC1F56FE5600AFA25D /* QuestionaryVC.m in Sources */,
@@ -2260,10 +2227,8 @@
 				ACACEFEE1F597AFE004C28A4 /* ExpandAssessmentVC.m in Sources */,
 				045A49821FA2202F008C1630 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
 				CEEE8041200E3B6D00E33513 /* ExcierseDetailVC.m in Sources */,
-				04124A752010B25500E99E31 /* XYMarkerView.swift in Sources */,
 				045A497D1FA22026008C1630 /* FFMonthCell.m in Sources */,
 				045A49B51FA220B2008C1630 /* FFMonthCollectionViewForYearCell.m in Sources */,
-				04124A702010B21200E99E31 /* DateValueFormatter.m in Sources */,
 				045A495A1FA21F9E008C1630 /* FFButtonAddEventWithPopover.m in Sources */,
 				04EBB76D1F88CB9B00422202 /* AssignPlayerVC.m in Sources */,
 				046215EA1F4EFAE300A781C2 /* SKSTableViewCell.m in Sources */,
@@ -2292,13 +2257,13 @@
 				04534A551F53FA4100999FBC /* AFHTTPRequestOperation.m in Sources */,
 				045A49541FA21F93008C1630 /* FFCalendarViewController.m in Sources */,
 				ACAE8FEE1F6951D70072FA41 /* XYPieChart.m in Sources */,
+				04124A7A2010D5B100E99E31 /* HorizontalXLblFormatter.m in Sources */,
 				AC1BC8591F8665B40047AECC /* AAOptions3d.m in Sources */,
 				041BF5251F7FB4010091611D /* CRTableViewCell.m in Sources */,
 				04534A5C1F53FA4100999FBC /* AFURLResponseSerialization.m in Sources */,
 				ACB567C41F62D7A800F1C45E /* TrainingLoadCell.m in Sources */,
 				045A49EE1FA22174008C1630 /* FFEventDetailPopoverController.m in Sources */,
 				CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */,
-				04124A742010B25500E99E31 /* BalloonMarker.swift in Sources */,
 				AC1BC85E1F8665B40047AECC /* AASeriesElement.m in Sources */,
 				040B2A8D1F600E0600FB4B93 /* DMLazyScrollView.m in Sources */,
 				045A49971FA22072008C1630 /* FFViewWithHourLines.m in Sources */,
@@ -2379,6 +2344,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2421,6 +2387,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
