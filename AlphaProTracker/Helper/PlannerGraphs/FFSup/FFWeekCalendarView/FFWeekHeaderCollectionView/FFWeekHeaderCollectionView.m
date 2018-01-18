@@ -9,7 +9,7 @@
 //
 
 #import "FFWeekHeaderCollectionView.h"
-
+#import "Config.h"
 #import "FFWeekHeaderCell.h"
 #import "FFWeekCollectionViewFlowLayout.h"
 #import "FFImportantFilesForCalendar.h"
@@ -107,6 +107,7 @@
     cell.date = dateOfLabel;
     
     [cell.label setText:[NSString stringWithFormat:@"%@, %li", [arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1], (long)compDateOfLabel.day]];
+    [cell.label setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 : 10)]];
     
     if (compDateOfLabel.weekday == 1 || compDateOfLabel.weekday == 7) {
         [cell.label setTextColor:[UIColor grayColor]];

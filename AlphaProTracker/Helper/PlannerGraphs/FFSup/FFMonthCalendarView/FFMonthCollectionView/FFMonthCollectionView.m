@@ -122,14 +122,17 @@
     }
     
     id obj = [arrayDates objectAtIndex:indexPath.row];
+    NSLog(@"indexpath and value %ld %@",indexPath.row,obj);
     if (obj != [NSNull null]) {
-        
+    
         NSDate *date = (NSDate *)obj;
         NSDateComponents *components = [NSDate componentsOfDate:date];
         
         [cell setArrayEvents:[dictEvents objectForKey:date]];
         [cell.labelDay setText:[NSString stringWithFormat:@"%li", (long)[components day]]];
-        
+
+        NSLog(@"day %li", (long)[components day]);
+
         if ([NSDate isTheSameDateTheCompA:components compB:[NSDate componentsOfCurrentDate]]) {
             [cell markAsCurrentDay];
         }
@@ -143,6 +146,16 @@
 //    [button setTitle:event.stringCustomerName forState:UIControlStateNormal];
 //    [button setEvent:event];
 //    [button setProtocol:self];
+//    FFMonthCell *cell = (FFMonthCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_IDENTIFIER_MONTH_CELL forIndexPath:indexPath];
+    
+    FFMonthCell* cell1 = (FFMonthCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@"%@",cell1.labelDay.text);
+    NSLog(@"%d",[cell1.labelDay.text isEqualToString:@""]);
+//    if ([FFMonthCell isKindOfClass: cell1]) {
+//        FFMonthCell* ce = (FFMonthCell*)cell1;
+//        NSLog(@"%@",ce.labelDay.text);
+//
+//    }
 
 }
 

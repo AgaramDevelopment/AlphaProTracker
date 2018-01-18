@@ -54,7 +54,7 @@
         [imageViewCircle setAutoresizingMask:AR_LEFT_BOTTOM];
         [self addSubview:imageViewCircle];
         
-        labelDay = [[UILabel alloc] initWithFrame:CGRectMake((imageViewCircle.frame.size.width-20.)/2., (imageViewCircle.frame.size.height-20.)/2., 20., 20.)];
+        labelDay = [[UILabel alloc] initWithFrame:CGRectMake((imageViewCircle.frame.size.width-20.)/2., (imageViewCircle.frame.size.height-20.)/2., 30., 20.)];
         [labelDay setAutoresizingMask:AR_LEFT_BOTTOM];
         [labelDay setTextAlignment:NSTextAlignmentCenter];
         [imageViewCircle addSubview:labelDay];

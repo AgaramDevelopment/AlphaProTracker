@@ -9,7 +9,7 @@
 //
 
 #import "FFDayHeaderCollectionView.h"
-
+#import "Config.h"
 #import "FFDayHeaderCell.h"
 #import "FFWeekCollectionViewFlowLayout.h"
 #import "FFImportantFilesForCalendar.h"
@@ -117,7 +117,13 @@
     FFDayHeaderCell *cell = (FFDayHeaderCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_IDENTIFIER_MONTH_CELL forIndexPath:indexPath];
     [cell.button addTarget:self action:@selector(dayButton:) forControlEvents:UIControlEventTouchUpInside];
     cell.date = dateOfLabel;
-    [cell.button setTitle:[NSString stringWithFormat:@"%@, %li", [arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1], (long)compDateOfLabel.day] forState:UIControlStateNormal];
+//    NSString* str = [[NSString stringWithFormat:@"%@", [arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1]]substringToIndex:1];
+
+//    [cell.button setTitle:[NSString stringWithFormat:@"%@, %li",(IS_IPAD ? [arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1]: str)  , (long)compDateOfLabel.day] forState:UIControlStateNormal];
+    [cell.button setTitle:[NSString stringWithFormat:@"%@, %li",[arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1]  , (long)compDateOfLabel.day] forState:UIControlStateNormal];
+
+    
+    [cell.button.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 :10)]];
     [cell.button setSelected:([NSDate isTheSameDateTheCompA:compDateOfLabel compB:[[FFDateManager sharedManager] currentDate].componentsOfDate])];
     cell.button.tag = indexPath.row;
     

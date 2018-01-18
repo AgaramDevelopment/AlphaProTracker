@@ -34,6 +34,7 @@
 -(NSString *)Bcolors : (NSString *)ReqColor;
 
 @property (nonatomic, strong) NSString *check;
+@property (weak, nonatomic) IBOutlet UIView *calendarView;
 
 
 

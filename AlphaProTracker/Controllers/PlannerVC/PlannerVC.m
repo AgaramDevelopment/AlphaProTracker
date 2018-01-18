@@ -63,13 +63,6 @@ typedef enum : NSUInteger
 @property (nonatomic, strong) FFWeekCalendarView *viewCalendarWeek;
 @property (nonatomic, strong) FFDayCalendarView *viewCalendarDay;
 
-
-
-
-
-
-
-
 @property (nonatomic,strong) WebService * objWebservice;
 
 @property (nonatomic,strong) IBOutlet UIView * titleview;
@@ -110,7 +103,7 @@ typedef enum : NSUInteger
 @synthesize viewCalendarMonth;
 @synthesize viewCalendarWeek;
 @synthesize viewCalendarDay;
-
+@synthesize calendarView;
 
 #pragma mark - Lifecycle
 
@@ -168,6 +161,12 @@ typedef enum : NSUInteger
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
 //    saCalendar.delegate = self;
 //    [self.view addSubview:saCalendar];
+    
+    viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:calendarView.frame];
+    viewCalendarWeek = [[FFWeekCalendarView alloc] initWithFrame:calendarView.frame];
+    viewCalendarDay = [[FFDayCalendarView alloc] initWithFrame:calendarView.frame];
+
+
 
 
 }
@@ -184,7 +183,7 @@ typedef enum : NSUInteger
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
-    
+        [COMMON AddMenuView:self.view];
 
     
 }
@@ -202,6 +201,9 @@ typedef enum : NSUInteger
     
     userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
 //    [self EventTypeWebservice :usercode:cliendcode:userref];
+    [viewCalendarMonth removeFromSuperview];
+    [viewCalendarWeek removeFromSuperview];
+    [viewCalendarDay removeFromSuperview];
     [self addMonthCalendar];
     [self setArrayWithEvents:[self arrayWithEvents]];
 
@@ -219,6 +221,10 @@ typedef enum : NSUInteger
       self.TabbarWidth.constant = self.WEEK.frame.size.width;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
         [self customNavigationBarLayout];
+    [viewCalendarMonth removeFromSuperview];
+    [viewCalendarWeek removeFromSuperview];
+    [viewCalendarDay removeFromSuperview];
+
         [self addCalendarWeek];
         //[self displayFFCalendar];
 //     PlannerVC *calendarVc = [PlannerVC new];
@@ -237,6 +243,10 @@ typedef enum : NSUInteger
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
     [self customNavigationBarLayout];
+    [viewCalendarMonth removeFromSuperview];
+    [viewCalendarWeek removeFromSuperview];
+    [viewCalendarDay removeFromSuperview];
+
     [self addCalendarDay];
     //[self displayFFCalendar];
     [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:0]];
@@ -880,72 +890,30 @@ typedef enum : NSUInteger
 
 -(void)addMonthCalendar
 {
-    FFMonthCalendarView* monthly = [[FFMonthCalendarView alloc] initWithFrame:CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+27,self.view.frame.size.width,self.view.frame.size.height-340)];
-    [monthly setProtocol:self];
-    [monthly setDictEvents:dictEvents];
-    [self.view addSubview:monthly];
-    
-[COMMON AddMenuView:self.view];
+    [self updateLabelWithMonthAndYear];
+    [viewCalendarMonth setFrame:CGRectMake(0,0,calendarView.frame.size.width,calendarView.frame.size.height)];
+    [viewCalendarMonth setProtocol:self];
+    [viewCalendarMonth setDictEvents:dictEvents];
+    [calendarView addSubview:viewCalendarMonth];
     
 }
 
 - (void)addCalendarWeek {
     
-    //CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
-    CGRect frame = CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+27,self.view.frame.size.width,self.view.frame.size.height-340);
-    
-    
-    
-    //saCalendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+5,self.view.frame.size.width,self.view.frame.size.height-340) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
-    
-    //viewCalendarYear = [[FFYearCalendarView alloc] initWithFrame:frame];
-    //[viewCalendarYear setProtocol:self];
-    //[self.view addSubview:viewCalendarYear];
-    
-//    viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:frame];
-//    [viewCalendarMonth setProtocol:self];
-//    [viewCalendarMonth setDictEvents:dictEvents];
-//    [self.view addSubview:viewCalendarMonth];
-    
-    viewCalendarWeek = [[FFWeekCalendarView alloc] initWithFrame:frame];
-    
+    [viewCalendarWeek setFrame:CGRectMake(0,0,calendarView.frame.size.width,calendarView.frame.size.height)];
     [viewCalendarWeek setProtocol:self];
     [viewCalendarWeek setDictEvents:dictEvents];
-    [self.view addSubview:viewCalendarWeek];
-    
-//    viewCalendarDay = [[FFDayCalendarView alloc] initWithFrame:frame];
-//    [viewCalendarDay setProtocol:self];
-//    [viewCalendarDay setDictEvents:dictEvents];
-//    [self.view addSubview:viewCalendarDay];
-    
-    arrayCalendars = @[viewCalendarWeek];
+    [calendarView addSubview:viewCalendarWeek];
 }
 
 - (void)addCalendarDay {
     
-    CGRect frame = CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+27,self.view.frame.size.width,self.view.frame.size.height-340);
-    
-    //viewCalendarYear = [[FFYearCalendarView alloc] initWithFrame:frame];
-    //[viewCalendarYear setProtocol:self];
-    //[self.view addSubview:viewCalendarYear];
-    
-    //    viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:frame];
-    //    [viewCalendarMonth setProtocol:self];
-    //    [viewCalendarMonth setDictEvents:dictEvents];
-    //    [self.view addSubview:viewCalendarMonth];
-    
-//    viewCalendarWeek = [[FFWeekCalendarView alloc] initWithFrame:frame];
-//    [viewCalendarWeek setProtocol:self];
-//    [viewCalendarWeek setDictEvents:dictEvents];
-//    [self.view addSubview:viewCalendarWeek];
-    
-    viewCalendarDay = [[FFDayCalendarView alloc] initWithFrame:frame];
+    [viewCalendarDay setFrame:CGRectMake(0,0,calendarView.frame.size.width,calendarView.frame.size.height)];
     [viewCalendarDay setProtocol:self];
     [viewCalendarDay setDictEvents:dictEvents];
-    [self.view addSubview:viewCalendarDay];
+    [calendarView addSubview:viewCalendarDay];
     
-    arrayCalendars = @[viewCalendarDay];
 }
 
 
@@ -1033,19 +1001,6 @@ typedef enum : NSUInteger
     if (protocol != nil && [protocol respondsToSelector:@selector(arrayUpdatedWithAllEvents:)]) {
         [protocol arrayUpdatedWithAllEvents:arrayNew];
     }
-}
-- (void)displayFFCalendar {
-    
-    FFCalendarViewController *calendarVc = [FFCalendarViewController new];
-    [calendarVc setProtocol:self];
-    [calendarVc setArrayWithEvents:[self arrayWithEvents]];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:calendarVc];
-    navigationController.view.frame = CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height);
-    
-    [self addChildViewController:navigationController];
-    [self.view addSubview:navigationController.view];
-    [navigationController didMoveToParentViewController:self];
 }
 
 //- (NSMutableArray *)arrayWithEvents {

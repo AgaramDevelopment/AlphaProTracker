@@ -26,11 +26,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="eaW-tO-bY2">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhI-tf-RxS">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                    <rect key="frame" x="0.0" y="30" width="375" height="71"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnP-Qu-uIz">
                             <rect key="frame" x="5" y="15" width="40" height="35"/>
@@ -41,7 +41,7 @@
                             <state key="normal" image="menuImg"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJg-EU-TWZ">
-                            <rect key="frame" x="0.0" y="44" width="375" height="20"/>
+                            <rect key="frame" x="0.0" y="52" width="375" height="20"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="iS2-Pt-TRK"/>
@@ -95,11 +95,11 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="jhI-tf-RxS" secondAttribute="bottom" constant="-1" id="4MI-XA-uU5"/>
                 <constraint firstAttribute="trailing" secondItem="jhI-tf-RxS" secondAttribute="trailing" id="I41-DG-mNj"/>
-                <constraint firstItem="jhI-tf-RxS" firstAttribute="top" secondItem="eaW-tO-bY2" secondAttribute="top" id="PW4-Fi-3v0"/>
+                <constraint firstItem="jhI-tf-RxS" firstAttribute="top" secondItem="eaW-tO-bY2" secondAttribute="top" constant="30" id="PW4-Fi-3v0"/>
                 <constraint firstItem="jhI-tf-RxS" firstAttribute="leading" secondItem="eaW-tO-bY2" secondAttribute="leading" id="jh0-ff-NLO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

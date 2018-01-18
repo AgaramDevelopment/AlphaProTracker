@@ -78,7 +78,7 @@
         [collectionViewHeaderDay scrollToDate:[[FFDateManager sharedManager] currentDate]];
         [self addSubview:collectionViewHeaderDay];
         
-        dayContainerScroll = [[FFDayScrollView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT_SCROLL, self.frame.size.width/2., self.frame.size.height-HEADER_HEIGHT_SCROLL)];
+        dayContainerScroll = [[FFDayScrollView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT_SCROLL, self.frame.size.width, self.frame.size.height-HEADER_HEIGHT_SCROLL)];
         [self addSubview:dayContainerScroll];
     }
     [dayContainerScroll setDictEvents:dictEvents];
