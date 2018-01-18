@@ -56,6 +56,11 @@
     NSString * selectInjuryCode;
     NSString * VasValue;
     UIImage *imageToPost;
+    NSString *mrData;
+    NSString *ctData;
+    NSString *xrData;
+    NSString *bloodData;
+    
     CGSize dataSize;
 }
 @property (nonatomic,strong) NSMutableArray * gameArray;
@@ -215,12 +220,15 @@
     self.StSlider.labelColor = [UIColor whiteColor];
     self.StSlider.sliderCircleRadius = self.StSlider.trackCircleRadius+10;
     
-    
+    xrData = @"";
+    ctData = @"";
+    bloodData = @"";
+    mrData = @"";
     
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     RoleCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-
+    
     
     self.TrainingArray =[[NSMutableArray alloc]init];
     self.competitionArray =[[NSMutableArray alloc]init];
@@ -249,7 +257,7 @@
     [self.leftBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
     [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
     [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-   
+    
     [self startFetchTeamPlayerGameService];
     
     
@@ -305,60 +313,60 @@
     self.teamSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.teamSubView.layer.borderWidth=0.5;
     self.teamSubView.layer.masksToBounds=YES;
-
+    
     self.playerSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.playerSubView.layer.borderWidth=0.5;
     self.playerSubView.layer.masksToBounds=YES;
-
+    
     self.assessmentSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.assessmentSubView.layer.borderWidth=0.5;
     self.assessmentSubView.layer.masksToBounds=YES;
-
+    
     self.onSetSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.onSetSubView.layer.borderWidth=0.5;
     self.onSetSubView.layer.masksToBounds=YES;
-
+    
     self.injuryTypeSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.injuryTypeSubView.layer.borderWidth=0.5;
     self.injuryTypeSubView.layer.masksToBounds=YES;
-
+    
     self.injuryCauseSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.injuryCauseSubView.layer.borderWidth=0.5;
     self.injuryCauseSubView.layer.masksToBounds=YES;
-
+    
     self.XRaySubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.XRaySubView.layer.borderWidth=0.5;
     self.XRaySubView.layer.masksToBounds=YES;
-
+    
     
     self.CTScansSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.CTScansSubView.layer.borderWidth=0.5;
     self.CTScansSubView.layer.masksToBounds=YES;
-
+    
     self.MRIScansSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.MRIScansSubView.layer.borderWidth=0.5;
     self.MRIScansSubView.layer.masksToBounds=YES;
-
+    
     self.BloodTestSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.BloodTestSubView.layer.borderWidth=0.5;
     self.BloodTestSubView.layer.masksToBounds=YES;
-
+    
     self.ExpectedSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.ExpectedSubView.layer.borderWidth=0.5;
     self.ExpectedSubView.layer.masksToBounds=YES;
-
+    
     self.injuryNameSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.injuryNameSubView.layer.borderWidth=0.5;
     self.injuryNameSubView.layer.masksToBounds=YES;
-
+    
     self.chiefSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.chiefSubView.layer.borderWidth=0.5;
     self.chiefSubView.layer.masksToBounds=YES;
-
+    
     
     self.allviewHeight.constant =60;
     
-
+    
 }
 -(void)FetchMetadatawebservice
 {
@@ -373,813 +381,813 @@
                 
                 
                 
-    
+                
                 self.TrainingArray =[responseObject valueForKey:@"Training"];
                 
                 self.competitionArray =[responseObject valueForKey:@"Competition"];
-
+                
                 self.headandtruckArray =[responseObject valueForKey:@"HeadAndTrunk"];
-
+                
                 self.upperextremityArray =[responseObject valueForKey:@"UpperExtremity"];
-
+                
                 self.lowerextremityArray =[responseObject valueForKey:@"LowerExtremity"];
-
+                
                 self.injuryTypeArray =[responseObject valueForKey:@"InjuryType"];
-
+                
                 self.injuryCauseArray =[responseObject valueForKey:@"InjuryCause"];
                 
                 if(self.isUpdate == YES)
                 {
-                
-                selectInjuryOccuranceCode =[self.objSelectInjuryArray valueForKey:@"INJURYOCCURANCECODE"];//trainingarray,competion
-                selectInjuryLocationCode = [self.objSelectInjuryArray valueForKey:@"INJURYLOCATIONCODE"];//headandtruckArray,upperextremityArray,lowerextremityArray
-                injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"INJURYTYPECODE"] ;
-                injuryCausecode =[self.objSelectInjuryArray valueForKey:@"INJURYCAUSECODE"];
-                
-                selectoccurancecode=[self.objSelectInjuryArray valueForKey:@"INJURYOCCURANCESUBCODE"];
-                selectlocationCode = [self.objSelectInjuryArray valueForKey:@"INJURYLOCATIONSUBCODE"];
-            
-                
-                
-                if([selectOnsetTypeCode isEqualToString:@"MSC127"])
-                {
-                    [self.traumaticBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.delayedBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                     
-                }
-                else
-                {
-                    [self.traumaticBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.delayedBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                    selectInjuryOccuranceCode =[self.objSelectInjuryArray valueForKey:@"INJURYOCCURANCECODE"];//trainingarray,competion
+                    selectInjuryLocationCode = [self.objSelectInjuryArray valueForKey:@"INJURYLOCATIONCODE"];//headandtruckArray,upperextremityArray,lowerextremityArray
+                    injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"INJURYTYPECODE"] ;
+                    injuryCausecode =[self.objSelectInjuryArray valueForKey:@"INJURYCAUSECODE"];
                     
-                }
-                if([selectoccurancecode isEqualToString:@"MSC131"])
-                {
-                    [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                    selectoccurancecode=[self.objSelectInjuryArray valueForKey:@"INJURYOCCURANCESUBCODE"];
+                    selectlocationCode = [self.objSelectInjuryArray valueForKey:@"INJURYLOCATIONSUBCODE"];
                     
-                    for(int i=0;i<self.TrainingArray.count;i++)
+                    
+                    
+                    if([selectOnsetTypeCode isEqualToString:@"MSC127"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.TrainingArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.traumaticBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.delayedBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
-                        if([selectoccurancecode isEqualToString:OccCode])
-                        {
-                            self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
                     }
-                    
-                }
-                else if([selectoccurancecode isEqualToString:@"MSC132"])
-                {
-                    [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.TrainingArray.count;i++)
+                    else
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.TrainingArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.traumaticBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.delayedBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
-                        if([selectoccurancecode isEqualToString:OccCode])
-                        {
-                            self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
                     }
-                    
-                }
-                else if([selectoccurancecode isEqualToString:@"MSC133"])
-                {
-                    [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.competitionArray.count;i++)
+                    if([selectoccurancecode isEqualToString:@"MSC131"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.competitionArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
-                        if([selectoccurancecode isEqualToString:OccCode])
+                        for(int i=0;i<self.TrainingArray.count;i++)
                         {
-                            self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-
-                    }
-                    
-                }
-                else if([selectoccurancecode isEqualToString:@"MSC134"])
-                {
-                    [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.competitionArray.count;i++)
-                    {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.competitionArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectoccurancecode isEqualToString:OccCode])
-                        {
-                            self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.TrainingArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectoccurancecode isEqualToString:OccCode])
+                            {
+                                self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
                         }
                         
                     }
-                    
-                }
-                else if([selectoccurancecode isEqualToString:@"MSC135"])
-                {
-                    [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.competitionArray.count;i++)
+                    else if([selectoccurancecode isEqualToString:@"MSC132"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.competitionArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
-                        if([selectoccurancecode isEqualToString:OccCode])
+                        for(int i=0;i<self.TrainingArray.count;i++)
                         {
-                            self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.TrainingArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectoccurancecode isEqualToString:OccCode])
+                            {
+                                self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
                         }
                         
                     }
-                    
-                }
-                else if([selectoccurancecode isEqualToString:@"MSC136"])
-                {
-                    [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.competitionArray.count;i++)
+                    else if([selectoccurancecode isEqualToString:@"MSC133"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.competitionArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
-                        if([selectoccurancecode isEqualToString:OccCode])
+                        for(int i=0;i<self.competitionArray.count;i++)
                         {
-                            self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.competitionArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectoccurancecode isEqualToString:OccCode])
+                            {
+                                self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
-                    
-                }
-                else if([selectoccurancecode isEqualToString:@"MSC137"])
-                {
-                    [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.competitionArray.count;i++)
+                    else if([selectoccurancecode isEqualToString:@"MSC134"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.competitionArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
-                        if([selectoccurancecode isEqualToString:OccCode])
+                        for(int i=0;i<self.competitionArray.count;i++)
                         {
-                            self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.competitionArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectoccurancecode isEqualToString:OccCode])
+                            {
+                                self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
-                    
-                }
-
-
-
-
-                
-                if([selectlocationCode isEqualToString:@"MSC141"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
+                    else if([selectoccurancecode isEqualToString:@"MSC135"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        for(int i=0;i<self.competitionArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.competitionArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectoccurancecode isEqualToString:OccCode])
+                            {
+                                self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
-
-                    
-                }
-                else if([selectlocationCode isEqualToString:@"MSC142"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
+                    else if([selectoccurancecode isEqualToString:@"MSC136"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        for(int i=0;i<self.competitionArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.competitionArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectoccurancecode isEqualToString:OccCode])
+                            {
+                                self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
-
-
-                    
-                }
-                else if([selectlocationCode isEqualToString:@"MSC143"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
+                    else if([selectoccurancecode isEqualToString:@"MSC137"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        for(int i=0;i<self.competitionArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-                        
-                    }
-
-                    
-                    
-                }
-
-                else if([selectlocationCode isEqualToString:@"MSC144"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
-                    {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectlocationCode isEqualToString:OccCode])
-                        {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-                        
-                    }
-
-                    
-                    
-                }
-
-                else if([selectlocationCode isEqualToString:@"MSC145"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
-                    {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectlocationCode isEqualToString:OccCode])
-                        {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-                        
-                    }
-
-                    
-                }
-
-                else if([selectlocationCode isEqualToString:@"MSC146"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
-                    {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectlocationCode isEqualToString:OccCode])
-                        {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-                        
-                    }
-
-                }
-
-                else if([selectlocationCode isEqualToString:@"MSC147"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
-                    {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectlocationCode isEqualToString:OccCode])
-                        {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-                        
-                    }
-
-                }
-
-                else if([selectlocationCode isEqualToString:@"MSC148"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.headandtruckArray.count;i++)
-                    {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.headandtruckArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectlocationCode isEqualToString:OccCode])
-                        {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-                        
-                    }
-
-                }
-                
-                if([selectlocationCode isEqualToString:@"MSC149"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.upperextremityArray.count;i++)
-                    {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectlocationCode isEqualToString:OccCode])
-                        {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.competitionArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectoccurancecode isEqualToString:OccCode])
+                            {
+                                self.occurancelbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
                     
-                }
-                else if([selectlocationCode isEqualToString:@"MSC150"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                     
                     
-                    for(int i=0;i<self.upperextremityArray.count;i++)
+                    
+                    
+                    if([selectlocationCode isEqualToString:@"MSC141"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        for(int i=0;i<self.headandtruckArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC142"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        for(int i=0;i<self.headandtruckArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC143"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        for(int i=0;i<self.headandtruckArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    else if([selectlocationCode isEqualToString:@"MSC144"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        for(int i=0;i<self.headandtruckArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    else if([selectlocationCode isEqualToString:@"MSC145"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        for(int i=0;i<self.headandtruckArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    else if([selectlocationCode isEqualToString:@"MSC146"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.headandtruckArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
                     
-                }
-                else if([selectlocationCode isEqualToString:@"MSC151"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.upperextremityArray.count;i++)
+                    else if([selectlocationCode isEqualToString:@"MSC147"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        
+                        for(int i=0;i<self.headandtruckArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
                     
-                }
-                else if([selectlocationCode isEqualToString:@"MSC152"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.upperextremityArray.count;i++)
+                    else if([selectlocationCode isEqualToString:@"MSC148"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        
+                        for(int i=0;i<self.headandtruckArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.headandtruckArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
                     
-                }
-                else if([selectlocationCode isEqualToString:@"MSC153"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.upperextremityArray.count;i++)
+                    if([selectlocationCode isEqualToString:@"MSC149"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC150"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC151"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC152"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC153"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC154"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC155"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC156"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.upperextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.upperextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
                     
-                }
-                else if([selectlocationCode isEqualToString:@"MSC154"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                     
-                    
-                    for(int i=0;i<self.upperextremityArray.count;i++)
+                    if([selectlocationCode isEqualToString:@"MSC157"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC158"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC159"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC160"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC161"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC162"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC163"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
+                        }
+                        
+                    }
+                    else if([selectlocationCode isEqualToString:@"MSC164"])
+                    {
+                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                        
+                        for(int i=0;i<self.lowerextremityArray.count;i++)
+                        {
+                            NSDictionary *dic = [[NSDictionary alloc]init];
+                            dic=[self.lowerextremityArray objectAtIndex:i];
+                            NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
+                            
+                            if([selectlocationCode isEqualToString:OccCode])
+                            {
+                                self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            }
+                            
                         }
                         
                     }
                     
-                }
-                else if([selectlocationCode isEqualToString:@"MSC155"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                     
                     
-                    for(int i=0;i<self.upperextremityArray.count;i++)
+                    
+                    
+                    if([selectInjurySiteCode isEqualToString:@"MSC165"])
+                    {
+                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                    }
+                    else if([selectInjurySiteCode isEqualToString:@"MSC167"])
+                    {
+                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                    }
+                    else if([selectInjurySiteCode isEqualToString:@"MSC166"])
+                    {
+                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        
+                    }
+                    else if([selectInjurySiteCode isEqualToString:@"MSC168"])
+                    {
+                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        
+                    }
+                    
+                    
+                    
+                    if([selectInjurySideCode isEqualToString:@"MSC169"])
+                    {
+                        [self.rightBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.leftBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                    }
+                    else
+                    {
+                        [self.rightBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.leftBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                    }
+                    
+                    for(int i=0;i<self.injuryTypeArray.count;i++)
                     {
                         NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
+                        dic=[self.injuryTypeArray objectAtIndex:i];
                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        if([injuryTypeCode isEqualToString:OccCode])
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            self.injurytypeLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            
                         }
-                        
                     }
                     
-                }
-                else if([selectlocationCode isEqualToString:@"MSC156"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                    
-                    for(int i=0;i<self.upperextremityArray.count;i++)
+                    for(int i=0;i<self.injuryCauseArray.count;i++)
                     {
                         NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.upperextremityArray objectAtIndex:i];
+                        dic=[self.injuryCauseArray objectAtIndex:i];
                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
                         
-                        if([selectlocationCode isEqualToString:OccCode])
+                        if([injuryCausecode isEqualToString:OccCode])
                         {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            self.injuryCauseLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                            
                         }
-                        
                     }
                     
-                }
-                
-                
-                if([selectlocationCode isEqualToString:@"MSC157"])
-                {
-                    [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                     
-                    
-                    for(int i=0;i<self.lowerextremityArray.count;i++)
+                    if([selectExpertOpinionCode isEqualToString:@"MSC215"])
                     {
-                        NSDictionary *dic = [[NSDictionary alloc]init];
-                        dic=[self.lowerextremityArray objectAtIndex:i];
-                        NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                        
-                        if([selectlocationCode isEqualToString:OccCode])
-                        {
-                            self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                        }
-                        
+                        [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                        [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                     }
-                    
-                }
-                 else if([selectlocationCode isEqualToString:@"MSC158"])
-                 {
-                     [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                     
-                     
-                     for(int i=0;i<self.lowerextremityArray.count;i++)
-                     {
-                         NSDictionary *dic = [[NSDictionary alloc]init];
-                         dic=[self.lowerextremityArray objectAtIndex:i];
-                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                         
-                         if([selectlocationCode isEqualToString:OccCode])
-                         {
-                             self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                         }
-                         
-                     }
-                     
-                 }
-                 else if([selectlocationCode isEqualToString:@"MSC159"])
-                 {
-                     [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                     
-                     
-                     for(int i=0;i<self.lowerextremityArray.count;i++)
-                     {
-                         NSDictionary *dic = [[NSDictionary alloc]init];
-                         dic=[self.lowerextremityArray objectAtIndex:i];
-                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                         
-                         if([selectlocationCode isEqualToString:OccCode])
-                         {
-                             self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                         }
-                         
-                     }
-                     
-                 }
-                 else if([selectlocationCode isEqualToString:@"MSC160"])
-                 {
-                     [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                     
-                     
-                     for(int i=0;i<self.lowerextremityArray.count;i++)
-                     {
-                         NSDictionary *dic = [[NSDictionary alloc]init];
-                         dic=[self.lowerextremityArray objectAtIndex:i];
-                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                         
-                         if([selectlocationCode isEqualToString:OccCode])
-                         {
-                             self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                         }
-                         
-                     }
-                     
-                 }
-                 else if([selectlocationCode isEqualToString:@"MSC161"])
-                 {
-                     [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                     
-                     
-                     for(int i=0;i<self.lowerextremityArray.count;i++)
-                     {
-                         NSDictionary *dic = [[NSDictionary alloc]init];
-                         dic=[self.lowerextremityArray objectAtIndex:i];
-                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                         
-                         if([selectlocationCode isEqualToString:OccCode])
-                         {
-                             self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                         }
-                         
-                     }
-                     
-                 }
-                 else if([selectlocationCode isEqualToString:@"MSC162"])
-                 {
-                     [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                     
-                     
-                     for(int i=0;i<self.lowerextremityArray.count;i++)
-                     {
-                         NSDictionary *dic = [[NSDictionary alloc]init];
-                         dic=[self.lowerextremityArray objectAtIndex:i];
-                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                         
-                         if([selectlocationCode isEqualToString:OccCode])
-                         {
-                             self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                         }
-                         
-                     }
-                     
-                 }
-                 else if([selectlocationCode isEqualToString:@"MSC163"])
-                 {
-                     [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                     
-                     
-                     for(int i=0;i<self.lowerextremityArray.count;i++)
-                     {
-                         NSDictionary *dic = [[NSDictionary alloc]init];
-                         dic=[self.lowerextremityArray objectAtIndex:i];
-                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                         
-                         if([selectlocationCode isEqualToString:OccCode])
-                         {
-                             self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                         }
-                         
-                     }
-                     
-                 }
-                 else if([selectlocationCode isEqualToString:@"MSC164"])
-                 {
-                     [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                     [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                     
-                     
-                     for(int i=0;i<self.lowerextremityArray.count;i++)
-                     {
-                         NSDictionary *dic = [[NSDictionary alloc]init];
-                         dic=[self.lowerextremityArray objectAtIndex:i];
-                         NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                         
-                         if([selectlocationCode isEqualToString:OccCode])
-                         {
-                             self.locationlbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-                         }
-                         
-                     }
-                     
-                 }
-
-
-                
-                
-                
-                if([selectInjurySiteCode isEqualToString:@"MSC165"])
-                {
-                    [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                }
-                else if([selectInjurySiteCode isEqualToString:@"MSC167"])
-                {
-                    [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                }
-                else if([selectInjurySiteCode isEqualToString:@"MSC166"])
-                {
-                    [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.medicalBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    
-                }
-                else if([selectInjurySiteCode isEqualToString:@"MSC168"])
-                {
-                    [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.lateralBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    
-                }
-                
-                
-                
-                if([selectInjurySideCode isEqualToString:@"MSC169"])
-                {
-                    [self.rightBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.leftBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                }
-                else
-                {
-                    [self.rightBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.leftBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                }
-                
-                for(int i=0;i<self.injuryTypeArray.count;i++)
-                {
-                    NSDictionary *dic = [[NSDictionary alloc]init];
-                    dic=[self.injuryTypeArray objectAtIndex:i];
-                    NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
-                    
-                    if([injuryTypeCode isEqualToString:OccCode])
+                    else
                     {
-                        self.injurytypeLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
-
+                        [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                        [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                     }
-                }
-                
-                for(int i=0;i<self.injuryCauseArray.count;i++)
-                {
-                    NSDictionary *dic = [[NSDictionary alloc]init];
-                    dic=[self.injuryCauseArray objectAtIndex:i];
-                    NSString *OccCode = [dic valueForKey:@"InjuryMetaSubCode"];
                     
-                    if([injuryCausecode isEqualToString:OccCode])
+                    
+                    
+                    
+                    if([RoleCode isEqualToString:@"ROL0000003"])
                     {
-                        self.injuryCauseLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+                        self.playerview.hidden=NO;
+                        self.coachViewYposition.constant =10;
                         
                     }
-                }
-
-
-                if([selectExpertOpinionCode isEqualToString:@"MSC215"])
-                {
-                    [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                }
-                else
-                {
-                    [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                }
-
-                
-
-                
-                if([RoleCode isEqualToString:@"ROL0000003"])
-                {
-                    self.playerview.hidden=NO;
-                    self.coachViewYposition.constant =10;
+                    else{
+                        self.playerview.hidden=YES;
+                        self.coachViewYposition.constant =self.playerView.frame.size.height+5;
+                        
+                        self.updateBtn.hidden = YES;
+                        self.deleteBtn.hidden = YES;
+                    }
+                    
+                    if([self.TrainingBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]] && [self.CompetitionBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]])
+                    {
+                        self.occurrenceviewHeight.constant =120;
+                        self.locationviewHeight.constant  =130;
+                        self.occurranceselectview.hidden =YES;
+                        self.locationselectview.hidden =YES;
+                    }
+                    
                     
                 }
-                else{
-                    self.playerview.hidden=YES;
-                    self.coachViewYposition.constant =self.playerView.frame.size.height+5;
-                    
-                    self.updateBtn.hidden = YES;
-                    self.deleteBtn.hidden = YES;
-                }
-                
-                if([self.TrainingBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]] && [self.CompetitionBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]])
-                {
-                    self.occurrenceviewHeight.constant =120;
-                    self.locationviewHeight.constant  =130;
-                    self.occurranceselectview.hidden =YES;
-                    self.locationselectview.hidden =YES;
-                }
-
-
-             }
             }
             [COMMON RemoveLoadingIcon];
             [self.view setUserInteractionEnabled:YES];
@@ -1189,7 +1197,7 @@
         }];
         
     }
-
+    
 }
 -(void)startFetchTeamPlayerGameService
 {
@@ -1201,7 +1209,7 @@
             
             if(responseObject >0)
             {
-               
+                
                 self.gameArray =[responseObject valueForKey:@"fetchGame"];
                 self.TeamArray =[responseObject valueForKey:@"fetchTeam"];
                 self.playerArray =[responseObject valueForKey:@"fetchAthlete"];
@@ -1275,7 +1283,7 @@
                     
                     NSMutableArray *ggg=[[NSMutableArray alloc]init];
                     ggg=[selectedGame objectAtIndex:0];
-
+                    
                     self.gameLbl.text =[ggg valueForKey:@"gameName"];
                     
                     
@@ -1307,8 +1315,8 @@
                     
                     int a = [VasValue intValue];
                     
-                   // self.VasSlider.value = a;
-                     self.StSlider.index = a-1;
+                    // self.VasSlider.value = a;
+                    self.StSlider.index = a-1;
                     [self didChandeslidervalue:0];
                     
                     
@@ -1321,7 +1329,7 @@
                     self.deleteBtn.hidden =YES;
                 }
                 
-               [self FetchMetadatawebservice];
+                [self FetchMetadatawebservice];
                 
             }
             [COMMON RemoveLoadingIcon];
@@ -1332,7 +1340,7 @@
         }];
         
     }
-
+    
 }
 -(void)startDeleteInjuryService :(NSString *) Usercode :(NSString *)selectinjuryCode
 {
@@ -1357,7 +1365,7 @@
         }];
         
     }
-
+    
 }
 
 
@@ -1401,14 +1409,54 @@
         if(injuryTypeCode)   [dic    setObject:injuryTypeCode     forKey:@"INJURYTYPECODE"];
         if(injuryCausecode)   [dic    setObject:injuryCausecode     forKey:@"INJURYCAUSECODE"];
         if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"EXPERTOPTIONTAKENCODE"];
-        [dic    setObject:@""     forKey:@"XRAYSFILE"];
-        [dic    setObject:@""     forKey:@"XRAYSFILENAME"];
-        [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-        [dic    setObject:@""     forKey:@"CTSCANSFILENAME"];
-        [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-        [dic    setObject:@""     forKey:@"MRISCANSFILENAME"];
-        [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
-        [dic    setObject:@""     forKey:@"BLOODTESTFILENAME"];
+        
+        // UIImage *thumbnail = [self retrieveImageFromDevice:self.xrayLbl.text];
+        //NSData* data = UIImagePNGRepresentation(imageToPost);
+        
+        if(xrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"XRAYSFILE"];
+        }
+        else{
+        [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+        }
+        [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
+        
+        
+        
+        if(ctData==nil)
+        {
+            [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+        }
+        else
+        {
+        [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+        }
+        [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
+        
+        
+        
+        if(mrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+        }
+        [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
+        
+        
+        if(bloodData==nil)
+        {
+            [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
+        }
+        else
+        {
+            [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
+        }
+        [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
+        
         if(self.expectedLbl.text)   [dic    setObject:self.expectedLbl.text     forKey:@"EXPECTEDDATEOFRECOVERY"];
         if(usercode)   [dic    setObject:usercode     forKey:@"CREATEDBY"];
         
@@ -1453,7 +1501,7 @@
         
         
     }
-
+    
 }
 
 -(void)UpdateWebservice
@@ -1465,7 +1513,7 @@
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(cliendcode)   [dic    setObject:cliendcode     forKey:@"CLIENTCODE"];
         if(selectInjuryCode)   [dic    setObject:selectInjuryCode     forKey:@"INJURYCODE"];
-
+        
         if([RoleCode isEqualToString:@"ROL0000003"])
         {
             if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"GAMECODE"];
@@ -1496,14 +1544,51 @@
         if(injuryTypeCode)   [dic    setObject:injuryTypeCode     forKey:@"INJURYTYPECODE"];
         if(injuryCausecode)   [dic    setObject:injuryCausecode     forKey:@"INJURYCAUSECODE"];
         if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"EXPERTOPTIONTAKENCODE"];
-        [dic    setObject:@""     forKey:@"XRAYSFILE"];
-        [dic    setObject:@""     forKey:@"XRAYSFILENAME"];
-        [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-        [dic    setObject:@""     forKey:@"CTSCANSFILENAME"];
-        [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-        [dic    setObject:@""     forKey:@"MRISCANSFILENAME"];
-        [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
-        [dic    setObject:@""     forKey:@"BLOODTESTFILENAME"];
+        
+        
+        if(xrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"XRAYSFILE"];
+        }
+        else{
+            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+        }
+        [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
+        
+        
+        
+        if(ctData==nil)
+        {
+            [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+        }
+        [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
+        
+        
+        
+        if(mrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+        }
+        [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
+        
+        
+        if(bloodData==nil)
+        {
+            [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
+        }
+        else
+        {
+            [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
+        }
+        [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
         if(self.expectedLbl.text)   [dic    setObject:self.expectedLbl.text     forKey:@"EXPECTEDDATEOFRECOVERY"];
         if(usercode)   [dic    setObject:usercode     forKey:@"UPDATEDBY"];
         
@@ -1536,8 +1621,8 @@
             [COMMON webServiceFailureError];
             [self.view setUserInteractionEnabled:YES];
         }];
-
-}
+        
+    }
     
 }
 
@@ -1599,13 +1684,13 @@
         isTeam =NO;
         self.popview_Tbl.hidden=YES;
     }
-
+    
 }
 
 -(IBAction)didClickPlayerBtn:(id)sender
 {
     NSMutableArray * objPlayerArray =[[NSMutableArray alloc]init];
-
+    
     if(isPlayer == NO)
     {
         self.popviewYposition.constant = self.playerView.frame.origin.y+40;
@@ -1626,7 +1711,7 @@
                 [objPlayerArray addObject:playerDic];
             }
         }
-
+        
         
         self.commonArray =[[NSMutableArray alloc]init];
         self.commonArray = objPlayerArray;
@@ -1636,7 +1721,7 @@
         isPlayer =NO;
         self.popview_Tbl.hidden=YES;
     }
-
+    
 }
 
 -(IBAction)didClickassessment:(id)sender
@@ -1650,7 +1735,7 @@
 -(IBAction)didClickOnset:(id)sender
 {
     self.view_datepicker.hidden =NO;
-
+    
     isAssessment =NO;
     isExpected =NO;
     isOnset =YES;
@@ -1662,7 +1747,7 @@
     {
         [self.traumaticBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
         [self.delayedBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-
+        
         selectOnsetTypeCode=@"MSC127";
     }
     else{
@@ -1709,7 +1794,7 @@
         [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
         [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-
+        
         selectInjuryLocationCode=@"MSC141";
         //self.SelectLocationArray = self.headandtruckArray;
         
@@ -1718,43 +1803,43 @@
         islocation=YES;
         [self.popview_Tbl reloadData];
     }
-//    else if([self.upperBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]])
-//    {
-//        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-//        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-//        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-//        
-//        selectInjuryLocationCode=@"MSC149";
-//        //self.SelectLocationArray = self.upperextremityArray;
-//        
-//        islocation=YES;
-//        self.locationviewHeight.constant  =150;
-//        self.locationselectview.hidden =NO;
-//        [self.popview_Tbl reloadData];
-//        
-//    }
-//    else if([self.lowerBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]])
-//    {
-//        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-//        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-//        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-//        
-//        selectInjuryLocationCode=@"MSC157";
-//       // self.SelectLocationArray = self.lowerextremityArray;
-//        
-//        islocation=YES;
-//        self.locationviewHeight.constant  =150;
-//        self.locationselectview.hidden =NO;
-//        [self.popview_Tbl reloadData];
-//        
-//    }
-
-
+    //    else if([self.upperBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]])
+    //    {
+    //        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+    //        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+    //        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+    //
+    //        selectInjuryLocationCode=@"MSC149";
+    //        //self.SelectLocationArray = self.upperextremityArray;
+    //
+    //        islocation=YES;
+    //        self.locationviewHeight.constant  =150;
+    //        self.locationselectview.hidden =NO;
+    //        [self.popview_Tbl reloadData];
+    //
+    //    }
+    //    else if([self.lowerBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]])
+    //    {
+    //        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+    //        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+    //        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+    //
+    //        selectInjuryLocationCode=@"MSC157";
+    //       // self.SelectLocationArray = self.lowerextremityArray;
+    //
+    //        islocation=YES;
+    //        self.locationviewHeight.constant  =150;
+    //        self.locationselectview.hidden =NO;
+    //        [self.popview_Tbl reloadData];
+    //
+    //    }
+    
+    
 }
 -(IBAction)didClickuperbtnAction:(id)sender
 {
     self.SelectLocationArray =[[NSMutableArray alloc]init];
-
+    
     if([self.upperBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]]){
         [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
         [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
@@ -1765,13 +1850,13 @@
         //self.SelectLocationArray =self.upperextremityArray;
         self.locationviewHeight.constant  =150;
         self.locationselectview.hidden =NO;
-
+        
     }
-    }
+}
 -(IBAction)didClickLowerBtnAction:(id)sender
 {
     self.SelectLocationArray =[[NSMutableArray alloc]init];
-
+    
     if([self.lowerBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]]){
         [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
         [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
@@ -1784,7 +1869,7 @@
         self.locationviewHeight.constant  =150;
         self.locationselectview.hidden =NO;
     }
-   
+    
 }
 -(IBAction)didClickInjurySite:(id)sender
 {
@@ -1794,7 +1879,7 @@
         [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-
+        
         selectInjurySiteCode=@"MSC165";
     }
     
@@ -1808,7 +1893,7 @@
         [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         selectInjurySiteCode=@"MSC167";
     }
-
+    
 }
 
 -(IBAction)didClickmedicalBtn:(id)sender
@@ -1820,7 +1905,7 @@
         [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         selectInjurySiteCode=@"MSC166";
     }
-
+    
 }
 -(IBAction)didclicklateral:(id)sender
 {
@@ -1831,7 +1916,7 @@
         [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         selectInjurySiteCode=@"MSC168";
     }
-
+    
 }
 -(IBAction)didClickinjurySideBtn:(id)sender
 {
@@ -1866,7 +1951,7 @@
         
         selectExpertOpinionCode=@"MSC216";
     }
-
+    
 }
 -(IBAction)didClickInjuryTypeBtn:(id)sender
 {
@@ -1890,7 +1975,7 @@
         isinjuryType =NO;
         self.popview_Tbl.hidden=YES;
     }
-
+    
 }
 
 -(IBAction)didClickInjuryCauseBtn:(id)sender
@@ -1915,7 +2000,7 @@
         isinjuryCause =NO;
         self.popview_Tbl.hidden=NO;
     }
-
+    
 }
 -(IBAction)didChandeslidervalue:(UISlider *)sender
 {
@@ -1938,7 +2023,7 @@
     isMRI =NO;
     isBlood =NO;
     [self opengallery];
-
+    
 }
 -(IBAction)didClickMRIScan:(id)sender
 {
@@ -1961,7 +2046,7 @@
 -(IBAction)didClickExpected:(id)sender
 {
     //self.view_datepicker.hidden =NO;
-
+    
     isAssessment =NO;
     isExpected =YES;
     isOnset =NO;
@@ -1989,7 +2074,11 @@
     
     [datePicker reloadInputViews];
     [self.view_datepicker addSubview:datePicker];
+    
+}
 
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 -(void)opengallery
 {
@@ -2006,26 +2095,28 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString * objPath =[[picker valueForKey:@"mediaTypes"] objectAtIndex:0];
     NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
+    imageToPost = image;
     if(isXray ==YES)
     {
         self.xrayLbl.text =savedImagePath;
+        xrData = [self encodeToBase64String:imageToPost];
     }
     else if (isCT ==YES)
     {
         self.CTScanLbl.text =savedImagePath;
-        
+        ctData = [self encodeToBase64String:imageToPost];
     }
     else if (isMRI ==YES)
     {
         self.MRILbl.text =savedImagePath;
-        
+        mrData = [self encodeToBase64String:imageToPost];
     }
     else if (isBlood ==YES)
     {
         self.BloodTestLbl.text =savedImagePath;
-        
+        bloodData = [self encodeToBase64String:imageToPost];
     }
-    imageToPost = image;
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -2120,12 +2211,12 @@
         {
             //Do something else
         }
-
+        
         
         
         
     }
-
+    
 }
 
 
@@ -2159,26 +2250,26 @@
 -(IBAction)showSelecteddate:(id)sender{
     
     
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        NSDate *matchdate = [NSDate date];
-        [dateFormat setDateFormat:@"MM-dd-yyyy"];
-        // for minimum date
-       // [datePicker setMinimumDate:matchdate];
-        
-        // for maximumDate
-        //int daysToAdd = 1;
-        //NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
-        
-        //[datePicker setMaximumDate:newDate1];
-        
-        if(isAssessment ==YES)
-        {
-           self.assessmentLbl.text=[dateFormat stringFromDate:datePicker.date];
-        }
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    // for minimum date
+    // [datePicker setMinimumDate:matchdate];
+    
+    // for maximumDate
+    //int daysToAdd = 1;
+    //NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+    
+    //[datePicker setMaximumDate:newDate1];
+    
+    if(isAssessment ==YES)
+    {
+        self.assessmentLbl.text=[dateFormat stringFromDate:datePicker.date];
+    }
     else if (isOnset == YES)
     {
         self.onSetLbl.text=[dateFormat stringFromDate:datePicker.date];
-
+        
     }
     else if (isExpected == YES)
     {
@@ -2214,7 +2305,7 @@
             {
                 self.commonArray = self.competitionArray;
             }
-
+            
         }
         else
         {
@@ -2226,10 +2317,10 @@
             {
                 self.commonArray = self.competitionArray;
             }
-
+            
         }
         
-                //self.commonArray = self.SelectOccuranceArray;
+        //self.commonArray = self.SelectOccuranceArray;
         
         [self.popview_Tbl reloadData];
     }
@@ -2237,7 +2328,7 @@
         isoccurance =NO;
         self.popview_Tbl.hidden=YES;
     }
-
+    
 }
 
 -(IBAction)didClicklocationselectBtn:(id)sender
@@ -2288,7 +2379,7 @@
             }
             
         }
-
+        
         
         
         [self.popview_Tbl reloadData];
@@ -2297,7 +2388,7 @@
         islocation =NO;
         self.popview_Tbl.hidden=YES;
     }
-
+    
 }
 
 -(void)validation
@@ -2404,7 +2495,7 @@
         }
         
     }
-
+    
 }
 -(void)altermsg:(NSString *) message
 {
@@ -2440,7 +2531,7 @@
     }
     else if (isPlayer ==YES)
     {
-       str =[[self.commonArray valueForKey:@"athleteName"] objectAtIndex:indexPath.row];
+        str =[[self.commonArray valueForKey:@"athleteName"] objectAtIndex:indexPath.row];
         
     }
     else if (isinjuryType ==YES)
@@ -2463,7 +2554,7 @@
         str =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         
     }
-
+    
     
     dataSize = [COMMON getControlHeight:str withFontName:@"Helvetica" ofSize:10.0 withSize:CGSizeMake(150,tableView.frame.size.height+60)];
     
@@ -2493,7 +2584,7 @@
     else if (isTeam ==YES)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"teamName"] objectAtIndex:indexPath.row];
-
+        
     }
     else if (isPlayer ==YES)
     {
@@ -2525,14 +2616,14 @@
     Cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if(self.popview_Tbl.contentSize.height < 150)
     {
-    self.popViewheight.constant = self.popview_Tbl.contentSize.height+20;
+        self.popViewheight.constant = self.popview_Tbl.contentSize.height+20;
     }
     else
     {
         self.popViewheight.constant = 200;
-
+        
     }
-
+    
     return Cell;
     
     
@@ -2548,7 +2639,7 @@
     {
         self.TeamLbl.text =[[self.commonArray valueForKey:@"teamName"] objectAtIndex:indexPath.row];
         selectTeamCode =[[self.commonArray valueForKey:@"teamCode"] objectAtIndex:indexPath.row];
-
+        
     }
     else if (isPlayer ==YES)
     {
@@ -2575,8 +2666,8 @@
         self.locationlbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         selectlocationCode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
     }
-
-
+    
+    
     self.popview_Tbl.hidden=YES;
     
 }
@@ -2596,3 +2687,4 @@
 
 
 @end
+

@@ -9,9 +9,16 @@
 #import "MultiInjuryVC.h"
 #import "CustomNavigation.h"
 #import "HomeVC.h"
+#import "CRTableViewCell.h"
 
 
 @interface MultiInjuryVC ()
+{
+    BOOL isMulti;
+    BOOL isList;
+}
+
+@property (strong, nonatomic)  NSMutableArray *selectedMarks;
 
 @end
 
@@ -42,6 +49,8 @@
     self.typeView.layer.masksToBounds=YES;
     
     self.multiseliectPopView.hidden = YES;
+    
+    
 }
 
 -(void)customnavigationmethod
@@ -122,24 +131,68 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MyIdentifier = @"MyIdentifier";
+    if(tableView == self.injuryTbl)
+    {
+    static NSString *MyIdentifier = @"custid";
     
-    UITableViewCell *cell = [self.injuryTbl dequeueReusableCellWithIdentifier:MyIdentifier];
+    MultiInjurylistCell *cell = [self.injuryTbl dequeueReusableCellWithIdentifier:MyIdentifier];
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:MyIdentifier];
+        [[NSBundle mainBundle] loadNibNamed:@"MultiInjurylistCell" owner:self options:nil];
+        cell = self.objCell;
     }
     
     
-    cell.textLabel.text = @"injuryNAME";
-    
+    cell.sidelbl.text = @"Text";
+    cell.sitelbl.text = @"Text";
+    cell.causelbl.text = @"Text";
+    cell.locationlbl.text = @"Text";
+    cell.typelbl.text = @"Text";
+    //cell.deleteBtn.imageView.image = [UIImage imageNamed:@"ico_delete"];
+    [cell.deleteBtn setImage:[UIImage imageNamed:@"ico_delete"]  forState:UIControlStateNormal];
+    cell.backgroundColor =[UIColor clearColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
+    }
+    if(tableView == self.multiSelectTbl)
+    {
+        static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
+        CRTableViewCell *cell = (CRTableViewCell *)[self.multiSelectTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[CRTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CRTableViewCellIdentifier];
+        }
+        
+        //self.selectedMarks = [[NSMutableArray alloc]init];
+        
+        self.selectedMarks = [[NSMutableArray alloc]init];
+        
+        // Check if the cell is currently selected (marked)
+        NSString *text = @"text";
+        cell.isSelected = [self.selectedMarks containsObject:text] ? YES : NO;
+        cell.textLabel.text = text;
+        return cell;
+    }
+    return nil;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
+    if(tableView == self.multiSelectTbl)
+    {
+        NSString *text = @"text";
+        if ([self.selectedMarks containsObject:text])// Is selected?
+            [self.selectedMarks removeObject:text];
+        else
+            [self.selectedMarks addObject:text];
+        
+        static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
+        
+        CRTableViewCell *cell = (CRTableViewCell *)[self.multiSelectTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
+        cell.isSelected = [self.selectedMarks containsObject:text] ? YES : NO;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 
