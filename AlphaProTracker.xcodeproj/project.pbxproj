@@ -17,6 +17,14 @@
 		040EB3651F6D5148005118C7 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040EB3641F6D5148005118C7 /* EventKit.framework */; };
 		040EB3671F6D5161005118C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040EB3661F6D5161005118C7 /* CoreGraphics.framework */; };
 		040EB3691F6D5168005118C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040EB3681F6D5168005118C7 /* Foundation.framework */; };
+		04124A6C2010B21200E99E31 /* IntAxisValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A642010B21100E99E31 /* IntAxisValueFormatter.m */; };
+		04124A6D2010B21200E99E31 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A652010B21100E99E31 /* LargeValueFormatter.swift */; };
+		04124A6E2010B21200E99E31 /* HorizontalXLblFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A662010B21100E99E31 /* HorizontalXLblFormatter.m */; };
+		04124A6F2010B21200E99E31 /* DayAxisValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A692010B21200E99E31 /* DayAxisValueFormatter.m */; };
+		04124A702010B21200E99E31 /* DateValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04124A6A2010B21200E99E31 /* DateValueFormatter.m */; };
+		04124A742010B25500E99E31 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A712010B25400E99E31 /* BalloonMarker.swift */; };
+		04124A752010B25500E99E31 /* XYMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A722010B25400E99E31 /* XYMarkerView.swift */; };
+		04124A762010B25500E99E31 /* RadarMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124A732010B25400E99E31 /* RadarMarkerView.swift */; };
 		041607431F73993500DABB9E /* AddInjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041607421F73993500DABB9E /* AddInjuryVC.m */; };
 		041BF5211F7F5F320091611D /* ProgramVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041BF5201F7F5F320091611D /* ProgramVC.m */; };
 		041BF5251F7FB4010091611D /* CRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041BF5241F7FB4010091611D /* CRTableViewCell.m */; };
@@ -232,6 +240,7 @@
 		ACC2A1A51F5FF52A00210422 /* ViewProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC2A1A31F5FF52A00210422 /* ViewProfile.xib */; };
 		ACC4E2331F4E9BF100C53F45 /* DashBoardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4E2321F4E9BF100C53F45 /* DashBoardVC.m */; };
 		ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4E2361F4EAD1000C53F45 /* DashBoardVCCell.m */; };
+		ACE961634A15E7F8FAE831D7 /* Pods_AlphaProTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202A050CB55674369E3B256E /* Pods_AlphaProTracker.framework */; };
 		CE3EBB461FFC990200588728 /* AssessmentFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3EBB451FFC990200588728 /* AssessmentFilterView.m */; };
 		CEC26FCD1FFE129B00FF2D74 /* AssessmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC26FCC1FFE129B00FF2D74 /* AssessmentCell.m */; };
 		CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8033200E210400E33513 /* ExcersizeCollectionViewCell.m */; };
@@ -263,6 +272,19 @@
 		040EB3661F6D5161005118C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		040EB3681F6D5168005118C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		040EB36C1F6D521B005118C7 /* project.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = project.xcworkspace; path = AlphaProTracker.xcodeproj/project.xcworkspace; sourceTree = "<group>"; };
+		04124A622010B21000E99E31 /* AlphaProTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlphaProTracker-Bridging-Header.h"; sourceTree = "<group>"; };
+		04124A632010B21100E99E31 /* IntAxisValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAxisValueFormatter.h; path = Helper/componentsOfHorizontalBar/IntAxisValueFormatter.h; sourceTree = "<group>"; };
+		04124A642010B21100E99E31 /* IntAxisValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntAxisValueFormatter.m; path = Helper/componentsOfHorizontalBar/IntAxisValueFormatter.m; sourceTree = "<group>"; };
+		04124A652010B21100E99E31 /* LargeValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LargeValueFormatter.swift; path = Helper/componentsOfHorizontalBar/LargeValueFormatter.swift; sourceTree = "<group>"; };
+		04124A662010B21100E99E31 /* HorizontalXLblFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HorizontalXLblFormatter.m; path = Helper/componentsOfHorizontalBar/HorizontalXLblFormatter.m; sourceTree = "<group>"; };
+		04124A672010B21100E99E31 /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorizontalXLblFormatter.h; path = Helper/componentsOfHorizontalBar/HorizontalXLblFormatter.h; sourceTree = "<group>"; };
+		04124A682010B21100E99E31 /* DayAxisValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayAxisValueFormatter.h; path = Helper/componentsOfHorizontalBar/DayAxisValueFormatter.h; sourceTree = "<group>"; };
+		04124A692010B21200E99E31 /* DayAxisValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DayAxisValueFormatter.m; path = Helper/componentsOfHorizontalBar/DayAxisValueFormatter.m; sourceTree = "<group>"; };
+		04124A6A2010B21200E99E31 /* DateValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateValueFormatter.m; path = Helper/componentsOfHorizontalBar/DateValueFormatter.m; sourceTree = "<group>"; };
+		04124A6B2010B21200E99E31 /* DateValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateValueFormatter.h; path = Helper/componentsOfHorizontalBar/DateValueFormatter.h; sourceTree = "<group>"; };
+		04124A712010B25400E99E31 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BalloonMarker.swift; path = Helper/componentsOfHorizontalBar/cFormaters/BalloonMarker.swift; sourceTree = "<group>"; };
+		04124A722010B25400E99E31 /* XYMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XYMarkerView.swift; path = Helper/componentsOfHorizontalBar/cFormaters/XYMarkerView.swift; sourceTree = "<group>"; };
+		04124A732010B25400E99E31 /* RadarMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadarMarkerView.swift; path = Helper/componentsOfHorizontalBar/cFormaters/RadarMarkerView.swift; sourceTree = "<group>"; };
 		041607411F73993500DABB9E /* AddInjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddInjuryVC.h; path = Controllers/AddInjuryVC/AddInjuryVC.h; sourceTree = "<group>"; };
 		041607421F73993500DABB9E /* AddInjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddInjuryVC.m; path = Controllers/AddInjuryVC/AddInjuryVC.m; sourceTree = "<group>"; };
 		041BF51F1F7F5F320091611D /* ProgramVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgramVC.h; path = Controllers/ProgramVC/ProgramVC.h; sourceTree = "<group>"; };
@@ -506,6 +528,8 @@
 		18B97998200E129E00B94DD4 /* PopViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PopViewCell.m; path = Subview/PopCell/PopViewCell.m; sourceTree = "<group>"; };
 		18B9799B200E158500B94DD4 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepSlider.h; path = Helper/slider/StepSlider.h; sourceTree = "<group>"; };
 		18B9799C200E158500B94DD4 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepSlider.m; path = Helper/slider/StepSlider.m; sourceTree = "<group>"; };
+		202A050CB55674369E3B256E /* Pods_AlphaProTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaProTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38C2CA4AE7E2357ED13ADAD7 /* Pods-AlphaProTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaProTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker.release.xcconfig"; sourceTree = "<group>"; };
 		AC1BC7FA1F8663020047AECC /* AAChartKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartKit.h; path = Helper/AAChart/AAChartConfiger/AAChartKit.h; sourceTree = "<group>"; };
 		AC1BC7FB1F8663020047AECC /* AAChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartModel.h; path = Helper/AAChart/AAChartConfiger/AAChartModel.h; sourceTree = "<group>"; };
 		AC1BC7FC1F8663020047AECC /* AAChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AAChartModel.m; path = Helper/AAChart/AAChartConfiger/AAChartModel.m; sourceTree = "<group>"; };
@@ -665,6 +689,7 @@
 		ACC4E2321F4E9BF100C53F45 /* DashBoardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashBoardVC.m; path = Controllers/DashBoardVC/DashBoardVC.m; sourceTree = "<group>"; };
 		ACC4E2351F4EAD1000C53F45 /* DashBoardVCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashBoardVCCell.h; path = Subview/DashBoardVCCell/DashBoardVCCell.h; sourceTree = "<group>"; };
 		ACC4E2361F4EAD1000C53F45 /* DashBoardVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashBoardVCCell.m; path = Subview/DashBoardVCCell/DashBoardVCCell.m; sourceTree = "<group>"; };
+		B20DBBDAADFC06FDCE6BFAC6 /* Pods-AlphaProTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaProTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		CE3EBB441FFC990200588728 /* AssessmentFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentFilterView.h; path = Common/Assessment/AssessmentFilterView.h; sourceTree = "<group>"; };
 		CE3EBB451FFC990200588728 /* AssessmentFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentFilterView.m; path = Common/Assessment/AssessmentFilterView.m; sourceTree = "<group>"; };
 		CEC26FCB1FFE129B00FF2D74 /* AssessmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentCell.h; path = Subview/AssessmentCell/AssessmentCell.h; sourceTree = "<group>"; };
@@ -692,6 +717,7 @@
 				040EB3691F6D5168005118C7 /* Foundation.framework in Frameworks */,
 				040EB3671F6D5161005118C7 /* CoreGraphics.framework in Frameworks */,
 				040EB3651F6D5148005118C7 /* EventKit.framework in Frameworks */,
+				ACE961634A15E7F8FAE831D7 /* Pods_AlphaProTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,8 +751,29 @@
 				040EB3681F6D5168005118C7 /* Foundation.framework */,
 				040EB3661F6D5161005118C7 /* CoreGraphics.framework */,
 				040EB3641F6D5148005118C7 /* EventKit.framework */,
+				202A050CB55674369E3B256E /* Pods_AlphaProTracker.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04124A612010B20100E99E31 /* componentsOfHorizontalBar */ = {
+			isa = PBXGroup;
+			children = (
+				04124A712010B25400E99E31 /* BalloonMarker.swift */,
+				04124A732010B25400E99E31 /* RadarMarkerView.swift */,
+				04124A722010B25400E99E31 /* XYMarkerView.swift */,
+				04124A6B2010B21200E99E31 /* DateValueFormatter.h */,
+				04124A6A2010B21200E99E31 /* DateValueFormatter.m */,
+				04124A682010B21100E99E31 /* DayAxisValueFormatter.h */,
+				04124A692010B21200E99E31 /* DayAxisValueFormatter.m */,
+				04124A672010B21100E99E31 /* HorizontalXLblFormatter.h */,
+				04124A662010B21100E99E31 /* HorizontalXLblFormatter.m */,
+				04124A632010B21100E99E31 /* IntAxisValueFormatter.h */,
+				04124A642010B21100E99E31 /* IntAxisValueFormatter.m */,
+				04124A652010B21100E99E31 /* LargeValueFormatter.swift */,
+				04124A622010B21000E99E31 /* AlphaProTracker-Bridging-Header.h */,
+			);
+			name = componentsOfHorizontalBar;
 			sourceTree = "<group>";
 		};
 		041607401F7398FF00DABB9E /* AddInjuryVC */ = {
@@ -772,6 +819,7 @@
 				043B22FF1F4B1B3800036604 /* Products */,
 				040EB3631F6D5148005118C7 /* Frameworks */,
 				18A982AE200F09050071727E /* Recovered References */,
+				9D6FF2AB6C66A0BD955B6194 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -919,6 +967,7 @@
 		043B231D1F4B1BFF00036604 /* Helperview */ = {
 			isa = PBXGroup;
 			children = (
+				04124A612010B20100E99E31 /* componentsOfHorizontalBar */,
 				18B9799A200E157300B94DD4 /* Slider */,
 				18B9798E200DD48800B94DD4 /* ParallaxEffect */,
 				04E640991FB5A74A006E6C57 /* HeaderSectionFiles */,
@@ -1389,6 +1438,15 @@
 				18B9799C200E158500B94DD4 /* StepSlider.m */,
 			);
 			name = Slider;
+			sourceTree = "<group>";
+		};
+		9D6FF2AB6C66A0BD955B6194 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B20DBBDAADFC06FDCE6BFAC6 /* Pods-AlphaProTracker.debug.xcconfig */,
+				38C2CA4AE7E2357ED13ADAD7 /* Pods-AlphaProTracker.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		AC1BC7F61F8662BA0047AECC /* AAChartKit */ = {
@@ -1893,9 +1951,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 043B23151F4B1B3A00036604 /* Build configuration list for PBXNativeTarget "AlphaProTracker" */;
 			buildPhases = (
+				15774BBE1FDE65A6E70166E6 /* [CP] Check Pods Manifest.lock */,
 				043B22FA1F4B1B3800036604 /* Sources */,
 				043B22FB1F4B1B3800036604 /* Frameworks */,
 				043B22FC1F4B1B3800036604 /* Resources */,
+				3E1FA74BB05856F9F0A4C58C /* [CP] Embed Pods Frameworks */,
+				DF26C58B07139FB3E1D2ADC8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1918,6 +1979,7 @@
 					043B22FD1F4B1B3800036604 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = L5S8VPA4A5;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2002,6 +2064,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		15774BBE1FDE65A6E70166E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3E1FA74BB05856F9F0A4C58C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF26C58B07139FB3E1D2ADC8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		043B22FA1F4B1B3800036604 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2054,6 +2164,7 @@
 				04534A591F53FA4100999FBC /* AFSecurityPolicy.m in Sources */,
 				AC1BC8071F8663020047AECC /* AAOptionsConstructor.m in Sources */,
 				045A49D91FA2211B008C1630 /* FFButtonWithHourPopover.m in Sources */,
+				04124A6C2010B21200E99E31 /* IntAxisValueFormatter.m in Sources */,
 				04DB75281F7A5997001CB710 /* IllnessVC.m in Sources */,
 				04DF252A1F74CFDB00DB3AE3 /* TrainingLoadVCCell.m in Sources */,
 				ACACEFE51F597425004C28A4 /* TestAssessmentViewVC.m in Sources */,
@@ -2080,6 +2191,7 @@
 				045A496A1FA21FEB008C1630 /* FFDayScrollView.m in Sources */,
 				AC87CD9D1F55A74D002AA80E /* assemntCell.m in Sources */,
 				AC1BC8621F8665B40047AECC /* AATitle.m in Sources */,
+				04124A6F2010B21200E99E31 /* DayAxisValueFormatter.m in Sources */,
 				04E640AB1FB5A762006E6C57 /* INTUGroupedArray.m in Sources */,
 				045A49DF1FA22128008C1630 /* FFEditEventPopoverController.m in Sources */,
 				ACC4E2331F4E9BF100C53F45 /* DashBoardVC.m in Sources */,
@@ -2092,6 +2204,7 @@
 				045A495E1FA21FC7008C1630 /* FFDayCalendarView.m in Sources */,
 				AC1BC8611F8665B40047AECC /* AASubtitle.m in Sources */,
 				04CA66421F6F8A0C009F109E /* HACBarLayer.m in Sources */,
+				04124A762010B25500E99E31 /* RadarMarkerView.swift in Sources */,
 				04DC33701FB08601001BF439 /* EventRecord.m in Sources */,
 				04DB75321F7A60BB001CB710 /* AddIllnessVC.m in Sources */,
 				04534A6F1F542E2100999FBC /* PlannerAddEvent.m in Sources */,
@@ -2100,12 +2213,14 @@
 				045A49E01FA22128008C1630 /* FFEditEventView.m in Sources */,
 				045A49731FA22002008C1630 /* FFDayCell.m in Sources */,
 				ACB964A41F5E817300387AEC /* TeamsVC.m in Sources */,
+				04124A6D2010B21200E99E31 /* LargeValueFormatter.swift in Sources */,
 				045A49A81FA2209F008C1630 /* FFYearCollectionView.m in Sources */,
 				04EE9D681F9A20F6007B3278 /* DBAConnection.m in Sources */,
 				ACC1D6F21F6692A6002329A1 /* MCChartInformationView.m in Sources */,
 				ACACEFE21F59740C004C28A4 /* TestAssessmentListVC.m in Sources */,
 				04534A561F53FA4100999FBC /* AFHTTPRequestOperationManager.m in Sources */,
 				AC1BC8501F8665B40047AECC /* AAChart.m in Sources */,
+				04124A6E2010B21200E99E31 /* HorizontalXLblFormatter.m in Sources */,
 				CEEE8046200E3C3E00E33513 /* ExcersizeViewController.m in Sources */,
 				ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */,
 				ACBD4ADC1F56FE5600AFA25D /* QuestionaryVC.m in Sources */,
@@ -2145,8 +2260,10 @@
 				ACACEFEE1F597AFE004C28A4 /* ExpandAssessmentVC.m in Sources */,
 				045A49821FA2202F008C1630 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
 				CEEE8041200E3B6D00E33513 /* ExcierseDetailVC.m in Sources */,
+				04124A752010B25500E99E31 /* XYMarkerView.swift in Sources */,
 				045A497D1FA22026008C1630 /* FFMonthCell.m in Sources */,
 				045A49B51FA220B2008C1630 /* FFMonthCollectionViewForYearCell.m in Sources */,
+				04124A702010B21200E99E31 /* DateValueFormatter.m in Sources */,
 				045A495A1FA21F9E008C1630 /* FFButtonAddEventWithPopover.m in Sources */,
 				04EBB76D1F88CB9B00422202 /* AssignPlayerVC.m in Sources */,
 				046215EA1F4EFAE300A781C2 /* SKSTableViewCell.m in Sources */,
@@ -2181,6 +2298,7 @@
 				ACB567C41F62D7A800F1C45E /* TrainingLoadCell.m in Sources */,
 				045A49EE1FA22174008C1630 /* FFEventDetailPopoverController.m in Sources */,
 				CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */,
+				04124A742010B25500E99E31 /* BalloonMarker.swift in Sources */,
 				AC1BC85E1F8665B40047AECC /* AASeriesElement.m in Sources */,
 				040B2A8D1F600E0600FB4B93 /* DMLazyScrollView.m in Sources */,
 				045A49971FA22072008C1630 /* FFViewWithHourLines.m in Sources */,
@@ -2310,8 +2428,10 @@
 		};
 		043B23161F4B1B3A00036604 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B20DBBDAADFC06FDCE6BFAC6 /* Pods-AlphaProTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L5S8VPA4A5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2326,14 +2446,19 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "AlphaProTracker/AlphaProTracker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		043B23171F4B1B3A00036604 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38C2CA4AE7E2357ED13ADAD7 /* Pods-AlphaProTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L5S8VPA4A5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2347,6 +2472,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.AlphaProTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "AlphaProTracker/AlphaProTracker-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

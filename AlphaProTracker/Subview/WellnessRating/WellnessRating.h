@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HACBarChart.h"
+@import Charts;
 
 
 @interface WellnessRating : UIViewController
@@ -19,5 +20,7 @@
 @property (nonatomic,strong) IBOutlet NSMutableArray *selecteddetailslist;
 
 @property (nonatomic,strong) IBOutlet NSString *selectedUsercode;
+
+@property (weak, nonatomic) IBOutlet HorizontalBarChartView *viewHorizontalBar;
 
 @end
