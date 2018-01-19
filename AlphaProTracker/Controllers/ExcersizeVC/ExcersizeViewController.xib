@@ -46,7 +46,7 @@
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="z64-ff-Qdg">
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <point key="canvasLocation" x="-175" y="-572"/>
+            <point key="canvasLocation" x="35" y="-407"/>
         </collectionReusableView>
     </objects>
 </document>
