@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ExcersizeDetailItemVC.h"
 
 
 @interface AppDelegate ()
@@ -23,7 +23,11 @@
     storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
-    UIViewController * initViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"HomeVC" : @"LoginVC")];
+    
+//    UIViewController * initViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"HomeVC" : @"LoginVC")];
+    
+    ExcersizeDetailItemVC *initViewController = [ExcersizeDetailItemVC new];
+    
     
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];

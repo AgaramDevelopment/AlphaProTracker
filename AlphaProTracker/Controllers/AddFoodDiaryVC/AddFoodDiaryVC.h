@@ -17,6 +17,6 @@
 @property (nonatomic,assign) BOOL Isupdate;
 @property (nonatomic,assign) NSString* key;
 
-@property (strong,nonatomic) IBOutlet UIView * view_datepicker;
-
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, readwrite, retain) UIView *inputAccessoryView;
 @end

@@ -22,6 +22,12 @@
 		041607431F73993500DABB9E /* AddInjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041607421F73993500DABB9E /* AddInjuryVC.m */; };
 		041BF5211F7F5F320091611D /* ProgramVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041BF5201F7F5F320091611D /* ProgramVC.m */; };
 		041BF5251F7FB4010091611D /* CRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041BF5241F7FB4010091611D /* CRTableViewCell.m */; };
+		04228EC22011FE1000D131F8 /* AddFoodDiaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04228EC02011FE0C00D131F8 /* AddFoodDiaryVC.m */; };
+		04228EC52011FE6400D131F8 /* FoodDairyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04228EC32011FE6100D131F8 /* FoodDairyVC.m */; };
+		04228ECD201207B100D131F8 /* ExcersizeDetailItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04228ECB201207B100D131F8 /* ExcersizeDetailItemVC.m */; };
+		04228ECE201207B100D131F8 /* ExcersizeDetailItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04228ECC201207B100D131F8 /* ExcersizeDetailItemVC.xib */; };
+		04228ED02012236300D131F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04228ECF2012236300D131F8 /* AVFoundation.framework */; };
+		04228ED22012237400D131F8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04228ED12012237400D131F8 /* AVKit.framework */; };
 		04241DFB1F7D238F00A7C46A /* GraphsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04241DFA1F7D238F00A7C46A /* GraphsVC.m */; };
 		043B23031F4B1B3800036604 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 043B23021F4B1B3800036604 /* main.m */; };
 		043B23061F4B1B3800036604 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 043B23051F4B1B3800036604 /* AppDelegate.m */; };
@@ -112,7 +118,6 @@
 		04CA66421F6F8A0C009F109E /* HACBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA66401F6F8A0C009F109E /* HACBarLayer.m */; };
 		04CA66481F6FA567009F109E /* FoodDairy.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA66461F6FA567009F109E /* FoodDairy.m */; };
 		04CA66491F6FA567009F109E /* FoodDairy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CA66471F6FA567009F109E /* FoodDairy.xib */; };
-		04CA664D1F6FD863009F109E /* AddFoodDiaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA664C1F6FD863009F109E /* AddFoodDiaryVC.m */; };
 		04DB75281F7A5997001CB710 /* IllnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB75271F7A5996001CB710 /* IllnessVC.m */; };
 		04DB752D1F7A5E64001CB710 /* IllnessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB752B1F7A5E64001CB710 /* IllnessCell.m */; };
 		04DB752E1F7A5E64001CB710 /* IllnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DB752C1F7A5E64001CB710 /* IllnessCell.xib */; };
@@ -200,7 +205,6 @@
 		ACAE8FEE1F6951D70072FA41 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = ACAE8FED1F6951D70072FA41 /* XYPieChart.m */; };
 		ACB2686C1F5A7AA4006E69AC /* WellnessRatingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB2686B1F5A7AA4006E69AC /* WellnessRatingVC.m */; };
 		ACB268701F5AAE69006E69AC /* TrainingLoadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB2686F1F5AAE69006E69AC /* TrainingLoadVC.m */; };
-		ACB28C331F58365000E8A865 /* FoodDairyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB28C321F58365000E8A865 /* FoodDairyVC.m */; };
 		ACB28C371F5846A700E8A865 /* WorkLoadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB28C361F5846A700E8A865 /* WorkLoadVC.m */; };
 		ACB567C41F62D7A800F1C45E /* TrainingLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB567C21F62D7A800F1C45E /* TrainingLoadCell.m */; };
 		ACB567C51F62D7A800F1C45E /* TrainingLoadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACB567C31F62D7A800F1C45E /* TrainingLoadCell.xib */; };
@@ -274,6 +278,15 @@
 		041BF5201F7F5F320091611D /* ProgramVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgramVC.m; path = Controllers/ProgramVC/ProgramVC.m; sourceTree = "<group>"; };
 		041BF5231F7FB4010091611D /* CRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRTableViewCell.h; path = Helper/MultCellselection/CRTableViewCell.h; sourceTree = "<group>"; };
 		041BF5241F7FB4010091611D /* CRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CRTableViewCell.m; path = Helper/MultCellselection/CRTableViewCell.m; sourceTree = "<group>"; };
+		04228EC02011FE0C00D131F8 /* AddFoodDiaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddFoodDiaryVC.m; path = Controllers/AddFoodDiaryVC/AddFoodDiaryVC.m; sourceTree = "<group>"; };
+		04228EC12011FE0E00D131F8 /* AddFoodDiaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddFoodDiaryVC.h; path = Controllers/AddFoodDiaryVC/AddFoodDiaryVC.h; sourceTree = "<group>"; };
+		04228EC32011FE6100D131F8 /* FoodDairyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoodDairyVC.m; path = Controllers/FoodDairyVC/FoodDairyVC.m; sourceTree = "<group>"; };
+		04228EC42011FE6200D131F8 /* FoodDairyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoodDairyVC.h; path = Controllers/FoodDairyVC/FoodDairyVC.h; sourceTree = "<group>"; };
+		04228ECA201207B100D131F8 /* ExcersizeDetailItemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcersizeDetailItemVC.h; sourceTree = "<group>"; };
+		04228ECB201207B100D131F8 /* ExcersizeDetailItemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExcersizeDetailItemVC.m; sourceTree = "<group>"; };
+		04228ECC201207B100D131F8 /* ExcersizeDetailItemVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExcersizeDetailItemVC.xib; sourceTree = "<group>"; };
+		04228ECF2012236300D131F8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		04228ED12012237400D131F8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		04241DF91F7D238F00A7C46A /* GraphsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphsVC.h; path = Controllers/GraphVC/GraphsVC.h; sourceTree = "<group>"; };
 		04241DFA1F7D238F00A7C46A /* GraphsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphsVC.m; path = Controllers/GraphVC/GraphsVC.m; sourceTree = "<group>"; };
 		043B22FE1F4B1B3800036604 /* AlphaProTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlphaProTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -449,8 +462,6 @@
 		04CA66451F6FA567009F109E /* FoodDairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoodDairy.h; path = Subview/FoodDairyCell/FoodDairy.h; sourceTree = "<group>"; };
 		04CA66461F6FA567009F109E /* FoodDairy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoodDairy.m; path = Subview/FoodDairyCell/FoodDairy.m; sourceTree = "<group>"; };
 		04CA66471F6FA567009F109E /* FoodDairy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FoodDairy.xib; path = Subview/FoodDairyCell/FoodDairy.xib; sourceTree = "<group>"; };
-		04CA664B1F6FD863009F109E /* AddFoodDiaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddFoodDiaryVC.h; path = Controllers/AddFoodDiaryVC/AddFoodDiaryVC.h; sourceTree = "<group>"; };
-		04CA664C1F6FD863009F109E /* AddFoodDiaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddFoodDiaryVC.m; path = Controllers/AddFoodDiaryVC/AddFoodDiaryVC.m; sourceTree = "<group>"; };
 		04DB75261F7A5996001CB710 /* IllnessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IllnessVC.h; path = Controllers/IllnessVC/IllnessVC.h; sourceTree = "<group>"; };
 		04DB75271F7A5996001CB710 /* IllnessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IllnessVC.m; path = Controllers/IllnessVC/IllnessVC.m; sourceTree = "<group>"; };
 		04DB752A1F7A5E64001CB710 /* IllnessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IllnessCell.h; path = Subview/IllnessCell/IllnessCell.h; sourceTree = "<group>"; };
@@ -616,8 +627,6 @@
 		ACB2686B1F5A7AA4006E69AC /* WellnessRatingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WellnessRatingVC.m; path = Controllers/WellnessRatingVC/WellnessRatingVC.m; sourceTree = "<group>"; };
 		ACB2686E1F5AAE69006E69AC /* TrainingLoadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrainingLoadVC.h; path = Controllers/TrainingLoadVC/TrainingLoadVC.h; sourceTree = "<group>"; };
 		ACB2686F1F5AAE69006E69AC /* TrainingLoadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainingLoadVC.m; path = Controllers/TrainingLoadVC/TrainingLoadVC.m; sourceTree = "<group>"; };
-		ACB28C311F58365000E8A865 /* FoodDairyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoodDairyVC.h; path = Controllers/FoodDairyVC/FoodDairyVC.h; sourceTree = "<group>"; };
-		ACB28C321F58365000E8A865 /* FoodDairyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoodDairyVC.m; path = Controllers/FoodDairyVC/FoodDairyVC.m; sourceTree = "<group>"; };
 		ACB28C351F5846A700E8A865 /* WorkLoadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkLoadVC.h; path = Controllers/WorkLoadVC/WorkLoadVC.h; sourceTree = "<group>"; };
 		ACB28C361F5846A700E8A865 /* WorkLoadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkLoadVC.m; path = Controllers/WorkLoadVC/WorkLoadVC.m; sourceTree = "<group>"; };
 		ACB567C11F62D7A800F1C45E /* TrainingLoadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrainingLoadCell.h; path = Subview/TrainingLoadCell.h; sourceTree = "<group>"; };
@@ -695,6 +704,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04228ED22012237400D131F8 /* AVKit.framework in Frameworks */,
+				04228ED02012236300D131F8 /* AVFoundation.framework in Frameworks */,
 				04F1B95E1F94843C00EFA4A9 /* libsqlite3.0.tbd in Frameworks */,
 				040EB3691F6D5168005118C7 /* Foundation.framework in Frameworks */,
 				040EB3671F6D5161005118C7 /* CoreGraphics.framework in Frameworks */,
@@ -728,6 +739,8 @@
 		040EB3631F6D5148005118C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04228ED12012237400D131F8 /* AVKit.framework */,
+				04228ECF2012236300D131F8 /* AVFoundation.framework */,
 				04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */,
 				040EB36C1F6D521B005118C7 /* project.xcworkspace */,
 				040EB3681F6D5168005118C7 /* Foundation.framework */,
@@ -773,6 +786,16 @@
 				041BF5241F7FB4010091611D /* CRTableViewCell.m */,
 			);
 			name = MultiCell;
+			sourceTree = "<group>";
+		};
+		04228EC92012071100D131F8 /* ExcersizeDetailItemVC */ = {
+			isa = PBXGroup;
+			children = (
+				04228ECA201207B100D131F8 /* ExcersizeDetailItemVC.h */,
+				04228ECB201207B100D131F8 /* ExcersizeDetailItemVC.m */,
+				04228ECC201207B100D131F8 /* ExcersizeDetailItemVC.xib */,
+			);
+			path = ExcersizeDetailItemVC;
 			sourceTree = "<group>";
 		};
 		04241DF81F7D237D00A7C46A /* GraphVC */ = {
@@ -1224,8 +1247,8 @@
 		04CA664A1F6FD834009F109E /* AddFoodDiaryVC */ = {
 			isa = PBXGroup;
 			children = (
-				04CA664B1F6FD863009F109E /* AddFoodDiaryVC.h */,
-				04CA664C1F6FD863009F109E /* AddFoodDiaryVC.m */,
+				04228EC12011FE0E00D131F8 /* AddFoodDiaryVC.h */,
+				04228EC02011FE0C00D131F8 /* AddFoodDiaryVC.m */,
 			);
 			name = AddFoodDiaryVC;
 			sourceTree = "<group>";
@@ -1644,8 +1667,8 @@
 		ACB28C301F58363200E8A865 /* FoodDairyVC */ = {
 			isa = PBXGroup;
 			children = (
-				ACB28C311F58365000E8A865 /* FoodDairyVC.h */,
-				ACB28C321F58365000E8A865 /* FoodDairyVC.m */,
+				04228EC42011FE6200D131F8 /* FoodDairyVC.h */,
+				04228EC32011FE6100D131F8 /* FoodDairyVC.m */,
 			);
 			name = FoodDairyVC;
 			sourceTree = "<group>";
@@ -1887,6 +1910,7 @@
 				CEEE8044200E3C3E00E33513 /* ExcersizeViewController.m */,
 				CEEE8045200E3C3E00E33513 /* ExcersizeViewController.xib */,
 				CEEE8042200E3B7D00E33513 /* ExcierseDetailVC */,
+				04228EC92012071100D131F8 /* ExcersizeDetailItemVC */,
 			);
 			name = ExcersizeVC;
 			path = Controllers/ExcersizeVC;
@@ -1991,6 +2015,7 @@
 				04EBB7961F8904D500422202 /* QuestionaryCell.xib in Resources */,
 				ACC2A1A51F5FF52A00210422 /* ViewProfile.xib in Resources */,
 				ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */,
+				04228ECE201207B100D131F8 /* ExcersizeDetailItemVC.xib in Resources */,
 				0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */,
 				AC1BC8111F8665A60047AECC /* AADrilldown.js in Resources */,
 				CEEE8036200E210400E33513 /* ExcersizeCollectionViewCell.xib in Resources */,
@@ -2043,13 +2068,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AlphaProTracker-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3E1FA74BB05856F9F0A4C58C /* [CP] Embed Pods Frameworks */ = {
@@ -2058,9 +2086,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2102,7 +2135,6 @@
 				18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */,
 				045A498E1FA2205B008C1630 /* FFWeekHeaderCollectionView.m in Sources */,
 				044730D41F94D41E00871628 /* Utitliy.m in Sources */,
-				04CA664D1F6FD863009F109E /* AddFoodDiaryVC.m in Sources */,
 				04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */,
 				045A49E91FA22146008C1630 /* FFSearchBarWithAutoComplete.m in Sources */,
 				AC1BC8641F8665B40047AECC /* AAXAxis.m in Sources */,
@@ -2115,6 +2147,7 @@
 				04CA66411F6F8A0C009F109E /* HACBarChart.m in Sources */,
 				043B23061F4B1B3800036604 /* AppDelegate.m in Sources */,
 				AC1BC85D1F8665B40047AECC /* AASeries.m in Sources */,
+				04228ECD201207B100D131F8 /* ExcersizeDetailItemVC.m in Sources */,
 				ACBBA19D1F61507C000F9DC9 /* RecentPerformance.m in Sources */,
 				045A49BB1FA220C8008C1630 /* FFRedAndWhiteButton.m in Sources */,
 				045A49A31FA22095008C1630 /* FFYearCalendarView.m in Sources */,
@@ -2132,6 +2165,7 @@
 				045A49851FA22043008C1630 /* FFMonthHeaderView.m in Sources */,
 				045A49CB1FA220F2008C1630 /* FFDateManager.m in Sources */,
 				CE3EBB461FFC990200588728 /* AssessmentFilterView.m in Sources */,
+				04228EC22011FE1000D131F8 /* AddFoodDiaryVC.m in Sources */,
 				04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */,
 				04534A591F53FA4100999FBC /* AFSecurityPolicy.m in Sources */,
 				AC1BC8071F8663020047AECC /* AAOptionsConstructor.m in Sources */,
@@ -2173,6 +2207,7 @@
 				043B232E1F4B1E4300036604 /* Reachability.m in Sources */,
 				045A495E1FA21FC7008C1630 /* FFDayCalendarView.m in Sources */,
 				AC1BC8611F8665B40047AECC /* AASubtitle.m in Sources */,
+				04228EC52011FE6400D131F8 /* FoodDairyVC.m in Sources */,
 				04CA66421F6F8A0C009F109E /* HACBarLayer.m in Sources */,
 				04DC33701FB08601001BF439 /* EventRecord.m in Sources */,
 				04DB75321F7A60BB001CB710 /* AddIllnessVC.m in Sources */,
@@ -2205,7 +2240,6 @@
 				045A496F1FA21FF7008C1630 /* FFDayCollectionView.m in Sources */,
 				18B97999200E129E00B94DD4 /* PopViewCell.m in Sources */,
 				045A49611FA21FD3008C1630 /* FFDayHeaderCollectionView.m in Sources */,
-				ACB28C331F58365000E8A865 /* FoodDairyVC.m in Sources */,
 				045A49EF1FA22174008C1630 /* FFEventDetailView.m in Sources */,
 				AC1BC8061F8663020047AECC /* AAJsonConverter.m in Sources */,
 				0441B78A1F6ACB4E00A28E19 /* PlannerListVC.m in Sources */,
