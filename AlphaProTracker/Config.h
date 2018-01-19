@@ -201,4 +201,8 @@
 
 #define FetchModuleKey                    @"FETCHASSESSMENTENTRY"
 
+#define MultiInjuryAddeKey                    @"MULTIINJURYINSERT"
+
+#define deleteRowKey                    @"DELETEROW"
+
 

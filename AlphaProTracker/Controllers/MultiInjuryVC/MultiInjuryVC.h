@@ -25,6 +25,17 @@
 @property (nonatomic,strong) IBOutlet UIButton * locationBtn;
 @property (nonatomic,strong) IBOutlet UIButton * typeBtn;
 
+@property (nonatomic,strong) IBOutlet UIButton * UPDATEBtn;
+@property (nonatomic,strong) IBOutlet UIButton * DELETEBtn;
+@property (nonatomic,strong) IBOutlet UIButton * CLOSEBtn;
+
+
+@property (nonatomic,strong) IBOutlet UILabel * sitelbl;
+@property (nonatomic,strong) IBOutlet UILabel * sidelbl;
+@property (nonatomic,strong) IBOutlet UILabel * causelbl;
+@property (nonatomic,strong) IBOutlet UILabel * locationlbl;
+@property (nonatomic,strong) IBOutlet UILabel * typelbl;
+
 @property (nonatomic,strong) IBOutlet UIView * multiseliectPopView;
 @property (nonatomic,strong) IBOutlet UIView * tapView;
 @property (nonatomic,strong) IBOutlet MultiInjurylistCell * objCell;
@@ -32,5 +43,14 @@
 
 @property (nonatomic,strong) IBOutlet UITableView * multiSelectTbl;
 @property (nonatomic,strong) IBOutlet UITableView * injuryTbl;
+@property (nonatomic,strong)  NSMutableArray * injuryCauseArray;
+@property (nonatomic,strong)  NSMutableArray * injuryTypeArray;
+@property (nonatomic,strong)  NSMutableArray * injuryLocationArray;
+@property (nonatomic,strong)  NSMutableArray * injurySideArray;
+@property (nonatomic,strong)  NSMutableArray * injurySiteArray;
+
+@property (nonatomic,strong)  NSString * injuryName;
+@property (nonatomic,strong)  NSString * playercode;
+@property (nonatomic,strong)  NSString * clientcode;
 
 @end

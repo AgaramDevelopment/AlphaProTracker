@@ -295,8 +295,23 @@
 
 -(IBAction)didClickMultiInjuryAction:(id)sender
 {
+//    NSMutableArray *LocationArray = [[NSMutableArray alloc]init];
+//    [LocationArray arrayByAddingObject:self.headandtruckArray];
+//    [LocationArray arrayByAddingObject:self.upperextremityArray];
+//    [LocationArray arrayByAddingObject:self.lowerextremityArray];
+    
+    NSMutableArray *LocationArray = [NSMutableArray arrayWithArray: self.headandtruckArray];
+    [LocationArray addObjectsFromArray: self.upperextremityArray];
+    [LocationArray addObjectsFromArray: self.lowerextremityArray];
+    
     MultiInjuryVC  * objaddinjury=[[MultiInjuryVC alloc]init];
     objaddinjury = (MultiInjuryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"MultiInjuryVC"];
+    objaddinjury.playercode = selectPlayerCode;
+    objaddinjury.injuryName = self.injuryNameTxt.text;
+    objaddinjury.injuryTypeArray = self.injuryTypeArray;
+    objaddinjury.injuryCauseArray = self.injuryCauseArray;
+    objaddinjury.injuryLocationArray=LocationArray;
+    
     [self.navigationController pushViewController:objaddinjury animated:YES];
 }
 

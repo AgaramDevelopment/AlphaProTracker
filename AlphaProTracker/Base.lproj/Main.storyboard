@@ -13494,33 +13494,8 @@
                                         <state key="normal" title="Add">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPE-IJ-fAG">
-                                        <rect key="frame" x="131.5" y="619" width="112" height="40"/>
-                                        <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="Rk6-BL-NjF"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="UPDATE">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                         <connections>
-                                            <action selector="didClickupdate:" destination="dOe-yd-ctV" eventType="touchUpInside" id="Idm-Du-XYB"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2F-vo-CyB">
-                                        <rect key="frame" x="253.5" y="619" width="111.5" height="40"/>
-                                        <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="w0K-6H-VCM"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="DELETE">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didClickDelete:" destination="dOe-yd-ctV" eventType="touchUpInside" id="d8E-ax-kVd"/>
+                                            <action selector="AddAction:" destination="Mhk-Ko-m3Z" eventType="touchUpInside" id="qpW-zb-Wqj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOp-TL-cHP">
@@ -13530,12 +13505,31 @@
                                             <constraint firstAttribute="height" constant="40" id="waf-6h-moC"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="SUBMIT">
+                                        <state key="normal" title="UDATE">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="didClickSave:" destination="dOe-yd-ctV" eventType="touchUpInside" id="LL3-bV-kfL"/>
-                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPE-IJ-fAG">
+                                        <rect key="frame" x="131" y="619" width="112" height="40"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Rk6-BL-NjF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="DELETE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2F-vo-CyB">
+                                        <rect key="frame" x="253.5" y="619" width="111.5" height="40"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="w0K-6H-VCM"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="CLOSE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0Z-Si-fnE">
                                         <rect key="frame" x="5" y="299" width="365" height="35"/>
@@ -13769,20 +13763,28 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="CLOSEBtn" destination="G2F-vo-CyB" id="Opa-1I-WhG"/>
+                        <outlet property="DELETEBtn" destination="KPE-IJ-fAG" id="OCe-PX-xWc"/>
+                        <outlet property="UPDATEBtn" destination="NOp-TL-cHP" id="0O1-VP-84q"/>
                         <outlet property="causeBtn" destination="0XJ-0d-cK6" id="oG1-JK-FNS"/>
                         <outlet property="causeView" destination="iUq-xH-1BW" id="7FH-XS-S8y"/>
+                        <outlet property="causelbl" destination="DmR-wT-1KY" id="YbU-Uz-YYZ"/>
                         <outlet property="injuryTbl" destination="P3c-Z3-0Jc" id="p3N-Br-xLo"/>
                         <outlet property="locationBtn" destination="zw0-uW-hNp" id="5tI-PT-YTV"/>
                         <outlet property="locationView" destination="A7J-BC-2EF" id="0Pl-0P-TEQ"/>
+                        <outlet property="locationlbl" destination="g7p-I1-gMe" id="hCC-I3-tnN"/>
                         <outlet property="multiSelectTbl" destination="Qau-oT-V1s" id="AK0-lm-2cN"/>
                         <outlet property="multiseliectPopView" destination="MRs-5s-u5B" id="UES-Ce-IPR"/>
                         <outlet property="sideBtn" destination="hWo-aS-NAR" id="87n-ay-gTK"/>
                         <outlet property="sideView" destination="3Ly-jR-uvf" id="ukv-vl-7Cu"/>
+                        <outlet property="sidelbl" destination="e2j-vg-cDj" id="qiX-c2-gcg"/>
                         <outlet property="siteBtn" destination="04o-cX-rEH" id="Yce-yx-Sii"/>
                         <outlet property="siteView" destination="Oti-ag-ptm" id="f5I-PZ-zZI"/>
+                        <outlet property="sitelbl" destination="L0x-oE-BWs" id="JWM-vP-smO"/>
                         <outlet property="tapView" destination="doE-BF-SaJ" id="d2w-eB-dSI"/>
                         <outlet property="typeBtn" destination="YU1-Xj-cgk" id="ft9-ow-HE9"/>
                         <outlet property="typeView" destination="07G-IT-XqP" id="BGW-di-r44"/>
+                        <outlet property="typelbl" destination="XO3-xh-6hD" id="TSW-TF-BP5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ic-Lv-KYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
