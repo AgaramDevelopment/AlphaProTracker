@@ -11,6 +11,8 @@
 @interface AssessmentFilterView : UIView <SACalendarDelegate, UITextFieldDelegate>
 
 @property (nonatomic,strong) NSString *moduleStr;
+@property(nonatomic,strong) NSMutableArray * AssessmentTitleArray;
+
 
 
 

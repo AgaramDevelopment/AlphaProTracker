@@ -113,8 +113,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     NSString *aname = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                     
                     NSLog(@" Load completed Name = %@ ",aname);
-                    
-                    //[self InsertQuery:CLIENTCODE :MODULECODE :ASSESSMENTCODE :ASSESSMENTNAME :CREATEDBY :CREATEDDATE :MODIFIEDBY :MODIFIEDATE];
     
                     [self UpdateAssessment:CLIENTCODE :MODULECODE :ASSESEMENTCODE :ASSESSMENTNAME:RECORDSTATUS:CREATEDBY :CREATEDDATE :MODIFIEDBY :MODIFIEDATE];
                     sqlite3_reset(statement);
@@ -2851,12 +2849,255 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 
 
 
+#pragma teamlistsyn
+
+-(BOOL) SELECTTEAM:(NSString *)TEAMCODE{
+    @synchronized ([Utitliy syncId])  {
+        
+        NSString *CLIENTCODE = [self.TeamListDetailArray objectAtIndex:0];
+        NSString *TEAMCODE=[self.TeamListDetailArray objectAtIndex:1];
+        NSString *TEAMNAME=[self.TeamListDetailArray objectAtIndex:2];
+        NSString *TEAMSHORTNAME=[self.TeamListDetailArray objectAtIndex:3];
+        NSString *GAME=[self.TeamListDetailArray objectAtIndex:4];
+        NSString *RECORDSTATUS=[self.TeamListDetailArray objectAtIndex:5];
+        NSString *CREATEDBY=[self.TeamListDetailArray objectAtIndex:6];
+        NSString *CREATEDDATE=[self.TeamListDetailArray objectAtIndex:7];
+        
+        
+        NSString *databasePath =[self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *query=[NSString stringWithFormat:@"SELECT * FROM TEAMMASTER WHERE TEAMCODE='%@'",TEAMCODE];
+            
+            stmt=[query UTF8String];
+            
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    
+                    NSString *aname = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                    
+                    NSLog(@" Load completed Name = %@ ",aname);
+                
+            [self UPDATETEAMLIST:CLIENTCODE :TEAMCODE :TEAMNAME :TEAMSHORTNAME :GAME :RECORDSTATUS :CREATEDBY :CREATEDDATE];
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                }
+               
+                [self INSERTTEAMLIST:CLIENTCODE :TEAMCODE :TEAMNAME :TEAMSHORTNAME :GAME :RECORDSTATUS :CREATEDBY :CREATEDDATE];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
 
 
+-(BOOL) UPDATETEAMLIST:(NSString*) CLIENTCODE:(NSString*) TEAMCODE:(NSString*) TEAMNAME:(NSString*) TEAMSHORTNAME:(NSString*) GAME:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE{
+    @synchronized ([Utitliy syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            
+            NSString *updateSQL = [NSString stringWithFormat:@"UPDATE TEAMMASTER SET  CLIENTCODE='%@',GAME='%@',TEAMCODE='%@',TEAMNAME='%@',TEAMSHORTNAME='%@',RECORDSTATUS='%@',CREATEDBY='%@', CREATEDDATE='%@' WHERE TEAMCODE ='%@'",CLIENTCODE,GAME,TEAMCODE,TEAMNAME,TEAMSHORTNAME,RECORDSTATUS,CREATEDBY,CREATEDDATE,TEAMCODE];
+            
+            
+            const char *update_stmt = [updateSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
 
+-(BOOL) INSERTTEAMLIST:(NSString*) CLIENTCODE:(NSString*) TEAMCODE:(NSString*) TEAMNAME:(NSString*) TEAMSHORTNAME:(NSString*) GAME:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY :(NSString*) CREATEDDATE{
+    @synchronized ([Utitliy syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TEAMMASTER(CLIENTCODE,TEAMCODE,TEAMNAME,TEAMSHORTNAME,GAME,RECORDSTATUS,CREATEDBY,CREATEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@')",CLIENTCODE,TEAMCODE,TEAMNAME,TEAMSHORTNAME,GAME,RECORDSTATUS,CREATEDBY,CREATEDDATE];
+            
+            
+            const char *update_stmt = [INSERTSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
 
+#pragma SupportStaff
 
+-(BOOL)SELECTSupportStaff:(NSString *)MemberCode
+{
+    @synchronized ([Utitliy syncId])  {
+        
+        NSString *CLIENTCODE = [self.SupportStaffArray objectAtIndex:0];
+        NSString *MemberCode=[self.SupportStaffArray objectAtIndex:1];
+        NSString *StaffType=[self.SupportStaffArray objectAtIndex:2];
+        NSString *Levels=[self.SupportStaffArray objectAtIndex:3];
+        NSString *Recordstatus=[self.SupportStaffArray objectAtIndex:4];
+        NSString *Createdby=[self.SupportStaffArray objectAtIndex:5];
+        NSString *Createddate=[self.SupportStaffArray objectAtIndex:6];
+        NSString *Modifiedby=[self.SupportStaffArray objectAtIndex:7];
+        NSString *Modifieddate=[self.SupportStaffArray objectAtIndex:8];
 
+        
+        NSString *databasePath =[self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *query=[NSString stringWithFormat:@"SELECT * FROM SUPPORTSTAFF WHERE MEMBERCODE='%@'",MemberCode];
+            
+            stmt=[query UTF8String];
+            
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    
+                    NSString *aname = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                    
+                    NSLog(@" Load completed Name = %@ ",aname);
+                    
+                    [self UPDATESUPPORTSTAFFLIST:CLIENTCODE :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate :MemberCode :StaffType:Levels];
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                }
+                
+                [self INSERTSUPPORTSTAFFLIST:CLIENTCODE :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate :MemberCode :StaffType:Levels];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
+
+-(BOOL) UPDATESUPPORTSTAFFLIST:(NSString*) CLIENTCODE:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)MEMBERCODE :(NSString*) STAFFTYPE: (NSString*)LEVEL
+{
+    @synchronized ([Utitliy syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            
+            NSString *updateSQL = [NSString stringWithFormat:@"UPDATE SUPPORTSTAFF SET  CLIENTCODE='%@',RECORDSTATUS='%@',CREATEDBY='%@',CREATEDDATE='%@',MODIFIEDBY='%@',MODIFIEDDATE='%@',MEMBERCODE='%@', STAFFTYPE='%@', LEVELS='%@'",CLIENTCODE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,MEMBERCODE,STAFFTYPE,LEVEL];
+            
+            
+            const char *update_stmt = [updateSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
+
+-(BOOL) INSERTSUPPORTSTAFFLIST:(NSString*) CLIENTCODE:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)MEMBERCODE :(NSString*) STAFFTYPE: (NSString*)LEVEL{
+    @synchronized ([Utitliy syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO SUPPORTSTAFF(CLIENTCODE,MEMBERCODE,STAFFTYPE,LEVELS,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@')",CLIENTCODE,MEMBERCODE,STAFFTYPE,LEVEL,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE];
+            
+            
+            const char *update_stmt = [INSERTSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
 
 
 @end

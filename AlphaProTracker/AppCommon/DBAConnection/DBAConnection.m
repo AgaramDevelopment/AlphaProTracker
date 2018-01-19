@@ -436,9 +436,91 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 }
 
 
+//TeamLIST
 
+-(NSMutableArray *)AssessmentTeamListDetail :(NSString *) membercode
+{
+    @synchronized ([Utitliy syncId])  {
+        int retVal;
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+        NSMutableArray *assessment = [[NSMutableArray alloc]init];
+        if(retVal ==0){
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT TM.TEAMCODE,TEAMNAME FROM TEAMMASTER TM INNER JOIN  SUPPORTSTAFFTEAMS  ON TM.TEAMCODE=SUPPORTSTAFFTEAMS.TEAMCODE LEFT JOIN SUPPORTSTAFF SUP ON SUP.MEMBERCODE=SUPPORTSTAFFTEAMS.CODE WHERE SUP.MEMBERCODE='%@'",membercode];
+            
+            NSLog(@"%@",query);
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSLog(@"Success");
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString *    setTeamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *    setTeamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                    
+                    [dic setObject:setTeamCode forKey:@"TeamCode"];
+                    [dic setObject:setTeamName forKey:@"TeamName"];
+                    
+                    [assessment addObject:dic];
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        NSLog(@"%@", assessment);
+        
+        return assessment;
+    }
+}
 
-
+-(NSMutableArray *)AssessmentPlayerListDetail :(NSString *) clientCode :(NSString *)userCode
+{
+    @synchronized ([Utitliy syncId])  {
+        int retVal;
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+        NSMutableArray *assessment = [[NSMutableArray alloc]init];
+        if(retVal ==0){
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT AIT.ATHLETECODE,    COALESCE(AMR.FIRSTNAME,'')||' '||COALESCE(AMR.LASTNAME,'') AS PLAYERNAME FROM ATHLETEINFOTEAM AIT INNER JOIN  ASSOCIATIONMEMBERREGISTRATION AMR ON AMR.ASSOCIATIONMEMBERID = AIT.ATHLETECODE AND AMR.CLIENTCODE=AIT.CLIENTCODE WHERE TEAMCODE IN (SELECT DISTINCT TEAMCODE FROM SUPPORTSTAFFTEAMS AIT WHERE AIT.CODE = '%@' AND AIT.CLIENTCODE = '%@') union SELECT AIT.ATHLETECODE,    COALESCE(AMR.FIRSTNAME,'')||' '||COALESCE(AMR.LASTNAME,'') AS PLAYERNAME FROM ATHLETEINFOTEAM AIT INNER JOIN  ASSOCIATIONMEMBERREGISTRATION AMR ON AMR.ASSOCIATIONMEMBERID = AIT.ATHLETECODE AND AMR.CLIENTCODE=AIT.CLIENTCODE WHERE TEAMCODE IN (SELECT DISTINCT TEAMCODE FROM ATHLETEINFOTEAM AIT WHERE AIT.ATHLETECODE = '%@' AND AIT.CLIENTCODE = '%@')",clientCode,userCode,clientCode,userCode];
+            
+            NSLog(@"%@",query);
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSLog(@"Success");
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString *    setTeamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *    setTeamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                    
+                    [dic setObject:setTeamCode forKey:@"ATHLETECODE"];
+                    [dic setObject:setTeamName forKey:@"PLAYERNAME"];
+                    
+                    [assessment addObject:dic];
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        NSLog(@"%@", assessment);
+        
+        return assessment;
+    }
+}
 
 
 @end
