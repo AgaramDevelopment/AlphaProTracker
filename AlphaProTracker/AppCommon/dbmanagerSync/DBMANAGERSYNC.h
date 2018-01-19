@@ -37,6 +37,9 @@
 @property (nonatomic,strong)  NSMutableArray *UserDetailsArray;
 @property (nonatomic,strong)  NSMutableArray *UserRolemapArray;
 @property (nonatomic,strong)  NSMutableArray *AthleteinfodetailsArray;
+@property (nonatomic,strong)  NSMutableArray * TeamListDetailArray;
+@property (nonatomic,strong)  NSMutableArray * SupportStaffArray;
+
 
   
 
@@ -74,6 +77,11 @@
 -(BOOL)DleteTestGoal;
 -(BOOL)InsertTestGoal:(NSString*)Clientcode: (NSString*)Testcode:(NSString*) Min:(NSString*) Max: (NSString*)Recordstatus:(NSString*) Createdby:(NSString*)Createddate:(NSString*)Modifiedby:(NSString*)Modifieddate;
 
+//TeamList
+
+-(BOOL) SELECTTEAM:(NSString *)TEAMCODE;
+//SupportStaff
+-(BOOL)SELECTSupportStaff:(NSString *)MemberCode;
 
 
 //fetch the image

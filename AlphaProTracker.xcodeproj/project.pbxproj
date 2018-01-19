@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0403207C2011CE1C0026D7C0 /* agapt_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0403207B2011CE1C0026D7C0 /* agapt_database.sqlite */; };
 		04055A891F711F170014DC5B /* InjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04055A881F711F170014DC5B /* InjuryVC.m */; };
 		04055A8E1F711F870014DC5B /* InjuryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04055A8C1F711F870014DC5B /* InjuryListCell.m */; };
 		04055A8F1F711F870014DC5B /* InjuryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04055A8D1F711F870014DC5B /* InjuryListCell.xib */; };
@@ -117,7 +118,6 @@
 		04DB752E1F7A5E64001CB710 /* IllnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DB752C1F7A5E64001CB710 /* IllnessCell.xib */; };
 		04DB75321F7A60BB001CB710 /* AddIllnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB75311F7A60BB001CB710 /* AddIllnessVC.m */; };
 		04DC33701FB08601001BF439 /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC336F1FB08601001BF439 /* EventRecord.m */; };
-		04DD71011F95CBA900E50329 /* agapt_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04DD71001F95CBA900E50329 /* agapt_database.sqlite */; };
 		04DEBCAF1F4BEB190070C540 /* CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DEBCAD1F4BEB190070C540 /* CustomNavigation.m */; };
 		04DEBCB01F4BEB190070C540 /* CustomNavigation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DEBCAE1F4BEB190070C540 /* CustomNavigation.xib */; };
 		04DEBCB31F4BED800070C540 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DEBCB21F4BED800070C540 /* WebService.m */; };
@@ -247,6 +247,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0403207B2011CE1C0026D7C0 /* agapt_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = agapt_database.sqlite; sourceTree = "<group>"; };
 		04055A871F711F170014DC5B /* InjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InjuryVC.h; path = Controllers/InjuryVC/InjuryVC.h; sourceTree = "<group>"; };
 		04055A881F711F170014DC5B /* InjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InjuryVC.m; path = Controllers/InjuryVC/InjuryVC.m; sourceTree = "<group>"; };
 		04055A8B1F711F870014DC5B /* InjuryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InjuryListCell.h; path = Subview/InjuryListCell/InjuryListCell.h; sourceTree = "<group>"; };
@@ -459,7 +460,6 @@
 		04DB75311F7A60BB001CB710 /* AddIllnessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddIllnessVC.m; path = Controllers/AddIllnessVc/AddIllnessVC.m; sourceTree = "<group>"; };
 		04DC336E1FB08601001BF439 /* EventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventRecord.h; path = Subview/EventRecord/EventRecord.h; sourceTree = "<group>"; };
 		04DC336F1FB08601001BF439 /* EventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventRecord.m; path = Subview/EventRecord/EventRecord.m; sourceTree = "<group>"; };
-		04DD71001F95CBA900E50329 /* agapt_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = agapt_database.sqlite; sourceTree = "<group>"; };
 		04DEBCAC1F4BEB190070C540 /* CustomNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavigation.h; path = Common/CustomNavigation/CustomNavigation.h; sourceTree = "<group>"; };
 		04DEBCAD1F4BEB190070C540 /* CustomNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavigation.m; path = Common/CustomNavigation/CustomNavigation.m; sourceTree = "<group>"; };
 		04DEBCAE1F4BEB190070C540 /* CustomNavigation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomNavigation.xib; path = Common/CustomNavigation/CustomNavigation.xib; sourceTree = "<group>"; };
@@ -829,7 +829,7 @@
 		043B23011F4B1B3800036604 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				04DD71001F95CBA900E50329 /* agapt_database.sqlite */,
+				0403207B2011CE1C0026D7C0 /* agapt_database.sqlite */,
 				043B23021F4B1B3800036604 /* main.m */,
 				04CA66431F6F8A51009F109E /* AlphaProTracker-Bridging-Header.h */,
 			);
@@ -2001,13 +2001,13 @@
 				04DB752E1F7A5E64001CB710 /* IllnessCell.xib in Resources */,
 				ACB567C51F62D7A800F1C45E /* TrainingLoadCell.xib in Resources */,
 				045A49FA1FA22192008C1630 /* redCircle.png in Resources */,
+				0403207C2011CE1C0026D7C0 /* agapt_database.sqlite in Resources */,
 				04DEBCB01F4BEB190070C540 /* CustomNavigation.xib in Resources */,
 				043B23111F4B1B3A00036604 /* LaunchScreen.storyboard in Resources */,
 				AC1BC8131F8665A60047AECC /* AAFunnel.js in Resources */,
 				ACBBA1A41F616942000F9DC9 /* SessionDetails.xib in Resources */,
 				ACBBA1861F614049000F9DC9 /* TrainingLoad.xib in Resources */,
 				045A49FB1FA22192008C1630 /* WeeklyCalendar.png in Resources */,
-				04DD71011F95CBA900E50329 /* agapt_database.sqlite in Resources */,
 				AC1BC8671F8665C20047AECC /* AAChartKit.podspec in Resources */,
 				CEEE8040200E3B6D00E33513 /* ExcierseDetailVC.xib in Resources */,
 				043B230E1F4B1B3900036604 /* Assets.xcassets in Resources */,

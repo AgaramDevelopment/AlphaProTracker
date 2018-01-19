@@ -31,6 +31,9 @@
     NSString * AssessmentCode;
     
     NSMutableArray *list;
+    
+    NSMutableArray * objTeamList;
+    
     NSMutableArray *aslist;
     NSMutableArray *asblist;
     NSMutableArray *asbblist;
@@ -80,9 +83,9 @@
     [super viewDidLoad];
     
     //[COMMON AddMenuView:self.view];
-     objWebService=[[WebService alloc]init];
-   // aslist = [[NSMutableArray alloc]init];
     
+    objWebService=[[WebService alloc]init];
+
     poplistArray = [[NSMutableArray alloc]init];
     addedArray = [[NSMutableArray alloc]init];
     [self setview];
@@ -115,11 +118,11 @@
     NSString *d=comp[0];
     
     self.callbl.text = d;
-   
     objAssessmentSideView.frame=[self setFramrToMenuViewWithXposition:-190];
     objAssessmentSideView.moduleStr =  self.ModuleCode;
-    //objAssessmentSideView.hidden=YES;
+    objAssessmentSideView.AssessmentTitleArray = aslist;
     self.assessmentView.hidden = YES;
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -148,25 +151,30 @@
     NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     NSString *userCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     //[Db AssessmentTestType:clientCode:userCode:self.ModuleCode];
-    
-    NSMutableArray * myNewDouble =  [Db AssessmentTestType:clientCode :userCode :self.ModuleCode ];
-    
-    NSLog(@"%@", myNewDouble);
     aslist = [[NSMutableArray alloc]init];
-    
-    assmntCodeArray = [[NSMutableArray alloc]init];
-    
-    for(int i=0;i<myNewDouble.count;i++)
-    {
-        NSString * name = [[myNewDouble valueForKey:@"AssessmentName"] objectAtIndex:i];
-        NSString * assesmentCode = [[myNewDouble valueForKey:@"AssessmentCode"] objectAtIndex:i];
-        NSLog(@"%@", name);
-        [aslist addObject:name];
-        [assmntCodeArray addObject:assesmentCode];
-    }
 
-    //[self.New sendActionsForControlEvents:UIControlEventTouchUpInside];
-    poplistArray = aslist;
+    aslist =  [Db AssessmentTestType:clientCode :userCode :self.ModuleCode ];
+    
+    
+    
+    
+//    NSLog(@"%@", myNewDouble);
+//    aslist = [[NSMutableArray alloc]init];
+//
+//    assmntCodeArray = [[NSMutableArray alloc]init];
+//
+//    for(int i=0;i<myNewDouble.count;i++)
+//    {
+//        NSString * name = [[myNewDouble valueForKey:@"AssessmentName"] objectAtIndex:i];
+//        NSString * assesmentCode = [[myNewDouble valueForKey:@"AssessmentCode"] objectAtIndex:i];
+//        NSLog(@"%@", name);
+//        //NSDictionary * assessmentDic = [[NSDictionary alloc]init];
+//        [aslist addObject:name];
+//        [assmntCodeArray addObject:assesmentCode];
+//    }
+//
+//    //[self.New sendActionsForControlEvents:UIControlEventTouchUpInside];
+//    poplistArray = aslist;
 }
 
 -(IBAction)didselectAssesment:(id)sender

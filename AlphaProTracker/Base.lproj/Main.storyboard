@@ -14582,7 +14582,7 @@ portion Size</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="MONTH">
-                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="MonthAction:" destination="gr9-zK-LSX" eventType="touchUpInside" id="Rm5-XR-eIU"/>
@@ -14595,7 +14595,7 @@ portion Size</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="WEEK">
-                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="WeekAction:" destination="gr9-zK-LSX" eventType="touchUpInside" id="u3I-1N-oCE"/>
@@ -14608,7 +14608,7 @@ portion Size</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="DAY">
-                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="DayAction:" destination="gr9-zK-LSX" eventType="touchUpInside" id="bId-Ry-0Kx"/>
@@ -14687,7 +14687,7 @@ portion Size</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="4WO-uH-NJX" secondAttribute="trailing" id="2kI-bi-OdH"/>
                                     <constraint firstItem="9lP-lt-6Mo" firstAttribute="leading" secondItem="vsJ-cO-Paq" secondAttribute="leading" constant="5" id="3ft-AX-zqT"/>

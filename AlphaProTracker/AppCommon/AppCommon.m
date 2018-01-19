@@ -759,6 +759,8 @@ AppCommon *sharedCommon = nil;
                 NSMutableArray * lstTestcGoal =[[NSMutableArray alloc]init];
                 NSMutableArray * LstUserrolemap =[[NSMutableArray alloc]init];
                 NSMutableArray * LstUserdetail =[[NSMutableArray alloc]init];
+                NSMutableArray * lstTeamListArray = [[NSMutableArray alloc]init];
+                NSMutableArray * lstSupportStaff = [[NSMutableArray alloc]init];
 
                 lstAssessment =[responseObject valueForKey:@"LstAssessment"];
                 lstSession =[responseObject valueForKey:@"LstSession"];
@@ -784,6 +786,8 @@ AppCommon *sharedCommon = nil;
                 lstatheleteinfodetaul =[responseObject valueForKey:@"LstAthleteinfodetails"];
                 lstgameattributemetadata =[responseObject valueForKey:@"LstGameattributemetadata"];
                 lstTestcGoal =[responseObject valueForKey:@"LstTestscgoal"];
+                lstTeamListArray = [responseObject valueForKey:@"LstTeam"];
+                lstSupportStaff = [responseObject valueForKey:@"LstSupportStaff"];
 
                 
                 //NSMutableArray * listAssesmnt =[[NSMutableArray alloc]init];
@@ -1357,9 +1361,54 @@ AppCommon *sharedCommon = nil;
                     
                 }
 
+                for(int i= 0;i<lstTeamListArray.count;i++)
+                {
+                    
+                    NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+                    arr1 = [lstTeamListArray objectAtIndex:i];
+                    
+                    NSString * Clientcode =[arr1 valueForKey:@"ClientCode"];
+                    NSString * Teamcode =[arr1 valueForKey:@"TeamCode"];
+                    NSString * TeamName =[arr1 valueForKey:@"TeamName"];
+                    NSString * TeamShortName =[arr1 valueForKey:@"TeamShortName"];
+                    NSString * Game =[arr1 valueForKey:@"Game"];
+                    NSString * RecordStatus =[arr1 valueForKey:@"RecordStatus"];
+                    NSString * CreatedBy =[arr1 valueForKey:@"CreatedBy"];
+                    NSString * CreatedDate =[arr1 valueForKey:@"CreatedDate"];
+                    
+                    NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Teamcode,TeamName,TeamShortName,Game,RecordStatus,CreatedBy,CreatedDate, nil];
+                    
+                    DBMANAGERSYNC *Dbm = [[DBMANAGERSYNC alloc]init];
+                    Dbm.TeamListDetailArray = Values;
+                    [Dbm SELECTTEAM:Teamcode];
+                    
+                }
+
+                for(int i= 0;i<lstSupportStaff.count;i++)
+                {
+                    
+                    NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+                    arr1 = [lstSupportStaff objectAtIndex:i];
+                    
+                    NSString * Clientcode =[arr1 valueForKey:@"Clientcode"];
+                    NSString * Membercode =[arr1 valueForKey:@"MemberCode"];
+                    NSString * StaffType =[arr1 valueForKey:@"StaffType"];
+                    NSString * level =[arr1 valueForKey:@"Levels"];
+                    NSString * recordStatus =[arr1 valueForKey:@"Recordstatus"];
+                    NSString * CreateBy =[arr1 valueForKey:@"Createdby"];
+                    NSString * CreatedDate =[arr1 valueForKey:@"Createddate"];
+                    NSString * ModifiedBy =[arr1 valueForKey:@"Modifiedby"];
+                    NSString * ModifiedDate =[arr1 valueForKey:@"Modifieddate"];
+                    
+                    NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Membercode,StaffType,level,recordStatus,CreateBy,CreatedDate,ModifiedBy,ModifiedDate, nil];
+                    
+                    DBMANAGERSYNC *Dbm = [[DBMANAGERSYNC alloc]init];
+                    Dbm.SupportStaffArray = Values;
+                    [Dbm SELECTSupportStaff:Membercode];
+                    
+                }
+
                 
-
-
 
             }
             
