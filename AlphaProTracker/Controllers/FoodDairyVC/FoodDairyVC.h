@@ -15,7 +15,6 @@
 @property (nonatomic,strong) IBOutlet UIView *playerview;
 @property (nonatomic,strong) IBOutlet UIView *daterview;
 @property (nonatomic,strong) IBOutlet FoodDairy * objFood;
-@property (strong,nonatomic) IBOutlet UIView * view_datepicker;
 @property (strong,nonatomic)  NSString * check;
 
 @end

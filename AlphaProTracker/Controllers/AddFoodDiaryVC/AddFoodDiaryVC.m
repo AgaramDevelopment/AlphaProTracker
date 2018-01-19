@@ -31,10 +31,13 @@
 @property (nonatomic,strong) IBOutlet UIView * mealsview ;
 @property (nonatomic,strong) IBOutlet UIView * foodsizeview ;
 @property (nonatomic,strong) IBOutlet UIView * fooddetailiew ;
+@property (strong, nonatomic) IBOutlet UITextField *datelbl;
+@property (strong, nonatomic) IBOutlet UITextField *starttimelbl;
+@property (strong, nonatomic) IBOutlet UITextField *endTimelbl;
 
-@property (nonatomic,strong) IBOutlet UILabel * datelbl ;
-@property (nonatomic,strong) IBOutlet UILabel * starttimelbl ;
-@property (nonatomic,strong) IBOutlet UILabel * endTimelbl ;
+//@property (nonatomic,strong) IBOutlet UILabel * datelbl ;
+//@property (nonatomic,strong) IBOutlet UILabel * starttimelbl ;
+//@property (nonatomic,strong) IBOutlet UILabel * endTimelbl ;
 @property (nonatomic,strong) IBOutlet UILabel * mealslbl ;
 @property (nonatomic,strong) IBOutlet UITextView * foodsizeTxv  ;
 @property (nonatomic,strong) IBOutlet UITextView * fooddetailTxv  ;
@@ -62,13 +65,42 @@
     [self customnavigationmethod];
     [self designViewMethod];
     objWebservice =[[WebService alloc]init];
-    self.view_datepicker.hidden=YES;
+
     self.popviewTbl.hidden=YES;
     RoleCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
 
+    //Veeresh
+    datePicker = [[UIDatePicker alloc] init];
+
+    self.datelbl.tintColor = [UIColor clearColor];
+    self.starttimelbl.tintColor = [UIColor clearColor];
+    self.endTimelbl.tintColor = [UIColor clearColor];
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    
+    //create left side empty space so that done button set on right side
+    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+    //    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style: UIBarButtonItemStyleDone target:self action:@selector(doneButtonAction)];
+    NSMutableArray *toolbarArray = [NSMutableArray new];
+    [toolbarArray addObject:cancelBtn];
+    [toolbarArray addObject:flexSpace];
+    [toolbarArray addObject:doneBtn];
+    
+    [toolbar setItems:toolbarArray animated:false];
+    [toolbar sizeToFit];
+    
+    //setting toolbar as inputAccessoryView
+    self.datelbl.inputAccessoryView = toolbar;
+    self.starttimelbl.inputAccessoryView = toolbar;
+    self.endTimelbl.inputAccessoryView = toolbar;
+    
 
     if([self.key isEqualToString:@"add"])
     {
@@ -102,6 +134,7 @@
         self.dateBtn.userInteractionEnabled =NO;
         self.starttimeBtn.userInteractionEnabled=NO;
         self.endtimeBtn.userInteractionEnabled=NO;
+        self.scrollView.scrollEnabled = NO;
     }
     else{
         if(_Isupdate ==YES)
@@ -109,11 +142,13 @@
             self.saveBtn.hidden=YES;
             self.deleteBtn.hidden=NO;
             self.updateBtn.hidden=NO;
+            self.scrollView.scrollEnabled = YES;
         }
         else{
             self.saveBtn.hidden=NO;
             self.deleteBtn.hidden=YES;
             self.updateBtn.hidden=YES;
+            self.scrollView.scrollEnabled = YES;
         }
         
         self.mealsBtn.userInteractionEnabled=YES;
@@ -143,6 +178,21 @@
     
 }
 
+-(void) doneButtonAction {
+    [self.view endEditing:true];
+}
+
+-(void) cancelButtonAction {
+    if(isDate==YES) {
+        [self.datelbl resignFirstResponder];
+    } else if(isStartTime==YES) {
+        [self.starttimelbl resignFirstResponder];
+    } else {
+        [self.endTimelbl resignFirstResponder];
+    }
+    [self.view endEditing:true];
+}
+
 -(void)designViewMethod
 {
     self.dateview.layer.borderColor=[UIColor whiteColor].CGColor;
@@ -166,55 +216,72 @@
 }
 -(void)DisplaydatePicker
 {
-    if(datePicker!= nil)
-    {
-        [datePicker removeFromSuperview];
-        
-    }
-    self.view_datepicker.hidden=NO;
-    //isStartDate =YES;
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //   2016-06-25 12:00:00
-    [dateFormat setDateFormat:@"MM-dd-yyyy"];
-    
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-180,self.view.frame.size.width,100)];
-    
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [datePicker setLocale:locale];
-    
-    // [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     datePicker.datePickerMode = UIDatePickerModeDate;
-    
+    self.datelbl.inputView = datePicker;
+    [datePicker addTarget:self action:@selector(datePickerDateValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.datelbl addTarget:self action:@selector(datePickerDateValueChanged:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.datelbl becomeFirstResponder];
+
     [datePicker reloadInputViews];
-    [self.view_datepicker addSubview:datePicker];
-    
 }
--(void)DisplayTime
-{
-    if(datePicker!= nil)
-    {
-        [datePicker removeFromSuperview];
-        
-    }
-    self.view_datepicker.hidden=NO;
-    //isStartDate =YES;
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+
+- (void) datePickerDateValueChanged:(UIDatePicker*)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
-    [dateFormat setDateFormat:@"hh:mm a"];
-    
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-180,self.view.frame.size.width,100)];
-    
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
+    self.datelbl.text = [dateFormatter stringFromDate:[datePicker date]];
     
-    // [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    NSDate *today = [NSDate date];
+    result = [today compare:datePicker.date]; // comparing two dates
+}
+
+
+-(void)DisplayStartTime
+{
     datePicker.datePickerMode = UIDatePickerModeTime;
     
+    self.starttimelbl.inputView = datePicker;
+    [datePicker addTarget:self action:@selector(datePickerStartTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.starttimelbl addTarget:self action:@selector(datePickerStartTimeValueChanged:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.starttimelbl becomeFirstResponder];
+    
     [datePicker reloadInputViews];
-    [self.view_datepicker addSubview:datePicker];
 }
+
+- (void) datePickerStartTimeValueChanged:(UIDatePicker*)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [datePicker setLocale:locale];
+    
+    self.starttimelbl.text = [dateFormatter stringFromDate:[datePicker date]];
+}
+
+-(void)DisplayEndTime
+{
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    
+    self.endTimelbl.inputView = datePicker;
+    [datePicker addTarget:self action:@selector(datePickerEndTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.starttimelbl addTarget:self action:@selector(datePickerEndTimeValueChanged:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.endTimelbl becomeFirstResponder];
+    
+    [datePicker reloadInputViews];
+}
+
+- (void) datePickerEndTimeValueChanged:(UIDatePicker*)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [datePicker setLocale:locale];
+    
+    self.endTimelbl.text = [dateFormatter stringFromDate:[datePicker date]];
+}
+
 -(IBAction)showSelecteddate:(id)sender{
     
     if(isDate==YES)
@@ -233,8 +300,6 @@
         
         
         self.datelbl.text=[dateFormat stringFromDate:datePicker.date];
-        
-        
         
         
         //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
@@ -257,7 +322,7 @@
         
         //[datePicker setMaximumDate:newDate1];
         
-
+    
         if(isStartTime==YES)
         {
             self.starttimelbl.text=[dateFormat stringFromDate:datePicker.date];
@@ -269,7 +334,6 @@
         
     }
     
-    [self.view_datepicker setHidden:YES];
     
 }
 
@@ -278,19 +342,20 @@
 {
     isDate =YES;
     [self DisplaydatePicker];
+    
 }
 
 -(IBAction)didClickStartTime:(id)sender
 {
     isDate =NO;
     isStartTime =YES;
-    [self DisplayTime];
+    [self DisplayStartTime];
 }
 -(IBAction)didclickEndDatepicker:(id)sender
 {
     isDate =NO;
     isStartTime =NO;
-    [self DisplayTime];
+    [self DisplayEndTime];
 }
 -(IBAction)didclickSaveBtn:(id)sender
 {

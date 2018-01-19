@@ -47,7 +47,9 @@
 @property (nonatomic,strong) IBOutlet UILabel * gameLbl;
 @property (nonatomic,strong) IBOutlet UILabel * TeamLbl;
 @property (nonatomic,strong) IBOutlet UILabel * playerLbl;
-@property (nonatomic,strong) IBOutlet UILabel * datelbl;
+@property (strong, nonatomic) IBOutlet UITextField *datelbl;
+
+//@property (nonatomic,strong) IBOutlet UILabel * datelbl;
 @property (nonatomic,strong) IBOutlet UIView * mainGameView;
 @property (nonatomic,strong) IBOutlet UIView * mainTeamView;
 @property (nonatomic,strong) IBOutlet UIView * mainPlayerView;
@@ -89,7 +91,6 @@
     
     self.popviewTbl.hidden =YES;
     
-    self.view_datepicker.hidden=YES;
 
     
     RoleCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
@@ -98,7 +99,30 @@
     
     userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
+    //Veeresh
+    datePicker = [[UIDatePicker alloc] init];
     
+    self.datelbl.tintColor = [UIColor clearColor];
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    
+    //create left side empty space so that done button set on right side
+    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+    //    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style: UIBarButtonItemStyleDone target:self action:@selector(doneButtonAction)];
+    NSMutableArray *toolbarArray = [NSMutableArray new];
+    [toolbarArray addObject:cancelBtn];
+    [toolbarArray addObject:flexSpace];
+    [toolbarArray addObject:doneBtn];
+    
+    [toolbar setItems:toolbarArray animated:false];
+    [toolbar sizeToFit];
+    
+    //setting toolbar as inputAccessoryView
+    self.datelbl.inputAccessoryView = toolbar;
 
     // Do any additional setup after loading the view.
 }
@@ -141,8 +165,6 @@
         NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
         [dfs setDateFormat:@"yyyy-MM-dd"];
         NSString * endDateStr = [dfs stringFromDate:sevenDays];
-        
-        
     }
 
     [self startFetchMetaDataService:cliendcode :userref :RoleCode];
@@ -185,6 +207,25 @@
 //    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
+
+-(void) doneButtonAction {
+//    [self.datelbl resignFirstResponder];
+//    [self.view endEditing:true];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.datelbl resignFirstResponder];
+        [self.view endEditing:true];
+        [self validation];
+    });
+}
+
+-(void) cancelButtonAction {
+    
+    [self.datelbl resignFirstResponder];
+    [self.view endEditing:true];
+}
+
+
 -(IBAction)didClickBackBtn:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -338,7 +379,7 @@
 {
 //    isGame=NO;
 //    isTeam =NO;
-//    isPlayer=NO;
+//    isPlayer=NO;rt
 //    isShowDetails=NO;
 //    isDate =YES;
     [self DisplaydatePicker];
@@ -346,29 +387,23 @@
 
 -(void)DisplaydatePicker
 {
-    if(datePicker!= nil)
-    {
-        [datePicker removeFromSuperview];
-        
-    }
-    self.view_datepicker.hidden=NO;
-    //isStartDate =YES;
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //   2016-06-25 12:00:00
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.maindateView.frame.origin.y-160,self.view.frame.size.width,100)];
-    
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [datePicker setLocale:locale];
-    
-    // [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     datePicker.datePickerMode = UIDatePickerModeDate;
+    self.datelbl.inputView = datePicker;
+    [datePicker addTarget:self action:@selector(datePickerDateValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.datelbl addTarget:self action:@selector(datePickerDateValueChanged:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.datelbl becomeFirstResponder];
     
     [datePicker reloadInputViews];
-    [self.view_datepicker addSubview:datePicker];
-    
+}
+
+
+- (void) datePickerDateValueChanged:(UIDatePicker*)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [datePicker setLocale:locale];
+    self.datelbl.text = [dateFormatter stringFromDate:[datePicker date]];
 }
 
 -(IBAction)showSelecteddate:(id)sender{
@@ -389,8 +424,7 @@
         
         self.datelbl.text=[dateFormat stringFromDate:datePicker.date];
     
-        [self.view_datepicker setHidden:YES];
-    [self validation];
+//    [self validation];
      //[self startFetchFoodDetailsService:selectPlayerCode :cliendcode :self.datelbl.text];
     
 }
@@ -533,6 +567,7 @@
                 isPlayer =NO;
                 isTeam =NO;
                 isGame =NO;
+                
                 [self.fooddetailTbl reloadData];
             }
             
