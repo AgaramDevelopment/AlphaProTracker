@@ -205,4 +205,5 @@
 
 #define deleteRowKey                    @"DELETEROW"
 
+#define OPENPLAYEREXERCISEDETAILS                    @"OPENPLAYEREXERCISEDETAILS"
 
