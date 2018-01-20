@@ -20,8 +20,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     self.view.backgroundColor = [UIColor clearColor];
     
     //Load View based on Item.
@@ -43,14 +41,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    //    self.isImage = YES;
-    //    self.isVideo = NO;
-    //    self.isPDF = NO;
 }
 
 - (void)loadImageView {
@@ -78,15 +68,16 @@
     self.playerImageView.hidden = YES;
     self.webView.hidden = YES;
     
-    [self.avPlayer seekToTime:CMTimeMake(0, 1)];
-    [self.avPlayer pause];
-    [self.avPlayerViewController.view removeFromSuperview];
-    self.avPlayer = NULL;
-    
+    if(self.isVideo) {
+        [self.avPlayer seekToTime:CMTimeMake(0, 1)];
+        [self.avPlayer pause];
+        [self.avPlayerViewController.view removeFromSuperview];
+        self.avPlayer = NULL;
+    }
     self.videoView.hidden = YES;
-    //    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popViewControllerAnimated:YES];
     
+    //   [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)loadWebView {
