@@ -17,6 +17,7 @@
 #import "AssignPlayerVC.h"
 #import <sqlite3.h>
 #import "ExcersizeViewController.h"
+#import "MBProgressHUD.h"
 
 @implementation AppCommon
 AppCommon *sharedCommon = nil;
@@ -234,6 +235,7 @@ AppCommon *sharedCommon = nil;
                               @[@"INJURY"],
                               @[@"FOOD DIARY"],
                               @[@"PROFILE"],
+                              @[@"PROGRAM"],
                               @[@"LOGOUT"]]
                           ];
             isPlayer=YES;
@@ -388,8 +390,7 @@ AppCommon *sharedCommon = nil;
     cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
     cell.backgroundColor =[UIColor colorWithRed:(17/255.0f) green:(24/255.0f) blue:(67/255.0f) alpha:1.0];
     cell.textLabel.textColor =[UIColor whiteColor];
-    //[cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
-    cell.textLabel.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size: (IS_IPAD ? 15 : 14)]];
     return cell;
 }
 
@@ -404,7 +405,25 @@ AppCommon *sharedCommon = nil;
     menuview.hidden=NO;
     if(isPlayer==YES)
     {
-//        [@"HomeVC",@"Planner",@"WorkLoadVC",@"Illness",@"injury",@"FoodDairyVC",@"PlayerVC"]
+        NSArray* temp = @[@"HomeVC",@"Planner",@"WorkLoadVC",@"Illness",@"injury",@"FoodDairyVC",@"PlayerVC"];
+        
+        if (indexPath.row == 7) {
+            ExcersizeViewController* VC = [ExcersizeViewController new];
+            [appDel.navigationController pushViewController:VC animated:YES];
+
+        }
+        else if(indexPath.row == 8)
+        {
+            [self actionLogOut];
+        }
+        else{
+            [self redirectSelectview:[temp objectAtIndex:indexPath.row]];
+
+        }
+        
+    }
+    else
+    {
         
         if(indexPath.row==0)
         {
@@ -415,140 +434,56 @@ AppCommon *sharedCommon = nil;
         
         else if(indexPath.row ==1)
         {
-//            [self redirectSelectview:@"Planner"];
-            ExcersizeViewController* VC = [ExcersizeViewController new];
-            [appDel.navigationController pushViewController:VC animated:YES];
-
+            [self redirectSelectview:@"Planner"];
             
         }
         
         else if(indexPath.row ==2)
         {
-            [self redirectSelectview:@"WorkLoadVC"];
+            // [self redirectSelectview:@"DashBoardVC"];
             
         }
         else if (indexPath.row == 3)
         {
-            [self redirectSelectview:@"Illness"];
+            //[self redirectSelectview:@"DashBoardVC"];
         }
         else if (indexPath.row == 4)
         {
-            [self redirectSelectview:@"injury"];
+            //[self redirectSelectview:@"DashBoardVC"];
         }
         else if (indexPath.row == 5)
         {
-            [self redirectSelectview:@"FoodDairyVC"];
+            [self redirectSelectview:@"WorkLoadVC"];
         }
         else if (indexPath.row == 6)
         {
-            [self redirectSelectview:@"PlayerVC"];
+            [self redirectSelectview:@"FoodDairyVC"];
         }
         else if (indexPath.row ==7)
         {
-            UIAlertView *objAlter =[[UIAlertView alloc]initWithTitle:@"" message:@"Do you want to Logout?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [objAlter show];
-
+            [self redirectSelectview:@"ProfileVC"];
             
         }
+        else if (indexPath.row ==8)
+        {
+            [self synDataMethod];
+        }
+        else if (indexPath.row ==9)
+        {
+            [self redirectSelectview:@"Illness"];
+        }
+        else if (indexPath.row ==10)
+        {
+            [self redirectSelectview:@"injury"];
+        }
         
-    }
-    else
-    {
-        
-    if(indexPath.row==0)
-    {
-        
-        [self redirectSelectview:@"HomeVC"];
-
-    }
-    
-    else if(indexPath.row ==1)
-    {
-        [self redirectSelectview:@"Planner"];
-
-    }
-    
-   else if(indexPath.row ==2)
-   {
-      // [self redirectSelectview:@"DashBoardVC"];
-
-   }
-    else if (indexPath.row == 3)
-    {
-        //[self redirectSelectview:@"DashBoardVC"];
-    }
-    else if (indexPath.row == 4)
-    {
-        //[self redirectSelectview:@"DashBoardVC"];
-    }
-    else if (indexPath.row == 5)
-    {
-        [self redirectSelectview:@"WorkLoadVC"];
-    }
-    else if (indexPath.row == 6)
-    {
-        [self redirectSelectview:@"FoodDairyVC"];
-    }
-    else if (indexPath.row ==7)
-    {
-        [self redirectSelectview:@"ProfileVC"];
-
-    }
-    else if (indexPath.row ==8)
-    {
-        [self synDataMethod];
-    }
-    else if (indexPath.row ==9)
-    {
-        [self redirectSelectview:@"Illness"];
-    }
-    else if (indexPath.row ==10)
-    {
-        [self redirectSelectview:@"injury"];
-    }
-    
-    else if(indexPath.row ==11)
-    {
-        
-        UIAlertView *objAlter =[[UIAlertView alloc]initWithTitle:@"" message:@"Do you want to Logout?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-        [objAlter show];
-        
-        
-
-    }
+        else if(indexPath.row ==11)
+        {
+            [self actionLogOut];
+        }
     }
    
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    
-    if (buttonIndex == [alertView cancelButtonIndex])
-    {
-        alertView.hidden=YES;
-    }
-    else
-    {
-    
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"UserCode"];
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ClientCode"];
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Userreferencecode"];
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Username"];
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"PhotoPath"];
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RoleCode"];
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RoleName"];
-        
-        
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self redirectSelectview:@"LoginVC"];
-    }
-}
-
 
 - (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -664,14 +599,8 @@ AppCommon *sharedCommon = nil;
 
 -(void)redirectSelectview:(NSString *)selectViewcontroller
 {
-    if ([selectViewcontroller isEqualToString:@"LoginVC"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    
     UIViewController *initViewController = [appDel.storyBoard instantiateViewControllerWithIdentifier:selectViewcontroller];
     [appDel.navigationController pushViewController:initViewController animated:YES];
-    
 }
 
 #pragma mark - Actions
@@ -1221,10 +1150,6 @@ AppCommon *sharedCommon = nil;
                     NSString * Modifiedby =[arr1 valueForKey:@"Modifiedby"];
                     NSString * Modifieddate =[arr1 valueForKey:@"Modifieddate"];
                     
-                    
-    
-                    
-                    
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Rolecode,Role,Ischecked,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     DBMANAGERSYNC *Dbm = [[DBMANAGERSYNC alloc]init];
                     Dbm.RoleDetailsArray = Values;
@@ -1440,4 +1365,38 @@ AppCommon *sharedCommon = nil;
     [appDel.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
+-(void)actionLogOut
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:APP_NAME message:@"Are you sure, you want to Logout?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction* actionYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+        
+        if ([appDel.window.rootViewController isKindOfClass: [LoginVC class]]) {
+            [appDel.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [self redirectSelectview:@"LoginVC"];
+        }
+        
+    }];
+
+    [alert addAction:actionYes];
+    [alert addAction:actionNo];
+    [appDel.window.rootViewController presentViewController:alert animated:YES completion:nil];
+
+}
++(void)showLoading
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
+    [hud setMode:MBProgressHUDModeIndeterminate];
+    hud.label.text = @"Please wait";
+    [hud setBackgroundColor:[UIColor clearColor]];
+}
++(void)hideLoading
+{
+    [MBProgressHUD hideHUDForView:appDel.window animated:YES];
+}
 @end
+

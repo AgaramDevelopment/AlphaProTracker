@@ -67,6 +67,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+#pragma mark - UICollectionView Delegate 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -168,7 +169,10 @@
      "UserReferenceCode":"AMR0000011"
      }
      */
+    if(![COMMON isInternetReachable])
+        return;
     
+    [AppCommon showLoading];
     NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",AllPlayerProgramKey]];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -190,13 +194,14 @@
                 [self.excersizeCollection reloadData];
             });
         }
-        
-        [COMMON RemoveLoadingIcon];
-        [self.view setUserInteractionEnabled:YES];
+        [AppCommon hideLoading];
+//        [COMMON RemoveLoadingIcon];
+//        [self.view setUserInteractionEnabled:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
-        [COMMON webServiceFailureError];
-        [self.view setUserInteractionEnabled:YES];
+//        [COMMON webServiceFailureError];
+//        [self.view setUserInteractionEnabled:YES];
+        [AppCommon hideLoading];
         
     }];
     

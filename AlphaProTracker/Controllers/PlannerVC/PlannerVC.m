@@ -140,8 +140,8 @@ typedef enum : NSUInteger
     
     self.Tabbar.hidden = YES;
     
-//    [self EventTypeWebservice :usercode:cliendcode:userref];
-    [self MonthAction:nil];
+    [self EventTypeWebservice :usercode:cliendcode:userref];
+//    [self MonthAction:nil];
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
@@ -364,9 +364,8 @@ typedef enum : NSUInteger
             [self.navigationController pushViewController:objPlannerlist animated:YES];
         }
         else{
-        NSLog(@"newDate is less");
-        UIAlertView * objAlt =[[UIAlertView alloc]initWithTitle:@"Planner" message:@"Past date not allowed!!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [objAlt show];
+            
+            [AppCommon showAlertWithMessage:@"Past date not allowed!!"];
         }
     }
     else
@@ -503,7 +502,6 @@ typedef enum : NSUInteger
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
         manager.requestSerializer = requestSerializer;
         
         
