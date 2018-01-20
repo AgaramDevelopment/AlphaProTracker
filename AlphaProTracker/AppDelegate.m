@@ -24,9 +24,9 @@
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
     
-//    UIViewController * initViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"HomeVC" : @"LoginVC")];
+    UIViewController * initViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"HomeVC" : @"LoginVC")];
     
-    ExcersizeDetailItemVC *initViewController = [ExcersizeDetailItemVC new];
+    //ExcersizeDetailItemVC *initViewController = [ExcersizeDetailItemVC new];
     
     
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

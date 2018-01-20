@@ -142,6 +142,10 @@
 		04F1B95E1F94843C00EFA4A9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */; };
 		04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */; };
 		04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */; };
+		189663CB2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189663C62012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.xib */; };
+		189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189663C82012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib */; };
+		189663CD2012FE3F00A8BFE1 /* ExcerciseParameterTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189663C92012FE3F00A8BFE1 /* ExcerciseParameterTVC.m */; };
+		189663CE2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189663CA2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.m */; };
 		18A982B2200F0F900071727E /* MultiInjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A982B1200F0F900071727E /* MultiInjuryVC.m */; };
 		18B97984200DCE6600B94DD4 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97983200DCE6600B94DD4 /* ProfileVC.m */; };
 		18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97985200DCEC200B94DD4 /* HomeVCCell.m */; };
@@ -149,10 +153,6 @@
 		18B97994200DD49E00B94DD4 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97992200DD49E00B94DD4 /* ParallaxHeaderView.m */; };
 		18B97999200E129E00B94DD4 /* PopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97998200E129E00B94DD4 /* PopViewCell.m */; };
 		18B9799D200E158500B94DD4 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B9799C200E158500B94DD4 /* StepSlider.m */; };
-		18E6632D20123A3A000BD323 /* ExcerciseAttachmentCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E6632720123A39000BD323 /* ExcerciseAttachmentCVC.m */; };
-		18E6632E20123A3A000BD323 /* ExcerciseAttachmentCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E6632820123A3A000BD323 /* ExcerciseAttachmentCVC.xib */; };
-		18E6632F20123A3A000BD323 /* ExcerciseParameterTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E6632920123A3A000BD323 /* ExcerciseParameterTVC.m */; };
-		18E6633020123A3A000BD323 /* ExcerciseParameterTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E6632B20123A3A000BD323 /* ExcerciseParameterTVC.xib */; };
 		AC1BC8041F8663020047AECC /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FC1F8663020047AECC /* AAChartModel.m */; };
 		AC1BC8051F8663020047AECC /* AAChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FE1F8663020047AECC /* AAChartView.m */; };
 		AC1BC8061F8663020047AECC /* AAJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC8011F8663020047AECC /* AAJsonConverter.m */; };
@@ -513,6 +513,12 @@
 		04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBMANAGERSYNC.m; path = AppCommon/dbmanagerSync/DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		04FBEE721F7E7D7E007C5BF8 /* PieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieChartView.h; path = Helper/PieChart/PieChartView.h; sourceTree = "<group>"; };
 		04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PieChartView.m; path = Helper/PieChart/PieChartView.m; sourceTree = "<group>"; };
+		189663C52012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseAttachmentCVC.h; path = Subview/ExcirsizeDetails/ExcerciseAttachmentCVC.h; sourceTree = "<group>"; };
+		189663C62012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExcerciseAttachmentCVC.xib; path = Subview/ExcirsizeDetails/ExcerciseAttachmentCVC.xib; sourceTree = "<group>"; };
+		189663C72012FE3F00A8BFE1 /* ExcerciseParameterTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseParameterTVC.h; path = Subview/ExcirsizeDetails/ExcerciseParameterTVC.h; sourceTree = "<group>"; };
+		189663C82012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExcerciseParameterTVC.xib; path = Subview/ExcirsizeDetails/ExcerciseParameterTVC.xib; sourceTree = "<group>"; };
+		189663C92012FE3F00A8BFE1 /* ExcerciseParameterTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExcerciseParameterTVC.m; path = Subview/ExcirsizeDetails/ExcerciseParameterTVC.m; sourceTree = "<group>"; };
+		189663CA2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExcerciseAttachmentCVC.m; path = Subview/ExcirsizeDetails/ExcerciseAttachmentCVC.m; sourceTree = "<group>"; };
 		18A982B0200F0F900071727E /* MultiInjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiInjuryVC.h; path = Controllers/MultiInjuryVC/MultiInjuryVC.h; sourceTree = "<group>"; };
 		18A982B1200F0F900071727E /* MultiInjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiInjuryVC.m; path = Controllers/MultiInjuryVC/MultiInjuryVC.m; sourceTree = "<group>"; };
 		18B97983200DCE6600B94DD4 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileVC.m; path = Controllers/ProfileVC/ProfileVC.m; sourceTree = "<group>"; };
@@ -525,12 +531,6 @@
 		18B97998200E129E00B94DD4 /* PopViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PopViewCell.m; path = Subview/PopCell/PopViewCell.m; sourceTree = "<group>"; };
 		18B9799B200E158500B94DD4 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepSlider.h; path = Helper/slider/StepSlider.h; sourceTree = "<group>"; };
 		18B9799C200E158500B94DD4 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepSlider.m; path = Helper/slider/StepSlider.m; sourceTree = "<group>"; };
-		18E6632720123A39000BD323 /* ExcerciseAttachmentCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExcerciseAttachmentCVC.m; path = AlphaProTracker/Subview/EcersizeDetail/ExcerciseAttachmentCVC.m; sourceTree = SOURCE_ROOT; };
-		18E6632820123A3A000BD323 /* ExcerciseAttachmentCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExcerciseAttachmentCVC.xib; path = AlphaProTracker/Subview/EcersizeDetail/ExcerciseAttachmentCVC.xib; sourceTree = SOURCE_ROOT; };
-		18E6632920123A3A000BD323 /* ExcerciseParameterTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExcerciseParameterTVC.m; path = AlphaProTracker/Subview/EcersizeDetail/ExcerciseParameterTVC.m; sourceTree = SOURCE_ROOT; };
-		18E6632A20123A3A000BD323 /* ExcerciseParameterTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseParameterTVC.h; path = AlphaProTracker/Subview/EcersizeDetail/ExcerciseParameterTVC.h; sourceTree = SOURCE_ROOT; };
-		18E6632B20123A3A000BD323 /* ExcerciseParameterTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExcerciseParameterTVC.xib; path = AlphaProTracker/Subview/EcersizeDetail/ExcerciseParameterTVC.xib; sourceTree = SOURCE_ROOT; };
-		18E6632C20123A3A000BD323 /* ExcerciseAttachmentCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseAttachmentCVC.h; path = AlphaProTracker/Subview/EcersizeDetail/ExcerciseAttachmentCVC.h; sourceTree = SOURCE_ROOT; };
 		202A050CB55674369E3B256E /* Pods_AlphaProTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaProTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38C2CA4AE7E2357ED13ADAD7 /* Pods-AlphaProTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaProTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker.release.xcconfig"; sourceTree = "<group>"; };
 		AC1BC7FA1F8663020047AECC /* AAChartKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartKit.h; path = Helper/AAChart/AAChartConfiger/AAChartKit.h; sourceTree = "<group>"; };
@@ -879,6 +879,7 @@
 		043B23191F4B1BC700036604 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
+				189663C42012FE1D00A8BFE1 /* ExcirsizeDetails */,
 				04F11D95200F70D0004A4218 /* MultiInjurylistCell */,
 				CEEE8031200E20E200E33513 /* ExcersizeCollectionCell */,
 				18B97996200E125000B94DD4 /* PopviewCell */,
@@ -1400,6 +1401,19 @@
 			name = PieChart;
 			sourceTree = "<group>";
 		};
+		189663C42012FE1D00A8BFE1 /* ExcirsizeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				189663C52012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.h */,
+				189663CA2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.m */,
+				189663C62012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.xib */,
+				189663C72012FE3F00A8BFE1 /* ExcerciseParameterTVC.h */,
+				189663C92012FE3F00A8BFE1 /* ExcerciseParameterTVC.m */,
+				189663C82012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib */,
+			);
+			name = ExcirsizeDetails;
+			sourceTree = "<group>";
+		};
 		18A982AE200F09050071727E /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1443,19 +1457,6 @@
 				18B9799C200E158500B94DD4 /* StepSlider.m */,
 			);
 			name = Slider;
-			sourceTree = "<group>";
-		};
-		18E6632620123969000BD323 /* ExcirsizeDetail */ = {
-			isa = PBXGroup;
-			children = (
-				18E6632C20123A3A000BD323 /* ExcerciseAttachmentCVC.h */,
-				18E6632720123A39000BD323 /* ExcerciseAttachmentCVC.m */,
-				18E6632820123A3A000BD323 /* ExcerciseAttachmentCVC.xib */,
-				18E6632A20123A3A000BD323 /* ExcerciseParameterTVC.h */,
-				18E6632920123A3A000BD323 /* ExcerciseParameterTVC.m */,
-				18E6632B20123A3A000BD323 /* ExcerciseParameterTVC.xib */,
-			);
-			path = ExcirsizeDetail;
 			sourceTree = "<group>";
 		};
 		9D6FF2AB6C66A0BD955B6194 /* Pods */ = {
@@ -1942,7 +1943,6 @@
 		CEEE8031200E20E200E33513 /* ExcersizeCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
-				18E6632620123969000BD323 /* ExcirsizeDetail */,
 				CEEE8032200E210400E33513 /* ExcersizeCollectionViewCell.h */,
 				CEEE8033200E210400E33513 /* ExcersizeCollectionViewCell.m */,
 				CEEE8034200E210400E33513 /* ExcersizeCollectionViewCell.xib */,
@@ -2041,7 +2041,7 @@
 				ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */,
 				04228ECE201207B100D131F8 /* ExcersizeDetailItemVC.xib in Resources */,
 				0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */,
-				18E6633020123A3A000BD323 /* ExcerciseParameterTVC.xib in Resources */,
+				189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */,
 				AC1BC8111F8665A60047AECC /* AADrilldown.js in Resources */,
 				CEEE8036200E210400E33513 /* ExcersizeCollectionViewCell.xib in Resources */,
 				045A49F81FA22192008C1630 /* DailyCalendar.png in Resources */,
@@ -2059,7 +2059,7 @@
 				ACBBA1861F614049000F9DC9 /* TrainingLoad.xib in Resources */,
 				045A49FB1FA22192008C1630 /* WeeklyCalendar.png in Resources */,
 				AC1BC8671F8665C20047AECC /* AAChartKit.podspec in Resources */,
-				18E6632E20123A3A000BD323 /* ExcerciseAttachmentCVC.xib in Resources */,
+				189663CB2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.xib in Resources */,
 				CEEE8040200E3B6D00E33513 /* ExcierseDetailVC.xib in Resources */,
 				043B230E1F4B1B3900036604 /* Assets.xcassets in Resources */,
 				045A49FC1FA22192008C1630 /* YearlyCalendar.png in Resources */,
@@ -2155,6 +2155,7 @@
 				18B9799D200E158500B94DD4 /* StepSlider.m in Sources */,
 				045A49AC1FA220A8008C1630 /* FFYearCell.m in Sources */,
 				04534A571F53FA4100999FBC /* AFHTTPSessionManager.m in Sources */,
+				189663CE2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.m in Sources */,
 				AC1BC8651F8665B40047AECC /* AAYAxis.m in Sources */,
 				ACACEFDF1F596DE1004C28A4 /* TestAssessmentEntryVC.m in Sources */,
 				040B2A8E1F600E0600FB4B93 /* SACalendar.m in Sources */,
@@ -2168,7 +2169,6 @@
 				04534A581F53FA4100999FBC /* AFNetworkReachabilityManager.m in Sources */,
 				045A49661FA21FDE008C1630 /* FFDayHeaderButton.m in Sources */,
 				04534A721F542E7700999FBC /* PlannerVC.m in Sources */,
-				18E6632D20123A3A000BD323 /* ExcerciseAttachmentCVC.m in Sources */,
 				AC1BC84F1F8665B40047AECC /* AABar.m in Sources */,
 				ACBBA1851F614049000F9DC9 /* TrainingLoad.m in Sources */,
 				04CA66411F6F8A0C009F109E /* HACBarChart.m in Sources */,
@@ -2186,6 +2186,7 @@
 				ACBBA1971F614E20000F9DC9 /* CtlVsAtl.m in Sources */,
 				04E640A91FB5A762006E6C57 /* INTUFruit.m in Sources */,
 				AC9F541D1F4D42E600BED5CF /* HomeVC.m in Sources */,
+				189663CD2012FE3F00A8BFE1 /* ExcerciseParameterTVC.m in Sources */,
 				ACB28C371F5846A700E8A865 /* WorkLoadVC.m in Sources */,
 				04E640AD1FB5A762006E6C57 /* INTUMutableGroupedArray.m in Sources */,
 				045A49A91FA2209F008C1630 /* FFYearCollectionViewFlowLayout.m in Sources */,
@@ -2247,7 +2248,6 @@
 				045A49A81FA2209F008C1630 /* FFYearCollectionView.m in Sources */,
 				04EE9D681F9A20F6007B3278 /* DBAConnection.m in Sources */,
 				ACC1D6F21F6692A6002329A1 /* MCChartInformationView.m in Sources */,
-				18E6632F20123A3A000BD323 /* ExcerciseParameterTVC.m in Sources */,
 				ACACEFE21F59740C004C28A4 /* TestAssessmentListVC.m in Sources */,
 				04534A561F53FA4100999FBC /* AFHTTPRequestOperationManager.m in Sources */,
 				AC1BC8501F8665B40047AECC /* AAChart.m in Sources */,
