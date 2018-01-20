@@ -13,6 +13,8 @@
 #import "WebService.h"
 #import "Config.h"
 #import "ExcerciseParameterTVC.h"
+#import "ExcersizeDetailItemVC.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ExcierseDetailVC ()
 
@@ -45,8 +47,8 @@
     [self.docuCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
     [self.videoCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
 
-    self.ExcerciseCode =@"EXE0000003";
-    self.ProgramCode = @"PGM0000011";
+    self.ExcerciseCode =@"EXE0000005";
+    self.ProgramCode = @"PGM0000014";
     self.OrderNo = @"1";
 
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
@@ -78,12 +80,25 @@
     [self.headerView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"Excercise";
     objCustomNavigation.btn_back.hidden = NO;
-    objCustomNavigation.menu_btn.hidden = YES;
-//    [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.home_btn.hidden = NO;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
+-(IBAction)MenuBtnAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+-(IBAction)HomeBtnAction:(id)sender
+{
+    HomeVC  * objTabVC=[[HomeVC alloc]init];
+    objTabVC = (HomeVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"HomeVC"];
+    [self.navigationController pushViewController:objTabVC animated:YES];
+    
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -93,8 +108,12 @@
     
     if(collectionView == _imageCView){
         return imageArray.count;
+    }else if(collectionView == _videoCView){
+        return videoArray.count;
+    }else if(collectionView == _docuCView){
+        return documentArray.count;
     }else{
-    return 10;
+        return 0;
     }
 }
 
@@ -106,19 +125,31 @@
   // ExcerciseAttachmentCVC * objCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
     
     if(collectionView == self.imageCView){
+        
+        NSMutableDictionary *dict = [imageArray objectAtIndex:indexPath.row];
+        
+        
    
         ExcerciseAttachmentCVC* cell = [self.imageCView dequeueReusableCellWithReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
 
+        NSURL *url=[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]]];
+
+        [cell.image sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
+        
         return cell;
 
     }else if(collectionView == self.videoCView){
         ExcerciseAttachmentCVC* cell = [self.videoCView dequeueReusableCellWithReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
+        
+        [cell.image setImage:  [UIImage imageNamed:@"default_video"]];
 
    //     ExcerciseAttachmentCVC * cell = [self.videoCView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
         return cell;
         
     }else if(collectionView == self.docuCView){
         ExcerciseAttachmentCVC* cell = [self.docuCView dequeueReusableCellWithReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
+        [cell.image setImage:  [UIImage imageNamed:@"default_pdf"]];
+
 
       //  ExcerciseAttachmentCVC * cell = [self.docuCView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
         return cell;
@@ -143,7 +174,50 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    // IMAGE_URL
     
+    if(collectionView == _imageCView){
+        
+        NSMutableDictionary *dict = [imageArray objectAtIndex:indexPath.row];
+        
+        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
+        vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
+        vc.isImage = YES;
+        
+        //Transparency Color
+        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        //        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if(collectionView == _videoCView){
+        NSMutableDictionary *dict = [videoArray objectAtIndex:indexPath.row];
+        
+        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
+        vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
+        vc.isVideo = YES;
+        
+        //Transparency Color
+        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        //        [self.navigationController pushViewController:vc animated:YES];
+    }else if(collectionView == _docuCView){
+        NSMutableDictionary *dict = [documentArray objectAtIndex:indexPath.row];
+        
+        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
+        vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
+        vc.isPDF = YES;
+        
+        //Transparency Color
+        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        //        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 

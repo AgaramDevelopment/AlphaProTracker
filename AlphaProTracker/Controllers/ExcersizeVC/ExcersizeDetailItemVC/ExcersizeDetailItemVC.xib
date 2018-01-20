@@ -29,15 +29,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RqX-JC-r7b">
                             <rect key="frame" x="20" y="60" width="305" height="469"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="npW-ku-uvb">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="npW-ku-uvb">
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="469"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </imageView>
                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EG4-wt-gWR">
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="469"/>
                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </webView>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="EG4-wt-gWR" firstAttribute="top" secondItem="RqX-JC-r7b" secondAttribute="top" id="3Wd-CZ-1YP"/>
                                 <constraint firstAttribute="bottom" secondItem="EG4-wt-gWR" secondAttribute="bottom" id="5Wl-sj-WCe"/>
@@ -70,7 +71,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="RqX-JC-r7b" firstAttribute="top" secondItem="I5V-hS-oAb" secondAttribute="bottom" constant="15" id="0PX-cK-a1E"/>
                         <constraint firstAttribute="bottom" secondItem="RqX-JC-r7b" secondAttribute="bottom" constant="20" id="13v-oo-Hoe"/>
@@ -79,15 +80,16 @@
                         <constraint firstAttribute="trailing" secondItem="I5V-hS-oAb" secondAttribute="trailing" constant="20" id="eIN-SY-7Jy"/>
                         <constraint firstItem="RqX-JC-r7b" firstAttribute="top" secondItem="Sh2-JQ-MS9" secondAttribute="top" constant="60" id="h3U-zt-eTj"/>
                         <constraint firstItem="I5V-hS-oAb" firstAttribute="top" secondItem="Sh2-JQ-MS9" secondAttribute="top" constant="15" id="j2z-If-ZE4"/>
-                        <constraint firstAttribute="width" constant="345" id="lF6-cJ-u1y"/>
                         <constraint firstItem="RqX-JC-r7b" firstAttribute="leading" secondItem="Sh2-JQ-MS9" secondAttribute="leading" constant="20" id="zlh-PA-3GJ"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.092671587423312884" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Sh2-JQ-MS9" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EIN-m7-Eja"/>
-                <constraint firstItem="Sh2-JQ-MS9" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="n0X-FP-ReB"/>
+                <constraint firstItem="Sh2-JQ-MS9" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="39" id="JKN-jg-A2E"/>
+                <constraint firstItem="Sh2-JQ-MS9" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="Uxd-pg-nbN"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Sh2-JQ-MS9" secondAttribute="bottom" constant="59" id="chS-Wq-lQ5"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Sh2-JQ-MS9" secondAttribute="trailing" constant="15" id="m1o-q2-Oee"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="79.5" y="87.5"/>

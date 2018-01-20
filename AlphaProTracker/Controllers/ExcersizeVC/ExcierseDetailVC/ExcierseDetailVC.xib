@@ -208,7 +208,7 @@
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-0d-bU6">
                                                     <rect key="frame" x="0.0" y="41" width="375" height="116"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="116" id="jkz-Ko-jHN"/>
                                                     </constraints>
@@ -224,7 +224,7 @@
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="pP8-0d-bU6" secondAttribute="trailing" id="8Jy-UO-7W5"/>
                                                 <constraint firstItem="pP8-0d-bU6" firstAttribute="leading" secondItem="dSo-6V-Ql7" secondAttribute="leading" id="Fiw-bP-iQt"/>
@@ -260,7 +260,7 @@
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="RS7-ye-XqL">
                                                     <rect key="frame" x="0.0" y="41" width="375" height="116"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="116" id="TRi-Lt-wJm"/>
                                                     </constraints>
@@ -276,7 +276,7 @@
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="RS7-ye-XqL" firstAttribute="leading" secondItem="RrV-6U-PAr" secondAttribute="leading" id="2Mr-qx-ySa"/>
                                                 <constraint firstAttribute="trailing" secondItem="RS7-ye-XqL" secondAttribute="trailing" id="2oN-nF-YNS"/>
