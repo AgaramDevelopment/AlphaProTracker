@@ -121,18 +121,27 @@
 
 //    [cell.button setTitle:[NSString stringWithFormat:@"%@, %li",(IS_IPAD ? [arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1]: str)  , (long)compDateOfLabel.day] forState:UIControlStateNormal];
     [cell.button setTitle:[NSString stringWithFormat:@"%@, %li",[arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1]  , (long)compDateOfLabel.day] forState:UIControlStateNormal];
+    NSLog(@"DAY Header cell %@ ",cell.button.titleLabel.text);
 
-    
+    [cell.button setBackgroundColor:[UIColor yellowColor]];
     [cell.button.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 :10)]];
     [cell.button setSelected:([NSDate isTheSameDateTheCompA:compDateOfLabel compB:[[FFDateManager sharedManager] currentDate].componentsOfDate])];
     cell.button.tag = indexPath.row;
-    
+    cell.button.buttonIndexPath = indexPath;
     if (cell.isSelected && protocol && [protocol respondsToSelector:@selector(daySelected:)]) {
         [protocol daySelected:cell.date];
     }
     
     return cell;
 }
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FFDayHeaderCell* cell = (FFDayHeaderCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@" did select DAY Header cell %@ ",cell.button.titleLabel.text);
+    [self.cellProtocol getDate:[NSDate date]];
+    
+}
+
 
 #pragma mark - Button Action
 
@@ -145,6 +154,11 @@
     [[FFDateManager sharedManager] setCurrentDate:button.date];
     
     [self reloadData];
+    
+    FFDayHeaderCell* cell = (FFDayHeaderCell*)[self cellForItemAtIndexPath:button.buttonIndexPath];
+    NSLog(@" did select DAY Header cell %@ ",cell.button.titleLabel.text);
+    [self.cellProtocol getDate:[NSDate date]];
+
 }
 
 #pragma mark - Scroll to Date

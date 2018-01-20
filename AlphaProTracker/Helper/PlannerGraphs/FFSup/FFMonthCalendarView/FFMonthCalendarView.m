@@ -14,7 +14,7 @@
 #import "FFMonthHeaderView.h"
 #import "FFImportantFilesForCalendar.h"
 
-@interface FFMonthCalendarView () <FFMonthCollectionViewProtocol>
+@interface FFMonthCalendarView () <FFMonthCollectionViewProtocol,CollectionCellProtocol>
 @property (nonatomic, strong) FFMonthCollectionView *collectionViewMonth;
 @end
 
@@ -41,6 +41,7 @@
         
         collectionViewMonth = [[FFMonthCollectionView alloc] initWithFrame:CGRectMake(0., HEADER_HEIGHT_MONTH, self.frame.size.width, self.frame.size.height-HEADER_HEIGHT_MONTH) collectionViewLayout:[UICollectionViewLayout new]];
         [collectionViewMonth setProtocol:self];
+        [collectionViewMonth setCellProtocol:self];
         [self addSubview:collectionViewMonth];
         
         [self setAutoresizingMask: AR_WIDTH_HEIGHT];
@@ -91,6 +92,10 @@
         [protocol setNewDictionary:dict];
     }
 }
-
+-(void)getDate:(NSDate *)date // Month cell protocol
+{
+    NSLog(@"DATE MONTH CALENDAR");
+    [self.collectionDidSelectDelegate didSelectEventOfCell:date];
+}
 
 @end

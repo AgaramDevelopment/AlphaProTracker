@@ -96,6 +96,19 @@
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    FFDayCell* cell1 = (FFDayCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@"%@",cell1.date);
+    
+    //    NSMutableArray *arrayDates = [array objectAtIndex:indexPath.section];
+    //    id obj = [arrayDates objectAtIndex:indexPath.row];
+    //    NSDate *date = (NSDate *)obj;
+    [self.cellProtocol getDate:cell1.date];
+    
+}
+
 #pragma mark - UICollectionView Delegate FlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

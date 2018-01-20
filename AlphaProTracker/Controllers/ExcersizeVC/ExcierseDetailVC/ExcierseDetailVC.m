@@ -47,18 +47,18 @@
     [self.docuCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
     [self.videoCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
 
-    self.ExcerciseCode =@"EXE0000005";
-    self.ProgramCode = @"PGM0000014";
-    self.OrderNo = @"1";
+//    self.ExcerciseCode =@"EXE0000005";
+//    self.ProgramCode = @"PGM0000014";
+//    self.OrderNo = @"1";
 
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
     
-    cliendcode = @"CLI0000001";
-    usercode = @"USM0000012";
-    userref = @"AMR0000011";
+//    cliendcode = @"CLI0000001";
+//    usercode = @"USM0000012";
+//    userref = @"AMR0000011";
     self.paramTView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     
@@ -174,7 +174,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-   // IMAGE_URL
+    // IMAGE_URL
     
     if(collectionView == _imageCView){
         
@@ -184,7 +184,12 @@
         vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
         vc.isImage = YES;
         
-        [self.navigationController pushViewController:vc animated:YES];
+        //Transparency Color
+        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        //        [self.navigationController pushViewController:vc animated:YES];
         
     }else if(collectionView == _videoCView){
         NSMutableDictionary *dict = [videoArray objectAtIndex:indexPath.row];
@@ -193,7 +198,12 @@
         vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
         vc.isVideo = YES;
         
-        [self.navigationController pushViewController:vc animated:YES];
+        //Transparency Color
+        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        //        [self.navigationController pushViewController:vc animated:YES];
     }else if(collectionView == _docuCView){
         NSMutableDictionary *dict = [documentArray objectAtIndex:indexPath.row];
         
@@ -201,7 +211,12 @@
         vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
         vc.isPDF = YES;
         
-        [self.navigationController pushViewController:vc animated:YES];
+        //Transparency Color
+        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        //        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

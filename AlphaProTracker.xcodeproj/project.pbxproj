@@ -693,6 +693,7 @@
 		B20DBBDAADFC06FDCE6BFAC6 /* Pods-AlphaProTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaProTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		CE3EBB441FFC990200588728 /* AssessmentFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentFilterView.h; path = Common/Assessment/AssessmentFilterView.h; sourceTree = "<group>"; };
 		CE3EBB451FFC990200588728 /* AssessmentFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentFilterView.m; path = Common/Assessment/AssessmentFilterView.m; sourceTree = "<group>"; };
+		CEAB4EA82013031500CCF8EC /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateProtocol.h; path = Helper/PlannerGraphs/DateProtocol.h; sourceTree = "<group>"; };
 		CEC26FCB1FFE129B00FF2D74 /* AssessmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentCell.h; path = Subview/AssessmentCell/AssessmentCell.h; sourceTree = "<group>"; };
 		CEC26FCC1FFE129B00FF2D74 /* AssessmentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentCell.m; path = Subview/AssessmentCell/AssessmentCell.m; sourceTree = "<group>"; };
 		CEEE8032200E210400E33513 /* ExcersizeCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcersizeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1107,6 +1108,7 @@
 		045A49501FA21E21008C1630 /* PlannerGraphs */ = {
 			isa = PBXGroup;
 			children = (
+				CEAB4EA82013031500CCF8EC /* DateProtocol.h */,
 				045A49F11FA22192008C1630 /* blackCircle.png */,
 				045A49F21FA22192008C1630 /* DailyCalendar.png */,
 				045A49F31FA22192008C1630 /* MonthlyCalendar.png */,

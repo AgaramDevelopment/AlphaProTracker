@@ -21,6 +21,7 @@
 @property (nonatomic,assign) BOOL isVideo;
 @property (nonatomic,assign) BOOL isPDF;
 @property (nonatomic,strong)  NSString * URL;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 

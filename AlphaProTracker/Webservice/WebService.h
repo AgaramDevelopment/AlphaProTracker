@@ -26,6 +26,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 #define BASE_URL   @"http://192.168.1.84:8029/AGAPTService.svc/"
 #define IMAGE_URL   @"http://192.168.1.84:8030/"
 
+
 //#define BASE_URL   @"http://192.168.1.84:8039/AGAPTService.svc/"
 
 //#define BASE_URL  @"http://13.126.151.253:9001/AGAPTService.svc/"

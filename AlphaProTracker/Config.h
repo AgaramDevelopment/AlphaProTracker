@@ -206,4 +206,5 @@
 #define deleteRowKey                    @"DELETEROW"
 
 #define OPENPLAYEREXERCISEDETAILS                    @"OPENPLAYEREXERCISEDETAILS"
+#define AllPlayerProgramKey               @"GETALLPLAYERPROGRAMS"
 

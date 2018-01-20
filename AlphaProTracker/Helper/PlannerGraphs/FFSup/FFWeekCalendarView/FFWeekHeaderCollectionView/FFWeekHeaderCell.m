@@ -10,6 +10,7 @@
 
 #import "FFWeekHeaderCell.h"
 #import "FFImportantFilesForCalendar.h"
+#import "Config.h"
 
 @implementation FFWeekHeaderCell
 
@@ -23,7 +24,7 @@
     if (self) {
         // Initialization code
         
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.frame.size.width, self.frame.size.height)];
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0.,(IS_IPAD ? self.frame.size.width : self.frame.size.width/2), self.frame.size.height)];
         [imageView setAutoresizingMask:AR_LEFT_RIGHT];
         [imageView setContentMode:UIViewContentModeCenter];
         [self addSubview:imageView];

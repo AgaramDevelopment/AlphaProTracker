@@ -95,13 +95,27 @@
     [cell setProtocol:self];
     [cell setDate:[NSDate dateWithYear:comp.year month:comp.month day:1+indexPath.row-(componentsFirstDayOfMonth.weekday-1)-7]];
     [cell showEvents:[dictEvents objectForKey:cell.date]];
-    
+    NSLog(@"WEEK %@",cell.date);
     if ([NSDate isTheSameDateTheCompA:cell.date.componentsOfDate compB:[NSDate componentsOfCurrentDate]] && protocol != nil && [protocol respondsToSelector:@selector(showHourLine:)]) {
         [protocol showHourLine:YES];
     }
 
     return cell;
 }
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    FFWeekCell* cell1 = (FFWeekCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@"%@",cell1.date);
+    
+//    NSMutableArray *arrayDates = [array objectAtIndex:indexPath.section];
+//    id obj = [arrayDates objectAtIndex:indexPath.row];
+//    NSDate *date = (NSDate *)obj;
+    [self.cellProtocol getDate:cell1.date];
+    
+}
+
 
 #pragma mark - UICollectionView Delegate FlowLayout
 

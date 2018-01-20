@@ -10,7 +10,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AppCommon.h"
 
-@interface ExcersizeDetailItemVC () <UIWebViewDelegate>
+@interface ExcersizeDetailItemVC ()
 
 @end
 
@@ -20,9 +20,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    self.view.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor lightTextColor];
+    
+    self.scrollView.minimumZoomScale=1.0;
+    self.scrollView.maximumZoomScale=4.0;
+    self.scrollView.contentSize = CGSizeMake(self.playerImageView.frame.size.width, self.playerImageView.frame.size.height);
     
     //Load View based on Item.
     if(self.isImage) {
@@ -45,23 +47,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    //    self.isImage = YES;
-    //    self.isVideo = NO;
-    //    self.isPDF = NO;
-}
-
 - (void)loadImageView {
     
     NSURL *url=[NSURL URLWithString:self.URL];
     [self.playerImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"profileImg"]];
 }
 -(void) videoPlayer {
-    
-    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
-    self.webView.scrollView.showsVerticalScrollIndicator = NO;
     
     NSURL *videoURL = [NSURL URLWithString:self.URL];
     
@@ -78,20 +69,22 @@
     self.playerImageView.hidden = YES;
     self.webView.hidden = YES;
     
-    [self.avPlayer seekToTime:CMTimeMake(0, 1)];
-    [self.avPlayer pause];
-    [self.avPlayerViewController.view removeFromSuperview];
-    self.avPlayer = NULL;
-    
+    if(self.isVideo) {
+        [self.avPlayer seekToTime:CMTimeMake(0, 1)];
+        [self.avPlayer pause];
+        [self.avPlayerViewController.view removeFromSuperview];
+        self.avPlayer = NULL;
+    }
     self.videoView.hidden = YES;
-    //    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popViewControllerAnimated:YES];
     
+    //   [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)loadWebView {
     [COMMON loadingIcon:self.view];
-    self.webView.delegate=self;
+    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
+    self.webView.scrollView.showsVerticalScrollIndicator = NO;
     NSURL*url=[[NSURL alloc]initWithString:self.URL];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:requestObj];
@@ -104,6 +97,11 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     return YES;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.playerImageView;
 }
 /*
  #pragma mark - Navigation

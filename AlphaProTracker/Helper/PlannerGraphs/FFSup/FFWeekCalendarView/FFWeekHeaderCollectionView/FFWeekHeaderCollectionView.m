@@ -108,7 +108,8 @@
     
     [cell.label setText:[NSString stringWithFormat:@"%@, %li", [arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1], (long)compDateOfLabel.day]];
     [cell.label setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 : 10)]];
-    
+    NSLog(@"Week Header cell %@ ",cell.label.text);
+
     if (compDateOfLabel.weekday == 1 || compDateOfLabel.weekday == 7) {
         [cell.label setTextColor:[UIColor grayColor]];
     }
@@ -120,6 +121,14 @@
 
     
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FFWeekHeaderCell* cell = (FFWeekHeaderCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@" did select Week Header cell %@ ",cell.label.text);
+    [self.cellProtocol getDate:[NSDate date]];
+
 }
 
 #pragma mark - UICollectionView Delegate FlowLayout

@@ -129,10 +129,10 @@
         manager.requestSerializer = requestSerializer;
 
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if([COMMON GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Createdby"];
-        if([COMMON GetClientCode])   [dic    setObject:@"CLI0000001"     forKey:@"Clientcode"];
-        if([COMMON GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Modifiedby"];
-        if([COMMON GetuserReference])   [dic    setObject:@"AMR0000001"    forKey:@"Userreferencecode"];
+        if([AppCommon GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Createdby"];
+        if([AppCommon GetClientCode])   [dic    setObject:@"CLI0000001"     forKey:@"Clientcode"];
+        if([AppCommon GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Modifiedby"];
+        if([AppCommon GetuserReference])   [dic    setObject:@"AMR0000001"    forKey:@"Userreferencecode"];
 
 
         NSLog(@"parameters : %@",dic);
