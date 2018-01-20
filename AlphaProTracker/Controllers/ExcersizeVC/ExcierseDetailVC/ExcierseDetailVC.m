@@ -80,12 +80,25 @@
     [self.headerView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"Excercise";
     objCustomNavigation.btn_back.hidden = NO;
-    objCustomNavigation.menu_btn.hidden = YES;
-//    [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.home_btn.hidden = NO;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
+-(IBAction)MenuBtnAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+-(IBAction)HomeBtnAction:(id)sender
+{
+    HomeVC  * objTabVC=[[HomeVC alloc]init];
+    objTabVC = (HomeVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"HomeVC"];
+    [self.navigationController pushViewController:objTabVC animated:YES];
+    
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -121,18 +134,22 @@
 
         NSURL *url=[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]]];
 
-        [cell.image sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"profileImg"]];
+        [cell.image sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
         
         return cell;
 
     }else if(collectionView == self.videoCView){
         ExcerciseAttachmentCVC* cell = [self.videoCView dequeueReusableCellWithReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
+        
+        [cell.image setImage:  [UIImage imageNamed:@"default_video"]];
 
    //     ExcerciseAttachmentCVC * cell = [self.videoCView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
         return cell;
         
     }else if(collectionView == self.docuCView){
         ExcerciseAttachmentCVC* cell = [self.docuCView dequeueReusableCellWithReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
+        [cell.image setImage:  [UIImage imageNamed:@"default_pdf"]];
+
 
       //  ExcerciseAttachmentCVC * cell = [self.docuCView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"attachmentCVC" forIndexPath:indexPath];
         return cell;

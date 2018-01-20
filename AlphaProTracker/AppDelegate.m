@@ -26,7 +26,7 @@
     
     UIViewController * initViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"HomeVC" : @"LoginVC")];
     
-   // ExcierseDetailVC *initViewController = [ExcierseDetailVC new];
+    //ExcierseDetailVC *initViewController = [ExcierseDetailVC new];
     
     
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
