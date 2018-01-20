@@ -87,7 +87,7 @@
         self.lblHeaderName.text = [[[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.row]valueForKey:@"programName"];
         
         UILabel* label= [[UILabel alloc] initWithFrame:CGRectMake(10, 0, cell.frame.size.width, cell.frame.size.height)];
-        label.text = [[[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.row] valueForKey:@"programName"];
+        label.text = [[[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.section] valueForKey:@"programName"];
         [label setTextColor:[UIColor whiteColor]];
         [cell addSubview:label];
         
@@ -105,9 +105,18 @@
     NSArray* resultArray = [self getValueSectionWise:indexPath];
 
     ExcersizeCollectionViewCell* cell = [excersizeCollection dequeueReusableCellWithReuseIdentifier:@"First" forIndexPath:indexPath];
-    NSString* strImg = [NSString stringWithFormat:@"%@%@",IMG_URL,[[resultArray objectAtIndex:indexPath.row]valueForKey:@"PhotoPath"]];
+    NSString* strImg = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[resultArray objectAtIndex:indexPath.row]valueForKey:@"PhotoPath"]];
     
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:strImg] placeholderImage:[UIImage imageNamed:@"banner"]];
+    if ([[AppCommon getFileType:strImg] isEqualToString:@"pdf"]) {
+        [cell.imgView setImage:[UIImage imageNamed:@"default_pdf"]];
+    }
+    else if ([[AppCommon getFileType:strImg] isEqualToString:@"video"]){
+        [cell.imgView setImage:[UIImage imageNamed:@"default_video"]];
+    }
+    else{
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:strImg] placeholderImage:[UIImage imageNamed:@"default_image"]];
+    }
+    
     cell.lblExcersize.text = [[resultArray objectAtIndex:indexPath.row] valueForKey:@"ExcerciseName"];
 
     
@@ -118,6 +127,9 @@
 {
     NSArray* array = [self getValueSectionWise:indexPath];
     ExcierseDetailVC* VC = [ExcierseDetailVC new];
+    VC.ExcerciseCode = [[array objectAtIndex:indexPath.row] valueForKey:@"ExcerciseCode"];
+    VC.ProgramCode = [[array objectAtIndex:indexPath.row] valueForKey:@"programcode"];
+    VC.OrderNo = [[array objectAtIndex:indexPath.row] valueForKey:@"OrderNo"];
     [self.navigationController pushViewController:VC animated:YES];
 }
 
@@ -161,22 +173,17 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
     manager.requestSerializer = requestSerializer;
     
-    NSString * usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-    NSString *cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    NSString *userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if(cliendcode) [dic setObject:cliendcode forKey:@"Clientcode"];
-    if(usercode) [dic setObject:usercode forKey:@"Usercode"];
-    if(userref) [dic setObject:userref forKey:@"UserReferenceCode"];
+    if([AppCommon GetClientCode]) [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
+    if([AppCommon GetUsercode]) [dic setObject:[AppCommon GetUsercode] forKey:@"Usercode"];
+    if([AppCommon GetuserReference]) [dic setObject:[AppCommon GetuserReference] forKey:@"UserReferenceCode"];
     
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
-        if(responseObject >0)
+        if(responseObject > 0)
         {
             arrayExcersizeList = responseObject;
             dispatch_async(dispatch_get_main_queue(), ^{

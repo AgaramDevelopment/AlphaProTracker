@@ -21,19 +21,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="OQ6-E3-9p5">
+                    <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6DA-mB-TZN">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                     <color key="backgroundColor" red="0.17254901959999999" green="0.65490196079999996" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="65" id="YHh-60-Mat">
-                            <variation key="heightClass=regular-widthClass=regular" constant="90"/>
-                        </constraint>
+                        <constraint firstAttribute="height" constant="65" id="YHh-60-Mat"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ljM-YG-JyH">
                     <rect key="frame" x="0.0" y="65" width="375" height="602"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Zgh-3L-Vfn">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="Zgh-3L-Vfn">
                         <size key="itemSize" width="150" height="150"/>
                         <size key="headerReferenceSize" width="375" height="30"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -50,12 +51,19 @@
                 <constraint firstAttribute="bottom" secondItem="ljM-YG-JyH" secondAttribute="bottom" id="1lW-eW-LUU"/>
                 <constraint firstItem="6DA-mB-TZN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CQt-n9-5HI"/>
                 <constraint firstItem="6DA-mB-TZN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GgU-be-bcr"/>
+                <constraint firstItem="OQ6-E3-9p5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IJs-AO-2bi"/>
                 <constraint firstItem="ljM-YG-JyH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JBE-q1-mP9"/>
+                <constraint firstAttribute="bottom" secondItem="OQ6-E3-9p5" secondAttribute="bottom" id="OiM-5t-iYL"/>
                 <constraint firstAttribute="trailing" secondItem="6DA-mB-TZN" secondAttribute="trailing" id="RBC-oA-Cds"/>
                 <constraint firstAttribute="trailing" secondItem="ljM-YG-JyH" secondAttribute="trailing" id="aHd-LD-OHx"/>
                 <constraint firstItem="ljM-YG-JyH" firstAttribute="top" secondItem="6DA-mB-TZN" secondAttribute="bottom" id="qls-I1-YNq"/>
+                <constraint firstAttribute="trailing" secondItem="OQ6-E3-9p5" secondAttribute="trailing" id="wir-zn-Gr5"/>
+                <constraint firstItem="OQ6-E3-9p5" firstAttribute="top" secondItem="6DA-mB-TZN" secondAttribute="bottom" id="zok-14-JPT"/>
             </constraints>
             <point key="canvasLocation" x="202" y="-101"/>
         </view>
     </objects>
+    <resources>
+        <image name="Background" width="1200" height="1920"/>
+    </resources>
 </document>

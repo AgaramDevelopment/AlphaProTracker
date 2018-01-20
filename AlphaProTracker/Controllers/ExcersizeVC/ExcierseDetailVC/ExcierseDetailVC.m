@@ -47,18 +47,18 @@
     [self.docuCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
     [self.videoCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
 
-    self.ExcerciseCode =@"EXE0000005";
-    self.ProgramCode = @"PGM0000014";
-    self.OrderNo = @"1";
+//    self.ExcerciseCode =@"EXE0000005";
+//    self.ProgramCode = @"PGM0000014";
+//    self.OrderNo = @"1";
 
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
     
-    cliendcode = @"CLI0000001";
-    usercode = @"USM0000012";
-    userref = @"AMR0000011";
+//    cliendcode = @"CLI0000001";
+//    usercode = @"USM0000012";
+//    userref = @"AMR0000011";
     self.paramTView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     

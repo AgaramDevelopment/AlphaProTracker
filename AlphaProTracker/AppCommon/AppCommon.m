@@ -87,35 +87,28 @@ AppCommon *sharedCommon = nil;
 -(void)reachabilityNotReachableAlert{
     
     [self RemoveLoadingIcon];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] message:@"It appears that you have lost network connectivity. Please check your network settings!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    
-    [alert show];
-    
+    [AppCommon showAlertWithMessage:@"It appears that you have lost network connectivity. Please check your network settings!"];
 }
 
 -(void)webServiceFailureError
 {
     [self RemoveLoadingIcon];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] message:@"Server Error" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    
-    [alert show];
+    [AppCommon showAlertWithMessage:@"Server Error"];
 }
 
 #pragma mark - get usercode,clientcode,usereferencecode
 
--(NSString *)GetUsercode
++(NSString *)GetUsercode
 {
     NSString * usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     return usercode;
 }
--(NSString *) GetClientCode
++(NSString *) GetClientCode
 {
     NSString * clientcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     return clientcode;
 }
--(NSString *) GetuserReference
++(NSString *) GetuserReference
 {
     NSString * userreference =  [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     return userreference;
@@ -1427,6 +1420,24 @@ AppCommon *sharedCommon = nil;
 
 }
 
++(NSString *)getFileType:(NSString *)filePath
+{
+    NSString* fileExtension = [[filePath pathExtension]lowercaseString];
+    if ([fileExtension isEqualToString:@"png"] || [fileExtension isEqualToString:@"jpeg"] || [fileExtension isEqualToString:@"jpg"] ) {
+        return @"img";
+    }
+    else if([fileExtension isEqualToString:@"pdf"]){
+        return @"pdf";
+    }
+    return @"video";
+}
 
++(void)showAlertWithMessage:(NSString *)message
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:APP_NAME message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* action = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action];
+    [appDel.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
 
 @end

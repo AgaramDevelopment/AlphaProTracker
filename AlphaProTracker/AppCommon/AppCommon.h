@@ -36,10 +36,11 @@
 - (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
 -(void)AddMenuView:(UIView *)view;
 -(void)ShowsideMenuView;
--(NSString *)GetUsercode;
--(NSString *) GetClientCode;
--(NSString *) GetuserReference;
-
++(NSString *)GetUsercode;
++(NSString *) GetClientCode;
++(NSString *) GetuserReference;
++(NSString *)getFileType:(NSString *)filePath;
++(void)showAlertWithMessage:(NSString *)message;
 
 
 @end
