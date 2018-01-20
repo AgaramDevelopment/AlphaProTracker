@@ -13,13 +13,14 @@
 #import "AppCommon.h"
 #import "Config.h"
 #import "WebService.h"
+#import "InjuryVC.h"
 
 
 
 @interface MultiInjuryVC ()
 {
-//    BOOL isMulti;
-//    BOOL isList;
+    //    BOOL isMulti;
+    //    BOOL isList;
     
     
     BOOL isSide;
@@ -28,9 +29,11 @@
     BOOL isCause;
     BOOL isType;
     
+    WebService *objWebservice;
+    
     NSIndexPath *SelectedindexPath;
     
-   // UITapGestureRecognizer *letterTapRecognizer;
+    // UITapGestureRecognizer *letterTapRecognizer;
 }
 
 @property (strong, nonatomic)  NSMutableArray *selectedMarks;
@@ -54,6 +57,7 @@
     [super viewDidLoad];
     [self customnavigationmethod];
     
+    objWebservice=[[WebService alloc]init];
     self.sideView.layer.borderColor =[UIColor lightGrayColor].CGColor;
     self.sideView.layer.borderWidth=0.5;
     self.sideView.layer.masksToBounds=YES;
@@ -86,15 +90,16 @@
     self.injurySiteArray = [NSMutableArray arrayWithObjects:@"Anterior",@"Posterior",@"Medical",@"Lateral", nil];
     
     self.clientcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
+    self.createdby = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    self.usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     UITapGestureRecognizer *outerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highlightLetter:)];
     [self.tapView addGestureRecognizer:outerTapRecognizer];
     
 }
 
 - (void)highlightLetter:(UITapGestureRecognizer*)sender {
-//    UIView *view = sender.view;
-//    NSLog(@"%d", view.tag);//By tag, you can find out where you had tapped.
+    //    UIView *view = sender.view;
+    //    NSLog(@"%d", view.tag);//By tag, you can find out where you had tapped.
     
     self.multiseliectPopView.hidden = YES;
 }
@@ -113,7 +118,7 @@
     objCustomNavigation.menu_btn.hidden = YES;
     
     [objCustomNavigation.btn_back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
-   // [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    // [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -127,14 +132,14 @@
 }
 -(IBAction)SideAction:(id)sender
 {
-     isSide=YES;
-     isSite=NO;
-     isLoc=NO;
-     isCause=NO;
-     isType=NO;
+    isSide=YES;
+    isSite=NO;
+    isLoc=NO;
+    isCause=NO;
+    isType=NO;
     
     self.multiseliectPopView.hidden = NO;
-     self.selectedMarks = [[NSMutableArray alloc]init];
+    self.selectedMarks = [[NSMutableArray alloc]init];
     self.commonArray = [[NSMutableArray alloc]init];
     self.commonArray = self.injurySideArray;
     [self.multiSelectTbl reloadData];
@@ -147,7 +152,7 @@
     isCause=NO;
     isType=NO;
     self.multiseliectPopView.hidden = NO;
-     self.selectedMarks = [[NSMutableArray alloc]init];
+    self.selectedMarks = [[NSMutableArray alloc]init];
     self.commonArray = [[NSMutableArray alloc]init];
     self.commonArray = self.injurySiteArray;
     [self.multiSelectTbl reloadData];
@@ -162,7 +167,7 @@
     
     self.multiseliectPopView.hidden = NO;
     self.commonArray = [[NSMutableArray alloc]init];
-     self.selectedMarks = [[NSMutableArray alloc]init];
+    self.selectedMarks = [[NSMutableArray alloc]init];
     self.commonArray = self.injuryCauseArray;
     [self.multiSelectTbl reloadData];
 }
@@ -175,7 +180,7 @@
     isType=NO;
     self.multiseliectPopView.hidden = NO;
     self.commonArray = [[NSMutableArray alloc]init];
-     self.selectedMarks = [[NSMutableArray alloc]init];
+    self.selectedMarks = [[NSMutableArray alloc]init];
     self.commonArray = self.injuryLocationArray;
     [self.multiSelectTbl reloadData];
 }
@@ -188,7 +193,7 @@
     isType=YES;
     self.multiseliectPopView.hidden = NO;
     self.commonArray = [[NSMutableArray alloc]init];
-     self.selectedMarks = [[NSMutableArray alloc]init];
+    self.selectedMarks = [[NSMutableArray alloc]init];
     self.commonArray = self.injuryTypeArray;
     [self.multiSelectTbl reloadData];
 }
@@ -198,6 +203,15 @@
     [self tablevalueAddWebservice];
 }
 
+-(IBAction)UpdateAction:(id)sender
+{
+    [self UpdateWebservice];
+}
+
+-(IBAction)DeleteAction:(id)sender
+{
+    [self startDeleteInjuryService:self.usercode :self.injurycode];
+}
 -(IBAction)CancelAction:(id)sender
 {
     self.multiseliectPopView.hidden = YES;
@@ -275,32 +289,32 @@
 {
     if(tableView == self.injuryTbl)
     {
-    static NSString *MyIdentifier = @"custid";
-    
-    MultiInjurylistCell *cell = [self.injuryTbl dequeueReusableCellWithIdentifier:MyIdentifier];
-    
-    if (cell == nil)
-    {
-        [[NSBundle mainBundle] loadNibNamed:@"MultiInjurylistCell" owner:self options:nil];
-        cell = self.objCell;
-    }
-    
-    
-    cell.sidelbl.text = [[self.commonGridArray valueForKey:@"InjurySide"]objectAtIndex:indexPath.row];
-    cell.sitelbl.text = [[self.commonGridArray valueForKey:@"InjurySite"]objectAtIndex:indexPath.row];
-    cell.causelbl.text = [[self.commonGridArray valueForKey:@"InjuryCause"]objectAtIndex:indexPath.row];
-    cell.locationlbl.text = [[self.commonGridArray valueForKey:@"InjuryLocation"]objectAtIndex:indexPath.row];
-    cell.typelbl.text = [[self.commonGridArray valueForKey:@"InjuryType"]objectAtIndex:indexPath.row];
+        static NSString *MyIdentifier = @"custid";
+        
+        MultiInjurylistCell *cell = [self.injuryTbl dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"MultiInjurylistCell" owner:self options:nil];
+            cell = self.objCell;
+        }
+        
+        
+        cell.sidelbl.text = [[self.commonGridArray valueForKey:@"InjurySide"]objectAtIndex:indexPath.row];
+        cell.sitelbl.text = [[self.commonGridArray valueForKey:@"InjurySite"]objectAtIndex:indexPath.row];
+        cell.causelbl.text = [[self.commonGridArray valueForKey:@"InjuryCause"]objectAtIndex:indexPath.row];
+        cell.locationlbl.text = [[self.commonGridArray valueForKey:@"InjuryLocation"]objectAtIndex:indexPath.row];
+        cell.typelbl.text = [[self.commonGridArray valueForKey:@"InjuryType"]objectAtIndex:indexPath.row];
         
         [[cell deleteBtn] setTag:indexPath.row];
         [cell.deleteBtn addTarget:self action:@selector(DeleterowAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
-    //cell.deleteBtn.imageView.image = [UIImage imageNamed:@"ico_delete"];
-    [cell.deleteBtn setImage:[UIImage imageNamed:@"ico_delete"]  forState:UIControlStateNormal];
-    cell.backgroundColor =[UIColor clearColor];
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    return cell;
+        //cell.deleteBtn.imageView.image = [UIImage imageNamed:@"ico_delete"];
+        [cell.deleteBtn setImage:[UIImage imageNamed:@"ico_delete"]  forState:UIControlStateNormal];
+        cell.backgroundColor =[UIColor clearColor];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        return cell;
     }
     if(tableView == self.multiSelectTbl)
     {
@@ -321,7 +335,7 @@
         if(isSide==YES)
         {
             
-        NSString *text = [self.commonArray objectAtIndex:indexPath.row];
+            NSString *text = [self.commonArray objectAtIndex:indexPath.row];
             NSString *SideCode;
             
             if(indexPath.row == 0)
@@ -332,8 +346,8 @@
             {
                 SideCode = @"MSC170";
             }
-        cell.isSelected = [self.selectedMarks containsObject:SideCode] ? YES : NO;
-        cell.textLabel.text = text;
+            cell.isSelected = [self.selectedMarks containsObject:SideCode] ? YES : NO;
+            cell.textLabel.text = text;
         }
         
         if(isSite==YES)
@@ -394,17 +408,17 @@
     
     if(tableView == self.multiSelectTbl)
     {
-//        NSString *text = @"text";
-//        if ([self.selectedMarks containsObject:text])// Is selected?
-//            [self.selectedMarks removeObject:text];
-//        else
-//            [self.selectedMarks addObject:text];
+        //        NSString *text = @"text";
+        //        if ([self.selectedMarks containsObject:text])// Is selected?
+        //            [self.selectedMarks removeObject:text];
+        //        else
+        //            [self.selectedMarks addObject:text];
         
         NSString *text;
         
         if(isSide==YES)
         {
-           
+            
             NSString *SideCode;
             
             if(indexPath.row == 0)
@@ -418,9 +432,9 @@
             
             text = [self.commonArray objectAtIndex:indexPath.row];
             if ([self.selectedMarks containsObject:SideCode])// Is selected?
-                [self.selectedMarks removeObject:SideCode];
+            [self.selectedMarks removeObject:SideCode];
             else
-                [self.selectedMarks addObject:SideCode];
+            [self.selectedMarks addObject:SideCode];
             
             NSLog(@"%@",_selectedMarks);
             
@@ -454,9 +468,9 @@
             
             text = [self.commonArray objectAtIndex:indexPath.row];
             if ([self.selectedMarks containsObject:SiteCode])// Is selected?
-                [self.selectedMarks removeObject:SiteCode];
+            [self.selectedMarks removeObject:SiteCode];
             else
-                [self.selectedMarks addObject:SiteCode];
+            [self.selectedMarks addObject:SiteCode];
             
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
@@ -471,9 +485,9 @@
             NSString *locationcode = [[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row];
             text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
             if ([self.selectedMarks containsObject:locationcode])// Is selected?
-                [self.selectedMarks removeObject:locationcode];
+            [self.selectedMarks removeObject:locationcode];
             else
-                [self.selectedMarks addObject:locationcode];
+            [self.selectedMarks addObject:locationcode];
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
@@ -487,9 +501,9 @@
             NSString *causecode = [[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row];
             text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
             if ([self.selectedMarks containsObject:causecode])// Is selected?
-                [self.selectedMarks removeObject:causecode];
+            [self.selectedMarks removeObject:causecode];
             else
-                [self.selectedMarks addObject:causecode];
+            [self.selectedMarks addObject:causecode];
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
@@ -502,9 +516,9 @@
             NSString *typecode = [[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row];
             text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
             if ([self.selectedMarks containsObject:typecode])// Is selected?
-                [self.selectedMarks removeObject:typecode];
+            [self.selectedMarks removeObject:typecode];
             else
-                [self.selectedMarks addObject:typecode];
+            [self.selectedMarks addObject:typecode];
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
@@ -533,7 +547,7 @@
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         manager.requestSerializer = requestSerializer;
-
+        
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -544,7 +558,7 @@
         if(_SiteCodeArray) [dic    setObject:_SiteCodeArray    forKey:@"InjurySite1"];
         if(self.CauseCodeArray)   [dic    setObject:self.CauseCodeArray      forKey:@"InjuryCaseCode1"];
         if(self.TypeCodeArray)   [dic    setObject:self.TypeCodeArray      forKey:@"InjuryTypeCode1"];
-         if(self.LocCodeArray)   [dic    setObject:self.LocCodeArray      forKey:@"InjuryLocationSubCode1"];
+        if(self.LocCodeArray)   [dic    setObject:self.LocCodeArray      forKey:@"InjuryLocationSubCode1"];
         
         
         
@@ -577,16 +591,180 @@
     
 }
 
+-(void)UpdateWebservice
+{
+    [COMMON loadingIcon:self.view];
+    if([COMMON isInternetReachable])
+    {
+        
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",MultiInjuryUpdateKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        
+        if(self.createdby)   [dic    setObject:self.createdby     forKey:@"CreatedBy"];
+        if(self.occurenceCode)   [dic    setObject:self.occurenceCode     forKey:@"InjuaryOccuranceCode"];
+        if(self.occurenceSubCode)   [dic    setObject:self.occurenceSubCode     forKey:@"InjuaryOccuranceSubCode"];
+        if(self.injurycode)   [dic    setObject:self.injurycode     forKey:@"InjuryCode"];
+        if(self.onsetCode)   [dic    setObject:self.onsetCode     forKey:@"OnSetType"];
+        if(self.injuryName)   [dic    setObject:self.injuryName     forKey:@"InjuryName"];
+        if(self.playercode)   [dic    setObject:self.playercode     forKey:@"PlayerCode"];
+        if(_gamecode)   [dic    setObject:_gamecode     forKey:@"GameCode"];
+        if(_teamcode)   [dic    setObject:_teamcode     forKey:@"TeamCode"];
+        if(self.clientcode) [dic    setObject:self.clientcode     forKey:@"ClientCode"];
+        if(_SideCodeArray) [dic    setObject:_SideCodeArray    forKey:@"InjurySide1"];
+        if(_SiteCodeArray) [dic    setObject:_SiteCodeArray    forKey:@"InjurySite1"];
+        if(self.CauseCodeArray)   [dic    setObject:self.CauseCodeArray      forKey:@"InjuryCaseCode1"];
+        if(@"")   [dic    setObject:@""      forKey:@"InjuryCauseCode"];
+        if(self.TypeCodeArray)   [dic    setObject:self.TypeCodeArray      forKey:@"InjuryTypeCode1"];
+        if(self.LocCodeArray)   [dic    setObject:self.LocCodeArray      forKey:@"InjuryLocationSubCode1"];
+        if(self.dateofAssessment)   [dic    setObject:self.dateofAssessment      forKey:@"DateOfAssessment"];
+        if(self.onsetDate)   [dic    setObject:self.onsetDate      forKey:@"OnSetDate"];
+        if(self.chiefComplaint)   [dic    setObject:self.chiefComplaint      forKey:@"ChiefCompliant"];
+        if(self.expectedOpinionCode)   [dic    setObject:self.expectedOpinionCode      forKey:@"ExpertOptionTakenCode"];
+        if(self.recoverydate)   [dic    setObject:self.recoverydate      forKey:@"ExpectedDateOfRecovery"];
+        if(self.vasValue)   [dic    setObject:self.vasValue      forKey:@"Vas"];
+        if(@"Yes")   [dic    setObject:@"Yes"      forKey:@"MultiInjury"];
+        
+        if(xrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"XRAYSFILE"];
+        }
+        else{
+            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+        }
+        [dic    setObject:@"Xray.png"     forKey:@"XRaysName"];
+        
+        
+        
+        if(ctData==nil)
+        {
+            [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+        }
+        [dic    setObject:@"Ctscan.png"     forKey:@"CTScansName"];
+        
+        
+        
+        if(mrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+        }
+        [dic    setObject:@"Mriscan.png"     forKey:@"MriScansName"];
+        
+        
+        if(bloodData==nil)
+        {
+            [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
+        }
+        else
+        {
+            [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
+        }
+        [dic    setObject:@"Bloodtest.png"     forKey:@"BloodTestName"];
+        
+        
+        
+        
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                //if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"])
+                
+                if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Message"] != NULL)
+                {
+                    [self ShowAlterMsg:@"Injury Updated Successfully"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+                else
+                {
+                    [self ShowAlterMsg:@"Injury Updated Failed"];
+                    //[self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+            
+            [COMMON RemoveLoadingIcon];
+            [self.view setUserInteractionEnabled:YES];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [COMMON webServiceFailureError];
+            [self.view setUserInteractionEnabled:YES];
+            
+        }];
+    }
+    
+}
+
+-(void)startDeleteInjuryService :(NSString *) Usercode :(NSString *)selectinjuryCode
+{
+    [COMMON loadingIcon:self.view];
+    if([COMMON isInternetReachable])
+    {
+        [objWebservice getinjuryDelete:injuryDelete :selectinjuryCode :Usercode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                
+                [self ShowAlterMsg:@"Injury Deleted Successfully"];
+                //[self.navigationController popViewControllerAnimated:YES];
+                
+                InjuryVC  * obj=[[InjuryVC alloc]init];
+                obj = (InjuryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"injury"];
+                [self.navigationController pushViewController:obj animated:YES];
+                
+            }
+            [COMMON RemoveLoadingIcon];
+            [self.view setUserInteractionEnabled:YES];
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            [COMMON webServiceFailureError];
+            [self.view setUserInteractionEnabled:YES];
+        }];
+        
+    }
+    
+}
+
+
 -(IBAction)DeleterowAction:(id)sender
 {
     
     UIButton *button = sender;
-   SelectedindexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    SelectedindexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     
     [self ShowAlterMsg1:@"Do you Want to delete Injury?"];
     
 }
 
+-(void)ShowAlterMsg:(NSString*) MsgStr
+{
+    UIAlertView *objAlter =[[UIAlertView alloc]initWithTitle:@"" message:MsgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objAlter show];
+    
+    // [self DeleteWebservice];
+    
+}
 
 -(void)ShowAlterMsg1:(NSString*) MsgStr
 {
@@ -684,3 +862,4 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.navigationController popViewControllerAnimated:NO];
 }
 @end
+

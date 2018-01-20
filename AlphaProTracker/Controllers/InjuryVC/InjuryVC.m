@@ -19,6 +19,7 @@
 {
     WebService * objWebservice;
     NSString * cliendCode;
+    NSString *userRefcode;
 }
 
 @property (nonatomic,strong)IBOutlet UIButton * addBtn;
@@ -35,6 +36,8 @@
     [self customnavigationmethod];
     objWebservice =[[WebService alloc]init];
     cliendCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    userRefcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
     self.addBtn.layer.cornerRadius=20;
     self.addBtn.layer.masksToBounds=YES;
     
@@ -42,7 +45,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
-        [COMMON AddMenuView:self.view];
+    [COMMON AddMenuView:self.view];
     
     [self FetchInjuryListWebService];
 }
@@ -66,7 +69,7 @@
 #pragma Button action
 -(IBAction)MenuBtnAction:(id)sender
 {
-   [COMMON ShowsideMenuView];
+    [COMMON ShowsideMenuView];
     
 }
 
@@ -77,30 +80,76 @@
     [self.navigationController pushViewController:objTabVC animated:YES];
     
 }
+//-(void)FetchInjuryListWebService
+//{
+//    [COMMON loadingIcon:self.view];
+//    if([COMMON isInternetReachable])
+//    {
+//        [objWebservice getFetchinjuryList:FetchInjuryList :cliendCode :userRefcode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//           NSLog(@"response ; %@",responseObject);
+//
+//           if(responseObject >0)
+//           {
+//               self.InjuryListArray =[[NSMutableArray alloc] init];
+//               self.InjuryListArray =[responseObject valueForKey:@"InjuryDetails"];
+//               [self.injuryTbl reloadData];
+//
+//           }
+//           [COMMON RemoveLoadingIcon];
+//           [self.view setUserInteractionEnabled:YES];
+//       } failure:^(AFHTTPRequestOperation *operation, id error) {
+//           [COMMON webServiceFailureError];
+//           [self.view setUserInteractionEnabled:YES];
+//       }];
+//
+//    }
+//}
+
 -(void)FetchInjuryListWebService
 {
     [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
     {
-       [objWebservice getFetchinjuryList:FetchInjuryList :cliendCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
-           NSLog(@"response ; %@",responseObject);
-           
-           if(responseObject >0)
-           {
-               self.InjuryListArray =[[NSMutableArray alloc] init];
-               self.InjuryListArray =[responseObject valueForKey:@"InjuryDetails"];
-               [self.injuryTbl reloadData];
-               
-           }
-           [COMMON RemoveLoadingIcon];
-           [self.view setUserInteractionEnabled:YES];
-       } failure:^(AFHTTPRequestOperation *operation, id error) {
-           [COMMON webServiceFailureError];
-           [self.view setUserInteractionEnabled:YES];
-       }];
         
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FetchInjuryList]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(cliendCode)   [dic    setObject:cliendCode     forKey:@"ClientCode"];
+        if(userRefcode)   [dic    setObject:userRefcode     forKey:@"Userreferencecode"];
+        
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                self.InjuryListArray =[[NSMutableArray alloc] init];
+                self.InjuryListArray =[responseObject valueForKey:@"InjuryWebs"];
+                [self.injuryTbl reloadData];
+            }
+            
+            [COMMON RemoveLoadingIcon];
+            [self.view setUserInteractionEnabled:YES];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [COMMON webServiceFailureError];
+            [self.view setUserInteractionEnabled:YES];
+            
+        }];
     }
+    
 }
+
 #pragma Tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -110,8 +159,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-        return [self.InjuryListArray count];
-   
+    return [self.InjuryListArray count];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,7 +171,7 @@
     }
     else
     {
-       return 40;
+        return 40;
     }
 }
 
@@ -130,19 +179,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        static NSString *CellIdentifier = @"Injury";
-        
-        InjuryListCell * objCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (objCell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"InjuryListCell" owner:self options:nil];
-            objCell = self.injuryCell;
-        }
+    static NSString *CellIdentifier = @"Injury";
+    
+    InjuryListCell * objCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (objCell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"InjuryListCell" owner:self options:nil];
+        objCell = self.injuryCell;
+    }
     
     
     
-    NSString * ondate =[[self.InjuryListArray valueForKey:@"ONSETDATE"] objectAtIndex:indexPath.row];
+    NSString * ondate =[[self.InjuryListArray valueForKey:@"OnSetDate"] objectAtIndex:indexPath.row];
     NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
     [dateFormatters setDateFormat:@"MM/dd/yyyy hh:mm:ss a"];
     NSDate *dates = [dateFormatters dateFromString:ondate];
@@ -152,7 +201,7 @@
     NSString * ondateStr = [dfs stringFromDate:dates];
     
     
-    NSString * recorydate =[[self.InjuryListArray valueForKey:@"EXPECTEDDATEOFRECOVERY"] objectAtIndex:indexPath.row];;
+    NSString * recorydate =[[self.InjuryListArray valueForKey:@"ExpectedDateOfRecovery"] objectAtIndex:indexPath.row];;
     NSDateFormatter *dateFormatterss = [[NSDateFormatter alloc] init];
     [dateFormatterss setDateFormat:@"MM/dd/yyyy hh:mm:ss a"];
     NSDate *date = [dateFormatters dateFromString:recorydate];
@@ -160,19 +209,19 @@
     NSDateFormatter* df = [[NSDateFormatter alloc]init];
     [df setDateFormat:@"dd-MMMM-yyyy"];
     NSString * recorydateStr = [df stringFromDate:date];
-
     
-        
-        objCell.dateofOnsetlbl.text =ondateStr;
-        objCell.injuryNamelbl.text =[[self.InjuryListArray valueForKey:@"INJURYNAME"] objectAtIndex:indexPath.row];
-    objCell.recoverylbl.text=recorydateStr;
+    
+    
+    objCell.dateofOnsetlbl.text =ondate;
+    objCell.injuryNamelbl.text =[[self.InjuryListArray valueForKey:@"InjuryName"] objectAtIndex:indexPath.row];
+    objCell.recoverylbl.text=recorydate;
     
     objCell.backgroundColor = [UIColor clearColor];
     
-        objCell.selectionStyle=UITableViewCellSelectionStyleNone;
-        return objCell;
+    objCell.selectionStyle=UITableViewCellSelectionStyleNone;
+    return objCell;
     
-
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -189,7 +238,7 @@
     AddInjuryVC  * objaddinjury=[[AddInjuryVC alloc]init];
     objaddinjury = (AddInjuryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"addInjury"];
     objaddinjury.isUpdate =NO;
-  
+    
     [self.navigationController pushViewController:objaddinjury animated:YES];
 }
 
@@ -200,3 +249,4 @@
 
 
 @end
+

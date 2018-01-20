@@ -135,7 +135,9 @@
 
 #define removeRecord                      @"DELETE_WORKLOAD_WELLNESS_RATING"
 
-#define FetchInjuryList                   @"FETCH_INJURY"
+//#define FetchInjuryList                   @"FETCH_INJURY"
+
+#define FetchInjuryList                   @"FETCHLOADINJURYWEB"
 
 #define TRDetailsKey                      @"GET_TRAININGLOAD_DETAILS"
 
@@ -206,5 +208,7 @@
 #define deleteRowKey                    @"DELETEROW"
 
 #define OPENPLAYEREXERCISEDETAILS                    @"OPENPLAYEREXERCISEDETAILS"
-#define AllPlayerProgramKey               @"GETALLPLAYERPROGRAMS"
 
+#define MultiInjuryUpdateKey                    @"MULTIINJURYUPDATE"
+
+#define AllPlayerProgramKey               @"GETALLPLAYERPROGRAMS"

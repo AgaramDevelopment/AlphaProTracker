@@ -12,3 +12,4 @@
 @property (nonatomic,strong) IBOutlet InjuryListCell * injuryCell;
 
 @end
+
