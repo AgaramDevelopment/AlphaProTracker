@@ -24,6 +24,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 #pragma Testing Url 
 
 #define BASE_URL   @"http://192.168.1.84:8029/AGAPTService.svc/"
+#define IMAGE_URL   @"http://192.168.1.84:8030/"
 
 //#define BASE_URL   @"http://192.168.1.84:8039/AGAPTService.svc/"
 

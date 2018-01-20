@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ExcersizeDetailItemVC.h"
+#import "ExcierseDetailVC.h"
 
 
 @interface AppDelegate ()
@@ -26,7 +26,7 @@
     
     UIViewController * initViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"HomeVC" : @"LoginVC")];
     
-    //ExcersizeDetailItemVC *initViewController = [ExcersizeDetailItemVC new];
+   // ExcierseDetailVC *initViewController = [ExcierseDetailVC new];
     
     
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
