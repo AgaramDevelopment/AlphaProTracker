@@ -18,7 +18,7 @@
 
 #import "FFImportantFilesForCalendar.h"
 
-@interface FFDayCalendarView () <FFDayCellProtocol, FFEditEventViewProtocol, FFEventDetailViewProtocol, FFDayHeaderCollectionViewProtocol, FFDayCollectionViewProtocol, UIGestureRecognizerDelegate>
+@interface FFDayCalendarView () <FFDayCellProtocol, FFEditEventViewProtocol, FFEventDetailViewProtocol, FFDayHeaderCollectionViewProtocol, FFDayCollectionViewProtocol, UIGestureRecognizerDelegate,CollectionCellProtocol>
 @property (nonatomic, strong) FFDayHeaderCollectionView *collectionViewHeaderDay;
 @property (nonatomic, strong) FFDayScrollView *dayContainerScroll;
 @property (nonatomic, strong) FFEventDetailView *viewDetail;
@@ -75,6 +75,7 @@
     if (!dayContainerScroll) {
         collectionViewHeaderDay = [[FFDayHeaderCollectionView alloc] initWithFrame:CGRectMake(0., 0., self.frame.size.width, HEADER_HEIGHT_SCROLL)];
         [collectionViewHeaderDay setProtocol:self];
+        [collectionViewHeaderDay setCellProtocol:self];
         [collectionViewHeaderDay scrollToDate:[[FFDateManager sharedManager] currentDate]];
         [self addSubview:collectionViewHeaderDay];
         
@@ -206,6 +207,12 @@
     
     [view removeFromSuperview];
     view = nil;
+}
+
+-(void)getDate:(NSDate *)date // Month cell protocol
+{
+    NSLog(@"DATE MONTH CALENDAR");
+    [self.collectionDidSelectDelegate didSelectEventOfCell:date];
 }
 
 @end

@@ -9,7 +9,6 @@
 //
 
 #import "FFMonthCollectionView.h"
-
 #import "FFMonthCollectionViewFlowLayout.h"
 #import "FFEvent.h"
 #import "FFMonthCell.h"
@@ -156,6 +155,10 @@
 //        NSLog(@"%@",ce.labelDay.text);
 //
 //    }
+    NSMutableArray *arrayDates = [array objectAtIndex:indexPath.section];
+    id obj = [arrayDates objectAtIndex:indexPath.row];
+    NSDate *date = (NSDate *)obj;
+    [self.cellProtocol getDate:date];
 
 }
 

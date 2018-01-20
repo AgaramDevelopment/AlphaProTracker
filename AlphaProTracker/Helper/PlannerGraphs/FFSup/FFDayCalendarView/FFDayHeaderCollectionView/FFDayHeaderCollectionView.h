@@ -9,6 +9,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FFMonthCollectionView.h"
 
 @protocol FFDayHeaderCollectionViewProtocol <NSObject>
 @required
@@ -18,6 +19,7 @@
 @interface FFDayHeaderCollectionView : UICollectionView
 
 @property (nonatomic, strong) id<FFDayHeaderCollectionViewProtocol> protocol;
+@property (nonatomic, strong) id<CollectionCellProtocol> cellProtocol;
 
 - (void)scrollToDate:(NSDate *)date;
 

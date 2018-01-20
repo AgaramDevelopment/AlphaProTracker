@@ -9,7 +9,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FFMonthCollectionView.h"
 #import "FFDayCell.h"
 
 @protocol FFDayCollectionViewProtocol <NSObject>
@@ -20,5 +20,6 @@
 
 @property (nonatomic, strong) id<FFDayCollectionViewProtocol> protocol;
 @property (nonatomic, strong) NSMutableDictionary *dictEvents;
+@property (nonatomic, strong) id<CollectionCellProtocol> cellProtocol;
 
 @end

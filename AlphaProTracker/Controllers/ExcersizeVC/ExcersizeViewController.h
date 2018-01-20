@@ -10,6 +10,7 @@
 
 @interface ExcersizeViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UICollectionView *excersizeCollection;
 @property (weak, nonatomic) IBOutlet UILabel *lblHeaderName;
 @end

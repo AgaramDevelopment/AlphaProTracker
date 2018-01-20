@@ -14,7 +14,7 @@
 #import "FFWeekScrollView.h"
 #import "FFImportantFilesForCalendar.h"
 
-@interface FFWeekCalendarView () <FFWeekCollectionViewProtocol, FFWeekHeaderCollectionViewProtocol>
+@interface FFWeekCalendarView () <FFWeekCollectionViewProtocol, FFWeekHeaderCollectionViewProtocol,CollectionCellProtocol>
 @property (nonatomic, strong) FFWeekHeaderCollectionView *scrollViewHeaderWeek;
 @property (nonatomic, strong) FFWeekScrollView *weekContainerScroll;
 @end
@@ -63,6 +63,8 @@
         
         scrollViewHeaderWeek = [[FFWeekHeaderCollectionView alloc] initWithFrame:CGRectMake(viewLeft.frame.size.width, 0, self.frame.size.width-viewLeft.frame.size.width, HEADER_HEIGHT_SCROLL)];
         [scrollViewHeaderWeek setProtocol:self];
+        [scrollViewHeaderWeek setCellProtocol:self];
+        
         [self scrollToPage:(int)[NSDate componentsOfDate:[[FFDateManager sharedManager] currentDate]].weekOfMonth+1];
         [self addSubview:scrollViewHeaderWeek];
         
@@ -125,6 +127,12 @@
     CGPoint offset = weekContainerScroll.collectionViewWeek.contentOffset;
     offset.x = scrollViewHeaderWeek.contentOffset.x;
     [weekContainerScroll.collectionViewWeek setContentOffset:offset];
+}
+
+-(void)getDate:(NSDate *)date // Month cell protocol
+{
+    NSLog(@"DATE WEEK CALENDAR");
+    [self.collectionDidSelectDelegate didSelectEventOfCell:date];
 }
 
 @end

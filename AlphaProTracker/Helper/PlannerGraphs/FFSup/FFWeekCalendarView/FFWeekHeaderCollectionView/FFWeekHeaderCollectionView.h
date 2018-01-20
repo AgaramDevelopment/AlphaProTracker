@@ -9,6 +9,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FFMonthCollectionView.h"
 
 @protocol FFWeekHeaderCollectionViewProtocol <NSObject>
 @required
@@ -17,7 +18,7 @@
 @end
 
 @interface FFWeekHeaderCollectionView : UICollectionView
-
 @property id<FFWeekHeaderCollectionViewProtocol> protocol;
+@property (nonatomic, strong) id<CollectionCellProtocol> cellProtocol;
 
 @end

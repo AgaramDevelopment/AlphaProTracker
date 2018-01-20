@@ -20,7 +20,7 @@ static UIImage *imageCircleBlack;
 #pragma mark - Synthesize
 
 @synthesize date;
-
+@synthesize buttonIndexPath;
 #pragma mark - Lifecycle
 
 - (id)initWithFrame:(CGRect)frame

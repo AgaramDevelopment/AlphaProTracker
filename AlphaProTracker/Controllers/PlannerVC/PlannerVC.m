@@ -22,6 +22,7 @@
 
 #import "EventRecord.h"
 #import "FFBlueButton.h"
+#import "FFMonthCollectionView.h"
 
 
 
@@ -34,7 +35,7 @@ typedef enum : NSUInteger
 } CalendarViewType;
 
 
-@interface PlannerVC ()<SACalendarDelegate,FFButtonAddEventWithPopoverProtocol, FFYearCalendarViewProtocol, FFMonthCalendarViewProtocol, FFWeekCalendarViewProtocol, FFDayCalendarViewProtocol>
+@interface PlannerVC ()<SACalendarDelegate,FFButtonAddEventWithPopoverProtocol, FFYearCalendarViewProtocol, FFMonthCalendarViewProtocol, FFWeekCalendarViewProtocol, FFDayCalendarViewProtocol,DateProtocol>
 
 {
     BOOL isEvent;
@@ -62,6 +63,7 @@ typedef enum : NSUInteger
 @property (nonatomic, strong) FFMonthCalendarView *viewCalendarMonth;
 @property (nonatomic, strong) FFWeekCalendarView *viewCalendarWeek;
 @property (nonatomic, strong) FFDayCalendarView *viewCalendarDay;
+@property (nonatomic,strong) FFMonthCollectionView * monthCollect;
 
 @property (nonatomic,strong) WebService * objWebservice;
 
@@ -121,7 +123,7 @@ typedef enum : NSUInteger
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //[COMMON AddMenuView:self.view];
     self.nameOfMonth.text = @"";
     [self customnavigationmethod];
@@ -138,8 +140,8 @@ typedef enum : NSUInteger
     
     self.Tabbar.hidden = YES;
     
-    [self EventTypeWebservice :usercode:cliendcode:userref];
-    
+//    [self EventTypeWebservice :usercode:cliendcode:userref];
+    [self MonthAction:nil];
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
@@ -163,8 +165,11 @@ typedef enum : NSUInteger
 //    [self.view addSubview:saCalendar];
     
     viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:calendarView.frame];
+    [viewCalendarMonth setCollectionDidSelectDelegate:self];
     viewCalendarWeek = [[FFWeekCalendarView alloc] initWithFrame:calendarView.frame];
+    [viewCalendarWeek setCollectionDidSelectDelegate:self];
     viewCalendarDay = [[FFDayCalendarView alloc] initWithFrame:calendarView.frame];
+    [viewCalendarDay setCollectionDidSelectDelegate:self];
 
 
 
@@ -179,7 +184,6 @@ typedef enum : NSUInteger
         [self buttonTodayAction:nil];
     }
 
-//    [self EventTypeWebservice :usercode:cliendcode:userref];
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     
@@ -190,17 +194,14 @@ typedef enum : NSUInteger
 
 -(IBAction)MonthAction:(id)sender
 {
-    
     self.Tabbar.hidden = NO;
     self.nameOfMonth.text = @"";
     
-    
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-    
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
     userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-//    [self EventTypeWebservice :usercode:cliendcode:userref];
+    
+    [self EventTypeWebservice :usercode:cliendcode:userref];
     [viewCalendarMonth removeFromSuperview];
     [viewCalendarWeek removeFromSuperview];
     [viewCalendarDay removeFromSuperview];
@@ -544,8 +545,8 @@ typedef enum : NSUInteger
 //                    [saCalendar SetEventTitle:self.AllEventDetailListArray];
 //                }
 //
-//                [self setArrayWithEvents:[self arrayWithEvents]];
-                [self MonthAction:nil];
+                [self setArrayWithEvents:[self arrayWithEvents]];
+//                [self MonthAction:nil];
                 
                 
             }
@@ -1195,7 +1196,9 @@ typedef enum : NSUInteger
    [COMMON ShowsideMenuView];
 }
 
-
-
+-(void)didSelectEventOfCell:(NSDate *)selectedDate
+{
+    NSLog(@"FINAL DATE %@",selectedDate);
+}
 
 @end

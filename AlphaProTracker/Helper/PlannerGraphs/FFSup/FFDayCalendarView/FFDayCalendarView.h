@@ -9,6 +9,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DateProtocol.h"
 
 @protocol FFDayCalendarViewProtocol <NSObject>
 @required
@@ -19,6 +20,7 @@
 
 @property (nonatomic, strong) id<FFDayCalendarViewProtocol> protocol;
 @property (nonatomic, strong) NSMutableDictionary *dictEvents;
+@property (nonatomic, strong) id<DateProtocol> collectionDidSelectDelegate;
 
 - (void)invalidateLayout;
 

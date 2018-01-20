@@ -13,5 +13,7 @@
 @interface FFDayHeaderButton : UIButton
 
 @property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSIndexPath *buttonIndexPath;
+
 
 @end

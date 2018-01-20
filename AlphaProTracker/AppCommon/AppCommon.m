@@ -422,7 +422,10 @@ AppCommon *sharedCommon = nil;
         
         else if(indexPath.row ==1)
         {
-            [self redirectSelectview:@"Planner"];
+//            [self redirectSelectview:@"Planner"];
+            ExcersizeViewController* VC = [ExcersizeViewController new];
+            [appDel.navigationController pushViewController:VC animated:YES];
+
             
         }
         
@@ -583,9 +586,7 @@ AppCommon *sharedCommon = nil;
         else if( indexPath.subRow==5)
         {
             NSLog(@"Physio ProgramVC");
-//            [self redirectSelectview:@"ProgramVC"];
-            ExcersizeViewController* VC = [ExcersizeViewController new];
-            [appDel.navigationController pushViewController:VC animated:YES];
+            [self redirectSelectview:@"ProgramVC"];
             
         }
         else if( indexPath.subRow==6)
