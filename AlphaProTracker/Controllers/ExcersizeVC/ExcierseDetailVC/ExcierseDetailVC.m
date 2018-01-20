@@ -476,7 +476,7 @@
     
 
  
-    
+    BOOL flag = false;
     
     NSMutableArray *paramArray = [[NSMutableArray alloc] init];
     for(int i=0;i<parameterArray.count;i++){
@@ -484,7 +484,17 @@
         NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
         [paramDict setValue:[[parameterArray objectAtIndex:i] objectForKey:@"ParameterCode"] forKey:@"ParameterCode"];
         [paramDict setValue:[[parameterArray objectAtIndex:i] objectForKey:@"value"] forKey:@"value"];
-        [paramDict setValue: cell.actualTFld.text forKey:@"ActualValue"];
+        
+        NSString *actualValue = cell.actualTFld.text;
+        actualValue = [actualValue stringByTrimmingCharactersInSet:
+                                   [NSCharacterSet whitespaceCharacterSet]];
+
+        if([actualValue isEqualToString:@""] ){
+            flag = true;
+            break;
+        }
+        
+        [paramDict setValue: actualValue forKey:@"ActualValue"];
           //[initWithObjectsAndKeys: cell.name.text, @"name", cell.age.text, @"age", nil];
         
         [paramArray addObject:paramDict];
@@ -492,7 +502,11 @@
     
     [dict setValue:paramArray forKey:@"lstExcercise_Parameters"];
 
-    [self saveParamWebservice:dict];
+    if(!flag){
+        [self saveParamWebservice:dict];
+    }else{
+        [self showAlertWithMessage:@"Actual value can not be empty"];
+    }
 }
 -(void) showAlertWithMessage:(NSString *)message
 {
