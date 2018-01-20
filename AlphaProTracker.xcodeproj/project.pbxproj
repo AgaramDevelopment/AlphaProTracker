@@ -42,15 +42,6 @@
 		0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0441B7841F6ACA6B00A28E19 /* PlannerCell.xib */; };
 		0441B78A1F6ACB4E00A28E19 /* PlannerListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0441B7891F6ACB4E00A28E19 /* PlannerListVC.m */; };
 		044730D41F94D41E00871628 /* Utitliy.m in Sources */ = {isa = PBXBuildFile; fileRef = 044730D31F94D41E00871628 /* Utitliy.m */; };
-		04534A551F53FA4100999FBC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A431F53FA4100999FBC /* AFHTTPRequestOperation.m */; };
-		04534A561F53FA4100999FBC /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A451F53FA4100999FBC /* AFHTTPRequestOperationManager.m */; };
-		04534A571F53FA4100999FBC /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A471F53FA4100999FBC /* AFHTTPSessionManager.m */; };
-		04534A581F53FA4100999FBC /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A4A1F53FA4100999FBC /* AFNetworkReachabilityManager.m */; };
-		04534A591F53FA4100999FBC /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A4C1F53FA4100999FBC /* AFSecurityPolicy.m */; };
-		04534A5A1F53FA4100999FBC /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A4E1F53FA4100999FBC /* AFURLConnectionOperation.m */; };
-		04534A5B1F53FA4100999FBC /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A501F53FA4100999FBC /* AFURLRequestSerialization.m */; };
-		04534A5C1F53FA4100999FBC /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A521F53FA4100999FBC /* AFURLResponseSerialization.m */; };
-		04534A5D1F53FA4100999FBC /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A541F53FA4100999FBC /* AFURLSessionManager.m */; };
 		04534A6F1F542E2100999FBC /* PlannerAddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A6E1F542E2100999FBC /* PlannerAddEvent.m */; };
 		04534A721F542E7700999FBC /* PlannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534A711F542E7700999FBC /* PlannerVC.m */; };
 		045A49541FA21F93008C1630 /* FFCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045A49531FA21F93008C1630 /* FFCalendarViewController.m */; };
@@ -196,8 +187,6 @@
 		AC87CD9E1F55A74D002AA80E /* assemntCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC87CD9C1F55A74D002AA80E /* assemntCell.xib */; };
 		AC9F541D1F4D42E600BED5CF /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F541C1F4D42E600BED5CF /* HomeVC.m */; };
 		ACA768591F4C1E8000ECC17A /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA768581F4C1E8000ECC17A /* LoginVC.m */; };
-		ACA768611F4C2AF000ECC17A /* AFNetworkActivityLogger in Resources */ = {isa = PBXBuildFile; fileRef = ACA7685A1F4C2AF000ECC17A /* AFNetworkActivityLogger */; };
-		ACA768671F4C2AF000ECC17A /* UIKit+AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = ACA768601F4C2AF000ECC17A /* UIKit+AFNetworking */; };
 		ACACEFDB1F5920EA004C28A4 /* WLReportFilterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFDA1F5920EA004C28A4 /* WLReportFilterVC.m */; };
 		ACACEFDF1F596DE1004C28A4 /* TestAssessmentEntryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFDE1F596DE1004C28A4 /* TestAssessmentEntryVC.m */; };
 		ACACEFE21F59740C004C28A4 /* TestAssessmentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFE11F59740C004C28A4 /* TestAssessmentListVC.m */; };
@@ -316,25 +305,6 @@
 		0441B7891F6ACB4E00A28E19 /* PlannerListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlannerListVC.m; path = Controllers/PlannerListVC/PlannerListVC.m; sourceTree = "<group>"; };
 		044730D21F94D28E00871628 /* Utitliy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utitliy.h; path = AppCommon/Utitliy.h; sourceTree = "<group>"; };
 		044730D31F94D41E00871628 /* Utitliy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utitliy.m; path = AppCommon/Utitliy.m; sourceTree = "<group>"; };
-		04534A421F53FA4100999FBC /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Helper/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		04534A431F53FA4100999FBC /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Helper/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		04534A441F53FA4100999FBC /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Helper/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		04534A451F53FA4100999FBC /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperationManager.m; path = Helper/AFNetworking/AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		04534A461F53FA4100999FBC /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = Helper/AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		04534A471F53FA4100999FBC /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = Helper/AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		04534A481F53FA4100999FBC /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = Helper/AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
-		04534A491F53FA4100999FBC /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = Helper/AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		04534A4A1F53FA4100999FBC /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = Helper/AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		04534A4B1F53FA4100999FBC /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = Helper/AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
-		04534A4C1F53FA4100999FBC /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = Helper/AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
-		04534A4D1F53FA4100999FBC /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = Helper/AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		04534A4E1F53FA4100999FBC /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = Helper/AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		04534A4F1F53FA4100999FBC /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = Helper/AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		04534A501F53FA4100999FBC /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = Helper/AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		04534A511F53FA4100999FBC /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = Helper/AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		04534A521F53FA4100999FBC /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = Helper/AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		04534A531F53FA4100999FBC /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = Helper/AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
-		04534A541F53FA4100999FBC /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = Helper/AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		04534A6D1F542E2100999FBC /* PlannerAddEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlannerAddEvent.h; path = Controllers/PlannerAddEventVC/PlannerAddEvent.h; sourceTree = "<group>"; };
 		04534A6E1F542E2100999FBC /* PlannerAddEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlannerAddEvent.m; path = Controllers/PlannerAddEventVC/PlannerAddEvent.m; sourceTree = "<group>"; };
 		04534A701F542E7700999FBC /* PlannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlannerVC.h; path = Controllers/PlannerVC/PlannerVC.h; sourceTree = "<group>"; };
@@ -613,8 +583,6 @@
 		AC9F541F1F4D5C7B00BED5CF /* HomeVCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeVCCell.h; path = Subview/HomeVCCell/HomeVCCell.h; sourceTree = "<group>"; };
 		ACA768571F4C1E8000ECC17A /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = Controllers/LoginVC/LoginVC.h; sourceTree = "<group>"; };
 		ACA768581F4C1E8000ECC17A /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = Controllers/LoginVC/LoginVC.m; sourceTree = "<group>"; };
-		ACA7685A1F4C2AF000ECC17A /* AFNetworkActivityLogger */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AFNetworkActivityLogger; path = Helper/AFNetworkActivityLogger; sourceTree = "<group>"; };
-		ACA768601F4C2AF000ECC17A /* UIKit+AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "UIKit+AFNetworking"; path = "Helper/UIKit+AFNetworking"; sourceTree = "<group>"; };
 		ACACEFD91F5920EA004C28A4 /* WLReportFilterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLReportFilterVC.h; path = Controllers/WLReportFilterVC/WLReportFilterVC.h; sourceTree = "<group>"; };
 		ACACEFDA1F5920EA004C28A4 /* WLReportFilterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLReportFilterVC.m; path = Controllers/WLReportFilterVC/WLReportFilterVC.m; sourceTree = "<group>"; };
 		ACACEFDD1F596DE1004C28A4 /* TestAssessmentEntryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestAssessmentEntryVC.h; path = Controllers/TestAssessmentEntryVC/TestAssessmentEntryVC.h; sourceTree = "<group>"; };
@@ -989,10 +957,7 @@
 				ACAE8FEB1F6951B00072FA41 /* PieChart */,
 				ACC1D6EC1F66926A002329A1 /* Charts */,
 				04534A5E1F53FD1C00999FBC /* Calender */,
-				04534A411F53FA2900999FBC /* AFNetwork */,
 				046215E21F4EFA9700A781C2 /* SKSTableview */,
-				ACA7685A1F4C2AF000ECC17A /* AFNetworkActivityLogger */,
-				ACA768601F4C2AF000ECC17A /* UIKit+AFNetworking */,
 			);
 			name = Helperview;
 			sourceTree = "<group>";
@@ -1052,32 +1017,6 @@
 				04534A711F542E7700999FBC /* PlannerVC.m */,
 			);
 			name = PlannerVC;
-			sourceTree = "<group>";
-		};
-		04534A411F53FA2900999FBC /* AFNetwork */ = {
-			isa = PBXGroup;
-			children = (
-				04534A421F53FA4100999FBC /* AFHTTPRequestOperation.h */,
-				04534A431F53FA4100999FBC /* AFHTTPRequestOperation.m */,
-				04534A441F53FA4100999FBC /* AFHTTPRequestOperationManager.h */,
-				04534A451F53FA4100999FBC /* AFHTTPRequestOperationManager.m */,
-				04534A461F53FA4100999FBC /* AFHTTPSessionManager.h */,
-				04534A471F53FA4100999FBC /* AFHTTPSessionManager.m */,
-				04534A481F53FA4100999FBC /* AFNetworking.h */,
-				04534A491F53FA4100999FBC /* AFNetworkReachabilityManager.h */,
-				04534A4A1F53FA4100999FBC /* AFNetworkReachabilityManager.m */,
-				04534A4B1F53FA4100999FBC /* AFSecurityPolicy.h */,
-				04534A4C1F53FA4100999FBC /* AFSecurityPolicy.m */,
-				04534A4D1F53FA4100999FBC /* AFURLConnectionOperation.h */,
-				04534A4E1F53FA4100999FBC /* AFURLConnectionOperation.m */,
-				04534A4F1F53FA4100999FBC /* AFURLRequestSerialization.h */,
-				04534A501F53FA4100999FBC /* AFURLRequestSerialization.m */,
-				04534A511F53FA4100999FBC /* AFURLResponseSerialization.h */,
-				04534A521F53FA4100999FBC /* AFURLResponseSerialization.m */,
-				04534A531F53FA4100999FBC /* AFURLSessionManager.h */,
-				04534A541F53FA4100999FBC /* AFURLSessionManager.m */,
-			);
-			name = AFNetwork;
 			sourceTree = "<group>";
 		};
 		04534A5E1F53FD1C00999FBC /* Calender */ = {
@@ -2048,7 +1987,6 @@
 				CEEE8036200E210400E33513 /* ExcersizeCollectionViewCell.xib in Resources */,
 				045A49F81FA22192008C1630 /* DailyCalendar.png in Resources */,
 				CEEE803B200E2BBC00E33513 /* HeaderCollectionReusableView.xib in Resources */,
-				ACA768611F4C2AF000ECC17A /* AFNetworkActivityLogger in Resources */,
 				CEEE8047200E3C3E00E33513 /* ExcersizeViewController.xib in Resources */,
 				04DB752E1F7A5E64001CB710 /* IllnessCell.xib in Resources */,
 				ACB567C51F62D7A800F1C45E /* TrainingLoadCell.xib in Resources */,
@@ -2076,7 +2014,6 @@
 				045A49F91FA22192008C1630 /* MonthlyCalendar.png in Resources */,
 				04F11D9A200F70F9004A4218 /* MultiInjurylistCell.xib in Resources */,
 				AC1BC8161F8665A60047AECC /* AAHighchartsMore.js in Resources */,
-				ACA768671F4C2AF000ECC17A /* UIKit+AFNetworking in Resources */,
 				ACBD4AD81F56CFBC00AFA25D /* SubAssessmentCell.xib in Resources */,
 				04055A8F1F711F870014DC5B /* InjuryListCell.xib in Resources */,
 				045A49F71FA22192008C1630 /* blackCircle.png in Resources */,
@@ -2115,12 +2052,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2151,12 +2092,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				045A49A01FA2207E008C1630 /* FFWeekCollectionViewFlowLayout.m in Sources */,
-				04534A5D1F53FA4100999FBC /* AFURLSessionManager.m in Sources */,
-				04534A5A1F53FA4100999FBC /* AFURLConnectionOperation.m in Sources */,
 				04DEBCB31F4BED800070C540 /* WebService.m in Sources */,
 				18B9799D200E158500B94DD4 /* StepSlider.m in Sources */,
 				045A49AC1FA220A8008C1630 /* FFYearCell.m in Sources */,
-				04534A571F53FA4100999FBC /* AFHTTPSessionManager.m in Sources */,
 				189663CE2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.m in Sources */,
 				AC1BC8651F8665B40047AECC /* AAYAxis.m in Sources */,
 				ACACEFDF1F596DE1004C28A4 /* TestAssessmentEntryVC.m in Sources */,
@@ -2168,7 +2106,6 @@
 				045A49E91FA22146008C1630 /* FFSearchBarWithAutoComplete.m in Sources */,
 				AC1BC8641F8665B40047AECC /* AAXAxis.m in Sources */,
 				AC1BC8561F8665B40047AECC /* AALine.m in Sources */,
-				04534A581F53FA4100999FBC /* AFNetworkReachabilityManager.m in Sources */,
 				045A49661FA21FDE008C1630 /* FFDayHeaderButton.m in Sources */,
 				04534A721F542E7700999FBC /* PlannerVC.m in Sources */,
 				AC1BC84F1F8665B40047AECC /* AABar.m in Sources */,
@@ -2197,7 +2134,6 @@
 				CE3EBB461FFC990200588728 /* AssessmentFilterView.m in Sources */,
 				04228EC22011FE1000D131F8 /* AddFoodDiaryVC.m in Sources */,
 				04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */,
-				04534A591F53FA4100999FBC /* AFSecurityPolicy.m in Sources */,
 				AC1BC8071F8663020047AECC /* AAOptionsConstructor.m in Sources */,
 				045A49D91FA2211B008C1630 /* FFButtonWithHourPopover.m in Sources */,
 				04DB75281F7A5997001CB710 /* IllnessVC.m in Sources */,
@@ -2251,7 +2187,6 @@
 				04EE9D681F9A20F6007B3278 /* DBAConnection.m in Sources */,
 				ACC1D6F21F6692A6002329A1 /* MCChartInformationView.m in Sources */,
 				ACACEFE21F59740C004C28A4 /* TestAssessmentListVC.m in Sources */,
-				04534A561F53FA4100999FBC /* AFHTTPRequestOperationManager.m in Sources */,
 				AC1BC8501F8665B40047AECC /* AAChart.m in Sources */,
 				CEEE8046200E3C3E00E33513 /* ExcersizeViewController.m in Sources */,
 				ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */,
@@ -2312,19 +2247,16 @@
 				045A497E1FA22026008C1630 /* FFMonthCollectionView.m in Sources */,
 				AC1BC8521F8665B40047AECC /* AADataLabels.m in Sources */,
 				045A49C71FA220D2008C1630 /* UILabel+FFCustomMethods.m in Sources */,
-				04534A5B1F53FA4100999FBC /* AFURLRequestSerialization.m in Sources */,
 				AC1BC8551F8665B40047AECC /* AALegend.m in Sources */,
 				045A49BA1FA220C8008C1630 /* FFBlueButton.m in Sources */,
 				0441B7851F6ACA6B00A28E19 /* PlannerCell.m in Sources */,
 				045A49671FA21FDE008C1630 /* FFDayHeaderCell.m in Sources */,
 				18B97993200DD49E00B94DD4 /* UIImage+ImageEffects.m in Sources */,
-				04534A551F53FA4100999FBC /* AFHTTPRequestOperation.m in Sources */,
 				045A49541FA21F93008C1630 /* FFCalendarViewController.m in Sources */,
 				ACAE8FEE1F6951D70072FA41 /* XYPieChart.m in Sources */,
 				04124A7A2010D5B100E99E31 /* HorizontalXLblFormatter.m in Sources */,
 				AC1BC8591F8665B40047AECC /* AAOptions3d.m in Sources */,
 				041BF5251F7FB4010091611D /* CRTableViewCell.m in Sources */,
-				04534A5C1F53FA4100999FBC /* AFURLResponseSerialization.m in Sources */,
 				ACB567C41F62D7A800F1C45E /* TrainingLoadCell.m in Sources */,
 				045A49EE1FA22174008C1630 /* FFEventDetailPopoverController.m in Sources */,
 				CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */,

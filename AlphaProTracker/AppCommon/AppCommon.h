@@ -41,6 +41,8 @@
 +(NSString *) GetuserReference;
 +(NSString *)getFileType:(NSString *)filePath;
 +(void)showAlertWithMessage:(NSString *)message;
++(void)showLoading;
++(void)hideLoading;
 
 
 @end
