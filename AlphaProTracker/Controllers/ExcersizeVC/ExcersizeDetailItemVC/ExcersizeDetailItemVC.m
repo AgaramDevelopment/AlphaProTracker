@@ -50,7 +50,7 @@
 - (void)loadImageView {
     
     NSURL *url=[NSURL URLWithString:self.URL];
-    [self.playerImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"profileImg"]];
+    [self.playerImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
 }
 -(void) videoPlayer {
     

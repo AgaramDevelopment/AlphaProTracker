@@ -10,6 +10,12 @@
 #import "MultiInjurylistCell.h"
 
 @interface MultiInjuryVC : UIViewController
+{
+    NSString *mrData;
+    NSString *ctData;
+    NSString *xrData;
+    NSString *bloodData;
+}
 
 
 
@@ -49,8 +55,27 @@
 @property (nonatomic,strong)  NSMutableArray * injurySideArray;
 @property (nonatomic,strong)  NSMutableArray * injurySiteArray;
 
+@property (nonatomic,strong)  NSString * onsetCode;
+@property (nonatomic,strong)  NSString * injurycode;
 @property (nonatomic,strong)  NSString * injuryName;
 @property (nonatomic,strong)  NSString * playercode;
 @property (nonatomic,strong)  NSString * clientcode;
+@property (nonatomic,strong)  NSString * createdby;
+@property (nonatomic,strong)  NSString * usercode;
+
+@property (nonatomic,strong)  NSString * occurenceCode;
+@property (nonatomic,strong)  NSString * occurenceSubCode;
+@property (nonatomic,strong)  NSString * dateofAssessment;
+@property (nonatomic,strong)  NSString * onsetDate;
+@property (nonatomic,strong)  NSString * chiefComplaint;
+@property (nonatomic,strong)  NSString * expectedOpinionCode;
+@property (nonatomic,strong)  NSString * recoverydate;
+@property (nonatomic,strong)  NSString * vasValue;
+
+@property (nonatomic,strong)  NSString * gamecode;
+@property (nonatomic,strong)  NSString * teamcode;
+
+
 
 @end
+

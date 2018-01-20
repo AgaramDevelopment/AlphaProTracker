@@ -17,4 +17,8 @@
 
 @property (nonatomic,strong)IBOutlet UIButton * multiInjuryBtn;
 
+@property (nonatomic,strong) NSString * ismulti;
+
+
 @end
+

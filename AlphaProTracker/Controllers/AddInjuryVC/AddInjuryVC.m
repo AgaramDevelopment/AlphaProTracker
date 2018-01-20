@@ -220,6 +220,7 @@
     self.StSlider.labelColor = [UIColor whiteColor];
     self.StSlider.sliderCircleRadius = self.StSlider.trackCircleRadius+10;
     
+    [self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateSelected];
     xrData = @"";
     ctData = @"";
     bloodData = @"";
@@ -295,10 +296,10 @@
 
 -(IBAction)didClickMultiInjuryAction:(id)sender
 {
-//    NSMutableArray *LocationArray = [[NSMutableArray alloc]init];
-//    [LocationArray arrayByAddingObject:self.headandtruckArray];
-//    [LocationArray arrayByAddingObject:self.upperextremityArray];
-//    [LocationArray arrayByAddingObject:self.lowerextremityArray];
+    
+    
+    
+    
     
     NSMutableArray *LocationArray = [NSMutableArray arrayWithArray: self.headandtruckArray];
     [LocationArray addObjectsFromArray: self.upperextremityArray];
@@ -306,11 +307,25 @@
     
     MultiInjuryVC  * objaddinjury=[[MultiInjuryVC alloc]init];
     objaddinjury = (MultiInjuryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"MultiInjuryVC"];
-    objaddinjury.playercode = selectPlayerCode;
-    objaddinjury.injuryName = self.injuryNameTxt.text;
+    objaddinjury.playercode = [self.objSelectInjuryArray valueForKey:@"PlayerCode"];;
+    objaddinjury.injuryName = [self.objSelectInjuryArray valueForKey:@"InjuryName"];;
+    objaddinjury.injurycode = [self.objSelectInjuryArray valueForKey:@"InjuryCode"];
+    objaddinjury.onsetCode = [self.objSelectInjuryArray valueForKey:@"OnSetType"];;
     objaddinjury.injuryTypeArray = self.injuryTypeArray;
     objaddinjury.injuryCauseArray = self.injuryCauseArray;
     objaddinjury.injuryLocationArray=LocationArray;
+    objaddinjury.dateofAssessment= [self.objSelectInjuryArray valueForKey:@"DateOfAssessment"];;
+    objaddinjury.onsetDate = [self.objSelectInjuryArray valueForKey:@"OnSetDate"];;
+    objaddinjury.chiefComplaint = [self.objSelectInjuryArray valueForKey:@"ChiefCompliant"];;
+    objaddinjury.expectedOpinionCode = [self.objSelectInjuryArray valueForKey:@"ExpertOptionTakenCode"];;
+    objaddinjury.recoverydate = [self.objSelectInjuryArray valueForKey:@"ExpectedDateOfRecovery"];;
+    objaddinjury.vasValue = [self.objSelectInjuryArray valueForKey:@"Vas"];;
+    objaddinjury.occurenceCode = [self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceCode"];;
+    objaddinjury.occurenceSubCode = [self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceSubCode"];;
+    objaddinjury.gamecode= [self.objSelectInjuryArray valueForKey:@"GameCode"];;
+    objaddinjury.teamcode= [self.objSelectInjuryArray valueForKey:@"TeamCode"];;
+    
+    [self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateSelected];
     
     [self.navigationController pushViewController:objaddinjury animated:YES];
 }
@@ -413,14 +428,19 @@
                 
                 if(self.isUpdate == YES)
                 {
+                    selectInjuryOccuranceCode =[self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceCode"];//trainingarray,competion
+                    selectInjuryLocationCode = [self.objSelectInjuryArray valueForKey:@"InjuryLocationCode"];//headandtruckArray,upperextremityArray,lowerextremityArray
+                    injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"InjuryTypeCode"] ;
+                    injuryCausecode =[self.objSelectInjuryArray valueForKey:@"InjuryCauseCode"];
                     
-                    selectInjuryOccuranceCode =[self.objSelectInjuryArray valueForKey:@"INJURYOCCURANCECODE"];//trainingarray,competion
-                    selectInjuryLocationCode = [self.objSelectInjuryArray valueForKey:@"INJURYLOCATIONCODE"];//headandtruckArray,upperextremityArray,lowerextremityArray
-                    injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"INJURYTYPECODE"] ;
-                    injuryCausecode =[self.objSelectInjuryArray valueForKey:@"INJURYCAUSECODE"];
+                    selectoccurancecode=[self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceSubCode"];
+                    selectlocationCode = [self.objSelectInjuryArray valueForKey:@"InjuryLocationSubCode"];
                     
-                    selectoccurancecode=[self.objSelectInjuryArray valueForKey:@"INJURYOCCURANCESUBCODE"];
-                    selectlocationCode = [self.objSelectInjuryArray valueForKey:@"INJURYLOCATIONSUBCODE"];
+                    if([[self.objSelectInjuryArray valueForKey:@"MultiInjury"] isEqualToString:@"Yes"])
+                    {
+                        [self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
+                    }
+                    
                     
                     
                     
@@ -1200,8 +1220,6 @@
                         self.occurranceselectview.hidden =YES;
                         self.locationselectview.hidden =YES;
                     }
-                    
-                    
                 }
             }
             [COMMON RemoveLoadingIcon];
@@ -1238,7 +1256,7 @@
                     //        self.gameLbl.text =[self.objSelectInjuryArray valueForKey:@"PLAYERCODE"];
                     //        self.TeamLbl.text =[self.objSelectInjuryArray valueForKey:@"teamName"];
                     //        self.playerLbl.text =[self.objSelectInjuryArray valueForKey:@"playerName"];
-                    NSString *plycode = [self.objSelectInjuryArray valueForKey:@"PLAYERCODE"];
+                    NSString *plycode = [self.objSelectInjuryArray valueForKey:@"PlayerCode"];
                     
                     NSMutableArray *selectedPlayer;
                     selectedPlayer = [[NSMutableArray alloc]init];
@@ -1303,30 +1321,30 @@
                     
                     
                     
-                    self.assessmentLbl.text =[self.objSelectInjuryArray valueForKey:@"DATEOFASSESSMENT"];
+                    self.assessmentLbl.text =[self.objSelectInjuryArray valueForKey:@"DateOfAssessment"];
                     
-                    self.onSetLbl.text =[self.objSelectInjuryArray valueForKey:@"ONSETDATE"];
+                    self.onSetLbl.text =[self.objSelectInjuryArray valueForKey:@"OnSetDate"];
                     //self.injurytypeLbl.text =[self.objSelectInjuryArray valueForKey:@"mainSymptomName"];
                     //self.injuryCauseLbl.text =[self.objSelectInjuryArray valueForKey:@"causeOfIllnessName"];
-                    self.expectedLbl.text =[self.objSelectInjuryArray valueForKey:@"EXPECTEDDATEOFRECOVERY"];
-                    self.injuryNameTxt.text =[self.objSelectInjuryArray valueForKey:@"INJURYNAME"];
-                    self.cheifcomplientTxt.text =[self.objSelectInjuryArray valueForKey:@"CHIEFCOMPLIANT"];
-                    selectGameCode =[self.objSelectInjuryArray valueForKey:@"GAMECODE"];
-                    selectTeamCode =[self.objSelectInjuryArray valueForKey:@"TEAMCODE"];
-                    selectPlayerCode =[self.objSelectInjuryArray valueForKey:@"PLAYERCODE"];
-                    injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"INJURYTYPECODE"] ;
-                    injuryCausecode =[self.objSelectInjuryArray valueForKey:@"INJURYCAUSECODE"];
+                    self.expectedLbl.text =[self.objSelectInjuryArray valueForKey:@"ExpectedDateOfRecovery"];
+                    self.injuryNameTxt.text =[self.objSelectInjuryArray valueForKey:@"InjuryName"];
+                    self.cheifcomplientTxt.text =[self.objSelectInjuryArray valueForKey:@"ChiefCompliant"];
+                    selectGameCode =[self.objSelectInjuryArray valueForKey:@"GameCode"];
+                    selectTeamCode =[self.objSelectInjuryArray valueForKey:@"TeamCode"];
+                    selectPlayerCode =[self.objSelectInjuryArray valueForKey:@"PlayerCode"];
+                    injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"InjuryTypeCode"] ;
+                    injuryCausecode =[self.objSelectInjuryArray valueForKey:@"InjuryCauseCode"];
                     //selectCauseCode =[self.objSelectInjuryArray valueForKey:@"causeOfIllnessCode"];
-                    selectExpertOpinionCode =[self.objSelectInjuryArray valueForKey:@"EXPERTOPTIONTAKENCODE"];
-                    selectOnsetTypeCode =[self.objSelectInjuryArray valueForKey:@"ONSETTYPE"];
-                    selectInjuryOccuranceCode =[self.objSelectInjuryArray valueForKey:@"INJURYOCCURANCECODE"];
-                    selectInjuryLocationCode = [self.objSelectInjuryArray valueForKey:@"INJURYLOCATIONCODE"];
-                    selectInjurySiteCode = [self.objSelectInjuryArray valueForKey:@"INJURYSITECODE"];
-                    selectInjurySideCode = [self.objSelectInjuryArray valueForKey:@"INJURYSIDECODE"];
+                    selectExpertOpinionCode =[self.objSelectInjuryArray valueForKey:@"ExpertOptionTakenCode"];
+                    selectOnsetTypeCode =[self.objSelectInjuryArray valueForKey:@"OnSetType"];
+                    selectInjuryOccuranceCode =[self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceCode"];
+                    selectInjuryLocationCode = [self.objSelectInjuryArray valueForKey:@"InjuryLocationCode"];
+                    selectInjurySiteCode = [self.objSelectInjuryArray valueForKey:@"InjurySiteCode"];
+                    selectInjurySideCode = [self.objSelectInjuryArray valueForKey:@"InjurySideCode"];
                     
-                    selectInjuryCode  = [self.objSelectInjuryArray valueForKey:@"INJURYCODE"];
+                    selectInjuryCode  = [self.objSelectInjuryArray valueForKey:@"InjuryCode"];
                     
-                    VasValue = [self.objSelectInjuryArray valueForKey:@"VAS"];
+                    VasValue = [self.objSelectInjuryArray valueForKey:@"Vas"];
                     
                     int a = [VasValue intValue];
                     
@@ -1433,7 +1451,7 @@
             [dic    setObject:@""     forKey:@"XRAYSFILE"];
         }
         else{
-        [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
         }
         [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
         
@@ -1445,7 +1463,7 @@
         }
         else
         {
-        [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
         }
         [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
         
@@ -2681,7 +2699,6 @@
         self.locationlbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         selectlocationCode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
     }
-    
     
     self.popview_Tbl.hidden=YES;
     
