@@ -10,7 +10,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AppCommon.h"
 
-@interface ExcersizeDetailItemVC () <UIWebViewDelegate>
+@interface ExcersizeDetailItemVC ()
 
 @end
 
@@ -21,6 +21,10 @@
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor = [UIColor lightTextColor];
+    
+    self.scrollView.minimumZoomScale=1.0;
+    self.scrollView.maximumZoomScale=4.0;
+    self.scrollView.contentSize = CGSizeMake(self.playerImageView.frame.size.width, self.playerImageView.frame.size.height);
     
     //Load View based on Item.
     if(self.isImage) {
@@ -49,9 +53,6 @@
     [self.playerImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"profileImg"]];
 }
 -(void) videoPlayer {
-    
-    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
-    self.webView.scrollView.showsVerticalScrollIndicator = NO;
     
     NSURL *videoURL = [NSURL URLWithString:self.URL];
     
@@ -82,7 +83,8 @@
 
 -(void)loadWebView {
     [COMMON loadingIcon:self.view];
-    self.webView.delegate=self;
+    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
+    self.webView.scrollView.showsVerticalScrollIndicator = NO;
     NSURL*url=[[NSURL alloc]initWithString:self.URL];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:requestObj];
@@ -95,6 +97,11 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     return YES;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.playerImageView;
 }
 /*
  #pragma mark - Navigation

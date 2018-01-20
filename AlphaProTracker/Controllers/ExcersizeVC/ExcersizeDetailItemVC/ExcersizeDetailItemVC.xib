@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExcersizeDetailItemVC">
             <connections>
                 <outlet property="playerImageView" destination="npW-ku-uvb" id="XQy-aH-7Pf"/>
+                <outlet property="scrollView" destination="cYL-hT-ogR" id="GIR-62-Jmn"/>
                 <outlet property="videoView" destination="RqX-JC-r7b" id="g3r-5y-5Mo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="EG4-wt-gWR" id="97v-qm-6Xt"/>
@@ -29,25 +30,48 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RqX-JC-r7b">
                             <rect key="frame" x="20" y="60" width="305" height="469"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="npW-ku-uvb">
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-hT-ogR">
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="469"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </imageView>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="npW-ku-uvb">
+                                            <rect key="frame" x="0.0" y="0.0" width="305" height="469"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="469" id="J01-IE-TTr"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="npW-ku-uvb" secondAttribute="bottom" id="2Zq-Wx-KJx"/>
+                                        <constraint firstItem="npW-ku-uvb" firstAttribute="top" secondItem="cYL-hT-ogR" secondAttribute="top" id="Au1-a6-oIB"/>
+                                        <constraint firstItem="npW-ku-uvb" firstAttribute="centerY" secondItem="cYL-hT-ogR" secondAttribute="centerY" id="VuS-7H-baG"/>
+                                        <constraint firstAttribute="trailing" secondItem="npW-ku-uvb" secondAttribute="trailing" id="Ybh-Ul-oOA"/>
+                                        <constraint firstItem="npW-ku-uvb" firstAttribute="leading" secondItem="cYL-hT-ogR" secondAttribute="leading" id="eWM-ca-3gf"/>
+                                        <constraint firstItem="npW-ku-uvb" firstAttribute="width" secondItem="cYL-hT-ogR" secondAttribute="width" id="wI1-vr-T4U"/>
+                                        <constraint firstItem="npW-ku-uvb" firstAttribute="centerX" secondItem="cYL-hT-ogR" secondAttribute="centerX" id="xBf-vm-otk"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="0ue-BW-CTS"/>
+                                    </connections>
+                                </scrollView>
                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EG4-wt-gWR">
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="469"/>
                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="2Zj-uU-bdZ"/>
+                                    </connections>
                                 </webView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="EG4-wt-gWR" firstAttribute="top" secondItem="RqX-JC-r7b" secondAttribute="top" id="3Wd-CZ-1YP"/>
                                 <constraint firstAttribute="bottom" secondItem="EG4-wt-gWR" secondAttribute="bottom" id="5Wl-sj-WCe"/>
-                                <constraint firstAttribute="trailing" secondItem="npW-ku-uvb" secondAttribute="trailing" id="8bv-Lb-6bQ"/>
                                 <constraint firstItem="EG4-wt-gWR" firstAttribute="leading" secondItem="RqX-JC-r7b" secondAttribute="leading" id="A8C-wZ-JIE"/>
-                                <constraint firstItem="npW-ku-uvb" firstAttribute="leading" secondItem="RqX-JC-r7b" secondAttribute="leading" id="EoV-RM-5FX"/>
-                                <constraint firstAttribute="bottom" secondItem="npW-ku-uvb" secondAttribute="bottom" id="VEV-qo-jRt"/>
+                                <constraint firstAttribute="bottom" secondItem="cYL-hT-ogR" secondAttribute="bottom" id="P3H-4T-Dqp"/>
+                                <constraint firstItem="cYL-hT-ogR" firstAttribute="leading" secondItem="RqX-JC-r7b" secondAttribute="leading" id="WE3-wE-5Ok"/>
                                 <constraint firstAttribute="trailing" secondItem="EG4-wt-gWR" secondAttribute="trailing" id="dhG-TT-nuu"/>
-                                <constraint firstItem="npW-ku-uvb" firstAttribute="top" secondItem="RqX-JC-r7b" secondAttribute="top" id="gS6-jk-62r"/>
+                                <constraint firstAttribute="trailing" secondItem="cYL-hT-ogR" secondAttribute="trailing" id="nQT-NM-jW9"/>
+                                <constraint firstItem="cYL-hT-ogR" firstAttribute="top" secondItem="RqX-JC-r7b" secondAttribute="top" id="ty7-Hi-zP6"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5V-hS-oAb">
