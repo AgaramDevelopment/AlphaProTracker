@@ -129,7 +129,7 @@
         
         [cell setArrayEvents:[dictEvents objectForKey:date]];
         [cell.labelDay setText:[NSString stringWithFormat:@"%li", (long)[components day]]];
-
+//        cell.backgroundColor = [UIColor greenColor];
         NSLog(@"day %li", (long)[components day]);
 
         if ([NSDate isTheSameDateTheCompA:components compB:[NSDate componentsOfCurrentDate]]) {
@@ -141,20 +141,9 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    FFEvent *event = [arrayEvents objectAtIndex:indexPath.row];
-//    [button setTitle:event.stringCustomerName forState:UIControlStateNormal];
-//    [button setEvent:event];
-//    [button setProtocol:self];
-//    FFMonthCell *cell = (FFMonthCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_IDENTIFIER_MONTH_CELL forIndexPath:indexPath];
-    
     FFMonthCell* cell1 = (FFMonthCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@"%@",cell1.labelDay.text);
     NSLog(@"%d",[cell1.labelDay.text isEqualToString:@""]);
-//    if ([FFMonthCell isKindOfClass: cell1]) {
-//        FFMonthCell* ce = (FFMonthCell*)cell1;
-//        NSLog(@"%@",ce.labelDay.text);
-//
-//    }
     NSMutableArray *arrayDates = [array objectAtIndex:indexPath.section];
     id obj = [arrayDates objectAtIndex:indexPath.row];
     NSDate *date = (NSDate *)obj;

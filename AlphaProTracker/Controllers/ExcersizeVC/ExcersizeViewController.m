@@ -195,14 +195,8 @@
             });
         }
         [AppCommon hideLoading];
-//        [COMMON RemoveLoadingIcon];
-//        [self.view setUserInteractionEnabled:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed");
-//        [COMMON webServiceFailureError];
-//        [self.view setUserInteractionEnabled:YES];
         [AppCommon hideLoading];
-        
     }];
     
 }
