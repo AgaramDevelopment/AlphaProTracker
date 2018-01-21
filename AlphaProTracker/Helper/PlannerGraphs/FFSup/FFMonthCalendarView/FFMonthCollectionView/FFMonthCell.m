@@ -9,7 +9,7 @@
 //
 
 #import "FFMonthCell.h"
-
+#import "AppCommon.h"
 #import "FFButtonWithEditAndDetailPopoversForMonthCell.h"
 #import "FFImportantFilesForCalendar.h"
 
@@ -87,35 +87,38 @@
 #pragma mark - Showing Events
 
 - (void)setArrayEvents:(NSMutableArray *)_array {
-    
+    NSLog(@"FFMONTH CELL setArrayEvents called");
     arrayEvents = _array;
     arrayButtons = [NSMutableArray new];
+//        [self setBackgroundColor:[UIColor blueColor]];
     
     if ([arrayEvents count] > 0) {
+        FFEvent *event = [arrayEvents objectAtIndex:0];
+        NSLog(@"DATE %@ ",event.color);
+        [self setBackgroundColor:[AppCommon colorWithHexString:event.color]];
         
-        int maxNumOfButtons = 4;
-        CGFloat yFirstButton = imageViewCircle.frame.origin.y+imageViewCircle.frame.size.height;
-        CGFloat height = (self.frame.size.height-yFirstButton)/maxNumOfButtons;
-        
-        int buttonOfNumber = 0;
-        for (int i = 0; i < [arrayEvents count] ; i++) {
-            
-            buttonOfNumber++;
-            FFButtonWithEditAndDetailPopoversForMonthCell *button = [[FFButtonWithEditAndDetailPopoversForMonthCell alloc] initWithFrame:CGRectMake(0, yFirstButton+(buttonOfNumber-1)*height, self.frame.size.width, height)];
-            [button setAutoresizingMask:AR_TOP_BOTTOM | UIViewAutoresizingFlexibleWidth];
-            [self addSubview:button];
-            [arrayButtons addObject:button];
-            
-            if ((buttonOfNumber == maxNumOfButtons) && ([arrayEvents count] - maxNumOfButtons > 0)) {
-                [button setTitle:[NSString stringWithFormat:@"%lu more...", (long)[arrayEvents count] - maxNumOfButtons] forState:UIControlStateNormal];
-                break;
-            } else {
-                FFEvent *event = [arrayEvents objectAtIndex:i];
-                [button setTitle:event.stringCustomerName forState:UIControlStateNormal];
-                [button setEvent:event];
-                [button setProtocol:self];
-            }
-        }
+//        int maxNumOfButtons = 4;
+//        CGFloat yFirstButton = imageViewCircle.frame.origin.y+imageViewCircle.frame.size.height;
+//        CGFloat height = (self.frame.size.height-yFirstButton)/maxNumOfButtons;
+//
+//        int buttonOfNumber = 0;
+//        for (int i = 0; i < [arrayEvents count] ; i++) {
+//            buttonOfNumber++;
+//            FFButtonWithEditAndDetailPopoversForMonthCell *button = [[FFButtonWithEditAndDetailPopoversForMonthCell alloc] initWithFrame:CGRectMake(0, yFirstButton+(buttonOfNumber-1)*height, self.frame.size.width, height)];
+//            [button setAutoresizingMask:AR_TOP_BOTTOM | UIViewAutoresizingFlexibleWidth];
+//            [self addSubview:button];
+//            [arrayButtons addObject:button];
+//
+//            if ((buttonOfNumber == maxNumOfButtons) && ([arrayEvents count] - maxNumOfButtons > 0)) {
+//                [button setTitle:[NSString stringWithFormat:@"%lu more...", (long)[arrayEvents count] - maxNumOfButtons] forState:UIControlStateNormal];
+//                break;
+//            } else {
+//                FFEvent *event = [arrayEvents objectAtIndex:i];
+//                [button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+//                [button setEvent:event];
+//                [button setProtocol:self];
+//            }
+//        }
     }
 }
 

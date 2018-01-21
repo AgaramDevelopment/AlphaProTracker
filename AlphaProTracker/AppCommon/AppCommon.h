@@ -44,6 +44,7 @@
 +(void)showLoading;
 +(void)hideLoading;
 
++(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end
 extern AppCommon *sharedCommon;

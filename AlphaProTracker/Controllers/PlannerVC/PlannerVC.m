@@ -25,39 +25,33 @@
 #import "FFMonthCollectionView.h"
 
 
-
-typedef enum : NSUInteger
-{
-    CalendarViewWeekType  = 0,
-    CalendarViewMonthType = 2,
-    //CalendarViewYearType = 2,
-    CalendarViewDayType = 1
-} CalendarViewType;
-
-
-@interface PlannerVC ()<SACalendarDelegate,FFButtonAddEventWithPopoverProtocol, FFYearCalendarViewProtocol, FFMonthCalendarViewProtocol, FFWeekCalendarViewProtocol, FFDayCalendarViewProtocol,DateProtocol>
-
+@interface PlannerVC ()<FFMonthCalendarViewProtocol, FFWeekCalendarViewProtocol, FFDayCalendarViewProtocol,DateProtocol>
 {
     BOOL isEvent;
     SACalendar *saCalendar;
     NSString *usercode;
     NSString *cliendcode;
-    NSString *userref;
+    NSString *userreference;
     NSDate *date1;
     NSDate *dateFromString;
-    
+    NSInteger loadedCalendrType;
     NSString *EventBgcolor;
 }
 
-
-
-
 @property (nonatomic) BOOL boolDidLoad;
 @property (nonatomic) BOOL boolYearViewIsShowing;
-@property (nonatomic, strong) NSMutableDictionary *dictEvents;
+
+
 @property (nonatomic, strong) UILabel *labelWithMonthAndYear;
-@property (nonatomic, strong) NSArray *arrayButtons;
-@property (nonatomic, strong) NSArray *arrayCalendars;
+@property (nonatomic,strong) IBOutlet UIButton * selectTitleBtn;
+@property (nonatomic,strong) IBOutlet UILabel * Tabbar;
+@property (nonatomic,strong) IBOutlet UIView * titleview;
+@property (nonatomic,strong) IBOutlet UIView * eventview;
+@property (nonatomic,strong) IBOutlet UITableView * eventTbl;
+@property (nonatomic,strong) IBOutlet UILabel * eventLbl;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * TabbarPosition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * TabbarWidth;
+
 @property (nonatomic, strong) FFEditEventPopoverController *popoverControllerEditar;
 @property (nonatomic, strong) FFYearCalendarView *viewCalendarYear;
 @property (nonatomic, strong) FFMonthCalendarView *viewCalendarMonth;
@@ -67,27 +61,13 @@ typedef enum : NSUInteger
 
 @property (nonatomic,strong) WebService * objWebservice;
 
-@property (nonatomic,strong) IBOutlet UIView * titleview;
-@property (nonatomic,strong) IBOutlet UIView * eventview;
-
-@property (nonatomic,strong) IBOutlet UITableView * eventTbl;
-
-@property (nonatomic,strong) IBOutlet UILabel * eventLbl;
+@property (nonatomic, strong) NSMutableDictionary *dictEvents;
+@property (nonatomic, strong) NSArray *arrayButtons;
+@property (nonatomic, strong) NSArray *arrayCalendars;
 @property (nonatomic,strong) NSMutableArray * AllEventListArray;
 @property (nonatomic,strong) NSMutableArray * AllEventDetailListArray;
-@property (nonatomic,strong) NSMutableArray * ParticipantsTypeArray;
-@property (nonatomic,strong) NSMutableArray * PlayerTeamArray;
-@property (nonatomic,strong) NSMutableArray * EventStatusArray;
-@property (nonatomic,strong) NSMutableArray * EventTypeArray;
-
+@property (nonatomic,strong) NSMutableArray * PlannerResponseArray;
 @property (nonatomic,strong) NSMutableArray * eventArray;
-
-@property (nonatomic,strong) IBOutlet UIButton * selectTitleBtn;
-
-@property (nonatomic,strong) IBOutlet UILabel * Tabbar;
-
-@property (nonatomic,strong) IBOutlet NSLayoutConstraint * TabbarPosition;
-@property (nonatomic,strong) IBOutlet NSLayoutConstraint * TabbarWidth;
 
 @end
 
@@ -135,7 +115,7 @@ typedef enum : NSUInteger
     
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
-    userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    userreference = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
     viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:calendarView.frame];
     [viewCalendarMonth setCollectionDidSelectDelegate:self];
@@ -143,8 +123,8 @@ typedef enum : NSUInteger
     [viewCalendarWeek setCollectionDidSelectDelegate:self];
     viewCalendarDay = [[FFDayCalendarView alloc] initWithFrame:calendarView.frame];
     [viewCalendarDay setCollectionDidSelectDelegate:self];
-
-    [self MonthAction:nil];
+    loadedCalendrType = 0;
+    arrayButtons = @[self.MONTH, self.WEEK, self.DAY];
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -158,65 +138,56 @@ typedef enum : NSUInteger
     
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
-    
     [COMMON AddMenuView:self.view];
-
+    [self EventTypeWebservice];
 }
 
 -(IBAction)MonthAction:(id)sender
 {
     self.Tabbar.hidden = NO;
     self.nameOfMonth.text = @"";
+    self.TabbarPosition.constant = self.MONTH.frame.origin.x;
+    self.TabbarWidth.constant = self.MONTH.frame.size.width;
+    loadedCalendrType = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
-    [self customNavigationBarLayout];
 
-    [self EventTypeWebservice :[AppCommon GetUsercode]:[AppCommon GetClientCode]:[AppCommon GetuserReference]];
     [viewCalendarMonth removeFromSuperview];
     [viewCalendarWeek removeFromSuperview];
     [viewCalendarDay removeFromSuperview];
     [self addMonthCalendar];
-    [self setArrayWithEvents:[self arrayWithEvents]];
-
-    self.TabbarPosition.constant = self.MONTH.frame.origin.x;
-    self.TabbarWidth.constant = self.MONTH.frame.size.width;
-    
 }
 
 -(IBAction)WeekAction:(id)sender
 {
-    
+    loadedCalendrType = 1;
     self.Tabbar.hidden = NO;
     
     self.TabbarPosition.constant = self.WEEK.frame.origin.x;
     self.TabbarWidth.constant = self.WEEK.frame.size.width;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
-    [self customNavigationBarLayout];
     [viewCalendarMonth removeFromSuperview];
     [viewCalendarWeek removeFromSuperview];
     [viewCalendarDay removeFromSuperview];
     
     [self addCalendarWeek];
-    [self setArrayWithEvents:[self arrayWithEvents]];
-    [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:0]];
+//    [self setArrayWithEvents:[self arrayWithEvents]];
     
 }
 
 -(IBAction)DayAction:(id)sender
 {
+    loadedCalendrType = 2;
     self.Tabbar.hidden = NO;
     self.TabbarPosition.constant = self.DAY.frame.origin.x;
     self.TabbarWidth.constant = self.DAY.frame.size.width;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
-    [self customNavigationBarLayout];
     [viewCalendarMonth removeFromSuperview];
     [viewCalendarWeek removeFromSuperview];
     [viewCalendarDay removeFromSuperview];
 
     [self addCalendarDay];
-    //[self displayFFCalendar];
     [self setArrayWithEvents:[self arrayWithEvents]];
-    [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:0]];
     
 }
 
@@ -250,103 +221,6 @@ typedef enum : NSUInteger
     }
     
 }
-/**
- *  Delegate method : get called when a date is selected
- */
--(void) SACalendar:(SACalendar*)calendar didSelectDate:(int)day month:(int)month year:(int)year
-{
-   // NSString * selectdate =[NSString stringWithFormat:@"%d-%02d-%02d",year,month,day];
-    NSString * selectdate =[NSString stringWithFormat:@"%02d/%02d/%d",day,month,year];
-
-    //NSString *finalDate = @"2017-10-15";
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-    //NSDate *datess = [dateFormatter dateFromString:selectdate];
-    
-    NSString * selectdate1 =[NSString stringWithFormat:@"%02d/%02d/%d",day+1,month,year];
-    NSDate *datess = [dateFormatter dateFromString:selectdate1];
-    NSDate *today = [NSDate date]; // it will give you current date
-    
-    NSMutableArray * ojAddPlannerArray =[[NSMutableArray alloc]init];
-    for(int i=0; self.AllEventDetailListArray.count>i;i++)
-    {
-        NSDictionary * objDic =[self.AllEventDetailListArray objectAtIndex:i];
-        NSString * startdate =[objDic valueForKey:@"startdatetime"];
-        NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
-        [dateFormatters setDateFormat:@"dd/MM/yyyy hh:mm a"];
-        NSDate *dates = [dateFormatters dateFromString:startdate];
-        
-        NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
-        [dfs setDateFormat:@"dd/MM/yyyy"];
-        NSString * endDateStr = [dfs stringFromDate:dates];
-        
-        if([endDateStr isEqualToString:selectdate])
-        {
-            [ojAddPlannerArray addObject:objDic];
-        }
-    }
-
-    
-    
-    NSComparisonResult result;
-    //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
-    
-    result = [today compare:datess]; // comparing two dates
-    
-    if(result==NSOrderedAscending)
-    {
-        NSLog(@"today is less");
-        
-        if(ojAddPlannerArray.count>0)
-        {
-            PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
-            objPlannerlist = (PlannerListVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
-            objPlannerlist.objPlannerArray =ojAddPlannerArray;
-            [self.navigationController pushViewController:objPlannerlist animated:YES];
-        }
-        
-        else
-        {
-        PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
-        objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
-        objaddEvent.selectDateStr =selectdate;
-            objaddEvent.isEdit =NO;
-        objaddEvent.ListeventTypeArray = self.EventTypeArray;
-        objaddEvent.ListeventStatusArray =self.EventStatusArray;
-        objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
-        
-        [self.navigationController pushViewController:objaddEvent animated:YES];
-        }
-    }
-    
-    else if(result==NSOrderedDescending)
-    {
-        if(ojAddPlannerArray.count>0)
-        {
-            PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
-            objPlannerlist = (PlannerListVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
-            objPlannerlist.objPlannerArray =ojAddPlannerArray;
-            [self.navigationController pushViewController:objPlannerlist animated:YES];
-        }
-        else{
-            
-            [AppCommon showAlertWithMessage:@"Past date not allowed!!"];
-        }
-    }
-    else
-        NSLog(@"Both dates are same");
-    
-    
-}
-
-/**
- *  Delegate method : get called user has scroll to a new month
- */
-//-(void) SACalendar:(SACalendar *)calendar didDisplayCalendarForMonth:(int)month year:(int)year{
-//
-//    NSLog(@"Displaying : %@ %04i",[DateUtil getMonthString:month],year);
-//}
 
 -(IBAction)didClickevent:(id)sender
 {
@@ -362,25 +236,22 @@ typedef enum : NSUInteger
         isEvent =NO;
     }
 }
--(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference
+-(void)EventTypeWebservice
 {
-    [COMMON loadingIcon:self.view];
-    if([COMMON isInternetReachable])
-    {
-        
+    if(![COMMON isInternetReachable])
+        return;
+    
+        [AppCommon showLoading];
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",PlannerEventKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
         manager.requestSerializer = requestSerializer;
         
-        
-        
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if(usercode)   [dic    setObject:usercode     forKey:@"CreatedBy"];
-        if(cliendcode)   [dic    setObject:cliendcode     forKey:@"ClientCode"];
-        if(userreference)   [dic    setObject:userreference     forKey:@"Userreferencecode"];
+        if(usercode)   [dic setObject:usercode forKey:@"CreatedBy"];
+        if(cliendcode)   [dic setObject:cliendcode forKey:@"ClientCode"];
+        if(userreference)   [dic setObject:userreference forKey:@"Userreferencecode"];
         
         
         NSLog(@"parameters : %@",dic);
@@ -391,7 +262,8 @@ typedef enum : NSUInteger
             {
                 NSLog(@"%@",responseObject);
                 self.AllEventListArray = [[NSMutableArray alloc]init];
-                
+                self.PlannerResponseArray = [[NSMutableArray alloc]init];
+                self.PlannerResponseArray = responseObject;
                 NSMutableArray * objAlleventArray= [responseObject valueForKey:@"ListEventTypeDetails"];
                 
                 
@@ -402,24 +274,9 @@ typedef enum : NSUInteger
                 
                 [self.AllEventListArray insertObject:mutableDict atIndex:0];
                 [self.AllEventListArray addObjectsFromArray:objAlleventArray];
-                
-                self.ParticipantsTypeArray =[[NSMutableArray alloc]init];
-                self.ParticipantsTypeArray=[responseObject valueForKey:@"ListParticipantsTypeDetails"];
-                
-                self.PlayerTeamArray =[[NSMutableArray alloc]init];
-                self.PlayerTeamArray =[responseObject valueForKey:@"ListPlayerTeamDetails"];
-                
-                self.EventTypeArray  =[[NSMutableArray alloc]init];
-                self.EventTypeArray =[responseObject valueForKey:@"ListEventTypeDetails"];
-                
-                self.EventStatusArray =[[NSMutableArray alloc]init];
-                self.EventStatusArray =[responseObject valueForKey:@"ListEventStatusDetails"];
-                
-                
             }
             
-            [COMMON RemoveLoadingIcon];
-            [self.view setUserInteractionEnabled:YES];
+            [AppCommon hideLoading];
             [self.eventTbl reloadData];
             
             NSDate *now = [NSDate date];
@@ -442,19 +299,18 @@ typedef enum : NSUInteger
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
-            [COMMON webServiceFailureError];
-            [self.view setUserInteractionEnabled:YES];
-            
+            [AppCommon hideLoading];
         }];
-    }
     
 }
 
 -(void)EventDateFetchMethod :(NSString *)startDate :(NSString *) endDate :(NSString *)cliendCode :(NSString *)createdby
 {
-    [COMMON loadingIcon:self.view];
-    if([COMMON isInternetReachable])
-    {
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
         
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",EventDateFetch]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -478,21 +334,22 @@ typedef enum : NSUInteger
                 NSLog(@"%@",responseObject);
                 self.AllEventDetailListArray = [[NSMutableArray alloc]init];
             
-//                self.eventArray =[[NSMutableArray alloc]init];
-//                self.eventArray=[responseObject valueForKey:@"lstEventDetailsEntity"];
-//                self.AllEventDetailListArray = self.eventArray;
                 [self.AllEventDetailListArray addObjectsFromArray:[responseObject valueForKey:@"lstEventDetailsEntity"]];
+                [self setArrayWithEvents:[self arrayWithEvents]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIButton* button = [arrayButtons objectAtIndex:loadedCalendrType];
+                    [button sendActionsForControlEvents:UIControlEventTouchUpInside];
+
+                });
+
+                [AppCommon hideLoading];
             }
             
-            [COMMON RemoveLoadingIcon];
-            [self.view setUserInteractionEnabled:YES];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
-            [COMMON webServiceFailureError];
-            [self.view setUserInteractionEnabled:YES];
-            
+            [AppCommon hideLoading];
         }];
-    }
     
 }
 
@@ -615,29 +472,9 @@ typedef enum : NSUInteger
         }
     }
     
-    saCalendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.titleview.frame.origin.x,self.titleview.frame.origin.y+self.titleview.frame.size.height+5,self.view.frame.size.width,self.view.frame.size.height-340) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
-//    
-//    
-//    
-    saCalendar.delegate = self;
-//    
-   [self.view addSubview:saCalendar];
-    
-    if(![self.AllEventDetailListArray isEqual: [NSNull null]])
-    {
-        [saCalendar SetEventTitle:self.AllEventDetailListArray];
-    }
-
-    
-    if(![self.AllEventDetailListArray isEqual: [NSNull null]])
-    {
-        [saCalendar SetEventTitle:self.AllEventDetailListArray];
-    }
-    
     if(indexPath.row ==0)
     {
         self.eventview.backgroundColor=[UIColor colorWithRed:(37/255.0f) green:(187/255.0f) blue:(151/255.0f) alpha:1.0f];
-        
     }
     else if(indexPath.row ==1)
     {
@@ -686,7 +523,6 @@ typedef enum : NSUInteger
     else
     {
         self.eventview.backgroundColor=[UIColor colorWithRed:(97/255.0f) green:(50/255.0f) blue:(139/255.0f) alpha:1.0f];
-        
     }
     
     
@@ -752,70 +588,6 @@ typedef enum : NSUInteger
     }
 }
 
-#pragma mark - Custom NavigationBar
-
-- (void)customNavigationBarLayout {
-    
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBarTintColor:[UIColor lighterGrayCustom]];
-    
-    [self addRightBarButtonItems];
-    [self addLeftBarButtonItems];
-}
-
-- (void)addRightBarButtonItems {
-    
-    UIBarButtonItem *fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixedItem.width = 20.;
-    
-    //FFRedAndWhiteButton *buttonYear = [self calendarButtonWithTitle:@"year"];
-    //FFRedAndWhiteButton *buttonMonth = [self calendarButtonWithTitle:@"month"];
-    FFRedAndWhiteButton *buttonWeek = [self calendarButtonWithTitle:@"week"];
-    FFRedAndWhiteButton *buttonDay = [self calendarButtonWithTitle:@"day"];
-    
-    //UIBarButtonItem *barButtonYear = [[UIBarButtonItem alloc] initWithCustomView:buttonYear];
-    //UIBarButtonItem *barButtonMonth = [[UIBarButtonItem alloc] initWithCustomView:buttonMonth];
-    UIBarButtonItem *barButtonWeek = [[UIBarButtonItem alloc] initWithCustomView:buttonWeek];
-    UIBarButtonItem *barButtonDay = [[UIBarButtonItem alloc] initWithCustomView:buttonDay];
-    
-    FFButtonAddEventWithPopover *buttonAdd = [[FFButtonAddEventWithPopover alloc] initWithFrame:CGRectMake(0., 0., 30,30)];
-    [buttonAdd setProtocol:self];
-    //UIBarButtonItem *barButtonAdd = [[UIBarButtonItem alloc] initWithCustomView:buttonAdd];
-    
-    arrayButtons = @[buttonWeek, buttonDay];
-    [self.navigationItem setRightBarButtonItems:@[barButtonWeek, barButtonDay]];
-}
-
-- (void)addLeftBarButtonItems {
-    
-    UIBarButtonItem *fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixedItem.width = 30.;
-    
-    FFRedAndWhiteButton *buttonToday = [[FFRedAndWhiteButton alloc] initWithFrame:CGRectMake(0., 0., 50., 30)];
-    [buttonToday addTarget:self action:@selector(buttonTodayAction:) forControlEvents:UIControlEventTouchUpInside];
-    [buttonToday setTitle:@"today" forState:UIControlStateNormal];
-    UIBarButtonItem *barButtonToday = [[UIBarButtonItem alloc] initWithCustomView:buttonToday];
-    
-    labelWithMonthAndYear = [[UILabel alloc] initWithFrame:CGRectMake(100., 100., 100., 100)];
-    [labelWithMonthAndYear setTextColor:[UIColor redColor]];
-    [labelWithMonthAndYear setFont:buttonToday.titleLabel.font];
-    UIBarButtonItem *barButtonLabel = [[UIBarButtonItem alloc] initWithCustomView:labelWithMonthAndYear];
-    
-    [self.navigationItem setLeftBarButtonItems:@[barButtonLabel, fixedItem, barButtonToday]];
-}
-
-- (FFRedAndWhiteButton *)calendarButtonWithTitle:(NSString *)title {
-    
-    FFRedAndWhiteButton *button = [[FFRedAndWhiteButton alloc] initWithFrame:CGRectMake(0., 0., 50., 30.)];
-    [button addTarget:self action:@selector(buttonYearMonthWeekDayAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [button setTitle:title forState:UIControlStateNormal];
-    return button;
-}
-
 #pragma mark - Add Calendars
 
 -(void)addMonthCalendar
@@ -848,20 +620,6 @@ typedef enum : NSUInteger
 
 
 #pragma mark - Button Action
-
-- (IBAction)buttonYearMonthWeekDayAction:(id)sender {
-    
-    long index = [arrayButtons indexOfObject:sender];
-    
-    //[self.view bringSubviewToFront:[arrayCalendars objectAtIndex:index]];
-    
-    for (UIButton *button in arrayButtons) {
-        button.selected = (button == sender);
-    }
-    
-    boolYearViewIsShowing = (index == 0);
-    [self updateLabelWithMonthAndYear];
-}
 
 - (IBAction)buttonTodayAction:(id)sender {
     
@@ -926,50 +684,13 @@ typedef enum : NSUInteger
     }
 }
 
-//- (NSMutableArray *)arrayWithEvents {
-//    
-//    FFEvent *event1 = [FFEvent new];
-//    [event1 setStringCustomerName: @"Customer A"];
-//    [event1 setNumCustomerID:@1];
-//    [event1 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
-//    [event1 setDateTimeBegin:[NSDate dateWithHour:10 min:00]];
-//    [event1 setDateTimeEnd:[NSDate dateWithHour:15 min:13]];
-//    [event1 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-//    
-//    return [NSMutableArray arrayWithArray:@[event1]];
-//}
-
-
 - (NSMutableArray *)arrayWithEvents {
     
-    
-    NSMutableArray *EventsList =[[NSMutableArray alloc]init];
-    
-    EventsList = self.AllEventDetailListArray;
-    
-    NSLog(@"%@", EventsList);
-    
-    NSMutableArray *title =[[NSMutableArray alloc]init];
-    NSMutableArray *strtDatetime =[[NSMutableArray alloc]init];
-    NSMutableArray *endDatetime =[[NSMutableArray alloc]init];
-    NSMutableArray *EventDate =[[NSMutableArray alloc]init];
-    NSMutableArray *Bgcolors =[[NSMutableArray alloc]init];
-    
-    title = [EventsList valueForKey:@"title"];
-    strtDatetime = [EventsList valueForKey:@"startdatetime"];
-    endDatetime = [EventsList valueForKey:@"enddatetime"];
-    EventDate = [EventsList valueForKey:@"title"];
-    
-    Bgcolors = [EventsList valueForKey:@"backgroundColor"];
-    
     NSMutableArray *allCompetitionArray = [[NSMutableArray alloc]init];
-
-    for(int i=0;i<strtDatetime.count;i++)
-    {
-        
-        
-    ///STARTDATETIME  START
-        NSString *dateString = [strtDatetime objectAtIndex:i];
+    
+    for (NSDictionary *temp in self.AllEventDetailListArray) {
+        ///STARTDATETIME  START
+        NSString *dateString = [temp valueForKey:@"startdatetime"];
         NSString *res= [self changeformate_string24hr:dateString];
         
         NSArray *components = [res componentsSeparatedByString:@" "];
@@ -987,9 +708,10 @@ typedef enum : NSUInteger
         [arr replaceObjectAtIndex:0 withObject:datee];
         NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
         [dateFormatter1 setDateFormat:@"dd-MM-yyyy"];
-        NSDate *dateFromString1 = [dateFormatter1 dateFromString:[arr objectAtIndex:0]];
+//        NSDate *dateFromString1 = [dateFormatter1 dateFromString:[arr objectAtIndex:0]];
+//        self.reqDate = [dateFromString1 copy];
+        NSDate *dateFromString1 = [dateFormatter1 dateFromString:datee];
         self.reqDate = [dateFromString1 copy];
-        
 
         //time
         
@@ -998,19 +720,14 @@ typedef enum : NSUInteger
         [arr1 addObject:tH];
         [arr1 replaceObjectAtIndex:0 withObject:STARThrs];
         int startH = [[arr1 objectAtIndex:0] intValue];
-    
+        
         NSString *tM=@"15";
         NSMutableArray *arr2 = [[NSMutableArray alloc]init];
         [arr2 addObject:tM];
         [arr2 replaceObjectAtIndex:0 withObject:STARTmnts];
         int startM = [[arr2 objectAtIndex:0] intValue];
-  ///STARTDATETIME  END
         
-        
-        
-  ///ENDDATETIME  START
-        
-        NSString *dateString1 = [endDatetime objectAtIndex:i];
+        NSString *dateString1 = [temp valueForKey:@"enddatetime"];
         NSString *res1= [self changeformate_string24hr:dateString1];
         
         NSArray *components1 = [res1 componentsSeparatedByString:@" "];
@@ -1020,7 +737,7 @@ typedef enum : NSUInteger
         NSArray *componentsEND = [timee1 componentsSeparatedByString:@":"];
         NSString *ENDhrs = componentsEND[0];
         NSString *ENDmnts = componentsEND[1];
-
+        
         //time
         
         NSString *tH1=@"15";
@@ -1034,28 +751,19 @@ typedef enum : NSUInteger
         [ar1 addObject:tM1];
         [ar1 replaceObjectAtIndex:0 withObject:ENDmnts];
         int endM = [[ar1 objectAtIndex:0] intValue];
-  ///ENDDATETIME  END
-        
-        
-        //Event Add
         
         EventRecord * objRecord    = [[EventRecord alloc]init];
         objRecord.numCustomerID    = @1;
-        objRecord.stringCustomerName  = [title objectAtIndex:i];
+        objRecord.stringCustomerName  = [temp valueForKey:@"title"];
         objRecord.dateDay          = self.reqDate;
         objRecord.dateTimeBegin  = [NSDate dateWithHour:startH min:startM];
         objRecord.dateTimeEnd         = [NSDate dateWithHour:endH min:endM];
-        objRecord.color         = [Bgcolors objectAtIndex:i];
-        
-//        FFBlueButton *bb = [[FFBlueButton alloc]init];
-//        [bb setBackgroundColor:<#(UIColor * _Nullable)#>]
+        objRecord.color         = [temp valueForKey:@"backgroundColor"];
         
         [allCompetitionArray addObject:objRecord];
         
     }
 
-    
-    //return [NSMutableArray arrayWithArray:@[event2]];
     
     return allCompetitionArray;
 }
@@ -1078,41 +786,6 @@ typedef enum : NSUInteger
     
 }
 
--(NSString *)Bcolors : (NSString *)ReqColor
-{
-    NSString * cc = EventBgcolor;
-    return cc;
-}
-
-
-
-
--(UIColor*)colorWithHexString:(NSString*)hex
-{
-    //-----------------------------------------
-    // Convert hex string to an integer
-    //-----------------------------------------
-    unsigned int hexint = 0;
-    
-    // Create scanner
-    NSScanner *scanner = [NSScanner scannerWithString:hex];
-    
-    // Tell scanner to skip the # character
-    [scanner setCharactersToBeSkipped:[NSCharacterSet
-                                       characterSetWithCharactersInString:@"#"]];
-    [scanner scanHexInt:&hexint];
-    
-    //-----------------------------------------
-    // Create color object, specifying alpha
-    //-----------------------------------------
-    UIColor *color =
-    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
-                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
-                     blue:((CGFloat) (hexint & 0xFF))/255
-                    alpha:1.0f];
-    
-    return color;
-}
 -(IBAction)MenuBtnAction:(id)sender
 {
    [COMMON ShowsideMenuView];
@@ -1183,10 +856,10 @@ typedef enum : NSUInteger
             objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
             objaddEvent.selectDateStr =selectdate;
             objaddEvent.isEdit =NO;
-            objaddEvent.ListeventTypeArray = self.EventTypeArray;
-            objaddEvent.ListeventStatusArray =self.EventStatusArray;
-            objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
-            
+            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
+            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
+            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
+
             [self.navigationController pushViewController:objaddEvent animated:YES];
         }
     }

@@ -13,11 +13,6 @@
 #import "HomeVC.h"
 #import "PlayerVC.h"
 
-
-
-
-
-
 @interface LoginVC ()<UITextFieldDelegate>
 {
     WebService * objWebservice;
@@ -48,12 +43,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.passwordTxt.secureTextEntry=YES;
-    //self.swt.transform = CGAffineTransformMakeScale(0.75, 0.60);
-    
     objWebservice=[[WebService alloc]init];
-    
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     if(!IS_IPHONE_DEVICE)
@@ -66,6 +58,13 @@
         self.signBtnyposition.constant  =self.passwordview.frame.origin.y-30;
     }
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 -(IBAction)didClickSubmitBtnAction:(id)sender
 {
     
@@ -77,31 +76,24 @@
 {
     if([self.userTxt.text isEqualToString:@""] || self.userTxt.text==nil)
     {
-        [self ShowAlterMsg:@"Please Enter UserName"];
+        [AppCommon showAlertWithMessage:@"Please Enter UserName"];
     }
     else if ([self.passwordTxt.text isEqualToString:@""] || self.passwordTxt.text==nil)
     {
-        [self ShowAlterMsg:@"Please Enter Password"];
+        [AppCommon showAlertWithMessage:@"Please Enter Password"];
     }
     else
     {
-        //[COMMON loadingIcon:self.view];
         [self LoginWebservice:self.userTxt.text:self.passwordTxt.text];
     }
 }
 
--(void)ShowAlterMsg:(NSString*) MsgStr
-{
-    UIAlertView *objAlter =[[UIAlertView alloc]initWithTitle:@"Login" message:MsgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [objAlter show];
-    
-}
-
 -(void)LoginWebservice :(NSString *) username :(NSString *) password
 {
-    [COMMON loadingIcon:self.view];
-    if([COMMON isInternetReachable])
-    {
+    if(![COMMON isInternetReachable])
+        return;
+    
+        [AppCommon showLoading];
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -148,49 +140,23 @@
                 [self.navigationController pushViewController:objTabVC animated:YES];
             }
             else{
-                [self ShowAlterMsg:@"Invalid Login "];
-                [COMMON RemoveLoadingIcon];
+                [AppCommon showAlertWithMessage:@"Invalid Login"];
             }
             
-            [COMMON RemoveLoadingIcon];
-            [self.view setUserInteractionEnabled:YES];
-            
+            [AppCommon hideLoading];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [COMMON webServiceFailureError];
-            [self.view setUserInteractionEnabled:YES];
-            
+            [AppCommon hideLoading];
+
         }];
-    }
     
 }
 
 - (IBAction)switchAction:(id)sender {
     
     self.passwordTxt.secureTextEntry= ![sender isOn];
-
-//    UISwitch *mySwitch = (UISwitch *)sender;
-//
-//    if ([mySwitch isOn]) {
-//
-//        self.passwordTxt.secureTextEntry=NO;
-//
-//        [self.swt setThumbTintColor:[UIColor colorWithRed: (27/255.0f)  green:(25/255.0f) blue:(68/255.0f) alpha:1.0f]];
-//        [self.swt setOnTintColor:[UIColor colorWithRed: (164/255.0f)  green:(179/255.0f) blue:(184/255.0f) alpha:1.0f]];
-//
-//        NSLog(@"ON");
-//
-//    } else {
-//
-//        self.passwordTxt.secureTextEntry=YES;
-//
-//        [self.swt setThumbTintColor:[UIColor colorWithRed: (128/255.0f)  green:(128/255.0f) blue:(128/255.0f) alpha:0.3f]];
-//        [self.swt setOnTintColor:[UIColor colorWithRed: (164/255.0f)  green:(179/255.0f) blue:(184/255.0f) alpha:1.0f]];
-//
-//        NSLog(@"Off");
-//
-//    }
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -214,12 +180,4 @@
     
     return YES;
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

@@ -101,7 +101,7 @@
         for (FFEvent *event in array) {
             
             CGFloat yTimeBegin = 0.0;
-            CGFloat yTimeEnd;
+            CGFloat yTimeEnd = 1.0;
             
             for (FFHourAndMinLabel *label in arrayLabelsHourAndMin) {
                 NSDateComponents *compLabel = [NSDate componentsOfDate:label.dateHourAndMin];
@@ -117,8 +117,8 @@
             }
             
             FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
-            [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+//            [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
             UIColor *color = [self colorWithHexString:event.color];
             [_button setBackgroundColor:color];
             [_button setEvent:event];

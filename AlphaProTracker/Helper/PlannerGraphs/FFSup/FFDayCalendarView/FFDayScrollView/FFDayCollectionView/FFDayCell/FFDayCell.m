@@ -9,7 +9,7 @@
 //
 
 #import "FFDayCell.h"
-
+#import "AppCommon.h"
 #import "FFHourAndMinLabel.h"
 #import "FFBlueButton.h"
 #import "FFImportantFilesForCalendar.h"
@@ -113,8 +113,8 @@
         
         for (FFEvent *event in arrayEvents) {
             
-            CGFloat yTimeBegin;
-            CGFloat yTimeEnd;
+            CGFloat yTimeBegin = 0.0;
+            CGFloat yTimeEnd = 1.0;
             
             for (FFHourAndMinLabel *label in arrayLabelsHourAndMin) {
                 NSDateComponents *compLabel = [NSDate componentsOfDate:label.dateHourAndMin];
@@ -130,10 +130,10 @@
             }
             
             FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(70., yTimeBegin, self.frame.size.width-95., yTimeEnd-yTimeBegin)];
-            [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
-            UIColor *color = [self colorWithHexString:event.color];
-            [_button setBackgroundColor:color];
+//            [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+//            UIColor *color = [self colorWithHexString:event.color];
+            [_button setBackgroundColor:[AppCommon colorWithHexString:event.color]];
             [_button setEvent:event];
             
             [arrayButtonsEvents addObject:_button];
@@ -165,34 +165,34 @@
         }
     }
 }
--(UIColor*)colorWithHexString:(NSString*)hex
-{
-    //-----------------------------------------
-    // Convert hex string to an integer
-    //-----------------------------------------
-    unsigned int hexint = 0;
-    
-    // Create scanner
-    NSScanner *scanner = [NSScanner scannerWithString:hex];
-    
-    // Tell scanner to skip the # character
-    [scanner setCharactersToBeSkipped:[NSCharacterSet
-                                       characterSetWithCharactersInString:@"#"]];
-    [scanner scanHexInt:&hexint];
-    
-    //-----------------------------------------
-    // Create color object, specifying alpha
-    //-----------------------------------------
-    UIColor *color =
-    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
-                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
-                     blue:((CGFloat) (hexint & 0xFF))/255
-                    alpha:1.0f];
-    
-    return color;
-}
-
-
+//-(UIColor*)colorWithHexString:(NSString*)hex
+//{
+//    //-----------------------------------------
+//    // Convert hex string to an integer
+//    //-----------------------------------------
+//    unsigned int hexint = 0;
+//
+//    // Create scanner
+//    NSScanner *scanner = [NSScanner scannerWithString:hex];
+//
+//    // Tell scanner to skip the # character
+//    [scanner setCharactersToBeSkipped:[NSCharacterSet
+//                                       characterSetWithCharactersInString:@"#"]];
+//    [scanner scanHexInt:&hexint];
+//
+//    //-----------------------------------------
+//    // Create color object, specifying alpha
+//    //-----------------------------------------
+//    UIColor *color =
+//    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+//                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+//                     blue:((CGFloat) (hexint & 0xFF))/255
+//                    alpha:1.0f];
+//
+//    return color;
+//}
+//
+//
 - (void)reloadLabelRed {
     
     [labelWithSameYOfCurrentHour setAlpha:1];
