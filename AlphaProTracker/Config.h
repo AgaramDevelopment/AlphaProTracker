@@ -212,3 +212,5 @@
 #define MultiInjuryUpdateKey                    @"MULTIINJURYUPDATE"
 
 #define AllPlayerProgramKey               @"GETALLPLAYERPROGRAMS"
+
+#define fetchMultiInjuryKey               @"UPDATEGRID"

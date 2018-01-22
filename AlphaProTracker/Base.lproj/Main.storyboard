@@ -6377,12 +6377,13 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQl-le-OZW">
-                                        <rect key="frame" x="20" y="1394" width="240" height="25"/>
+                                        <rect key="frame" x="20" y="1394" width="335" height="25"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1w-ZC-dm1">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="25" id="S0J-Ko-51I"/>
+                                                    <constraint firstAttribute="width" constant="25" id="PMv-eX-noN"/>
+                                                    <constraint firstAttribute="height" constant="25" id="lWs-Jg-jsX"/>
                                                 </constraints>
                                                 <state key="normal" image="rightMark"/>
                                                 <connections>
@@ -6390,23 +6391,40 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do You have Multiple Injury?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kx-hA-bdX">
-                                                <rect key="frame" x="30" y="0.0" width="210" height="25"/>
+                                                <rect key="frame" x="30" y="0.0" width="170" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="170" id="0Za-Q7-mwZ"/>
+                                                    <constraint firstAttribute="height" constant="25" id="hOw-n1-DWi"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTt-sW-IY3">
+                                                <rect key="frame" x="205" y="0.0" width="62" height="25"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="62" id="eim-wn-e2P"/>
+                                                    <constraint firstAttribute="height" constant="25" id="fEm-qe-FZP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                <state key="normal" title="MultiInjury">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="FetchMultiInjuryAction:" destination="dOe-yd-ctV" eventType="touchUpInside" id="uD8-J5-nPI"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="JuY-Z6-Kf1"/>
-                                            <constraint firstItem="8kx-hA-bdX" firstAttribute="top" secondItem="rQl-le-OZW" secondAttribute="top" id="KKg-6S-5lt"/>
-                                            <constraint firstItem="X1w-ZC-dm1" firstAttribute="leading" secondItem="rQl-le-OZW" secondAttribute="leading" id="QEL-es-TFR"/>
-                                            <constraint firstItem="8kx-hA-bdX" firstAttribute="leading" secondItem="X1w-ZC-dm1" secondAttribute="trailing" constant="5" id="RCM-2D-3I5"/>
-                                            <constraint firstAttribute="height" constant="25" id="STT-g5-RZF"/>
-                                            <constraint firstItem="X1w-ZC-dm1" firstAttribute="top" secondItem="rQl-le-OZW" secondAttribute="top" id="Xq4-ov-FIE"/>
-                                            <constraint firstAttribute="bottom" secondItem="X1w-ZC-dm1" secondAttribute="bottom" id="bh1-ky-DDA"/>
-                                            <constraint firstAttribute="bottom" secondItem="8kx-hA-bdX" secondAttribute="bottom" id="lte-Xh-RKU"/>
-                                            <constraint firstAttribute="trailing" secondItem="8kx-hA-bdX" secondAttribute="trailing" id="nBm-MQ-1IP"/>
+                                            <constraint firstItem="X1w-ZC-dm1" firstAttribute="leading" secondItem="rQl-le-OZW" secondAttribute="leading" id="A1l-RV-zhB"/>
+                                            <constraint firstAttribute="height" constant="25" id="DUg-G1-Afs"/>
+                                            <constraint firstItem="X1w-ZC-dm1" firstAttribute="top" secondItem="rQl-le-OZW" secondAttribute="top" id="Y4e-IK-M1N"/>
+                                            <constraint firstItem="8kx-hA-bdX" firstAttribute="top" secondItem="rQl-le-OZW" secondAttribute="top" id="gRY-S9-xrq"/>
+                                            <constraint firstItem="eTt-sW-IY3" firstAttribute="top" secondItem="rQl-le-OZW" secondAttribute="top" id="hzk-XR-N14"/>
+                                            <constraint firstItem="8kx-hA-bdX" firstAttribute="leading" secondItem="X1w-ZC-dm1" secondAttribute="trailing" constant="5" id="iZT-da-Xhm"/>
+                                            <constraint firstItem="eTt-sW-IY3" firstAttribute="leading" secondItem="8kx-hA-bdX" secondAttribute="trailing" constant="5" id="rt0-9S-GVT"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -6416,12 +6434,13 @@
                                     <constraint firstAttribute="trailing" secondItem="Hn7-a2-KiY" secondAttribute="trailing" constant="-1" id="IAz-cT-7gt"/>
                                     <constraint firstItem="Hn7-a2-KiY" firstAttribute="centerX" secondItem="nhG-B7-kC3" secondAttribute="centerX" id="Ip7-TS-7JF"/>
                                     <constraint firstItem="xqW-kI-Su0" firstAttribute="top" secondItem="nhG-B7-kC3" secondAttribute="top" constant="63" id="Iym-7P-Tq3"/>
-                                    <constraint firstItem="rQl-le-OZW" firstAttribute="top" secondItem="7ja-R0-wr8" secondAttribute="bottom" constant="10" id="J0z-WB-nvr"/>
+                                    <constraint firstItem="rQl-le-OZW" firstAttribute="top" secondItem="7ja-R0-wr8" secondAttribute="bottom" constant="10" id="MNR-Hp-leJ"/>
                                     <constraint firstItem="7ja-R0-wr8" firstAttribute="top" secondItem="Hn7-a2-KiY" secondAttribute="bottom" constant="4" id="Mds-eM-F5d"/>
+                                    <constraint firstAttribute="trailing" secondItem="rQl-le-OZW" secondAttribute="trailing" constant="20" id="Ni6-hB-TQ7"/>
                                     <constraint firstAttribute="trailing" secondItem="Ffo-Xm-2OA" secondAttribute="trailing" constant="25" id="OO1-jb-Kd6"/>
                                     <constraint firstAttribute="trailing" secondItem="xqW-kI-Su0" secondAttribute="trailing" constant="15" id="UqY-dl-D9L"/>
+                                    <constraint firstItem="rQl-le-OZW" firstAttribute="leading" secondItem="nhG-B7-kC3" secondAttribute="leading" constant="20" id="aCf-50-Dge"/>
                                     <constraint firstItem="onW-5y-Bc8" firstAttribute="top" secondItem="7ja-R0-wr8" secondAttribute="bottom" constant="56" id="aQA-eR-oQk"/>
-                                    <constraint firstItem="rQl-le-OZW" firstAttribute="leading" secondItem="nhG-B7-kC3" secondAttribute="leading" constant="20" id="dPz-Wk-hlW"/>
                                     <constraint firstItem="Ffo-Xm-2OA" firstAttribute="top" secondItem="7ja-R0-wr8" secondAttribute="bottom" constant="56" id="dxl-F7-TbI"/>
                                     <constraint firstItem="Hn7-a2-KiY" firstAttribute="leading" secondItem="nhG-B7-kC3" secondAttribute="leading" id="gyb-KJ-QNp"/>
                                     <constraint firstAttribute="trailing" secondItem="7ja-R0-wr8" secondAttribute="trailing" id="hg1-8Y-kNh"/>
@@ -6533,6 +6552,7 @@
                         <outlet property="lowerBtn" destination="1Yl-zj-e8R" id="jkb-dN-D7F"/>
                         <outlet property="medicalBtn" destination="Bct-SP-h4Y" id="R8z-vh-XvU"/>
                         <outlet property="multiInjuryBtn" destination="X1w-ZC-dm1" id="ec5-Cw-tDk"/>
+                        <outlet property="multiInjuryFetchBtn" destination="eTt-sW-IY3" id="ZZG-Ca-oBc"/>
                         <outlet property="occurancelbl" destination="6FG-e0-7ly" id="GO2-64-3cp"/>
                         <outlet property="occurranceBtn" destination="Kqj-v9-Sg9" id="I8x-hK-tkK"/>
                         <outlet property="occurranceView" destination="j7R-j4-MCH" id="9w9-73-uLq"/>

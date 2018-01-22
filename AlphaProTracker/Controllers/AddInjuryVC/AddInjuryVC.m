@@ -220,7 +220,8 @@
     self.StSlider.labelColor = [UIColor whiteColor];
     self.StSlider.sliderCircleRadius = self.StSlider.trackCircleRadius+10;
     
-    [self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateSelected];
+    //[self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateSelected];
+    self.multiInjuryFetchBtn.hidden=YES;
     xrData = @"";
     ctData = @"";
     bloodData = @"";
@@ -299,35 +300,48 @@
     
     
     
-    
-    
+    if([[self.objSelectInjuryArray valueForKey:@"MultiInjury"] isEqualToString:@"Yes"])
+    {
+        [self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
+        
+        self.multiInjuryFetchBtn.hidden=NO;
+    }else
+    {
+        [self.multiInjuryBtn setImage:[UIImage imageNamed:@" "] forState:UIControlStateSelected];
     NSMutableArray *LocationArray = [NSMutableArray arrayWithArray: self.headandtruckArray];
     [LocationArray addObjectsFromArray: self.upperextremityArray];
     [LocationArray addObjectsFromArray: self.lowerextremityArray];
     
     MultiInjuryVC  * objaddinjury=[[MultiInjuryVC alloc]init];
     objaddinjury = (MultiInjuryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"MultiInjuryVC"];
-    objaddinjury.playercode = [self.objSelectInjuryArray valueForKey:@"PlayerCode"];;
-    objaddinjury.injuryName = [self.objSelectInjuryArray valueForKey:@"InjuryName"];;
+    objaddinjury.playercode = [self.objSelectInjuryArray valueForKey:@"PlayerCode"];
+    objaddinjury.injuryName = [self.objSelectInjuryArray valueForKey:@"InjuryName"];
     objaddinjury.injurycode = [self.objSelectInjuryArray valueForKey:@"InjuryCode"];
-    objaddinjury.onsetCode = [self.objSelectInjuryArray valueForKey:@"OnSetType"];;
+    objaddinjury.onsetCode = [self.objSelectInjuryArray valueForKey:@"OnSetType"];
     objaddinjury.injuryTypeArray = self.injuryTypeArray;
     objaddinjury.injuryCauseArray = self.injuryCauseArray;
     objaddinjury.injuryLocationArray=LocationArray;
-    objaddinjury.dateofAssessment= [self.objSelectInjuryArray valueForKey:@"DateOfAssessment"];;
-    objaddinjury.onsetDate = [self.objSelectInjuryArray valueForKey:@"OnSetDate"];;
-    objaddinjury.chiefComplaint = [self.objSelectInjuryArray valueForKey:@"ChiefCompliant"];;
+    objaddinjury.dateofAssessment= [self.objSelectInjuryArray valueForKey:@"DateOfAssessment"];
+    objaddinjury.onsetDate = [self.objSelectInjuryArray valueForKey:@"OnSetDate"];
+    objaddinjury.chiefComplaint = [self.objSelectInjuryArray valueForKey:@"ChiefCompliant"];
     objaddinjury.expectedOpinionCode = [self.objSelectInjuryArray valueForKey:@"ExpertOptionTakenCode"];;
-    objaddinjury.recoverydate = [self.objSelectInjuryArray valueForKey:@"ExpectedDateOfRecovery"];;
-    objaddinjury.vasValue = [self.objSelectInjuryArray valueForKey:@"Vas"];;
-    objaddinjury.occurenceCode = [self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceCode"];;
-    objaddinjury.occurenceSubCode = [self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceSubCode"];;
-    objaddinjury.gamecode= [self.objSelectInjuryArray valueForKey:@"GameCode"];;
-    objaddinjury.teamcode= [self.objSelectInjuryArray valueForKey:@"TeamCode"];;
+    objaddinjury.recoverydate = [self.objSelectInjuryArray valueForKey:@"ExpectedDateOfRecovery"];
+    objaddinjury.vasValue = [self.objSelectInjuryArray valueForKey:@"Vas"];
+    objaddinjury.occurenceCode = [self.objSelectInjuryArray valueForKey:@"InjuryOccuranceCode"];
+    objaddinjury.occurenceSubCode = [self.objSelectInjuryArray valueForKey:@"InjuryOccuranceSubCode"];
+    objaddinjury.gamecode= [self.objSelectInjuryArray valueForKey:@"GameCode"];
+    objaddinjury.teamcode= [self.objSelectInjuryArray valueForKey:@"TeamCode"];
     
     [self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateSelected];
     
     [self.navigationController pushViewController:objaddinjury animated:YES];
+    }
+}
+
+-(IBAction)FetchMultiInjuryAction:(id)sender
+{
+    [self FetchWebservice];
+    
 }
 
 -(void)allviewsetBordermethod
@@ -439,6 +453,7 @@
                     if([[self.objSelectInjuryArray valueForKey:@"MultiInjury"] isEqualToString:@"Yes"])
                     {
                         [self.multiInjuryBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
+                        self.multiInjuryFetchBtn.hidden = NO;
                     }
                     
                     
@@ -1658,6 +1673,78 @@
     }
     
 }
+
+-(void)FetchWebservice
+{
+    [COMMON loadingIcon:self.view];
+    if([COMMON isInternetReachable])
+    {
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",fetchMultiInjuryKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(cliendcode)   [dic    setObject:cliendcode     forKey:@"ClientCode"];
+        if(selectPlayerCode)   [dic    setObject:selectPlayerCode     forKey:@"PlayerCode"];
+        if(selectInjuryCode) [dic    setObject:selectInjuryCode     forKey:@"InjuryCode"];
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                NSMutableArray * fetchValues = [[NSMutableArray alloc]init];
+                fetchValues = [responseObject valueForKey:@"InjuryWebs1"];
+                
+                
+                NSMutableArray *LocationArray = [NSMutableArray arrayWithArray: self.headandtruckArray];
+                [LocationArray addObjectsFromArray: self.upperextremityArray];
+                [LocationArray addObjectsFromArray: self.lowerextremityArray];
+                MultiInjuryVC  * objaddinjury=[[MultiInjuryVC alloc]init];
+                objaddinjury = (MultiInjuryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"MultiInjuryVC"];
+                objaddinjury.playercode = [self.objSelectInjuryArray valueForKey:@"PlayerCode"];
+                objaddinjury.injuryName = [self.objSelectInjuryArray valueForKey:@"InjuryName"];
+                objaddinjury.injurycode = [self.objSelectInjuryArray valueForKey:@"InjuryCode"];
+                objaddinjury.onsetCode = [self.objSelectInjuryArray valueForKey:@"OnSetType"];
+                objaddinjury.injuryTypeArray = self.injuryTypeArray;
+                objaddinjury.injuryCauseArray = self.injuryCauseArray;
+                objaddinjury.injuryLocationArray=LocationArray;
+                objaddinjury.dateofAssessment= [self.objSelectInjuryArray valueForKey:@"DateOfAssessment"];
+                objaddinjury.onsetDate = [self.objSelectInjuryArray valueForKey:@"OnSetDate"];
+                objaddinjury.chiefComplaint = [self.objSelectInjuryArray valueForKey:@"ChiefCompliant"];
+                objaddinjury.expectedOpinionCode = [self.objSelectInjuryArray valueForKey:@"ExpertOptionTakenCode"];;
+                objaddinjury.recoverydate = [self.objSelectInjuryArray valueForKey:@"ExpectedDateOfRecovery"];
+                objaddinjury.vasValue = [self.objSelectInjuryArray valueForKey:@"Vas"];
+                objaddinjury.occurenceCode = [self.objSelectInjuryArray valueForKey:@"InjuryOccuranceCode"];
+                objaddinjury.occurenceSubCode = [self.objSelectInjuryArray valueForKey:@"InjuryOccuranceSubCode"];
+                objaddinjury.gamecode= [self.objSelectInjuryArray valueForKey:@"GameCode"];
+                objaddinjury.teamcode= [self.objSelectInjuryArray valueForKey:@"TeamCode"];
+                objaddinjury.commonGridArray = fetchValues;
+                [self.navigationController pushViewController:objaddinjury animated:YES];
+                
+            }
+            
+            [COMMON RemoveLoadingIcon];
+            [self.view setUserInteractionEnabled:YES];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [COMMON webServiceFailureError];
+            [self.view setUserInteractionEnabled:YES];
+            
+        }];
+    }
+    
+}
+
 
 #pragma ButtonAction
 

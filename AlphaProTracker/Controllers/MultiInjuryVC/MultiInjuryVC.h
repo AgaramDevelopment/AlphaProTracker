@@ -55,6 +55,9 @@
 @property (nonatomic,strong)  NSMutableArray * injurySideArray;
 @property (nonatomic,strong)  NSMutableArray * injurySiteArray;
 
+@property (nonatomic,strong)  NSMutableArray * injuryFetchArray;
+@property (strong, nonatomic)  NSMutableArray *commonGridArray;
+
 @property (nonatomic,strong)  NSString * onsetCode;
 @property (nonatomic,strong)  NSString * injurycode;
 @property (nonatomic,strong)  NSString * injuryName;

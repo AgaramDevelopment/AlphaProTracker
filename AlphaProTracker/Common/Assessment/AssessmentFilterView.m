@@ -172,7 +172,7 @@
 
                 //FetchPlayer
 
-                NSMutableArray * objPlayerArray= [responseObject valueForKey:@"lstAssessmentEntryPlayer"];
+               // NSMutableArray * objPlayerArray= [responseObject valueForKey:@"lstAssessmentEntryPlayer"];
 
                 for(int i=0; objmoduleArray.count>i;i++)
                 {
