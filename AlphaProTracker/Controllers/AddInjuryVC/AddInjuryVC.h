@@ -16,6 +16,7 @@
 @property (nonatomic,strong)IBOutlet StepSlider * StSlider;
 
 @property (nonatomic,strong)IBOutlet UIButton * multiInjuryBtn;
+@property (nonatomic,strong)IBOutlet UIButton * multiInjuryFetchBtn;
 
 @property (nonatomic,strong) NSString * ismulti;
 

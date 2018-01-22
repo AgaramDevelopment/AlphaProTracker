@@ -32,6 +32,7 @@
     WebService *objWebservice;
     
     NSIndexPath *SelectedindexPath;
+    NSMutableArray * reqarraycount;
     
     // UITapGestureRecognizer *letterTapRecognizer;
 }
@@ -39,7 +40,7 @@
 @property (strong, nonatomic)  NSMutableArray *selectedMarks;
 
 @property (strong, nonatomic)  NSMutableArray *commonArray;
-@property (strong, nonatomic)  NSMutableArray *commonGridArray;
+
 
 
 @property (strong, nonatomic)  NSMutableArray *SiteCodeArray;
@@ -81,10 +82,29 @@
     self.multiseliectPopView.hidden = YES;
     self.selectedMarks = [[NSMutableArray alloc]init];
     
+    
+    
+    if(self.commonGridArray.count !=0)
+    {
+        
+        self.SideCodeArray = [[NSMutableArray alloc]init];
+        self.SiteCodeArray = [[NSMutableArray alloc]init];
+        self.TypeCodeArray = [[NSMutableArray alloc]init];
+        self.CauseCodeArray = [[NSMutableArray alloc]init];
+        self.LocCodeArray = [[NSMutableArray alloc]init];
+        self.UPDATEBtn.hidden = NO;
+        self.DELETEBtn.hidden = NO;
+        self.CLOSEBtn.hidden = NO;
+        self.injuryTbl.hidden = NO;
+        
+       
+    }else
+    {
     self.UPDATEBtn.hidden = YES;
     self.DELETEBtn.hidden = YES;
     self.CLOSEBtn.hidden = YES;
     self.injuryTbl.hidden = YES;
+    }
     
     self.injurySideArray = [NSMutableArray arrayWithObjects:@"Right",@"Left", nil];
     self.injurySiteArray = [NSMutableArray arrayWithObjects:@"Anterior",@"Posterior",@"Medical",@"Lateral", nil];
@@ -226,6 +246,8 @@
     {
         self.SiteCodeArray = [[NSMutableArray alloc]init];
         self.SiteCodeArray = _selectedMarks;
+        
+        //[self.SiteCodeArray addObjectsFromArray: _selectedMarks];
         self.sitelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.SiteCodeArray.count];
         NSLog(@"%@",_SiteCodeArray);
     }
@@ -233,6 +255,7 @@
     {
         self.SideCodeArray = [[NSMutableArray alloc]init];
         self.SideCodeArray = _selectedMarks;
+        //[self.SideCodeArray addObjectsFromArray: _selectedMarks];
         
         self.sidelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.SideCodeArray.count];
         
@@ -242,6 +265,7 @@
     {
         self.CauseCodeArray = [[NSMutableArray alloc]init];
         self.CauseCodeArray = _selectedMarks;
+        //[self.CauseCodeArray addObjectsFromArray: _selectedMarks];
         self.causelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.CauseCodeArray.count];
         NSLog(@"%@",_CauseCodeArray);
     }
@@ -249,6 +273,7 @@
     {
         self.LocCodeArray = [[NSMutableArray alloc]init];
         self.LocCodeArray = _selectedMarks;
+        //[self.LocCodeArray addObjectsFromArray: _selectedMarks];
         self.locationlbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.LocCodeArray.count];
         NSLog(@"%@",_LocCodeArray);
     }
@@ -256,6 +281,7 @@
     {
         self.TypeCodeArray = [[NSMutableArray alloc]init];
         self.TypeCodeArray = _selectedMarks;
+    //[self.TypeCodeArray addObjectsFromArray: _selectedMarks];
         self.typelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.TypeCodeArray.count];
         NSLog(@"%@",_TypeCodeArray);
     }
@@ -568,13 +594,18 @@
             
             if(responseObject >0)
             {
+                NSLog(@"%@", self.commonGridArray);
                 self.commonGridArray = [[NSMutableArray alloc]init];
+                //reqarraycount = [[NSMutableArray alloc]init];
                 self.commonGridArray = [responseObject valueForKey:@"InjuryWebs1"];
                 [self.injuryTbl reloadData];
                 self.UPDATEBtn.hidden = NO;
                 self.DELETEBtn.hidden = NO;
                 self.CLOSEBtn.hidden = NO;
                 self.injuryTbl.hidden = NO;
+//                reqarraycount = [[NSMutableArray alloc]init];
+//                reqarraycount = [responseObject valueForKey:@"InjuryWebs1"];
+//                [self reloaddata];
             }
             
             [COMMON RemoveLoadingIcon];
@@ -590,7 +621,19 @@
     }
     
 }
-
+-(void)reloaddata
+{
+    for(int i=0;i>reqarraycount.count;i++)
+    {
+        [self.commonGridArray addObject:[reqarraycount objectAtIndex:i]];
+        
+    }
+    [self.injuryTbl reloadData];
+    self.UPDATEBtn.hidden = NO;
+    self.DELETEBtn.hidden = NO;
+    self.CLOSEBtn.hidden = NO;
+    self.injuryTbl.hidden = NO;
+}
 -(void)UpdateWebservice
 {
     [COMMON loadingIcon:self.view];
@@ -606,12 +649,34 @@
         manager.requestSerializer = requestSerializer;
         
         
+//        self.SideCodeArray = [[NSMutableArray alloc]init];
+//        self.SiteCodeArray = [[NSMutableArray alloc]init];
+//        self.TypeCodeArray = [[NSMutableArray alloc]init];
+//        self.CauseCodeArray = [[NSMutableArray alloc]init];
+//        self.LocCodeArray = [[NSMutableArray alloc]init];
+        
+//        for(int i=0;i<_commonGridArray.count;i++)
+//        {
+//            NSString *sidecode = [[self.commonGridArray valueForKey:@"InjurySideCode"]objectAtIndex:i];
+//            NSString *sitecode = [[self.commonGridArray valueForKey:@"InjurySiteCode"]objectAtIndex:i];
+//            NSString *typecode = [[self.commonGridArray valueForKey:@"InjuryTypeCode"]objectAtIndex:i];
+//            NSString *causecode = [[self.commonGridArray valueForKey:@"InjuryCauseCode"]objectAtIndex:i];
+//            NSString *locationcode = [[self.commonGridArray valueForKey:@"InjuryLocationSubCode"]objectAtIndex:i];
+//
+//            [self.SideCodeArray addObject:sidecode];
+//            [self.SiteCodeArray addObject:sitecode];
+//            [self.TypeCodeArray addObject:typecode];
+//            [self.CauseCodeArray addObject:causecode];
+//            [self.LocCodeArray addObject:locationcode];
+//
+//        }
+        
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         
         if(self.createdby)   [dic    setObject:self.createdby     forKey:@"CreatedBy"];
-        if(self.occurenceCode)   [dic    setObject:self.occurenceCode     forKey:@"InjuaryOccuranceCode"];
-        if(self.occurenceSubCode)   [dic    setObject:self.occurenceSubCode     forKey:@"InjuaryOccuranceSubCode"];
+        if(self.occurenceCode)   [dic    setObject:self.occurenceCode     forKey:@"InjuryOccuranceCode"];
+        if(self.occurenceSubCode)   [dic    setObject:self.occurenceSubCode     forKey:@"InjuryOccuranceSubCode"];
         if(self.injurycode)   [dic    setObject:self.injurycode     forKey:@"InjuryCode"];
         if(self.onsetCode)   [dic    setObject:self.onsetCode     forKey:@"OnSetType"];
         if(self.injuryName)   [dic    setObject:self.injuryName     forKey:@"InjuryName"];
@@ -676,9 +741,6 @@
             [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
         }
         [dic    setObject:@"Bloodtest.png"     forKey:@"BloodTestName"];
-        
-        
-        
         
         
         
