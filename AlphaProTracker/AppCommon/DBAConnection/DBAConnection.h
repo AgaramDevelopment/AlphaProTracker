@@ -22,4 +22,5 @@
 -(NSMutableArray *)AssementForm:(NSString *) ScreenId:(NSString *) clientcode :(NSString *) modulecode:(NSString *) AssessmentCode :(NSString *) AssessmentTestCode;
 -(NSMutableArray *)AssessmentTeamListDetail :(NSString *) membercode;
 -(NSMutableArray *)AssessmentPlayerListDetail :(NSString *) clientCode :(NSString *)userCode;
+-(NSMutableArray *)GetAssessmentByCoach:(NSString *)clientCode : (NSString *) ModuleCode;
 @end

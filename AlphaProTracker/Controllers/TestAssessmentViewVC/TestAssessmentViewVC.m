@@ -19,10 +19,10 @@
 #import "INTUGroupedArrayImports.h"
 #import "INTUFruitCategory.h"
 #import "INTUFruit.h"
+#import "ExpandAssessmentVC.h"
 
 
-
-@interface TestAssessmentViewVC ()<SACalendarDelegate>
+@interface TestAssessmentViewVC ()<SACalendarDelegate,AssessmentFilterDelegate>
 {
     WebService *objWebService;
     NSString * SelectClientCode;
@@ -121,6 +121,7 @@
     objAssessmentSideView.frame=[self setFramrToMenuViewWithXposition:-190];
     objAssessmentSideView.moduleStr =  self.ModuleCode;
     objAssessmentSideView.AssessmentTitleArray = aslist;
+    objAssessmentSideView.AssessmentFilterDelegate = self;
     self.assessmentView.hidden = YES;
     
 }
@@ -582,6 +583,14 @@
     return frame;
 }
 
+-(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode;
+{
+    ExpandAssessmentVC * objExpandVC =[[ExpandAssessmentVC alloc]init];
+    objExpandVC = (ExpandAssessmentVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ExpendAssessment"];
+    objExpandVC.assessmentCodeStr = AssessmentCode;
+    objExpandVC.ModuleCodeStr = self.ModuleCode;
+    [self.navigationController pushViewController:objExpandVC animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

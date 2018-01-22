@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "SACalendar.h"
+
+@protocol AssessmentFilterDelegate
+-(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode;
+@end
+
 @interface AssessmentFilterView : UIView <SACalendarDelegate, UITextFieldDelegate>
+@property (nonatomic,strong) id AssessmentFilterDelegate;
 
 @property (nonatomic,strong) NSString *moduleStr;
+@property (nonatomic,strong) NSString * assessmentCode;
+
+
+
 @property(nonatomic,strong) NSMutableArray * AssessmentTitleArray;
 
 

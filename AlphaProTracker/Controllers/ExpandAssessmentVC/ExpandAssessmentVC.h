@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SKSTableView.h"
 @interface ExpandAssessmentVC : UIViewController
+@property(nonatomic,strong)IBOutlet UITableView * tableview;
 
+@property (nonatomic,strong) NSString * assessmentCodeStr;
+@property (nonatomic,strong) NSString * ModuleCodeStr;
+@property (nonatomic,strong) NSString * selectDate;
 @end

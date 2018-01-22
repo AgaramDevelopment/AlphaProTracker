@@ -15,6 +15,8 @@
 #import "PopViewCell.h"
 #import "DBAConnection.h"
 #import "WebService.h"
+#import "ExpandAssessmentVC.h"
+
 @implementation AssessmentFilterView
 {
     NSMutableArray * ModuleArray;
@@ -547,8 +549,10 @@
     {
         //player tbl selection
         self.playerTxt.text = [[_searchResult valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
+        NSDictionary * objDic = [self.searchResult objectAtIndex:indexPath.row];
         [self.playerTxt resignFirstResponder];
         self.playerTbl.hidden = YES;
+        [self.AssessmentFilterDelegate SelectPlayerMovetoAnother:objDic: self.assessmentCode];
     } else {
         self.popTblView.hidden = YES;
         [self removeAnimate];
@@ -572,7 +576,7 @@
         else if (isTittle) {
             
             self.titleLbl.text = [[commonArray valueForKey:@"AssessmentName"] objectAtIndex:indexPath.row];
-            
+            self.assessmentCode = [[commonArray valueForKey:@"AssessmentCode"] objectAtIndex:indexPath.row];
             
             NSString *membercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
             DBAConnection *Db = [[DBAConnection alloc]init];
