@@ -4484,7 +4484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qdF-wb-Fdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6480.8000000000002" y="905.3973013493254"/>
+            <point key="canvasLocation" x="6480" y="985"/>
         </scene>
         <!--TeamsVC-->
         <scene sceneID="lnM-GJ-qpc">
@@ -4562,7 +4562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="212-ou-q5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7104.375" y="903.16901408450701"/>
+            <point key="canvasLocation" x="7187" y="905"/>
         </scene>
         <!--InjuryVC-->
         <scene sceneID="gmC-Rb-bP2">
@@ -6385,7 +6385,6 @@
                                                     <constraint firstAttribute="width" constant="25" id="PMv-eX-noN"/>
                                                     <constraint firstAttribute="height" constant="25" id="lWs-Jg-jsX"/>
                                                 </constraints>
-                                                <state key="normal" image="rightMark"/>
                                                 <connections>
                                                     <action selector="didClickMultiInjuryAction:" destination="dOe-yd-ctV" eventType="touchUpInside" id="jRR-6v-etV"/>
                                                 </connections>
@@ -14718,7 +14717,6 @@ portion Size</string>
         <image name="ico_timer" width="16" height="16"/>
         <image name="ico_viewgraph" width="48" height="48"/>
         <image name="radio_off" width="25" height="25"/>
-        <image name="rightMark" width="42" height="42"/>
         <image name="search_Img.png" width="70" height="70"/>
     </resources>
 </document>
