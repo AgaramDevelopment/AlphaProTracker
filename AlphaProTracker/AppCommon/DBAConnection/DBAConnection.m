@@ -523,4 +523,49 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 }
 
 
+//Assessment By Coach
+
+-(NSMutableArray *)GetAssessmentByCoach:(NSString *)clientCode : (NSString *) ModuleCode
+{
+    @synchronized ([Utitliy syncId])  {
+        int retVal;
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+        NSMutableArray *assessment = [[NSMutableArray alloc]init];
+        if(retVal ==0){
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT ASSM.CLIENTCODE,ASSM.MODULECODE,ASSM.ASSESSMENTCODE,ASSM.ASSESSMENTNAME,ASSM.RECORDSTATUS,ASSM.CREATEDBY,ASSM.CREATEDDATE,ASSM.MODIFIEDBY,ASSM.MODIFIEDDATE,MDMODULE.METASUBCODEDESCRIPTION AS MODULENAME FROM    ASSESSMENT ASSM INNER JOIN METADATA MDMODULE ON MDMODULE.METASUBCODE=ASSM.MODULECODE WHERE  ASSM.CLIENTCODE= '%@'  AND ASSM.RECORDSTATUS='MSC001' AND MODULECODE = '%@'",clientCode,ModuleCode];
+            
+            NSLog(@"%@",query);
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSLog(@"Success");
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString *    setTeamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                    NSString *    setTeamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                    
+                    [dic setObject:setTeamCode forKey:@"ASSESSMENTCODE"];
+                    [dic setObject:setTeamName forKey:@"ASSESSMENTNAME"];
+                    
+                    [assessment addObject:dic];
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        NSLog(@"%@", assessment);
+        
+        return assessment;
+    }
+}
+
+
 @end

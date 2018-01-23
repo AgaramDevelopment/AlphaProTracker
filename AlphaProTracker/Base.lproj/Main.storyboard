@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -3422,7 +3422,7 @@
         <!--Expand AssessmentVC-->
         <scene sceneID="TVs-NB-nFY">
             <objects>
-                <viewController storyboardIdentifier="ExpandAssessmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dLL-OI-WYj" customClass="ExpandAssessmentVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExpendAssessment" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dLL-OI-WYj" customClass="ExpandAssessmentVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D1d-1c-G5F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3433,6 +3433,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9dG-2t-wFd">
                                 <rect key="frame" x="5" y="60" width="310" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="dLL-OI-WYj" id="vX9-nQ-18O"/>
+                                    <outlet property="delegate" destination="dLL-OI-WYj" id="Ceg-zW-t4W"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3448,6 +3452,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cBY-99-u65"/>
                     </view>
+                    <connections>
+                        <outlet property="tableview" destination="9dG-2t-wFd" id="CVy-P3-EZ5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lp3-kD-MPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
