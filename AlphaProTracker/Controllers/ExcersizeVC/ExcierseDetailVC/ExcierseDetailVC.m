@@ -36,8 +36,6 @@
 @implementation ExcierseDetailVC
 
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -180,43 +178,38 @@
         
         NSMutableDictionary *dict = [imageArray objectAtIndex:indexPath.row];
         
-        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
-        vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
+//        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
+        ExcersizeDetailItemVC *vc = [appDel.storyBoard instantiateViewControllerWithIdentifier:@"ExcersizeDetailItemVC"];
         vc.isImage = YES;
-        
+        vc.contentImages = imageArray;
+        vc.indexPath = indexPath.row;
         //Transparency Color
-        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-        //        [self.navigationController pushViewController:vc animated:YES];
+//        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+//        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+//
+//        [self presentViewController:vc animated:YES completion:nil];
+        [self.navigationController pushViewController:vc animated:YES];
         
     }else if(collectionView == _videoCView){
         NSMutableDictionary *dict = [videoArray objectAtIndex:indexPath.row];
         
-        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
-        vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
+//        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
+        ExcersizeDetailItemVC *vc = [appDel.storyBoard instantiateViewControllerWithIdentifier:@"ExcersizeDetailItemVC"];
         vc.isVideo = YES;
+        vc.contentImages = videoArray;
+        vc.indexPath = indexPath.row;
         
-        //Transparency Color
-        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-        //        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:YES];
     }else if(collectionView == _docuCView){
         NSMutableDictionary *dict = [documentArray objectAtIndex:indexPath.row];
         
-        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
-        vc.URL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
+//        ExcersizeDetailItemVC  * vc=[[ExcersizeDetailItemVC alloc]init];
+        ExcersizeDetailItemVC *vc = [appDel.storyBoard instantiateViewControllerWithIdentifier:@"ExcersizeDetailItemVC"];
         vc.isPDF = YES;
+        vc.contentImages = documentArray;
+        vc.indexPath = indexPath.row;
         
-        //Transparency Color
-        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-        //        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

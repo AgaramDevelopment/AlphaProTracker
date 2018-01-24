@@ -25,10 +25,10 @@
 		04228EC22011FE1000D131F8 /* AddFoodDiaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04228EC02011FE0C00D131F8 /* AddFoodDiaryVC.m */; };
 		04228EC52011FE6400D131F8 /* FoodDairyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04228EC32011FE6100D131F8 /* FoodDairyVC.m */; };
 		04228ECD201207B100D131F8 /* ExcersizeDetailItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04228ECB201207B100D131F8 /* ExcersizeDetailItemVC.m */; };
-		04228ECE201207B100D131F8 /* ExcersizeDetailItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04228ECC201207B100D131F8 /* ExcersizeDetailItemVC.xib */; };
 		04228ED02012236300D131F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04228ECF2012236300D131F8 /* AVFoundation.framework */; };
 		04228ED22012237400D131F8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04228ED12012237400D131F8 /* AVKit.framework */; };
 		04241DFB1F7D238F00A7C46A /* GraphsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04241DFA1F7D238F00A7C46A /* GraphsVC.m */; };
+		0426C8D1201842000028D4EA /* PageItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426C8D0201842000028D4EA /* PageItemController.m */; };
 		043B23031F4B1B3800036604 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 043B23021F4B1B3800036604 /* main.m */; };
 		043B23061F4B1B3800036604 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 043B23051F4B1B3800036604 /* AppDelegate.m */; };
 		043B230C1F4B1B3900036604 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043B230A1F4B1B3900036604 /* Main.storyboard */; };
@@ -277,11 +277,12 @@
 		04228EC42011FE6200D131F8 /* FoodDairyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoodDairyVC.h; path = Controllers/FoodDairyVC/FoodDairyVC.h; sourceTree = "<group>"; };
 		04228ECA201207B100D131F8 /* ExcersizeDetailItemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcersizeDetailItemVC.h; sourceTree = "<group>"; };
 		04228ECB201207B100D131F8 /* ExcersizeDetailItemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExcersizeDetailItemVC.m; sourceTree = "<group>"; };
-		04228ECC201207B100D131F8 /* ExcersizeDetailItemVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExcersizeDetailItemVC.xib; sourceTree = "<group>"; };
 		04228ECF2012236300D131F8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		04228ED12012237400D131F8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		04241DF91F7D238F00A7C46A /* GraphsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphsVC.h; path = Controllers/GraphVC/GraphsVC.h; sourceTree = "<group>"; };
 		04241DFA1F7D238F00A7C46A /* GraphsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphsVC.m; path = Controllers/GraphVC/GraphsVC.m; sourceTree = "<group>"; };
+		0426C8CF201842000028D4EA /* PageItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageItemController.h; sourceTree = "<group>"; };
+		0426C8D0201842000028D4EA /* PageItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageItemController.m; sourceTree = "<group>"; };
 		043B22FE1F4B1B3800036604 /* AlphaProTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlphaProTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043B23021F4B1B3800036604 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		043B23041F4B1B3800036604 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -772,7 +773,8 @@
 			children = (
 				04228ECA201207B100D131F8 /* ExcersizeDetailItemVC.h */,
 				04228ECB201207B100D131F8 /* ExcersizeDetailItemVC.m */,
-				04228ECC201207B100D131F8 /* ExcersizeDetailItemVC.xib */,
+				0426C8CF201842000028D4EA /* PageItemController.h */,
+				0426C8D0201842000028D4EA /* PageItemController.m */,
 			);
 			path = ExcersizeDetailItemVC;
 			sourceTree = "<group>";
@@ -1980,7 +1982,6 @@
 				04EBB7961F8904D500422202 /* QuestionaryCell.xib in Resources */,
 				ACC2A1A51F5FF52A00210422 /* ViewProfile.xib in Resources */,
 				ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */,
-				04228ECE201207B100D131F8 /* ExcersizeDetailItemVC.xib in Resources */,
 				0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */,
 				189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */,
 				AC1BC8111F8665A60047AECC /* AADrilldown.js in Resources */,
@@ -2226,6 +2227,7 @@
 				ACACEFEE1F597AFE004C28A4 /* ExpandAssessmentVC.m in Sources */,
 				045A49821FA2202F008C1630 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
 				CEEE8041200E3B6D00E33513 /* ExcierseDetailVC.m in Sources */,
+				0426C8D1201842000028D4EA /* PageItemController.m in Sources */,
 				045A497D1FA22026008C1630 /* FFMonthCell.m in Sources */,
 				045A49B51FA220B2008C1630 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				045A495A1FA21F9E008C1630 /* FFButtonAddEventWithPopover.m in Sources */,
