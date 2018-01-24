@@ -22,8 +22,9 @@
     NSMutableArray * ModuleArray;
     NSMutableArray * TeamArray;
     NSMutableArray * playerArray;
+    NSMutableArray * commonPlayerArray;
     NSMutableArray * commonArray;
-    NSMutableArray * FetchAssessTitleArray;
+    //NSMutableArray * FetchAssessTitleArray;
     WebService * objWebService;
     
     BOOL isModule;
@@ -145,9 +146,6 @@
             {
                 NSLog(@"%@",responseObject);
                 ModuleArray = [[NSMutableArray alloc]init];
-//                AssessmentTitleArray = [[NSMutableArray alloc]init];
-//                TeamArray = [[NSMutableArray alloc]init];
-//                playerArray = [[NSMutableArray alloc]init];
 
 
                 //FetchModule
@@ -237,7 +235,7 @@
             }
 
             [COMMON RemoveLoadingIcon];
-            [self SearchViewMethod];
+            //[self SearchViewMethod];
             [self setUserInteractionEnabled:YES];
             isplayerlist=YES;
             [self.playerTbl reloadData];
@@ -455,7 +453,7 @@
     }
     if(isplayerlist)
     {
-        return playerArray.count;
+        return commonPlayerArray.count;
     }
     return nil;
 }
@@ -486,7 +484,7 @@
         }
         
         //self.selectedMarks = [[NSMutableArray alloc]init];
-        cell.playername_lbl.text = [[playerArray valueForKey:@"PLAYERNAME"] objectAtIndex:indexPath.row];
+        cell.playername_lbl.text = [[commonPlayerArray valueForKey:@"PLAYERNAME"] objectAtIndex:indexPath.row];
         //cell.title_lbl.text = [[playerArray valueForKey:@"RecoveryStatus"] objectAtIndex:indexPath.row];
         NSLog(@"RecoveryStatus:%@", cell.title_lbl.text);
 //        NSString * imgStr1 = ([[playerArray objectAtIndex:indexPath.row] valueForKey:@"playerPhoto"]==[NSNull null])?@"":[[playerArray objectAtIndex:indexPath.row] valueForKey:@"playerPhoto"];
@@ -555,6 +553,7 @@
         [self.AssessmentFilterDelegate SelectPlayerMovetoAnother:objDic: self.assessmentCode];
     } else {
         self.popTblView.hidden = YES;
+        isPoPlist = NO;
         [self removeAnimate];
         if (isModule)
         {
@@ -597,8 +596,10 @@
             DBAConnection *Db = [[DBAConnection alloc]init];
 
             playerArray = [[NSMutableArray alloc]init];
+            commonPlayerArray = [[NSMutableArray alloc]init];
             playerArray =  [Db AssessmentPlayerListDetail:userref:clientcode];
             isplayerlist =YES;
+            commonPlayerArray = playerArray;
             [self.playerTbl reloadData];
             
             //isTittle =NO;
@@ -629,8 +630,8 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText
 {
-    
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"PlayerName CONTAINS[c] %@", searchText];
+  
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"PLAYERNAME CONTAINS[c] %@", searchText];
     _searchResult = [playerArray filteredArrayUsingPredicate:resultPredicate];
     
     NSLog(@"searchResult:%@", _searchResult);
@@ -646,6 +647,8 @@
             isTittle = NO;
             isModule = NO;
             self.playerTbl.hidden = NO;
+            commonPlayerArray =[[NSMutableArray alloc]init];
+            commonPlayerArray = [self.searchResult copy];
             [self.playerTbl reloadData];
         }
     });
@@ -711,6 +714,8 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
     self.playerTbl.hidden = NO;
+    commonPlayerArray = [[NSMutableArray alloc]init];
+    commonPlayerArray = playerArray;
     [self.playerTbl reloadData];
     [textField resignFirstResponder];
 }

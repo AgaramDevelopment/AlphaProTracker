@@ -88,7 +88,7 @@
         }
         else
         {
-          return CGSizeMake(85,85);
+          return CGSizeMake(90,100);
         }
     }
     else
