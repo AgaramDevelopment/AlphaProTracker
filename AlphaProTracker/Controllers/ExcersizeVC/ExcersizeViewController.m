@@ -90,7 +90,7 @@
         UILabel* label= [[UILabel alloc] initWithFrame:CGRectMake(10, 0, cell.frame.size.width, cell.frame.size.height)];
         label.text = [[[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.section] valueForKey:@"programName"];
         [label setTextColor:[UIColor whiteColor]];
-        [cell addSubview:label];
+//        [cell addSubview:label];
         
 
         UICollectionViewFlowLayout* lay1 = (UICollectionViewFlowLayout *)excersizeCollection.collectionViewLayout;

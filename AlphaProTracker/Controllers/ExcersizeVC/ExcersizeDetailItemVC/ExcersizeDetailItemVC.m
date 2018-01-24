@@ -7,8 +7,9 @@
 //
 
 #import "ExcersizeDetailItemVC.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "PageItemController.h"
 #import "AppCommon.h"
+#import "WebService.h"
 
 @interface ExcersizeDetailItemVC ()
 
@@ -20,26 +21,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.view.backgroundColor = [UIColor lightTextColor];
+    [self createPageViewController];
+    //    [self setupPageControl];
     
-    self.scrollView.minimumZoomScale=1.0;
-    self.scrollView.maximumZoomScale=4.0;
-    self.scrollView.contentSize = CGSizeMake(self.playerImageView.frame.size.width, self.playerImageView.frame.size.height);
-    
-    //Load View based on Item.
-    if(self.isImage) {
-        self.playerImageView.hidden = NO;
-        self.webView.hidden = YES;
-        [self loadImageView];
-    } else if (self.isVideo) {
-        self.playerImageView.hidden = YES;
-        self.webView.hidden = YES;
-        [self videoPlayer];
-    } else if (self.isPDF) {
-        self.playerImageView.hidden = YES;
-        self.webView.hidden = NO;
-        [self loadWebView];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,62 +31,137 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadImageView {
-    
-    NSURL *url=[NSURL URLWithString:self.URL];
-    [self.playerImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
-}
--(void) videoPlayer {
-    
-    NSURL *videoURL = [NSURL URLWithString:self.URL];
-    
-    self.avPlayer = [AVPlayer playerWithURL:videoURL];
-    self.avPlayerViewController = [AVPlayerViewController new];
-    self.avPlayerViewController.player = self.avPlayer;
-    self.avPlayerViewController.view.frame = _videoView.bounds;
-    [self.videoView addSubview:self.avPlayerViewController.view];
-    [self.avPlayer play];
-}
-
-- (IBAction)closeVideo:(id)sender {
-    
-    self.playerImageView.hidden = YES;
-    self.webView.hidden = YES;
-    
-    if(self.isVideo) {
-        [self.avPlayer seekToTime:CMTimeMake(0, 1)];
-        [self.avPlayer pause];
-        [self.avPlayerViewController.view removeFromSuperview];
-        self.avPlayer = NULL;
-    }
-    self.videoView.hidden = YES;
-    
-    //   [self.navigationController popViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)loadWebView {
-    [COMMON loadingIcon:self.view];
-    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
-    self.webView.scrollView.showsVerticalScrollIndicator = NO;
-    NSURL*url=[[NSURL alloc]initWithString:self.URL];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:requestObj];
-}
-
--(void)webViewDidFinishLoad:(UIWebView *)webView {
-    [COMMON RemoveLoadingIcon];
-    NSLog(@"webViewDidFinishLoad");
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    return YES;
-}
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+- (void)createPageViewController
 {
-    return self.playerImageView;
+    UIPageViewController *pageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageController"];
+    
+    pageController.dataSource = self;
+    pageController.delegate = self;
+    if([_contentImages count])
+    {
+        NSArray *startingViewControllers = @[[self itemControllerForIndex:self.indexPath]];
+        [pageController setViewControllers:startingViewControllers
+                                 direction:UIPageViewControllerNavigationDirectionForward
+                                  animated:NO
+                                completion:nil];
+        self.indexPath = self.indexPath+1;
+        NSString *contentString = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)self.indexPath, (unsigned long)[_contentImages count]];
+        self.contentLabel.text = contentString;
+    }
+    
+    self.pageViewController = pageController;
+    [self addChildViewController:self.pageViewController];
+    [[self.pageViewController view] setFrame:[[self containerView] bounds]];
+    [self.containerView addSubview:self.pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
 }
+
+- (void)setupPageControl
+{
+    [[UIPageControl appearance] setPageIndicatorTintColor:[UIColor grayColor]];
+    [[UIPageControl appearance] setCurrentPageIndicatorTintColor:[UIColor redColor]];
+    [[UIPageControl appearance] setBackgroundColor:[UIColor blackColor]];
+}
+
+#pragma mark UIPageViewControllerDataSource
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    PageItemController *itemController = (PageItemController *)viewController;
+    
+    if (itemController.itemIndex > 0)
+    {
+        return [self itemControllerForIndex:itemController.itemIndex-1];
+    }
+    
+    return nil;
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    PageItemController *itemController = (PageItemController *)viewController;
+    
+    if (itemController.itemIndex+1 < [_contentImages count])
+    {
+        return [self itemControllerForIndex:itemController.itemIndex+1];
+    }
+    return nil;
+}
+
+- (PageItemController *)itemControllerForIndex:(NSUInteger)itemIndex
+{
+    if (itemIndex < [_contentImages count])
+    {
+        PageItemController *pageItemController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemController"];
+        pageItemController.itemIndex = itemIndex;
+        
+        NSMutableDictionary *dict = [_contentImages objectAtIndex:itemIndex];
+        NSString *stringURL = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[dict valueForKey:@"FilePath"]];
+        
+        pageItemController.currentURL = stringURL;
+        pageItemController.currentImage = self.isImage;
+        pageItemController.currentVideo = self.isVideo;
+        pageItemController.currentPDF = self.isPDF;
+        return pageItemController;
+    }
+    return nil;
+}
+
+- (void)viewControllerItemsCount:(NSUInteger)count currentItemIndex:(NSUInteger)index
+{
+    NSLog(@"currentItemIndex: %ld", index);
+    //Current Image Number / No.of Images Count
+    NSString *contentString = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)index, (unsigned long)count];
+    self.contentLabel.text = contentString;
+}
+
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
+    
+    PageItemController* controller = pendingViewControllers[0];
+    NSInteger index = [controller itemIndex];
+    [controller.avPlayer play];
+    //    NSInteger nextIndex = [self indexOfViewController:controller];
+    NSLog(@"nextIndex:%ld", index);
+    
+    NSString *contentString = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)index+1, (unsigned long)[_contentImages count]];
+    self.contentLabel.text = contentString;
+}
+- (IBAction)closeButtonAction:(id)sender {
+    
+    PageItemController *pageItemController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemController"];
+    [pageItemController.avPlayer seekToTime:CMTimeMake(0, 1)];
+    [pageItemController.avPlayer pause];
+    [pageItemController.avPlayerViewController.view removeFromSuperview];
+    pageItemController.avPlayer = NULL;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    if (completed) {
+        PageItemController * viewController = [previousViewControllers lastObject];
+        
+        [viewController.avPlayer seekToTime:CMTimeMake(0, 1)];
+        [viewController.avPlayer pause];
+        //        [viewController.avPlayerViewController.view removeFromSuperview];
+        //        viewController.avPlayer = NULL;
+    }
+}
+
+#pragma mark Page Indicator
+/*
+ - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+ {
+ return [_contentImages count];
+ }
+ 
+ - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+ {
+ return 0;
+ }
+ */
+
 /*
  #pragma mark - Navigation
  
