@@ -10,7 +10,7 @@
 #import "SACalendar.h"
 
 @protocol AssessmentFilterDelegate
--(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode;
+-(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode:(NSString*)selectTitleStr;
 @end
 
 @interface AssessmentFilterView : UIView <SACalendarDelegate, UITextFieldDelegate>

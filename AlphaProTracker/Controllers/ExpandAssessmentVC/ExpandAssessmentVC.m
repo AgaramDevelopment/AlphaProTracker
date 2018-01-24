@@ -71,7 +71,7 @@
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
     [self.view addSubview:objCustomNavigation.view];
-    objCustomNavigation.tittle_lbl.text=@"";
+    objCustomNavigation.tittle_lbl.text=self.TitleStr;
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.menu_btn.hidden = NO;
     [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];

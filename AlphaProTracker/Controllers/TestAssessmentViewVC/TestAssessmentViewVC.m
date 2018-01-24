@@ -583,12 +583,13 @@
     return frame;
 }
 
--(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode;
+-(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode:(NSString*)selectTitleStr;
 {
     ExpandAssessmentVC * objExpandVC =[[ExpandAssessmentVC alloc]init];
     objExpandVC = (ExpandAssessmentVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ExpendAssessment"];
     objExpandVC.assessmentCodeStr = AssessmentCode;
     objExpandVC.ModuleCodeStr = self.ModuleCode;
+    objExpandVC.TitleStr = selectTitleStr;
     [self.navigationController pushViewController:objExpandVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {

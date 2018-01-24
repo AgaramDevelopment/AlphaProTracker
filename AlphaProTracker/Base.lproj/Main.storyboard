@@ -1624,6 +1624,14 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color">
+                                                        <string key="keyPath">_placeholderLabel.textColor
+_placeholderLabel.textColor
+_placeholderLabel.textColor</string>
+                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.26632063360000002" colorSpace="calibratedRGB"/>
