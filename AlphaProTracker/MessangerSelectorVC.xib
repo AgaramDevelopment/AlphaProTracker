@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessangerSelectorVC">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgi-Xj-nxN">
+                    <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZAz-ZW-6s9">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="553"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJk-9l-t6o">
+                            <rect key="frame" x="0.0" y="553" width="125" height="44"/>
+                            <color key="backgroundColor" red="0.1999762356" green="0.200016588" blue="0.1999709308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="buz-Ik-7He"/>
+                            </constraints>
+                            <state key="normal" title="Inbox">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlz-TE-rM5">
+                            <rect key="frame" x="250" y="553" width="125" height="44"/>
+                            <color key="backgroundColor" red="0.19997623562812805" green="0.20001658797264099" blue="0.19997093081474304" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="xob-xe-Ci9"/>
+                            </constraints>
+                            <state key="normal" title="Groups">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GO6-rl-Slw">
+                            <rect key="frame" x="125" y="553" width="125" height="44"/>
+                            <color key="backgroundColor" red="0.1999762356" green="0.200016588" blue="0.1999709308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Utx-fA-Ceq"/>
+                            </constraints>
+                            <state key="normal" title="Contacts">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="qlz-TE-rM5" secondAttribute="bottom" id="1F4-6l-GSi"/>
+                        <constraint firstAttribute="trailing" secondItem="qlz-TE-rM5" secondAttribute="trailing" id="1R5-Wf-1Lk"/>
+                        <constraint firstAttribute="bottom" secondItem="GO6-rl-Slw" secondAttribute="bottom" id="7r0-zP-ptR"/>
+                        <constraint firstAttribute="trailing" secondItem="ZAz-ZW-6s9" secondAttribute="trailing" id="8So-vY-peD"/>
+                        <constraint firstItem="kJk-9l-t6o" firstAttribute="leading" secondItem="Qgi-Xj-nxN" secondAttribute="leading" id="AYH-L4-Sqa"/>
+                        <constraint firstItem="ZAz-ZW-6s9" firstAttribute="top" secondItem="Qgi-Xj-nxN" secondAttribute="top" id="Aff-pL-ICw"/>
+                        <constraint firstItem="GO6-rl-Slw" firstAttribute="width" secondItem="kJk-9l-t6o" secondAttribute="width" id="Oid-C8-Tlb"/>
+                        <constraint firstItem="ZAz-ZW-6s9" firstAttribute="leading" secondItem="Qgi-Xj-nxN" secondAttribute="leading" id="TNc-kT-bto"/>
+                        <constraint firstAttribute="bottom" secondItem="kJk-9l-t6o" secondAttribute="bottom" id="dbz-S4-Bn5"/>
+                        <constraint firstItem="GO6-rl-Slw" firstAttribute="leading" secondItem="kJk-9l-t6o" secondAttribute="trailing" id="hnW-Ws-WBP"/>
+                        <constraint firstItem="kJk-9l-t6o" firstAttribute="top" secondItem="ZAz-ZW-6s9" secondAttribute="bottom" id="qhL-do-RjM"/>
+                        <constraint firstItem="qlz-TE-rM5" firstAttribute="leading" secondItem="GO6-rl-Slw" secondAttribute="trailing" id="uiL-Nr-KMs"/>
+                        <constraint firstItem="qlz-TE-rM5" firstAttribute="width" secondItem="kJk-9l-t6o" secondAttribute="width" id="xa4-QR-50A"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Qgi-Xj-nxN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mq8-3t-M62"/>
+                <constraint firstItem="Qgi-Xj-nxN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="YMB-sq-4eN"/>
+                <constraint firstItem="Qgi-Xj-nxN" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="eMN-gu-OHS"/>
+                <constraint firstItem="Qgi-Xj-nxN" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="hAp-Q3-ry5"/>
+            </constraints>
+            <point key="canvasLocation" x="26.5" y="51.5"/>
+        </view>
+    </objects>
+</document>
