@@ -3099,5 +3099,295 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
     }
 }
 
+-(BOOL)SELECTAssementEntry:(NSString *)AssessementEntryCode
+{
+    @synchronized ([Utitliy syncId])  {
+        
+        NSString *Clientcode = [self.AssessmentEntyArray valueForKey:@"Clientcode"];
+        NSString *Assessmententrycode=[self.AssessmentEntyArray valueForKey:@"Assessmententrycode"];
+        NSString *Modulecode=[self.AssessmentEntyArray valueForKey:@"Modulecode"];
+        NSString *Assessmentcode=[self.AssessmentEntyArray valueForKey:@"Assessmentcode"];
+        NSString *Assessmenttestcode=[self.AssessmentEntyArray valueForKey:@"Assessmenttestcode"];
+        NSString *Assessmenttesttypecode=[self.AssessmentEntyArray valueForKey:@"Assessmenttesttypecode"];
+        NSString *Assessmenttesttypescreencode=[self.AssessmentEntyArray valueForKey:@"Assessmenttesttypescreencode"];
+        NSString *Version=[self.AssessmentEntyArray valueForKey:@"Version"];
+        NSString *Assessor=[self.AssessmentEntyArray valueForKey:@"Assessor"];
+        NSString *Playercode = [self.AssessmentEntyArray valueForKey:@"Playercode"];
+        NSString *Assessmententrydate=[self.AssessmentEntyArray valueForKey:@"Assessmententrydate"];
+        NSNumber *Left=[self.AssessmentEntyArray valueForKey:@"Left"];
+        NSNumber *Right=[self.AssessmentEntyArray valueForKey:@"Right"];
+        NSNumber *Central=[self.AssessmentEntyArray valueForKey:@"Central"];
+        NSString *Value=[self.AssessmentEntyArray valueForKey:@"Value"];
+        NSString *Remarks=[self.AssessmentEntyArray valueForKey:@"Remarks"];
+        NSString *Inference=[self.AssessmentEntyArray valueForKey:@"Inference"];
+        NSString *Units=[self.AssessmentEntyArray valueForKey:@"Units"];
+        NSString *Description = [self.AssessmentEntyArray valueForKey:@"Description"];
+        NSString *Recordstatus=[self.AssessmentEntyArray valueForKey:@"Recordstatus"];
+        NSString *Createdby=[self.AssessmentEntyArray valueForKey:@"Createdby"];
+        NSString *Createddate=[self.AssessmentEntyArray valueForKey:@"Createddate"];
+        NSString *Modifiedby=[self.AssessmentEntyArray valueForKey:@"Modifiedby"];
+        NSString *Modifieddate=[self.AssessmentEntyArray valueForKey:@"Modifieddate"];
+        NSString *isIgnored=[self.AssessmentEntyArray valueForKey:@"isIgnored"];
+        NSNumber *Left1=[self.AssessmentEntyArray valueForKey:@"Left1"];
+        NSNumber *Right1=[self.AssessmentEntyArray valueForKey:@"Right1"];
+        NSNumber *Central1=[self.AssessmentEntyArray valueForKey:@"Central1"];
+        NSNumber *Left2=[self.AssessmentEntyArray valueForKey:@"Left2"];
+        NSNumber *Right2=[self.AssessmentEntyArray valueForKey:@"Right2"];
+        NSNumber *Central2=[self.AssessmentEntyArray valueForKey:@"Central2"];
+        NSNumber *Left3=[self.AssessmentEntyArray valueForKey:@"Left3"];
+        NSNumber *Right3=[self.AssessmentEntyArray valueForKey:@"Right3"];
+        NSNumber *Central3=[self.AssessmentEntyArray valueForKey:@"Central3"];
+        NSNumber *Left4=[self.AssessmentEntyArray valueForKey:@"Left4"];
+        NSNumber *Right4=[self.AssessmentEntyArray valueForKey:@"Right4"];
+        NSNumber *Central4=[self.AssessmentEntyArray valueForKey:@"Central4"];
+        NSNumber *Left5=[self.AssessmentEntyArray valueForKey:@"Left5"];
+        NSNumber *Right5=[self.AssessmentEntyArray valueForKey:@"Right5"];
+        NSNumber *Central5=[self.AssessmentEntyArray valueForKey:@"Central5"];
+        NSNumber *Left6=[self.AssessmentEntyArray valueForKey:@"Left6"];
+        NSNumber *Right6=[self.AssessmentEntyArray valueForKey:@"Right6"];
+        NSNumber *Central6=[self.AssessmentEntyArray valueForKey:@"Central6"];
+        NSNumber *Left7=[self.AssessmentEntyArray valueForKey:@"Left7"];
+        NSNumber *Right7=[self.AssessmentEntyArray valueForKey:@"Right7"];
+        NSNumber *Central7=[self.AssessmentEntyArray valueForKey:@"Central7"];
+        NSNumber *Left8=[self.AssessmentEntyArray valueForKey:@"Left8"];
+        NSNumber *Right8=[self.AssessmentEntyArray valueForKey:@"Right8"];
+        NSNumber *Central8=[self.AssessmentEntyArray valueForKey:@"Central8"];
+        NSNumber *Left9=[self.AssessmentEntyArray valueForKey:@"Left9"];
+        NSNumber *Right9=[self.AssessmentEntyArray valueForKey:@"Right9"];
+        NSNumber *Central9=[self.AssessmentEntyArray valueForKey:@"Central9"];
+        
+        
+        
+        
+        
+        
+        NSString *databasePath =[self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE Assessmententrycode='%@'",Assessmententrycode];
+            
+            stmt=[query UTF8String];
+            
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    
+                    NSString *aname = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                    
+                    NSLog(@" Load completed Name = %@ ",aname);
+                    
+                    [self UPDATEAssessmentEntry:Clientcode :Assessmententrycode :Modulecode :Assessmentcode :Assessmenttestcode :Assessmenttesttypecode :Assessmenttesttypescreencode :Version :Assessor :Playercode :Assessmententrydate :Left :Right :Central :Value :Remarks :Inference :Units :Description :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate :isIgnored :Left1 :Right1 :Central1 :Left2 :Right2 :Central2 :Left3 :Right3 :Central3 :Left4 :Right4 :Central4 :Left5 :Right5 :Central5 :Left6 :Right6 :Central6 :Left7 :Right7 :Central7 :Left8 :Right8 :Central8 :Left9 :Right9 :Central9];
+                    
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                }
+                
+                [self INSERTAssessmentEntry:Clientcode :Assessmententrycode :Modulecode :Assessmentcode :Assessmenttestcode :Assessmenttesttypecode :Assessmenttesttypescreencode :Version :Assessor :Playercode :Assessmententrydate :Left :Right:Central :Value :Remarks :Inference :Units :Description :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate :isIgnored :Left1 :Right1 :Central1 :Left2 :Right2 :Central2 :Left3 :Right3 :Central3 :Left4 :Right4 :Central4 :Left5 :Right5 :Central5 :Left6 :Right6 :Central6 :Left7 :Right7 :Central7 :Left8 :Right8 :Central8 :Left9 :Right9 :Central9];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
 
+-(BOOL) UPDATEAssessmentEntry:(NSString*) Clientcode:(NSString*) Assessmententrycode:(NSString*) Modulecode:(NSString*) Assessmentcode:(NSString*) Assessmenttestcode:(NSString*)Assessmenttesttypecode:(NSString*)Assessmenttesttypescreencode :(NSString*) Version: (NSString*)Assessor :(NSString*) Playercode:(NSString*) Assessmententrydate:(NSNumber*) Left:(NSNumber*) Right:(NSNumber*) Central:(NSString*)Value:(NSString*)Remarks :(NSString*) Inference: (NSString*)Units  :(NSString*) Description:(NSString*) Recordstatus:(NSString*) Createdby:(NSString*) Createddate:(NSString*) Modifiedby:(NSString*)Modifieddate:(NSString*)isIgnored :(NSNumber*) Left1: (NSNumber*)Right1 :(NSNumber*) Central1:(NSNumber*) Left2:(NSNumber*) Right2:(NSNumber*) Central2:(NSNumber*) Left3:(NSNumber*)Right3:(NSNumber*)Central3 :(NSNumber*) Left4: (NSNumber*)Right4 :(NSNumber*) Central4:(NSNumber*) Left5:(NSNumber*) Right5:(NSNumber*) Central5:(NSNumber*) Left6:(NSNumber*)Right6:(NSNumber*)Central6 :(NSNumber*) Left7: (NSNumber*)Right7 :(NSNumber*) Central7:(NSNumber*) Left8:(NSNumber*) Right8:(NSNumber*) Central8:(NSNumber*) Left9:(NSNumber*)Right9:(NSNumber*)Central9
+{
+    
+    @synchronized ([Utitliy syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            
+            NSString *updateSQL = [NSString stringWithFormat:@"UPDATE ASSESSMENTENTRY SET  Clientcode='%@' ,Assessmententrycode='%@' ,Modulecode='%@' ,Assessmentcode='%@' ,Assessmenttestcode='%@' ,Assessmenttesttypecode='%@' ,Assessmenttesttypescreencode='%@' ,Version ='%@',Assessor ='%@',Playercode='%@' ,Assessmententrydate='%@' ,Left='%@' ,Right='%@' ,Central='%@' ,Value='%@' ,Remarks='%@' ,Inference='%@' ,Units='%@' ,Description='%@' ,Recordstatus='%@' ,Createdby='%@' ,Createddate='%@' ,Modifiedby='%@' ,Modifieddate='%@' ,Ignored='%@' ,Left1='%@' ,Right1='%@' ,Central1='%@' ,Left2='%@' ,Right2='%@' ,Central2='%@' ,Left3='%@' ,Right3='%@' ,Central3='%@' ,Left4='%@' ,Right4='%@' ,Central4='%@' ,Left5='%@' ,Right5='%@' ,Central5='%@' ,Left6='%@' ,Right6='%@' ,Central6='%@' ,Left7='%@' ,Right7='%@' ,Central7='%@' ,Left8='%@' ,Right8='%@' ,Central8='%@' ,Left9='%@' ,Right9='%@' ,Central9='%@'",Clientcode ,Assessmententrycode ,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,isIgnored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9];
+            
+            
+            const char *update_stmt = [updateSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
+
+-(BOOL) INSERTAssessmentEntry:(NSString*) Clientcode:(NSString*) Assessmententrycode:(NSString*) Modulecode:(NSString*) Assessmentcode:(NSString*) Assessmenttestcode:(NSString*)Assessmenttesttypecode:(NSString*)Assessmenttesttypescreencode :(NSString*) Version: (NSString*)Assessor :(NSString*) Playercode:(NSString*) Assessmententrydate:(NSNumber*) Left:(NSNumber*) Right:(NSNumber*) Central:(NSString*)Value:(NSString*)Remarks :(NSString*) Inference: (NSString*)Units  :(NSString*) Description:(NSString*) Recordstatus:(NSString*) Createdby:(NSString*) Createddate:(NSString*) Modifiedby:(NSString*)Modifieddate:(NSString*)isIgnored :(NSNumber*) Left1: (NSNumber*)Right1 :(NSNumber*) Central1:(NSNumber*) Left2:(NSNumber*) Right2:(NSNumber*) Central2:(NSNumber*) Left3:(NSNumber*)Right3:(NSNumber*)Central3 :(NSNumber*) Left4: (NSNumber*)Right4 :(NSNumber*) Central4:(NSNumber*) Left5:(NSNumber*) Right5:(NSNumber*) Central5:(NSNumber*) Left6:(NSNumber*)Right6:(NSNumber*)Central6 :(NSNumber*) Left7: (NSNumber*)Right7 :(NSNumber*) Central7:(NSNumber*) Left8:(NSNumber*) Right8:(NSNumber*) Central8:(NSNumber*) Left9:(NSNumber*)Right9:(NSNumber*)Central9{
+    @synchronized ([Utitliy syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTENTRY(Clientcode ,Assessmententrycode ,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left,Right,Central,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,Ignored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode ,Assessmententrycode ,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left, Right ,Central ,Value,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,isIgnored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9];
+            
+//            NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTENTRY(Clientcode ,Assessmententrycode ,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,Ignored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode ,Assessmententrycode ,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,isIgnored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9];
+    
+            const char *update_stmt = [INSERTSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
+
+
+
+
+-(NSMutableDictionary *)AssessmentEntrySyncBackground
+{
+    @synchronized ([Utitliy syncId]) {
+        
+        //BOOL result = NO;
+        
+        NSMutableDictionary *RootDic= [[NSMutableDictionary alloc]init];;
+        NSMutableArray *listAssessmentArray = [[NSMutableArray alloc]init];
+        
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        
+        if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+        {
+           
+            NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ISSYNC = 0"];
+            stmt=[query UTF8String];
+            if(sqlite3_prepare_v2(dataBase, stmt,-1, &statement, NULL)==SQLITE_OK)
+            {
+                    while(sqlite3_step(statement)==SQLITE_ROW){
+                    
+                   // result = YES;
+                    
+                    NSMutableDictionary *tabledataDic= [[NSMutableDictionary alloc]init];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)] forKey:@"Clientcode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)] forKey:@"Assessmententrycode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)] forKey:@"Modulecode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)] forKey:@"Assessmentcode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)] forKey:@"Assessmenttestcode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)] forKey:@"Assessmenttesttypecode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)] forKey:@"Assessmenttesttypescreencode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)] forKey:@"Version"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)] forKey:@"Assessor"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)] forKey:@"Playercode"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)] forKey:@"Assessmententrydate"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)] forKey:@"Left"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)] forKey:@"Right"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)] forKey:@"Central"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)] forKey:@"Left1"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)] forKey:@"Right1"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)] forKey:@"Central1"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)] forKey:@"Left2"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)] forKey:@"Right2"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)] forKey:@"Central2"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)] forKey:@"Left3"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)] forKey:@"Right3"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)] forKey:@"Central3"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)] forKey:@"Left4"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)] forKey:@"Right4"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)] forKey:@"Central4"];
+                    
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)] forKey:@"Left5"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 27)] forKey:@"Right5"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 28)] forKey:@"Central5"];
+                    
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 29)] forKey:@"Left6"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 30)] forKey:@"Right6"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 31)] forKey:@"Central6"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 32)] forKey:@"Left7"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 33)] forKey:@"Right7"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 34)] forKey:@"Central7"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 35)] forKey:@"Left8"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 36)] forKey:@"Right8"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 37)] forKey:@"Central8"];
+                    
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 38)] forKey:@"Left9"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 39)] forKey:@"Right9"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 40)] forKey:@"Central9"];
+                    
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)] forKey:@"Value"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)] forKey:@"Remarks"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 43)] forKey:@"Inference"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 44)] forKey:@"Units"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 45)] forKey:@"Description"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 46)] forKey:@"Recordstatus"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 47)] forKey:@"Createdby"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)] forKey:@"Createddate"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)] forKey:@"Modifiedby"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 50)] forKey:@"Modifieddate"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 51)] forKey:@"isIgnored"];
+                        
+                        [listAssessmentArray addObject:tabledataDic];
+                    }
+                   
+                    [RootDic setObject:listAssessmentArray forKey:@"LstAssessmententry"];
+                    
+//                }else{
+//                    NSLog(@"Sync Update failed Stat: %s.", sqlite3_errmsg(dataBase));
+//                    NSLog(@"Sync Update failed %@",SEQNO);
+//                    result = NO;
+//                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            
+            
+            sqlite3_close(dataBase);
+        }
+        return RootDic;
+        
+    }
+}
 @end

@@ -550,7 +550,8 @@
         NSDictionary * objDic = [self.searchResult objectAtIndex:indexPath.row];
         [self.playerTxt resignFirstResponder];
         self.playerTbl.hidden = YES;
-        [self.AssessmentFilterDelegate SelectPlayerMovetoAnother:objDic: self.assessmentCode];
+        NSString * selectTitleStr =[NSString stringWithFormat:@"%@ - %@ %@",self.moduleLbl.text,self.titleLbl.text,self.teamLbl.text];
+        [self.AssessmentFilterDelegate SelectPlayerMovetoAnother:objDic :self.assessmentCode :selectTitleStr];
     } else {
         self.popTblView.hidden = YES;
         isPoPlist = NO;

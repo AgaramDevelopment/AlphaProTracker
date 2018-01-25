@@ -39,6 +39,7 @@
 @property (nonatomic,strong)  NSMutableArray *AthleteinfodetailsArray;
 @property (nonatomic,strong)  NSMutableArray * TeamListDetailArray;
 @property (nonatomic,strong)  NSMutableArray * SupportStaffArray;
+@property (nonatomic,strong)  NSMutableArray * AssessmentEntyArray;
 
 
   
@@ -83,6 +84,8 @@
 //SupportStaff
 -(BOOL)SELECTSupportStaff:(NSString *)MemberCode;
 
+-(BOOL)SELECTAssementEntry:(NSString *)AssessementEntryCode;
+
 
 //fetch the image
 -(NSMutableArray *)getPlayerCode;
@@ -90,6 +93,8 @@
 
 -(NSMutableArray *)getofficailCode;
 -(NSMutableArray *)getgroundcode;
+
+-(NSMutableDictionary *)AssessmentEntrySyncBackground;
 
 @property(nonatomic,strong) NSString *getDBPath;
 

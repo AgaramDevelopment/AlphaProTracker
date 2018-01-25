@@ -684,6 +684,7 @@ AppCommon *sharedCommon = nil;
                 NSMutableArray * LstUserdetail =[[NSMutableArray alloc]init];
                 NSMutableArray * lstTeamListArray = [[NSMutableArray alloc]init];
                 NSMutableArray * lstSupportStaff = [[NSMutableArray alloc]init];
+                NSMutableArray * lstAssementEntryArray = [[NSMutableArray alloc]init];
 
                 lstAssessment =[responseObject valueForKey:@"LstAssessment"];
                 lstSession =[responseObject valueForKey:@"LstSession"];
@@ -711,6 +712,8 @@ AppCommon *sharedCommon = nil;
                 lstTestcGoal =[responseObject valueForKey:@"LstTestscgoal"];
                 lstTeamListArray = [responseObject valueForKey:@"LstTeam"];
                 lstSupportStaff = [responseObject valueForKey:@"LstSupportStaff"];
+                
+                lstAssementEntryArray = [responseObject valueForKey:@"LstAssessmententryCurrDate"];
 
                 
                 //NSMutableArray * listAssesmnt =[[NSMutableArray alloc]init];
@@ -1326,8 +1329,20 @@ AppCommon *sharedCommon = nil;
                     [Dbm SELECTSupportStaff:Membercode];
                     
                 }
-
                 
+                for(int i= 0;i<lstAssementEntryArray.count;i++)
+                {
+                    
+                    NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+                    arr1 = [lstAssementEntryArray objectAtIndex:i];
+                    
+                    NSString * entrycode =[arr1 valueForKey:@"Assessmententrycode"];
+        
+                    DBMANAGERSYNC *Dbm = [[DBMANAGERSYNC alloc]init];
+                    Dbm.AssessmentEntyArray = arr1;
+                    [Dbm SELECTAssementEntry:entrycode];
+                    
+                }
 
             }
             

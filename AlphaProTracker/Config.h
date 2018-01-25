@@ -214,3 +214,5 @@
 #define AllPlayerProgramKey               @"GETALLPLAYERPROGRAMS"
 
 #define fetchMultiInjuryKey               @"UPDATEGRID"
+
+#define pushServiceKey               @"FETCH_ASSESSMENTTESTBASIS_ASSESSMENTINSERT"
