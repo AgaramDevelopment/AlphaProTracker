@@ -35,9 +35,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *starttimelbl;
 @property (strong, nonatomic) IBOutlet UITextField *endTimelbl;
 
-//@property (nonatomic,strong) IBOutlet UILabel * datelbl ;
-//@property (nonatomic,strong) IBOutlet UILabel * starttimelbl ;
-//@property (nonatomic,strong) IBOutlet UILabel * endTimelbl ;
 @property (nonatomic,strong) IBOutlet UILabel * mealslbl ;
 @property (nonatomic,strong) IBOutlet UITextView * foodsizeTxv  ;
 @property (nonatomic,strong) IBOutlet UITextView * fooddetailTxv  ;
@@ -218,125 +215,63 @@
 {
     datePicker.datePickerMode = UIDatePickerModeDate;
     self.datelbl.inputView = datePicker;
-    [datePicker addTarget:self action:@selector(datePickerDateValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.datelbl addTarget:self action:@selector(datePickerDateValueChanged:) forControlEvents:UIControlEventEditingDidBegin];
+    [datePicker addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventValueChanged];
+    [self.datelbl addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventEditingDidBegin];
     [self.datelbl becomeFirstResponder];
-
-    [datePicker reloadInputViews];
 }
-
-- (void) datePickerDateValueChanged:(UIDatePicker*)sender {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //   2016-06-25 12:00:00
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [datePicker setLocale:locale];
-    self.datelbl.text = [dateFormatter stringFromDate:[datePicker date]];
-    
-    NSDate *today = [NSDate date];
-    result = [today compare:datePicker.date]; // comparing two dates
-}
-
 
 -(void)DisplayStartTime
 {
     datePicker.datePickerMode = UIDatePickerModeTime;
-    
     self.starttimelbl.inputView = datePicker;
-    [datePicker addTarget:self action:@selector(datePickerStartTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.starttimelbl addTarget:self action:@selector(datePickerStartTimeValueChanged:) forControlEvents:UIControlEventEditingDidBegin];
+    [datePicker addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventValueChanged];
+    [self.starttimelbl addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventEditingDidBegin];
     [self.starttimelbl becomeFirstResponder];
-    
-    [datePicker reloadInputViews];
-}
-
-- (void) datePickerStartTimeValueChanged:(UIDatePicker*)sender {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //   2016-06-25 12:00:00
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [datePicker setLocale:locale];
-    
-    self.starttimelbl.text = [dateFormatter stringFromDate:[datePicker date]];
 }
 
 -(void)DisplayEndTime
 {
     datePicker.datePickerMode = UIDatePickerModeTime;
-    
     self.endTimelbl.inputView = datePicker;
-    [datePicker addTarget:self action:@selector(datePickerEndTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.starttimelbl addTarget:self action:@selector(datePickerEndTimeValueChanged:) forControlEvents:UIControlEventEditingDidBegin];
+    [datePicker addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventValueChanged];
+    [self.endTimelbl addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventEditingDidBegin];
     [self.endTimelbl becomeFirstResponder];
-    
-    [datePicker reloadInputViews];
 }
 
-- (void) datePickerEndTimeValueChanged:(UIDatePicker*)sender {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //   2016-06-25 12:00:00
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [datePicker setLocale:locale];
-    
-    self.endTimelbl.text = [dateFormatter stringFromDate:[datePicker date]];
-}
-
--(IBAction)showSelecteddate:(id)sender{
+- (void) displaySelectedDateAndTime:(UIDatePicker*)sender {
     
     if(isDate==YES)
     {
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        NSDate *matchdate = [NSDate date];
-        [dateFormat setDateFormat:@"MM-dd-yyyy"];
-//        // for minimum date
-//        [datePicker setMinimumDate:matchdate];
-//        
-//        // for maximumDate
-//        int daysToAdd = 1;
-//        NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
-//        
-//        [datePicker setMaximumDate:newDate1];
-        
-        
-        self.datelbl.text=[dateFormat stringFromDate:datePicker.date];
-        
-        
-        //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //   2016-06-25 12:00:00
+        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        [datePicker setLocale:locale];
+        [datePicker reloadInputViews];
+        self.datelbl.text = [dateFormatter stringFromDate:[datePicker date]];
         
         NSDate *today = [NSDate date];
-        
         result = [today compare:datePicker.date]; // comparing two dates
         
-    }
-    else{
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        NSDate *matchdate = [NSDate date];
-        [dateFormat setDateFormat:@"hh:mm a"];
-        // for minimum date
-        //[datePicker setMinimumDate:matchdate];
+    } else {
         
-        // for maximumDate
-        //int daysToAdd = 1;
-        //NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //   2016-06-25 12:00:00
+        [dateFormatter setDateFormat:@"hh:mm a"];
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        [datePicker setLocale:locale];
+        [datePicker reloadInputViews];
         
-        //[datePicker setMaximumDate:newDate1];
-        
-    
         if(isStartTime==YES)
         {
-            self.starttimelbl.text=[dateFormat stringFromDate:datePicker.date];
+            self.starttimelbl.text=[dateFormatter stringFromDate:datePicker.date];
         }
         else
         {
-            self.endTimelbl.text=[dateFormat stringFromDate:datePicker.date];
+            self.endTimelbl.text=[dateFormatter stringFromDate:datePicker.date];
         }
-        
     }
-    
-    
 }
-
 
 -(IBAction)didClickDatepicker:(id)sender
 {
@@ -558,8 +493,6 @@
         if([self.fooddiarydetailDic valueForKey:@"FOODDIARYCODE"])   [dic    setObject:[self.fooddiarydetailDic valueForKey:@"FOODDIARYCODE"]     forKey:@"FOODDIARYCODE"];
         if(self.datelbl.text)   [dic    setObject:self.datelbl.text     forKey:@"DATE"];
 
-
-        
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
@@ -577,8 +510,6 @@
                 else{
                     [self altermsg:@"Update failed"];
                 }
-
-                
             }
             
             [COMMON RemoveLoadingIcon];
@@ -592,15 +523,12 @@
             
         }];
     }
-
 }
 -(void)deletewebServiceMethod
 {
     [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
     {
-        
-        
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FooddiaryDelete]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -615,8 +543,6 @@
         if(usercode)   [dic    setObject:usercode     forKey:@"MODIFIEDBY"];
        
         if([self.fooddiarydetailDic valueForKey:@"FOODDIARYCODE"])   [dic    setObject:[self.fooddiarydetailDic valueForKey:@"FOODDIARYCODE"]     forKey:@"FOODDIARYCODE"];
-        
-        
         
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -636,13 +562,10 @@
                 else{
                     [self altermsg:@"Update failed"];
                 }
-                
-
             }
             
             [COMMON RemoveLoadingIcon];
             [self.view setUserInteractionEnabled:YES];
-            
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
@@ -651,7 +574,6 @@
             
         }];
     }
-
 }
 -(void)altermsg:(NSString *) message
 {
