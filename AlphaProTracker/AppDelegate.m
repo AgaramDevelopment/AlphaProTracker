@@ -287,14 +287,14 @@
             {
                 //if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"])
                 
-                if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Message"] != NULL)
-                {
-                   
-                }
-                else
-                {
-                   
-                }
+//                if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Message"] != NULL)
+//                {
+//
+//                }
+//                else
+//                {
+//
+//                }
             }
             
             

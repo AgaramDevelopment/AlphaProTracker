@@ -144,6 +144,10 @@
 		18B97994200DD49E00B94DD4 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97992200DD49E00B94DD4 /* ParallaxHeaderView.m */; };
 		18B97999200E129E00B94DD4 /* PopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97998200E129E00B94DD4 /* PopViewCell.m */; };
 		18B9799D200E158500B94DD4 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B9799C200E158500B94DD4 /* StepSlider.m */; };
+		18EC75892019F468007D50AA /* MessangerSelectorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC75872019F468007D50AA /* MessangerSelectorVC.m */; };
+		18EC758A2019F468007D50AA /* MessangerSelectorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EC75882019F468007D50AA /* MessangerSelectorVC.xib */; };
+		18EC758E2019F4AC007D50AA /* MessangerSendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC758C2019F4AC007D50AA /* MessangerSendVC.m */; };
+		18EC758F2019F4AC007D50AA /* MessangerSendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */; };
 		AC1BC8041F8663020047AECC /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FC1F8663020047AECC /* AAChartModel.m */; };
 		AC1BC8051F8663020047AECC /* AAChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FE1F8663020047AECC /* AAChartView.m */; };
 		AC1BC8061F8663020047AECC /* AAJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC8011F8663020047AECC /* AAJsonConverter.m */; };
@@ -502,6 +506,12 @@
 		18B97998200E129E00B94DD4 /* PopViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PopViewCell.m; path = Subview/PopCell/PopViewCell.m; sourceTree = "<group>"; };
 		18B9799B200E158500B94DD4 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepSlider.h; path = Helper/slider/StepSlider.h; sourceTree = "<group>"; };
 		18B9799C200E158500B94DD4 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepSlider.m; path = Helper/slider/StepSlider.m; sourceTree = "<group>"; };
+		18EC75862019F468007D50AA /* MessangerSelectorVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessangerSelectorVC.h; sourceTree = "<group>"; };
+		18EC75872019F468007D50AA /* MessangerSelectorVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessangerSelectorVC.m; sourceTree = "<group>"; };
+		18EC75882019F468007D50AA /* MessangerSelectorVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessangerSelectorVC.xib; sourceTree = "<group>"; };
+		18EC758B2019F4AC007D50AA /* MessangerSendVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessangerSendVC.h; sourceTree = "<group>"; };
+		18EC758C2019F4AC007D50AA /* MessangerSendVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessangerSendVC.m; sourceTree = "<group>"; };
+		18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessangerSendVC.xib; sourceTree = "<group>"; };
 		202A050CB55674369E3B256E /* Pods_AlphaProTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaProTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38C2CA4AE7E2357ED13ADAD7 /* Pods-AlphaProTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaProTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker.release.xcconfig"; sourceTree = "<group>"; };
 		AC1BC7FA1F8663020047AECC /* AAChartKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAChartKit.h; path = Helper/AAChart/AAChartConfiger/AAChartKit.h; sourceTree = "<group>"; };
@@ -885,6 +895,7 @@
 		043B231A1F4B1BD200036604 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18EC75802019F2E4007D50AA /* MessengerVC */,
 				18A982AF200F0F760071727E /* MultiInjuryVC */,
 				CEEE802B200E1DF300E33513 /* ExcersizeVC */,
 				04EBB76A1F88CB7600422202 /* AssignPlayerVC */,
@@ -1400,6 +1411,19 @@
 				18B9799C200E158500B94DD4 /* StepSlider.m */,
 			);
 			name = Slider;
+			sourceTree = "<group>";
+		};
+		18EC75802019F2E4007D50AA /* MessengerVC */ = {
+			isa = PBXGroup;
+			children = (
+				18EC75862019F468007D50AA /* MessangerSelectorVC.h */,
+				18EC75872019F468007D50AA /* MessangerSelectorVC.m */,
+				18EC75882019F468007D50AA /* MessangerSelectorVC.xib */,
+				18EC758B2019F4AC007D50AA /* MessangerSendVC.h */,
+				18EC758C2019F4AC007D50AA /* MessangerSendVC.m */,
+				18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */,
+			);
+			name = MessengerVC;
 			sourceTree = "<group>";
 		};
 		9D6FF2AB6C66A0BD955B6194 /* Pods */ = {
@@ -1982,6 +2006,7 @@
 				04EBB7961F8904D500422202 /* QuestionaryCell.xib in Resources */,
 				ACC2A1A51F5FF52A00210422 /* ViewProfile.xib in Resources */,
 				ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */,
+				18EC758A2019F468007D50AA /* MessangerSelectorVC.xib in Resources */,
 				0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */,
 				189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */,
 				AC1BC8111F8665A60047AECC /* AADrilldown.js in Resources */,
@@ -2022,6 +2047,7 @@
 				ACBBA18C1F614642000F9DC9 /* RecentFitness.xib in Resources */,
 				AC87CD9E1F55A74D002AA80E /* assemntCell.xib in Resources */,
 				0441B7801F6A4DE900A28E19 /* AddParticipantCell.xib in Resources */,
+				18EC758F2019F4AC007D50AA /* MessangerSendVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2222,6 +2248,7 @@
 				0441B77F1F6A4DE900A28E19 /* AddParticipantCell.m in Sources */,
 				ACC1D6F11F6692A6002329A1 /* MCBarChartView.m in Sources */,
 				045A49911FA22066008C1630 /* FFWeekScrollView.m in Sources */,
+				18EC758E2019F4AC007D50AA /* MessangerSendVC.m in Sources */,
 				ACACEFF21F598848004C28A4 /* AssessmentSinglePlayerReportVC.m in Sources */,
 				04DB752D1F7A5E64001CB710 /* IllnessCell.m in Sources */,
 				ACACEFEE1F597AFE004C28A4 /* ExpandAssessmentVC.m in Sources */,
@@ -2231,6 +2258,7 @@
 				045A497D1FA22026008C1630 /* FFMonthCell.m in Sources */,
 				045A49B51FA220B2008C1630 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				045A495A1FA21F9E008C1630 /* FFButtonAddEventWithPopover.m in Sources */,
+				18EC75892019F468007D50AA /* MessangerSelectorVC.m in Sources */,
 				04EBB76D1F88CB9B00422202 /* AssignPlayerVC.m in Sources */,
 				046215EA1F4EFAE300A781C2 /* SKSTableViewCell.m in Sources */,
 				ACA768591F4C1E8000ECC17A /* LoginVC.m in Sources */,
