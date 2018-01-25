@@ -100,19 +100,21 @@
 @property (nonatomic,strong) IBOutlet UILabel * CauseLbl;
 @property (nonatomic,strong) IBOutlet UILabel * mainSyntomLbl;
 
-@property (nonatomic,strong) IBOutlet UILabel * onSetLbl;
+@property (strong, nonatomic) IBOutlet UITextField *onSetLbl;
+
+//@property (nonatomic,strong) IBOutlet UILabel * onSetLbl;
 @property (nonatomic,strong) IBOutlet UITextField * illnessNameTxt;
 @property (nonatomic,strong) IBOutlet UITextField * cheifcomplientTxt;
 @property (nonatomic,strong) IBOutlet UILabel * xrayLbl;
 @property (nonatomic,strong) IBOutlet UILabel * CTScanLbl;
 @property (nonatomic,strong) IBOutlet UILabel * MRILbl;
 @property (nonatomic,strong) IBOutlet UILabel * BloodTestLbl;
-@property (nonatomic,strong) IBOutlet UILabel * expectedLbl;
+@property (strong, nonatomic) IBOutlet UITextField *expectedLbl;
+
+//@property (nonatomic,strong) IBOutlet UILabel * expectedLbl;
 @property (nonatomic,strong) IBOutlet UIButton * updateBtn;
 @property (nonatomic,strong) IBOutlet UIButton * deleteBtn;
 @property (nonatomic,strong) IBOutlet UIButton * saveBtn;
-
-@property (nonatomic,strong) IBOutlet UIView * view_datepicker;
 
 @property (nonatomic,strong) IBOutlet UITableView * popview_Tbl;
 
@@ -134,6 +136,10 @@
 
 @property (nonatomic,strong) IBOutlet UIButton * expertNoBtn;
 
+@property (strong, nonatomic) IBOutlet UIView *documentsView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *documentViewHeightConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *playerViewHeightConstraint;
+
 
 @end
 
@@ -151,9 +157,36 @@
     
 //    if(!IS_IPHONE_DEVICE)
 //    {
-        self.datepickerViewWidth.constant =self.view.frame.size.width/1.5;
-        self.datepickerViewheight.constant =self.view.frame.size.height/3;
+//        self.datepickerViewWidth.constant =self.view.frame.size.width/1.5;
+//        self.datepickerViewheight.constant =self.view.frame.size.height/3;
     //}
+    
+    //Veeresh
+    datePicker = [[UIDatePicker alloc] init];
+    
+    self.onSetLbl.tintColor = [UIColor clearColor];
+    self.expectedLbl.tintColor = [UIColor clearColor];
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    
+    //create left side empty space so that done button set on right side
+    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+    //    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style: UIBarButtonItemStyleDone target:self action:@selector(doneButtonAction)];
+    NSMutableArray *toolbarArray = [NSMutableArray new];
+    [toolbarArray addObject:cancelBtn];
+    [toolbarArray addObject:flexSpace];
+    [toolbarArray addObject:doneBtn];
+    
+    [toolbar setItems:toolbarArray animated:false];
+    [toolbar sizeToFit];
+    
+    //setting toolbar as inputAccessoryView
+    self.onSetLbl.inputAccessoryView = toolbar;
+    self.expectedLbl.inputAccessoryView = toolbar;
     
     [self allviewSetbordermethod];
     [self startFetchTeamPlayerGameService];
@@ -162,9 +195,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.popview_Tbl.hidden =YES;
-    self.view_datepicker.hidden =YES;
-    
-    
 }
 -(void)customnavigationmethod
 {
@@ -181,6 +211,20 @@
     //[objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
+
+-(void) doneButtonAction {
+    [self.view endEditing:true];
+}
+
+-(void) cancelButtonAction {
+    if(isExpected==YES) {
+        [self.expectedLbl resignFirstResponder];
+    } else if(isOnset==YES) {
+        [self.onSetLbl resignFirstResponder];
+    }
+    [self.view endEditing:true];
+}
+
 -(void)allviewSetbordermethod
 {
     self.gameSubView.layer.borderColor =[UIColor lightGrayColor].CGColor;
@@ -346,16 +390,17 @@
                 {
                     
                     self.playerview.hidden=YES;
-                    self.coachViewYposition.constant =self.playerView.frame.size.height+5;
-                    
+                    self.playerViewHeightConstraint.constant = 0;
+//                    self.coachViewYposition.constant =self.playerView.frame.size.height+5;
+                    self.documentsView.hidden = YES;
+                    self.documentViewHeightConstraint.constant = 0;
                     self.updateBtn.hidden = YES;
                     self.deleteBtn.hidden = YES;
                 }
                 else{
-                    
                     self.playerview.hidden=NO;
-                    self.coachViewYposition.constant =10;
-                    
+//                    self.coachViewYposition.constant =10;
+                    self.documentsView.hidden = NO;
                 }
 
                 [self Fetchillnessloadingwebservice];
@@ -547,7 +592,6 @@
 }
 -(IBAction)didClickOnset:(id)sender
 {
-    self.view_datepicker.hidden =NO;
     isExpected =NO;
     isOnset =YES;
     [self DisplaydatePicker];
@@ -649,7 +693,15 @@
     isExpected =YES;
     isOnset =NO;
     
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    self.expectedLbl.inputView = datePicker;
+    datePicker.date = [NSDate date];
+
+    [datePicker addTarget:self action:@selector(displaySelectedDate:) forControlEvents:UIControlEventValueChanged];
+    [self.expectedLbl addTarget:self action:@selector(displaySelectedDate:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.onSetLbl becomeFirstResponder];
     
+  /*
     if(datePicker!= nil)
     {
         [datePicker removeFromSuperview];
@@ -658,7 +710,7 @@
     self.view_datepicker.hidden=NO;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"]; // dd/MM/yyyy
     
     datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,50,self.view_datepicker.frame.size.width,100)];
     
@@ -669,13 +721,7 @@
     
     [datePicker reloadInputViews];
     [self.view_datepicker addSubview:datePicker];
-    
-    
-    
-    
-    
-
-    
+    */
 }
 
 -(IBAction)didClickctXScan:(id)sender
@@ -751,6 +797,16 @@
 }
 -(void)DisplaydatePicker
 {
+    
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    self.onSetLbl.inputView = datePicker;
+    datePicker.date = [NSDate date];
+    
+    [datePicker addTarget:self action:@selector(displaySelectedDate:) forControlEvents:UIControlEventValueChanged];
+    [self.onSetLbl addTarget:self action:@selector(displaySelectedDate:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.onSetLbl becomeFirstResponder];
+    
+    /*
     if(datePicker!= nil)
     {
         [datePicker removeFromSuperview];
@@ -773,16 +829,17 @@
     
     [datePicker reloadInputViews];
     [self.view_datepicker addSubview:datePicker];
-    
+    */
 }
+//-(IBAction)showSelecteddate:(id)sender{
+- (void)displaySelectedDate:(UIDatePicker*)sender {
+    
 
--(IBAction)showSelecteddate:(id)sender{
-    
-    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
-    
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [datePicker setLocale:locale];
+    [datePicker reloadInputViews];
     
     if (isOnset == YES)
     {
@@ -791,66 +848,67 @@
     }
     else if (isExpected == YES)
     {
-        
-        
-        
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+//        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+//        [datePicker setLocale:locale];
+//        [datePicker reloadInputViews];
         NSString *actDate = [dateFormat stringFromDate:datePicker.date];
-
-        NSDate *onsetDate = [dateFormatter dateFromString:self.onSetLbl.text];
-        NSDate *ExpectedDate = [dateFormatter dateFromString:actDate];
+        NSDate *onsetDate = [dateFormat dateFromString:self.onSetLbl.text];
+        NSDate *ExpectedDate = [dateFormat dateFromString:actDate];
         
         
         NSComparisonResult result;
         //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
         
         result = [onsetDate compare:ExpectedDate]; // comparing two dates
+        NSLog(@"onsetDate:%@", onsetDate);
+        NSLog(@"ExpectedDate:%@", ExpectedDate);
         
-        if(result==NSOrderedAscending)
+        if(result==NSOrderedAscending || result == NSOrderedSame)
         {
-            NSLog(@"today is less");
-            
+            NSLog(@"today is less OR equall");
             self.expectedLbl.text=[dateFormat stringFromDate:datePicker.date];
             
-        }
-        
-        else if(result==NSOrderedDescending)
-        {
+        } else if(result==NSOrderedDescending) {
             [self altermsg:@"Past Date not allowed"];
         }
 
-        
     }
-    [self.view_datepicker setHidden:YES];
-    
 }
 
 -(void)validation
 {
-    if([self.gameLbl.text isEqualToString:@"Select"] || [self.gameLbl.text isEqualToString:@""])
+    bool flag = false;
+    if(![RoleCode isEqualToString:@"ROL0000002"])
     {
-        [self altermsg:@"Please select Game"];
         
-    }
-    else if ([self.TeamLbl.text isEqualToString:@"Select"] || [self.TeamLbl.text isEqualToString:@""])
-    {
-        [self altermsg:@"Please select Team"];
-    }
-    else if ([self.playerLbl.text isEqualToString:@"Select"] || [self.playerLbl.text isEqualToString:@""])
-    {
-        [self altermsg:@"Please select Player"];
-        
+        if([self.gameLbl.text isEqualToString:@"Select"] || [self.gameLbl.text isEqualToString:@""])
+        {
+            [self altermsg:@"Please select Game"];
+            flag = true;
+
+        }
+        else if ([self.TeamLbl.text isEqualToString:@"Select"] || [self.TeamLbl.text isEqualToString:@""])
+        {
+            [self altermsg:@"Please select Team"];
+            flag = true;
+        }
+        else if ([self.playerLbl.text isEqualToString:@"Select"] || [self.playerLbl.text isEqualToString:@""])
+        {
+            [self altermsg:@"Please select Player"];
+            flag = true;
+            
+        }
     }
     
-    else if ([self.onSetLbl.text isEqualToString:@"Select"] || [self.onSetLbl.text isEqualToString:@""])
+    if(flag){
+    }else if ([self.onSetLbl.text isEqualToString:@"Select"] || [self.onSetLbl.text isEqualToString:@""])
     {
         [self altermsg:@"Please select Date of Onset"];
         
     }
-     else if ([self.illnessNameTxt.text isEqualToString:@""])
+    else if ([self.illnessNameTxt.text isEqualToString:@""])
     {
         [self altermsg:@"Please Enter IllnessName"];
         
@@ -876,7 +934,7 @@
         [self altermsg:@"Please select Cause Illness"];
         
     }
-
+    
     else if ([selectExpertOpinionCode isEqualToString:@"Select"] || [selectExpertOpinionCode isEqualToString:@""])
     {
         [self altermsg:@"Please select Expert Opinion Taken"];
@@ -923,9 +981,11 @@
         
     }
     else{
+//        [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Userreferencecode"] forKey:@"Userreferencecode"];
+    
         [dic    setObject:@""     forKey:@"GAMECODE"];
         [dic    setObject:@""     forKey:@"TEAMCODE"];
-        [dic    setObject:@""     forKey:@"PLAYERCODE"];
+        [dic    setObject: [[NSUserDefaults standardUserDefaults] valueForKey:@"Userreferencecode"]    forKey:@"PLAYERCODE"];
     }
     
     if(self.onSetLbl.text)   [dic    setObject:self.onSetLbl.text     forKey:@"DATEONSET"];
@@ -1179,7 +1239,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 50;
 }
 
 
@@ -1196,6 +1256,9 @@
                                       reuseIdentifier:CellIdentifier];
         //objCell = self.injuryCell;
     }
+    
+    Cell.textLabel.numberOfLines = 2;
+    
     if(isGame ==YES)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"gameName"] objectAtIndex:indexPath.row];
