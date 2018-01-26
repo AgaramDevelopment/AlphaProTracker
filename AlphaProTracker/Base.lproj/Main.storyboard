@@ -6876,7 +6876,7 @@ _placeholderLabel.textColor</string>
                                     <outlet property="delegate" destination="FWz-aM-X6x" id="tXG-dQ-cfC"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyF-e8-wjh">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyF-e8-wjh">
                                 <rect key="frame" x="265" y="521" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
