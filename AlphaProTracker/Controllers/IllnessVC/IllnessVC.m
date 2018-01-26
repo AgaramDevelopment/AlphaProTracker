@@ -61,8 +61,10 @@
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.menu_btn.hidden = NO;
     [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
+     [objCustomNavigation.home_btn setImage:[UIImage imageNamed:@"ico_addWhite"]  forState:UIControlStateNormal];
+    [objCustomNavigation.home_btn addTarget:self action:@selector(didclickAddBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma Button action
