@@ -123,7 +123,7 @@
     [cell.button setTitle:[NSString stringWithFormat:@"%@, %li",[arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1]  , (long)compDateOfLabel.day] forState:UIControlStateNormal];
     NSLog(@"DAY Header cell %@ ",cell.button.titleLabel.text);
 
-    [cell.button setBackgroundColor:[UIColor yellowColor]];
+//    [cell.button setBackgroundColor:[UIColor yellowColor]];
     [cell.button.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 :10)]];
     [cell.button setSelected:([NSDate isTheSameDateTheCompA:compDateOfLabel compB:[[FFDateManager sharedManager] currentDate].componentsOfDate])];
     cell.button.tag = indexPath.row;
@@ -157,7 +157,7 @@
     
     FFDayHeaderCell* cell = (FFDayHeaderCell*)[self cellForItemAtIndexPath:button.buttonIndexPath];
     NSLog(@" did select DAY Header cell %@ ",cell.button.titleLabel.text);
-    [self.cellProtocol getDate:[NSDate date]];
+    [self.cellProtocol getDate:button.date];
 
 }
 
