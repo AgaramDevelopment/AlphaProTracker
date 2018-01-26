@@ -21,6 +21,5 @@
 @property (strong,readwrite) NSString* datePickerFormat;
 @property (strong,readwrite) NSString* datePickerStyle;
 @property (strong,nonatomic) id<DatePickerProtocol> datePickerDelegate;
-
 - (IBAction)ActionResignDatePicker:(id)sender;
 @end
