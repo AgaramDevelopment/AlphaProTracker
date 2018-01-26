@@ -235,6 +235,8 @@
 		ACC4E2331F4E9BF100C53F45 /* DashBoardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4E2321F4E9BF100C53F45 /* DashBoardVC.m */; };
 		ACC4E2371F4EAD1000C53F45 /* DashBoardVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4E2361F4EAD1000C53F45 /* DashBoardVCCell.m */; };
 		ACE961634A15E7F8FAE831D7 /* Pods_AlphaProTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202A050CB55674369E3B256E /* Pods_AlphaProTracker.framework */; };
+		CE09F2BC201AF7B1006C764B /* MultiSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE09F2BB201AF7B1006C764B /* MultiSelectTableViewCell.m */; };
+		CE09F2BE201AF83D006C764B /* redCircle_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = CE09F2BD201AF835006C764B /* redCircle_mini.png */; };
 		CE3EBB461FFC990200588728 /* AssessmentFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3EBB451FFC990200588728 /* AssessmentFilterView.m */; };
 		CEC26FCD1FFE129B00FF2D74 /* AssessmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC26FCC1FFE129B00FF2D74 /* AssessmentCell.m */; };
 		CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8033200E210400E33513 /* ExcersizeCollectionViewCell.m */; };
@@ -670,6 +672,9 @@
 		ACC4E2351F4EAD1000C53F45 /* DashBoardVCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashBoardVCCell.h; path = Subview/DashBoardVCCell/DashBoardVCCell.h; sourceTree = "<group>"; };
 		ACC4E2361F4EAD1000C53F45 /* DashBoardVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashBoardVCCell.m; path = Subview/DashBoardVCCell/DashBoardVCCell.m; sourceTree = "<group>"; };
 		B20DBBDAADFC06FDCE6BFAC6 /* Pods-AlphaProTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaProTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaProTracker/Pods-AlphaProTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		CE09F2BA201AF7B1006C764B /* MultiSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelectTableViewCell.h; sourceTree = "<group>"; };
+		CE09F2BB201AF7B1006C764B /* MultiSelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiSelectTableViewCell.m; sourceTree = "<group>"; };
+		CE09F2BD201AF835006C764B /* redCircle_mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redCircle_mini.png; path = Helper/PlannerGraphs/FFSup/Util/Images/redCircle_mini.png; sourceTree = "<group>"; };
 		CE3EBB441FFC990200588728 /* AssessmentFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentFilterView.h; path = Common/Assessment/AssessmentFilterView.h; sourceTree = "<group>"; };
 		CE3EBB451FFC990200588728 /* AssessmentFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentFilterView.m; path = Common/Assessment/AssessmentFilterView.m; sourceTree = "<group>"; };
 		CEAB4EA82013031500CCF8EC /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateProtocol.h; path = Helper/PlannerGraphs/DateProtocol.h; sourceTree = "<group>"; };
@@ -860,6 +865,7 @@
 		043B23191F4B1BC700036604 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
+				CE09F2B9201AF7B1006C764B /* MultiselectDropdownCell */,
 				189663C42012FE1D00A8BFE1 /* ExcirsizeDetails */,
 				04F11D95200F70D0004A4218 /* MultiInjurylistCell */,
 				CEEE8031200E20E200E33513 /* ExcersizeCollectionCell */,
@@ -1064,6 +1070,7 @@
 				045A49F11FA22192008C1630 /* blackCircle.png */,
 				045A49F21FA22192008C1630 /* DailyCalendar.png */,
 				045A49F31FA22192008C1630 /* MonthlyCalendar.png */,
+				CE09F2BD201AF835006C764B /* redCircle_mini.png */,
 				045A49F41FA22192008C1630 /* redCircle.png */,
 				045A49F51FA22192008C1630 /* WeeklyCalendar.png */,
 				045A49F61FA22192008C1630 /* YearlyCalendar.png */,
@@ -1876,6 +1883,16 @@
 			name = TestAssessmentViewVC;
 			sourceTree = "<group>";
 		};
+		CE09F2B9201AF7B1006C764B /* MultiselectDropdownCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE09F2BA201AF7B1006C764B /* MultiSelectTableViewCell.h */,
+				CE09F2BB201AF7B1006C764B /* MultiSelectTableViewCell.m */,
+			);
+			name = MultiselectDropdownCell;
+			path = Subview/MultiselectDropdownCell;
+			sourceTree = "<group>";
+		};
 		CE3EBB421FFC824400588728 /* Assessment */ = {
 			isa = PBXGroup;
 			children = (
@@ -2007,6 +2024,7 @@
 				ACC2A1A51F5FF52A00210422 /* ViewProfile.xib in Resources */,
 				ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */,
 				18EC758A2019F468007D50AA /* MessangerSelectorVC.xib in Resources */,
+				CE09F2BE201AF83D006C764B /* redCircle_mini.png in Resources */,
 				0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */,
 				189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */,
 				AC1BC8111F8665A60047AECC /* AADrilldown.js in Resources */,
@@ -2191,6 +2209,7 @@
 				AC1BC8621F8665B40047AECC /* AATitle.m in Sources */,
 				04E640AB1FB5A762006E6C57 /* INTUGroupedArray.m in Sources */,
 				045A49DF1FA22128008C1630 /* FFEditEventPopoverController.m in Sources */,
+				CE09F2BC201AF7B1006C764B /* MultiSelectTableViewCell.m in Sources */,
 				ACC4E2331F4E9BF100C53F45 /* DashBoardVC.m in Sources */,
 				ACBD4AD71F56CFBC00AFA25D /* SubAssessmentCell.m in Sources */,
 				045A498D1FA2205B008C1630 /* FFWeekHeaderCell.m in Sources */,

@@ -216,3 +216,11 @@
 #define fetchMultiInjuryKey               @"UPDATEGRID"
 
 #define pushServiceKey               @"FETCH_ASSESSMENTTESTBASIS_ASSESSMENTINSERT"
+
+#define FetchSinglePlayerKey                @"FETCHSINGLEPLAYERCHART"
+
+#define FetchSinglePlayerChartKey                @"SINGLEPLAYERCHART"
+
+#define FetchMultiPlayerKey                @"FETCHMULTIPLAYERCHART"
+
+#define FetchMultiPlayerChartKey                @"MULTIPLAYERCHART"

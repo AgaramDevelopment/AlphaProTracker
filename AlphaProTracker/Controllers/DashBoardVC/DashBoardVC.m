@@ -123,60 +123,59 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
-    {
-        TestAssessmentViewVC  * objTabVC=[[TestAssessmentViewVC alloc]init];
-        objTabVC = (TestAssessmentViewVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"TestAssessmentViewVC"];
-        objTabVC.ModuleCode = self.selectedModule;
-        [self.navigationController pushViewController:objTabVC animated:YES];
-        
-    }
-    if(indexPath.row == 1)
-    {
-        QuestionaryVC  * objTabVC=[[QuestionaryVC alloc]init];
-        objTabVC = (QuestionaryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"QuestionaryVC"];
-        objTabVC.modulecode = self.selectedModule;
-        objTabVC.Scrname = self.ScreenName;
-        objTabVC.check = @"main";
-        [self.navigationController pushViewController:objTabVC animated:YES];
-        
-        
-    }
-    if(indexPath.row == 2)
-    {
-        AssessmentSinglePlayerReportVC  * objTabVC=[[AssessmentSinglePlayerReportVC alloc]init];
-        objTabVC = (AssessmentSinglePlayerReportVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"AssessmentSinglePlayerReportVC"];
-        [self.navigationController pushViewController:objTabVC animated:YES];
-
-    }
-    if(indexPath.row == 3)
-    {
-        AssessmentMultiPlayerReportVC  * objTabVC=[[AssessmentMultiPlayerReportVC alloc]init];
-        objTabVC = (AssessmentMultiPlayerReportVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"AssessmentMultiPlayerReportVC"];
-        [self.navigationController pushViewController:objTabVC animated:YES];
-
-    }
-    if(indexPath.row == 4)
-    {
-        
-        ProgramVC  * objTabVC=[[ProgramVC alloc]init];
-        objTabVC = (ProgramVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ProgramVC"];
-        objTabVC.ModuleCode = self.selectedModule;
-        objTabVC.Screen = self.ScreenName;
-        objTabVC.check = @"main";
-        [self.navigationController pushViewController:objTabVC animated:YES];
-        
-    }
-    if(indexPath.row == 5)
-    {
-        
-        AssignPlayerVC  * objTabVC=[[AssignPlayerVC alloc]init];
-        objTabVC = (AssignPlayerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"AssignPlayerVC"];
-        
-        objTabVC.ModuleCode = self.selectedModule;
-        objTabVC.check = @"main";
-        [self.navigationController pushViewController:objTabVC animated:YES];
- 
+    switch (indexPath.row) {
+        case 0:
+        {
+            TestAssessmentViewVC  * objTabVC = (TestAssessmentViewVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"TestAssessmentViewVC"];
+            objTabVC.ModuleCode = self.selectedModule;
+            [self.navigationController pushViewController:objTabVC animated:YES];
+        }
+            break;
+        case 1:
+        {
+            QuestionaryVC  * objTabVC = (QuestionaryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"QuestionaryVC"];
+            objTabVC.modulecode = self.selectedModule;
+            objTabVC.Scrname = self.ScreenName;
+            objTabVC.check = @"main";
+            [self.navigationController pushViewController:objTabVC animated:YES];
+        }
+            break;
+        case 2:
+        {
+            AssessmentSinglePlayerReportVC  * objTabVC = (AssessmentSinglePlayerReportVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"AssessmentSinglePlayerReportVC"];
+            objTabVC.ModuleCode = self.selectedModule;
+            [self.navigationController pushViewController:objTabVC animated:YES];
+        }
+            break;
+        case 3:
+        {
+            
+            AssessmentMultiPlayerReportVC  * objTabVC = (AssessmentMultiPlayerReportVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"AssessmentMultiPlayerReportVC"];
+            objTabVC.ModuleCode = self.selectedModule;
+            [self.navigationController pushViewController:objTabVC animated:YES];
+            
+        }
+            break;
+        case 4:
+        {
+            ProgramVC  * objTabVC = (ProgramVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ProgramVC"];
+            objTabVC.ModuleCode = self.selectedModule;
+            objTabVC.Screen = self.ScreenName;
+            objTabVC.check = @"main";
+            [self.navigationController pushViewController:objTabVC animated:YES];
+        }
+            break;
+        case 5:
+        {
+            AssignPlayerVC  * objTabVC = (AssignPlayerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"AssignPlayerVC"];
+            objTabVC.ModuleCode = self.selectedModule;
+            objTabVC.check = @"main";
+            [self.navigationController pushViewController:objTabVC animated:YES];
+        }
+            break;
+            
+        default:
+            break;
     }
     
     
