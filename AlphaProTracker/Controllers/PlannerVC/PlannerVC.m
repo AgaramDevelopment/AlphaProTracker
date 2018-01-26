@@ -299,6 +299,7 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
+            [COMMON webServiceFailureError];
             [AppCommon hideLoading];
         }];
     
@@ -348,6 +349,7 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
+            [COMMON webServiceFailureError];
             [AppCommon hideLoading];
         }];
     
@@ -863,7 +865,6 @@
             [self.navigationController pushViewController:objaddEvent animated:YES];
         }
     }
-    
     else if(result==NSOrderedDescending)
     {
         if(ojAddPlannerArray.count>0)

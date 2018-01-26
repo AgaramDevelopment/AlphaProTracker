@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
-
-
 @protocol FFCalendarViewControllerProtocol <NSObject>
 @required
 - (void)arrayUpdatedWithAllEvents:(NSMutableArray *)arrayUpdated;
@@ -21,18 +17,11 @@
 
 @property (nonatomic, strong) id <FFCalendarViewControllerProtocol> protocol;
 @property (nonatomic, strong) NSMutableArray *arrayWithEvents;
-
-
 @property (nonatomic, strong)IBOutlet UIButton *WEEK;
 @property (nonatomic, strong)IBOutlet UIButton *DAY;
 @property (nonatomic, strong)IBOutlet UIButton *MONTH;
-
 @property (nonatomic, strong)IBOutlet UILabel *nameOfMonth;
-
 @property (nonatomic, copy, readwrite) NSDate *reqDate;
-
--(NSString *)Bcolors : (NSString *)ReqColor;
-
 @property (nonatomic, strong) NSString *check;
 @property (weak, nonatomic) IBOutlet UIView *calendarView;
 

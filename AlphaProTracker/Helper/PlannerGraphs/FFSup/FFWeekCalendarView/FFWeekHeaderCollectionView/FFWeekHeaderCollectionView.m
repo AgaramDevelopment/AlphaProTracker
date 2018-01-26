@@ -115,7 +115,8 @@
     }
     
     if ([NSDate isTheSameDateTheCompA:compDateOfLabel compB:[NSDate componentsOfCurrentDate]]) {
-        [cell.imageView setImage:[UIImage imageNamed:@"redCircle"]];
+//        [cell.imageView setImage:[UIImage imageNamed:@"redCircle"]];
+        [cell.imageView setImage:[UIImage imageNamed:(IS_IPAD ?@"redCircle" : @"redCircle_mini")]];
         [cell.label setTextColor:[UIColor whiteColor]];
     }
 
@@ -127,7 +128,7 @@
 {
     FFWeekHeaderCell* cell = (FFWeekHeaderCell*)[collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@" did select Week Header cell %@ ",cell.label.text);
-    [self.cellProtocol getDate:[NSDate date]];
+    [self.cellProtocol getDate:cell.date];
 
 }
 

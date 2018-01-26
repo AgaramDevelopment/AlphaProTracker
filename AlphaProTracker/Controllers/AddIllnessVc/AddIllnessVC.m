@@ -391,15 +391,16 @@
                     
                     self.playerview.hidden=YES;
                     self.playerViewHeightConstraint.constant = 0;
-//                    self.coachViewYposition.constant =self.playerView.frame.size.height+5;
+                    self.coachViewYposition.constant =self.playerView.frame.size.height+5;
                     self.documentsView.hidden = YES;
                     self.documentViewHeightConstraint.constant = 0;
                     self.updateBtn.hidden = YES;
                     self.deleteBtn.hidden = YES;
+                    self.popviewYposition.constant = self.popview_Tbl.frame.origin.y+195;
                 }
                 else{
                     self.playerview.hidden=NO;
-//                    self.coachViewYposition.constant =10;
+                    self.coachViewYposition.constant =10;
                     self.documentsView.hidden = NO;
                 }
 
