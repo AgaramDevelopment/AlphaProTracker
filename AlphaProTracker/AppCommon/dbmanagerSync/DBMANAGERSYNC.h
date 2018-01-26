@@ -96,6 +96,8 @@
 
 -(NSMutableDictionary *)AssessmentEntrySyncBackground;
 
+-(BOOL) UPDATESyncStatus:(NSMutableArray*) entryDetailsList;
+
 @property(nonatomic,strong) NSString *getDBPath;
 
 @end

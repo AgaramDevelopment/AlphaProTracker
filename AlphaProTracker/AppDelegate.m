@@ -220,13 +220,13 @@
                                 
                                 NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
                                 dic = [objCaptransactions AssessmentEntrySyncBackground];
-                                
-                                //NSMutableArray *reqList = [[NSMutableArray alloc]init];
-                                //reqList = [dic valueForKey:@"LstAssessmententry"];
-                                if(dic.count>0 ){
+                                NSMutableArray *reqList = [[NSMutableArray alloc]init];
+                                reqList = [dic valueForKey:@"LstAssessmententry"];
+                                if(reqList.count>0 ){
                                     [self PushWebservice:dic];
                                 }else{
                                     
+                        
                                 }
                                 
                             }
@@ -256,8 +256,6 @@
             _timer = nil;
             
         }
-        
-        
     }
 }
 
@@ -275,26 +273,28 @@
         
         manager.requestSerializer = requestSerializer;
         
-       // NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        
-        //if([reqdic valueForKey:@"LstAssessmententry"])   [dic    setObject:[reqdic valueForKey:@"LstAssessmententry"]     forKey:@"LstAssessmententry"];
-        
-        //NSLog(@"parameters : %@",dic);
+        NSLog(@"response ; %@",reqdic);
         [manager POST:URLString parameters:reqdic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
             if(responseObject >0)
             {
                 //if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"])
-                
-//                if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Message"] != NULL)
-//                {
-//
-//                }
-//                else
-//                {
-//
-//                }
+                BOOL status = [responseObject valueForKey:@"Status"];
+                if(status == 1)
+                {
+                    NSMutableArray *Assessmentlist = [responseObject valueForKey:@"LstAssessmententry"];
+                    for(int i = 0;i<Assessmentlist.count;i++)
+                    {
+                        DBMANAGERSYNC * dbConnect = [[DBMANAGERSYNC alloc]init];
+                        [dbConnect UPDATESyncStatus:[Assessmentlist objectAtIndex:i]];
+                    }
+ 
+                }
+                else
+                {
+
+                }
             }
             
             

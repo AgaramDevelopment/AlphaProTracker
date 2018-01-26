@@ -80,8 +80,6 @@
         }
         NSString * PlyCode = self.Playercode;
         
-        
-        
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(cliendcode)   [dic    setObject:cliendcode     forKey:@"Clientcode"];
         if(PlyCode)   [dic    setObject:PlyCode     forKey:@"PlayerCode"];

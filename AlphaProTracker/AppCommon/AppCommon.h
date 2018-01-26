@@ -21,6 +21,7 @@
     UIView * commonview;
    // NSString *nn;
     BOOL isPlayer;
+    UIAlertView *objAlter;
     
     
 }

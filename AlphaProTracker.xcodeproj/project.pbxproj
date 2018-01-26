@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0403207C2011CE1C0026D7C0 /* agapt_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0403207B2011CE1C0026D7C0 /* agapt_database.sqlite */; };
 		04055A891F711F170014DC5B /* InjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04055A881F711F170014DC5B /* InjuryVC.m */; };
 		04055A8E1F711F870014DC5B /* InjuryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04055A8C1F711F870014DC5B /* InjuryListCell.m */; };
 		04055A8F1F711F870014DC5B /* InjuryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04055A8D1F711F870014DC5B /* InjuryListCell.xib */; };
@@ -133,6 +132,7 @@
 		04F1B95E1F94843C00EFA4A9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */; };
 		04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */; };
 		04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */; };
+		18935356201B13D1001EC0B5 /* agapt_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18935355201B13D1001EC0B5 /* agapt_database.sqlite */; };
 		189663CB2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189663C62012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.xib */; };
 		189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189663C82012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib */; };
 		189663CD2012FE3F00A8BFE1 /* ExcerciseParameterTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189663C92012FE3F00A8BFE1 /* ExcerciseParameterTVC.m */; };
@@ -248,7 +248,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0403207B2011CE1C0026D7C0 /* agapt_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = agapt_database.sqlite; sourceTree = "<group>"; };
 		04055A871F711F170014DC5B /* InjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InjuryVC.h; path = Controllers/InjuryVC/InjuryVC.h; sourceTree = "<group>"; };
 		04055A881F711F170014DC5B /* InjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InjuryVC.m; path = Controllers/InjuryVC/InjuryVC.m; sourceTree = "<group>"; };
 		04055A8B1F711F870014DC5B /* InjuryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InjuryListCell.h; path = Subview/InjuryListCell/InjuryListCell.h; sourceTree = "<group>"; };
@@ -488,6 +487,7 @@
 		04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBMANAGERSYNC.m; path = AppCommon/dbmanagerSync/DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		04FBEE721F7E7D7E007C5BF8 /* PieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieChartView.h; path = Helper/PieChart/PieChartView.h; sourceTree = "<group>"; };
 		04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PieChartView.m; path = Helper/PieChart/PieChartView.m; sourceTree = "<group>"; };
+		18935355201B13D1001EC0B5 /* agapt_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = agapt_database.sqlite; sourceTree = "<group>"; };
 		189663C52012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseAttachmentCVC.h; path = Subview/ExcirsizeDetails/ExcerciseAttachmentCVC.h; sourceTree = "<group>"; };
 		189663C62012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExcerciseAttachmentCVC.xib; path = Subview/ExcirsizeDetails/ExcerciseAttachmentCVC.xib; sourceTree = "<group>"; };
 		189663C72012FE3F00A8BFE1 /* ExcerciseParameterTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseParameterTVC.h; path = Subview/ExcirsizeDetails/ExcerciseParameterTVC.h; sourceTree = "<group>"; };
@@ -843,7 +843,7 @@
 		043B23011F4B1B3800036604 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0403207B2011CE1C0026D7C0 /* agapt_database.sqlite */,
+				18935355201B13D1001EC0B5 /* agapt_database.sqlite */,
 				043B23021F4B1B3800036604 /* main.m */,
 				04CA66431F6F8A51009F109E /* AlphaProTracker-Bridging-Header.h */,
 			);
@@ -2017,7 +2017,6 @@
 				04DB752E1F7A5E64001CB710 /* IllnessCell.xib in Resources */,
 				ACB567C51F62D7A800F1C45E /* TrainingLoadCell.xib in Resources */,
 				045A49FA1FA22192008C1630 /* redCircle.png in Resources */,
-				0403207C2011CE1C0026D7C0 /* agapt_database.sqlite in Resources */,
 				04DEBCB01F4BEB190070C540 /* CustomNavigation.xib in Resources */,
 				043B23111F4B1B3A00036604 /* LaunchScreen.storyboard in Resources */,
 				AC1BC8131F8665A60047AECC /* AAFunnel.js in Resources */,
@@ -2040,6 +2039,7 @@
 				045A49F91FA22192008C1630 /* MonthlyCalendar.png in Resources */,
 				04F11D9A200F70F9004A4218 /* MultiInjurylistCell.xib in Resources */,
 				AC1BC8161F8665A60047AECC /* AAHighchartsMore.js in Resources */,
+				18935356201B13D1001EC0B5 /* agapt_database.sqlite in Resources */,
 				ACBD4AD81F56CFBC00AFA25D /* SubAssessmentCell.xib in Resources */,
 				04055A8F1F711F870014DC5B /* InjuryListCell.xib in Resources */,
 				045A49F71FA22192008C1630 /* blackCircle.png in Resources */,

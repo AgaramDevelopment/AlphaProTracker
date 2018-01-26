@@ -466,7 +466,23 @@ AppCommon *sharedCommon = nil;
         }
         else if (indexPath.row ==8)
         {
-            [self synDataMethod];
+            
+            DBMANAGERSYNC * objCaptransactions = [[DBMANAGERSYNC alloc]init];
+           
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                dic = [objCaptransactions AssessmentEntrySyncBackground];
+                NSMutableArray *reqList = [[NSMutableArray alloc]init];
+                reqList = [dic valueForKey:@"LstAssessmententry"];
+                if(reqList.count>0 ){
+                
+                    [self ShowAlterMsg:@"Try After few seconds"];
+                }else{
+                    
+                    [self synDataMethod];
+
+                }
+            
+            
         }
         else if (indexPath.row ==9)
         {
@@ -484,6 +500,26 @@ AppCommon *sharedCommon = nil;
     }
    
 }
+
+-(void)ShowAlterMsg:(NSString*) MsgStr
+{
+    objAlter =[[UIAlertView alloc]initWithTitle:@"Please Wait" message:MsgStr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [objAlter show];
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSTimer *time  = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(hide) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:time forMode:NSDefaultRunLoopMode];
+        [[NSRunLoop currentRunLoop] run];
+    });
+    
+}
+
+-(void)hide
+{
+    objAlter.hidden = YES;
+}
+
 
 - (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
