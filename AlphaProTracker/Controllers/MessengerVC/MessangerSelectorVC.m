@@ -38,7 +38,7 @@
     CustomNavigation * objCustomNavigation;
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     [self.naviView addSubview:objCustomNavigation.view];
-    objCustomNavigation.tittle_lbl.text=@"Messages";
+    objCustomNavigation.tittle_lbl.text=@"";
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.home_btn.hidden =NO;
     objCustomNavigation.menu_btn.hidden = NO;
@@ -398,9 +398,7 @@
     //RcntPer.Playercode = plycde;
     objGroup.view.frame = CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height);
     objGroup.playerListArray =   recipientsArray;
-    
    // [objGroup.multiSelectBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:objGroup.view];
     
 }
