@@ -414,8 +414,12 @@ AppCommon *sharedCommon = nil;
             ExcersizeViewController* VC = [ExcersizeViewController new];
             [appDel.navigationController pushViewController:VC animated:YES];
 
+        } else if (indexPath.row ==8)
+        {
+            MessangerSelectorVC *msObj = [MessangerSelectorVC new];
+            [appDel.navigationController pushViewController:msObj animated:YES];
         }
-        else if(indexPath.row == 8)
+        else if(indexPath.row == 9)
         {
             [self actionLogOut];
         }
@@ -484,7 +488,6 @@ AppCommon *sharedCommon = nil;
                     [self synDataMethod];
 
                 }
-            
             
         }
         else if (indexPath.row ==9)
