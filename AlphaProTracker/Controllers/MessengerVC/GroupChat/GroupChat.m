@@ -66,12 +66,14 @@
             if(responseObject >0)
             {
                
-                MessangerSelectorVC * objMess = [[MessangerSelectorVC alloc] initWithNibName:@"MessangerSelectorVC" bundle:nil];
-                objMess.referenceKey = @"yes";
-                [appDel.navigationController pushViewController:objMess animated:YES];
+//                MessangerSelectorVC * objMess = [[MessangerSelectorVC alloc] initWithNibName:@"MessangerSelectorVC" bundle:nil];
+//                objMess.referenceKey = @"yes";
+//                [appDel.navigationController pushViewController:objMess animated:YES];
 //                objMess.referenceKey = @"yes";
 //                objMess.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
 //                [self.view addSubview:objMess.view];
+                
+                [self.view removeFromSuperview];
             }
             
             [COMMON RemoveLoadingIcon];
@@ -181,9 +183,10 @@
 }
 -(IBAction)closeAction:(id)sender
 {
-    MessangerSelectorVC * objMess = [[MessangerSelectorVC alloc] initWithNibName:@"MessangerSelectorVC" bundle:nil];
-    objMess.referenceKey = @"yes";
-    [appDel.navigationController pushViewController:objMess animated:YES];
+//    MessangerSelectorVC * objMess = [[MessangerSelectorVC alloc] initWithNibName:@"MessangerSelectorVC" bundle:nil];
+//    objMess.referenceKey = @"yes";
+//    [appDel.navigationController pushViewController:objMess animated:YES];
+    [self.view removeFromSuperview];
 }
 
 
