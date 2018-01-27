@@ -46,7 +46,7 @@
 +(void)hideLoading;
 
 +(UIColor*)colorWithHexString:(NSString*)hex;
-
+-(void)MovetoRightsidemenu;
 @end
 extern AppCommon *sharedCommon;
 #define COMMON (sharedCommon? sharedCommon:[AppCommon common])

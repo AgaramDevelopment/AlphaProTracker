@@ -275,7 +275,10 @@ AppCommon *sharedCommon = nil;
     [self swipeHandlerLeft];
 
 }
-
+-(void)MovetoRightsidemenu
+{
+    [self swipeHandlerRight];
+}
 
 -(void)swipeHandlerRight
 {

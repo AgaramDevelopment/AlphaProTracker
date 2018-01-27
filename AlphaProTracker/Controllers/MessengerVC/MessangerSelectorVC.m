@@ -52,7 +52,7 @@
 
 -(IBAction)BackBtnAction:(id)sender
 {
-    [COMMON ShowsideMenuView];
+    [COMMON MovetoRightsidemenu];
     [self.navigationController popViewControllerAnimated:NO];
     
 }
