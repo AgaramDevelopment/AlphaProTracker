@@ -226,3 +226,10 @@
 #define FetchMultiPlayerChartKey                @"MULTIPLAYERCHART"
 
 #define GroupChatKey                        @"CREATENEWGROUP"
+
+#define FetchAllMessageKey                @"SHOWALLMESSAGES"
+
+#define SendMessageKey                @"SENDREPLYMESSAGES_ANDROID"
+
+#define SendBroadCastMessageKey                @"SENDNEWMESSAGES_ANDROID"
+

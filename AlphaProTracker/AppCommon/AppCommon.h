@@ -38,6 +38,7 @@
 -(void)AddMenuView:(UIView *)view;
 -(void)ShowsideMenuView;
 +(NSString *)GetUsercode;
++(NSString *)GetUserName;
 +(NSString *) GetClientCode;
 +(NSString *) GetuserReference;
 +(NSString *)getFileType:(NSString *)filePath;

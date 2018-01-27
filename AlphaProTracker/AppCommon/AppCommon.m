@@ -105,6 +105,13 @@ AppCommon *sharedCommon = nil;
     NSString * usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     return usercode;
 }
+
++(NSString *)GetUserName
+{
+    NSString * userName = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+    return userName;
+}
+
 +(NSString *) GetClientCode
 {
     NSString * clientcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];

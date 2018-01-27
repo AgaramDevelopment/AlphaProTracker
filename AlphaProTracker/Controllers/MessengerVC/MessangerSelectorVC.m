@@ -12,6 +12,7 @@
 #import "InboxTableViewCell.h"
 #import "GroupChat.h"
 #import "CustomNavigation.h"
+#import "MessangerSendVC.h"
 
 @interface MessangerSelectorVC ()
 {
@@ -338,6 +339,37 @@
 // when user tap the row, what action you want to perform
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MessangerSendVC *msObj = [[MessangerSendVC alloc] init];
+
+    if (isInbox) {
+        msObj.CommID = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"commId"];
+        msObj.iSread = @"YES";
+        msObj.isBroadCastMsg = NO;
+        NSString* selectedName = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivefromname"];
+        msObj.SelectedName = selectedName;
+    }
+    else if(isContacts)
+    {
+        msObj.CommID = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"commId"];
+//        msObj.arrReceiverCodes = commonArray;
+        msObj.iSread = @"NO";
+        msObj.isBroadCastMsg = NO;
+        NSString* selectedName = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivername"];
+        msObj.SelectedName = selectedName;
+
+    }
+    else if(isGroups)
+    {
+        msObj.CommID = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"commId"];
+        msObj.iSread = @"NO";
+        msObj.isBroadCastMsg = NO;
+        NSString* selectedName = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivername"];
+        msObj.SelectedName = selectedName;
+
+    }
+    [self.navigationController pushViewController:msObj animated:YES];
+
+        
 //    [self resetButtonStatus];
 }
 
@@ -413,6 +445,19 @@
 }
 - (IBAction)NewGroptAction:(id)sender {
    
+    if(isContacts)
+    {
+        MessangerSendVC *msObj = [[MessangerSendVC alloc] init];
+        msObj.arrReceiverCodes = commonArray;
+        msObj.iSread = @"NO";
+        msObj.isBroadCastMsg = YES;
+//        msObj.CommID = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"commId"];
+        NSString* selectedName = [[commonArray valueForKey:@"receivername"]componentsJoinedByString:@","];
+        msObj.SelectedName = selectedName;
+        [self.navigationController pushViewController:msObj animated:YES];
+        return;
+        
+    }
      objGroup = [[GroupChat alloc] initWithNibName:@"GroupChat" bundle:nil];
     //RcntPer.Teamcode = tmecde;
     //RcntPer.Playercode = plycde;

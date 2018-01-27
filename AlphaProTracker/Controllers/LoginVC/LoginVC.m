@@ -120,11 +120,10 @@
                 NSString * objRoleName =[[objRole valueForKey:@"RoleName"] objectAtIndex:0];
                 [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"UserCode"] forKey:@"UserCode"];
                 [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"ClientCode"] forKey:@"ClientCode"];
-                
                 [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Userreferencecode"] forKey:@"Userreferencecode"];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"Username"];
-                [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"Password"];
+                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Username"] forKey:@"UserName"];
+                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"AssociationCode"]  forKey:@"AssociationCode"];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"PhotoPath"] forKey:@"PhotoPath"];
                 [[NSUserDefaults standardUserDefaults] setObject:objRoleName forKey:@"RoleName"];
@@ -133,7 +132,7 @@
                 
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-
+                
                 
                 HomeVC  * objTabVC=[[HomeVC alloc]init];
                 objTabVC = (HomeVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"HomeVC"];

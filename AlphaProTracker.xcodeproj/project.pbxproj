@@ -243,6 +243,8 @@
 		CE09F2BE201AF83D006C764B /* redCircle_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = CE09F2BD201AF835006C764B /* redCircle_mini.png */; };
 		CE09F2C2201AFCD8006C764B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE09F2C1201AFCD7006C764B /* DatePickerViewController.m */; };
 		CE3EBB461FFC990200588728 /* AssessmentFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3EBB451FFC990200588728 /* AssessmentFilterView.m */; };
+		CEB3631E201CAC9600BCA48E /* MessangerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB3631C201CAC9500BCA48E /* MessangerTableViewCell.m */; };
+		CEB3631F201CAC9600BCA48E /* MessangerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB3631D201CAC9500BCA48E /* MessangerTableViewCell.xib */; };
 		CEC26FCD1FFE129B00FF2D74 /* AssessmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC26FCC1FFE129B00FF2D74 /* AssessmentCell.m */; };
 		CEEE8035200E210400E33513 /* ExcersizeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8033200E210400E33513 /* ExcersizeCollectionViewCell.m */; };
 		CEEE8036200E210400E33513 /* ExcersizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE8034200E210400E33513 /* ExcersizeCollectionViewCell.xib */; };
@@ -691,6 +693,9 @@
 		CE3EBB441FFC990200588728 /* AssessmentFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentFilterView.h; path = Common/Assessment/AssessmentFilterView.h; sourceTree = "<group>"; };
 		CE3EBB451FFC990200588728 /* AssessmentFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentFilterView.m; path = Common/Assessment/AssessmentFilterView.m; sourceTree = "<group>"; };
 		CEAB4EA82013031500CCF8EC /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateProtocol.h; path = Helper/PlannerGraphs/DateProtocol.h; sourceTree = "<group>"; };
+		CEB3631B201CAC9500BCA48E /* MessangerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessangerTableViewCell.h; sourceTree = "<group>"; };
+		CEB3631C201CAC9500BCA48E /* MessangerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessangerTableViewCell.m; sourceTree = "<group>"; };
+		CEB3631D201CAC9500BCA48E /* MessangerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessangerTableViewCell.xib; sourceTree = "<group>"; };
 		CEC26FCB1FFE129B00FF2D74 /* AssessmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssessmentCell.h; path = Subview/AssessmentCell/AssessmentCell.h; sourceTree = "<group>"; };
 		CEC26FCC1FFE129B00FF2D74 /* AssessmentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssessmentCell.m; path = Subview/AssessmentCell/AssessmentCell.m; sourceTree = "<group>"; };
 		CEEE8032200E210400E33513 /* ExcersizeCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcersizeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -888,6 +893,7 @@
 		043B23191F4B1BC700036604 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
+				CEB3631A201CAC9500BCA48E /* MessangerCell */,
 				CE09F2B9201AF7B1006C764B /* MultiselectDropdownCell */,
 				189663C42012FE1D00A8BFE1 /* ExcirsizeDetails */,
 				04F11D95200F70D0004A4218 /* MultiInjurylistCell */,
@@ -1940,6 +1946,17 @@
 			name = Assessment;
 			sourceTree = "<group>";
 		};
+		CEB3631A201CAC9500BCA48E /* MessangerCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEB3631B201CAC9500BCA48E /* MessangerTableViewCell.h */,
+				CEB3631C201CAC9500BCA48E /* MessangerTableViewCell.m */,
+				CEB3631D201CAC9500BCA48E /* MessangerTableViewCell.xib */,
+			);
+			name = MessangerCell;
+			path = Subview/MessangerCell;
+			sourceTree = "<group>";
+		};
 		CEC26FCA1FFE124500FF2D74 /* AssessmentCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2094,6 +2111,7 @@
 				ACBBA1AA1F616F61000F9DC9 /* BowlingLoad.xib in Resources */,
 				04CA66491F6FA567009F109E /* FoodDairy.xib in Resources */,
 				ACBBA1801F613E1F000F9DC9 /* WellnessRating.xib in Resources */,
+				CEB3631F201CAC9600BCA48E /* MessangerTableViewCell.xib in Resources */,
 				045A49F91FA22192008C1630 /* MonthlyCalendar.png in Resources */,
 				04F11D9A200F70F9004A4218 /* MultiInjurylistCell.xib in Resources */,
 				AC1BC8161F8665A60047AECC /* AAHighchartsMore.js in Resources */,
@@ -2185,6 +2203,7 @@
 				ACACEFDF1F596DE1004C28A4 /* TestAssessmentEntryVC.m in Sources */,
 				040B2A8E1F600E0600FB4B93 /* SACalendar.m in Sources */,
 				18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */,
+				CEB3631E201CAC9600BCA48E /* MessangerTableViewCell.m in Sources */,
 				045A498E1FA2205B008C1630 /* FFWeekHeaderCollectionView.m in Sources */,
 				04269508201C4E3300AC1712 /* InboxTableViewCell.m in Sources */,
 				044730D41F94D41E00871628 /* Utitliy.m in Sources */,
