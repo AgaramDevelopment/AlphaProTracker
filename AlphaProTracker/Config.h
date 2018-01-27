@@ -224,3 +224,5 @@
 #define FetchMultiPlayerKey                @"FETCHMULTIPLAYERCHART"
 
 #define FetchMultiPlayerChartKey                @"MULTIPLAYERCHART"
+
+#define GroupChatKey                        @"CREATENEWGROUP"

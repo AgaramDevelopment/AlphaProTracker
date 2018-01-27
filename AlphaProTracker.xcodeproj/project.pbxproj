@@ -27,6 +27,12 @@
 		04228ED02012236300D131F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04228ECF2012236300D131F8 /* AVFoundation.framework */; };
 		04228ED22012237400D131F8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04228ED12012237400D131F8 /* AVKit.framework */; };
 		04241DFB1F7D238F00A7C46A /* GraphsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04241DFA1F7D238F00A7C46A /* GraphsVC.m */; };
+		04269508201C4E3300AC1712 /* InboxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04269504201C4E3200AC1712 /* InboxTableViewCell.m */; };
+		04269509201C4E3300AC1712 /* MessangerSelectorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04269505201C4E3200AC1712 /* MessangerSelectorVC.m */; };
+		0426950A201C4E3300AC1712 /* MessangerSelectorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04269506201C4E3300AC1712 /* MessangerSelectorVC.xib */; };
+		0426950B201C4E3300AC1712 /* InboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04269507201C4E3300AC1712 /* InboxTableViewCell.xib */; };
+		04269510201C504D00AC1712 /* GroupChat.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0426950D201C504C00AC1712 /* GroupChat.xib */; };
+		04269511201C504D00AC1712 /* GroupChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426950F201C504D00AC1712 /* GroupChat.m */; };
 		0426C8D1201842000028D4EA /* PageItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426C8D0201842000028D4EA /* PageItemController.m */; };
 		043B23031F4B1B3800036604 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 043B23021F4B1B3800036604 /* main.m */; };
 		043B23061F4B1B3800036604 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 043B23051F4B1B3800036604 /* AppDelegate.m */; };
@@ -144,8 +150,6 @@
 		18B97994200DD49E00B94DD4 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97992200DD49E00B94DD4 /* ParallaxHeaderView.m */; };
 		18B97999200E129E00B94DD4 /* PopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97998200E129E00B94DD4 /* PopViewCell.m */; };
 		18B9799D200E158500B94DD4 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B9799C200E158500B94DD4 /* StepSlider.m */; };
-		18EC75892019F468007D50AA /* MessangerSelectorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC75872019F468007D50AA /* MessangerSelectorVC.m */; };
-		18EC758A2019F468007D50AA /* MessangerSelectorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EC75882019F468007D50AA /* MessangerSelectorVC.xib */; };
 		18EC758E2019F4AC007D50AA /* MessangerSendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC758C2019F4AC007D50AA /* MessangerSendVC.m */; };
 		18EC758F2019F4AC007D50AA /* MessangerSendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */; };
 		AC1BC8041F8663020047AECC /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FC1F8663020047AECC /* AAChartModel.m */; };
@@ -287,6 +291,15 @@
 		04228ED12012237400D131F8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		04241DF91F7D238F00A7C46A /* GraphsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphsVC.h; path = Controllers/GraphVC/GraphsVC.h; sourceTree = "<group>"; };
 		04241DFA1F7D238F00A7C46A /* GraphsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphsVC.m; path = Controllers/GraphVC/GraphsVC.m; sourceTree = "<group>"; };
+		04269502201C4E3200AC1712 /* InboxTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InboxTableViewCell.h; path = Controllers/MessengerVC/InboxTableViewCell.h; sourceTree = "<group>"; };
+		04269503201C4E3200AC1712 /* MessangerSelectorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessangerSelectorVC.h; path = Controllers/MessengerVC/MessangerSelectorVC.h; sourceTree = "<group>"; };
+		04269504201C4E3200AC1712 /* InboxTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InboxTableViewCell.m; path = Controllers/MessengerVC/InboxTableViewCell.m; sourceTree = "<group>"; };
+		04269505201C4E3200AC1712 /* MessangerSelectorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessangerSelectorVC.m; path = Controllers/MessengerVC/MessangerSelectorVC.m; sourceTree = "<group>"; };
+		04269506201C4E3300AC1712 /* MessangerSelectorVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessangerSelectorVC.xib; path = Controllers/MessengerVC/MessangerSelectorVC.xib; sourceTree = "<group>"; };
+		04269507201C4E3300AC1712 /* InboxTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InboxTableViewCell.xib; path = Controllers/MessengerVC/InboxTableViewCell.xib; sourceTree = "<group>"; };
+		0426950D201C504C00AC1712 /* GroupChat.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GroupChat.xib; path = Controllers/MessengerVC/GroupChat/GroupChat.xib; sourceTree = "<group>"; };
+		0426950E201C504C00AC1712 /* GroupChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupChat.h; path = Controllers/MessengerVC/GroupChat/GroupChat.h; sourceTree = "<group>"; };
+		0426950F201C504D00AC1712 /* GroupChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupChat.m; path = Controllers/MessengerVC/GroupChat/GroupChat.m; sourceTree = "<group>"; };
 		0426C8CF201842000028D4EA /* PageItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageItemController.h; sourceTree = "<group>"; };
 		0426C8D0201842000028D4EA /* PageItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageItemController.m; sourceTree = "<group>"; };
 		043B22FE1F4B1B3800036604 /* AlphaProTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlphaProTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -509,9 +522,6 @@
 		18B97998200E129E00B94DD4 /* PopViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PopViewCell.m; path = Subview/PopCell/PopViewCell.m; sourceTree = "<group>"; };
 		18B9799B200E158500B94DD4 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepSlider.h; path = Helper/slider/StepSlider.h; sourceTree = "<group>"; };
 		18B9799C200E158500B94DD4 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepSlider.m; path = Helper/slider/StepSlider.m; sourceTree = "<group>"; };
-		18EC75862019F468007D50AA /* MessangerSelectorVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessangerSelectorVC.h; sourceTree = "<group>"; };
-		18EC75872019F468007D50AA /* MessangerSelectorVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessangerSelectorVC.m; sourceTree = "<group>"; };
-		18EC75882019F468007D50AA /* MessangerSelectorVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessangerSelectorVC.xib; sourceTree = "<group>"; };
 		18EC758B2019F4AC007D50AA /* MessangerSendVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessangerSendVC.h; sourceTree = "<group>"; };
 		18EC758C2019F4AC007D50AA /* MessangerSendVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessangerSendVC.m; sourceTree = "<group>"; };
 		18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessangerSendVC.xib; sourceTree = "<group>"; };
@@ -804,6 +814,16 @@
 				04241DFA1F7D238F00A7C46A /* GraphsVC.m */,
 			);
 			name = GraphVC;
+			sourceTree = "<group>";
+		};
+		0426950C201C4FF300AC1712 /* GroupChat */ = {
+			isa = PBXGroup;
+			children = (
+				0426950E201C504C00AC1712 /* GroupChat.h */,
+				0426950F201C504D00AC1712 /* GroupChat.m */,
+				0426950D201C504C00AC1712 /* GroupChat.xib */,
+			);
+			name = GroupChat;
 			sourceTree = "<group>";
 		};
 		043B22F51F4B1B3800036604 = {
@@ -1427,12 +1447,16 @@
 		18EC75802019F2E4007D50AA /* MessengerVC */ = {
 			isa = PBXGroup;
 			children = (
-				18EC75862019F468007D50AA /* MessangerSelectorVC.h */,
-				18EC75872019F468007D50AA /* MessangerSelectorVC.m */,
-				18EC75882019F468007D50AA /* MessangerSelectorVC.xib */,
+				04269502201C4E3200AC1712 /* InboxTableViewCell.h */,
+				04269504201C4E3200AC1712 /* InboxTableViewCell.m */,
+				04269507201C4E3300AC1712 /* InboxTableViewCell.xib */,
+				04269503201C4E3200AC1712 /* MessangerSelectorVC.h */,
+				04269505201C4E3200AC1712 /* MessangerSelectorVC.m */,
+				04269506201C4E3300AC1712 /* MessangerSelectorVC.xib */,
 				18EC758B2019F4AC007D50AA /* MessangerSendVC.h */,
 				18EC758C2019F4AC007D50AA /* MessangerSendVC.m */,
 				18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */,
+				0426950C201C4FF300AC1712 /* GroupChat */,
 			);
 			name = MessengerVC;
 			sourceTree = "<group>";
@@ -2033,11 +2057,12 @@
 				ACBBA1921F614B8D000F9DC9 /* SummaryOfInjuries.xib in Resources */,
 				ACBBA1981F614E20000F9DC9 /* CtlVsAtl.xib in Resources */,
 				AC1BC8151F8665A60047AECC /* AAHighchartsLibrary.js in Resources */,
+				0426950B201C4E3300AC1712 /* InboxTableViewCell.xib in Resources */,
+				0426950A201C4E3300AC1712 /* MessangerSelectorVC.xib in Resources */,
 				AC1BC8121F8665A60047AECC /* AAEasingMin.js in Resources */,
 				04EBB7961F8904D500422202 /* QuestionaryCell.xib in Resources */,
 				ACC2A1A51F5FF52A00210422 /* ViewProfile.xib in Resources */,
 				ACBB78221F5D835E009545BB /* ProfileVCCell.xib in Resources */,
-				18EC758A2019F468007D50AA /* MessangerSelectorVC.xib in Resources */,
 				CE09F2BE201AF83D006C764B /* redCircle_mini.png in Resources */,
 				0441B7861F6ACA6B00A28E19 /* PlannerCell.xib in Resources */,
 				189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */,
@@ -2052,6 +2077,7 @@
 				04DEBCB01F4BEB190070C540 /* CustomNavigation.xib in Resources */,
 				043B23111F4B1B3A00036604 /* LaunchScreen.storyboard in Resources */,
 				AC1BC8131F8665A60047AECC /* AAFunnel.js in Resources */,
+				04269510201C504D00AC1712 /* GroupChat.xib in Resources */,
 				ACBBA1A41F616942000F9DC9 /* SessionDetails.xib in Resources */,
 				ACBBA1861F614049000F9DC9 /* TrainingLoad.xib in Resources */,
 				045A49FB1FA22192008C1630 /* WeeklyCalendar.png in Resources */,
@@ -2160,6 +2186,7 @@
 				040B2A8E1F600E0600FB4B93 /* SACalendar.m in Sources */,
 				18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */,
 				045A498E1FA2205B008C1630 /* FFWeekHeaderCollectionView.m in Sources */,
+				04269508201C4E3300AC1712 /* InboxTableViewCell.m in Sources */,
 				044730D41F94D41E00871628 /* Utitliy.m in Sources */,
 				04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */,
 				045A49E91FA22146008C1630 /* FFSearchBarWithAutoComplete.m in Sources */,
@@ -2292,7 +2319,6 @@
 				045A497D1FA22026008C1630 /* FFMonthCell.m in Sources */,
 				045A49B51FA220B2008C1630 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				045A495A1FA21F9E008C1630 /* FFButtonAddEventWithPopover.m in Sources */,
-				18EC75892019F468007D50AA /* MessangerSelectorVC.m in Sources */,
 				04EBB76D1F88CB9B00422202 /* AssignPlayerVC.m in Sources */,
 				046215EA1F4EFAE300A781C2 /* SKSTableViewCell.m in Sources */,
 				ACA768591F4C1E8000ECC17A /* LoginVC.m in Sources */,
@@ -2300,6 +2326,7 @@
 				041BF5211F7F5F320091611D /* ProgramVC.m in Sources */,
 				045A49B31FA220B2008C1630 /* FFHeaderMonthForYearCell.m in Sources */,
 				045A49761FA2201C008C1630 /* FFMonthCalendarView.m in Sources */,
+				04269509201C4E3300AC1712 /* MessangerSelectorVC.m in Sources */,
 				04CA66481F6FA567009F109E /* FoodDairy.m in Sources */,
 				ACBB78211F5D835E009545BB /* ProfileVCCell.m in Sources */,
 				040B2A8F1F600E0600FB4B93 /* SACalendarCell.m in Sources */,
@@ -2308,6 +2335,7 @@
 				AC1BC85F1F8665B40047AECC /* AASpline.m in Sources */,
 				04EBB7951F8904D500422202 /* QuestionaryCell.m in Sources */,
 				043B23291F4B1D4200036604 /* AppCommon.m in Sources */,
+				04269511201C504D00AC1712 /* GroupChat.m in Sources */,
 				045A497E1FA22026008C1630 /* FFMonthCollectionView.m in Sources */,
 				AC1BC8521F8665B40047AECC /* AADataLabels.m in Sources */,
 				045A49C71FA220D2008C1630 /* UILabel+FFCustomMethods.m in Sources */,

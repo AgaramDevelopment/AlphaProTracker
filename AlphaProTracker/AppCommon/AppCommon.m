@@ -18,6 +18,7 @@
 #import <sqlite3.h>
 #import "ExcersizeViewController.h"
 #import "MBProgressHUD.h"
+#import "MessangerSelectorVC.h"
 
 @implementation AppCommon
 AppCommon *sharedCommon = nil;
@@ -236,6 +237,7 @@ AppCommon *sharedCommon = nil;
                               @[@"FOOD DIARY"],
                               @[@"PROFILE"],
                               @[@"PROGRAM"],
+                              @[@"MESSAGE"],
                               @[@"LOGOUT"]]
                           ];
             isPlayer=YES;
@@ -257,6 +259,7 @@ AppCommon *sharedCommon = nil;
                               @[@"SYNC DATA"],
                               @[@"ILLNESS"],
                               @[@"INJURY"],
+                              @[@"MESSAGE"],
                               @[@"LOGOUT"]]
                           ];
             isPlayer=NO;
@@ -492,8 +495,12 @@ AppCommon *sharedCommon = nil;
         {
             [self redirectSelectview:@"injury"];
         }
-        
-        else if(indexPath.row ==11)
+        else if (indexPath.row ==11)
+        {
+            MessangerSelectorVC *msObj = [MessangerSelectorVC new];
+            [appDel.navigationController pushViewController:msObj animated:YES];
+        }
+        else if(indexPath.row ==12)
         {
             [self actionLogOut];
         }
