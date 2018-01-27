@@ -73,12 +73,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
     
 }
 
-
-
-
-
-
-
 -(BOOL) SELECTASSESSMENT:(NSString *)ASSESSMENTCODE{
     @synchronized ([Utitliy syncId])  {
         
@@ -203,17 +197,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         return NO;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 -(BOOL) SELECTASSESSMENTTESTMASTER:(NSString *)TESTCODE{
@@ -3370,7 +3353,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)] forKey:@"Createddate"];
                     [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)] forKey:@"Modifiedby"];
                     [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 50)] forKey:@"Modifieddate"];
-                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 51)] forKey:@"isIgnored"];
+                    [tabledataDic setObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 52)] forKey:@"isIgnored"];
                         
                         [listAssessmentArray addObject:tabledataDic];
                     }

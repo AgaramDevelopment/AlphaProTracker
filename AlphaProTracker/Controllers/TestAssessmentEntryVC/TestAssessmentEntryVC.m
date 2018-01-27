@@ -274,12 +274,12 @@
             if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
             {
                 [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
-                self.ingnoreStatus =@"true";
+                self.ingnoreStatus =@"True";
             }
             else
             {
                 [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-                self.ingnoreStatus =@"false";
+                self.ingnoreStatus =@"False";
             }
         }
         else if ([[objDic valueForKey:@"romSideName"] isEqualToString:@"CENTRAL"])

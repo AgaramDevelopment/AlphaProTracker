@@ -40,19 +40,20 @@
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     [self.naviView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"";
-    objCustomNavigation.btn_back.hidden =YES;
+    objCustomNavigation.btn_back.hidden =NO;
     objCustomNavigation.home_btn.hidden =NO;
-    objCustomNavigation.menu_btn.hidden = NO;
+    objCustomNavigation.menu_btn.hidden = YES;
      [objCustomNavigation.home_btn setImage:[UIImage imageNamed:@"ico_addWhite"]  forState:UIControlStateNormal];
     
-    [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.btn_back addTarget:self action:@selector(BackBtnAction:) forControlEvents:UIControlEventTouchUpInside];
      [objCustomNavigation.home_btn addTarget:self action:@selector(NewGroptAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
--(IBAction)MenuBtnAction:(id)sender
+-(IBAction)BackBtnAction:(id)sender
 {
     [COMMON ShowsideMenuView];
+    [self.navigationController popViewControllerAnimated:NO];
     
 }
 
