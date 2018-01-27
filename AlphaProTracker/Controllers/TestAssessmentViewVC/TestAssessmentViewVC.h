@@ -36,4 +36,6 @@
 
 @property (strong, nonatomic) IBOutlet AssessmentFilterView *objAssessmentSideView;
 
+
 @end
+

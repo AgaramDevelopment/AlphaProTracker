@@ -6,30 +6,33 @@
 //  Copyright © 2017 agaraminfotech. All rights reserved.
 //
 
+
+
+
 #import "ExpandAssessmentVC.h"
 #import "AppCommon.h"
 #import "HomeVC.h"
 #import "CustomNavigation.h"
 #import "Config.h"
 #import "DBAConnection.h"
-//#import "INTUGroupedArrayImports.h"
-//#import "INTUFruitCategory.h"
-//#import "INTUFruit.h"
+#import "TestAssessmentEntryVC.h"
+
+
 
 @interface ExpandAssessmentVC ()<SKSTableViewDelegate>
+{
+    NSString * usercode;
+    NSString *clientCode;
+    BOOL isEdit;
+}
 
 @property (nonatomic,strong) NSMutableArray * objContenArray;
-//#if __has_feature(objc_generics)
-//@property (nonatomic, strong) INTUMutableGroupedArray<INTUFruitCategory *, INTUFruit *> *groupedArray;
-//#else
-//@property (nonatomic, strong) INTUMutableGroupedArray *groupedArray;
-//#endif
-//
-//#if __has_feature(objc_generics)
-//@property (nonatomic, strong) INTUMutableGroupedArray<INTUFruitCategory *, INTUFruit *> *AddedArray;
-//#else
-//@property (nonatomic, strong) INTUMutableGroupedArray *AddedArray;
-//#endif
+@property (nonatomic,strong) NSString * SelectTestCodeStr;
+@property (nonatomic,strong) NSString * SelectTestNameStr;
+@property (nonatomic,strong) NSString * SelectScreenId;;
+
+
+@property (nonatomic,strong) DBAConnection *objDBconnection;
 
 @end
 
@@ -38,27 +41,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _tableview.SKSTableViewDelegate = self;
-
-    //[COMMON AddMenuView:self.view];
+    
     [self customnavigationmethod];
-    // Do any additional setup after loading the view.
-//    self.objContenArray = [[NSMutableArray alloc]init];
-//    self.objContenArray = @[
-//
-//                  @[
-//                      @[@"HOME"],
-//                      @[@"PLANNER"],
-//                      @[@"PHYSIO", @"Assessment", @"Questionnaire", @"SinglePlayerReport", @"MultiPlayerReport", @"program",@"Assign Player"],
-//                      @[@"STRENGTH & CONDITIONS",@"Assessment",@"Questionnaire",@"SinglePlayerReport",@"MultiPlayerReport",@"Program",@"Assign player"],
-//                      @[@"COACH",@"Assessment",@"Questionnaire",@"SinglePlayerReport",@"MultiPlayerReport",@"Program",@"Assign player"],
-//                      @[@"WORK LOAD MANAGEMENT"],
-//                      @[@"FOOD DIARY"],
-//                      @[@"PROFILE"],
-//                      @[@"SYNC DATA"],
-//                      @[@"ILLNESS"],
-//                      @[@"INJURY"],
-//                      @[@"LOGOUT"]]
-//                  ];
+    usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
     
     [self tableValuesMethod];
 }
@@ -71,7 +58,8 @@
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
     [self.view addSubview:objCustomNavigation.view];
-    objCustomNavigation.tittle_lbl.text=self.TitleStr;
+    NSString * selectTilteStr = [NSString stringWithFormat:@"%@ - %@ \n %@",[self.SelectDetailDic valueForKey:@"Module"],[self.SelectDetailDic valueForKey:@"AssessmentTitle"],[self.SelectDetailDic valueForKey:@"Team"]];
+    objCustomNavigation.tittle_lbl.text= selectTilteStr;
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.menu_btn.hidden = NO;
     [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -84,7 +72,7 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-   [COMMON ShowsideMenuView];
+    [COMMON ShowsideMenuView];
 }
 
 -(IBAction)HomeBtnAction:(id)sender
@@ -96,7 +84,65 @@
     
 }
 
-
+-(void)tableValuesMethod
+{
+    
+    self.objDBconnection = [[DBAConnection alloc]init];
+    self.objContenArray =[[NSMutableArray alloc]init];
+    NSMutableArray * ComArray = [[NSMutableArray alloc]init];
+    
+    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :self.assessmentCodeStr :self.ModuleCodeStr ];
+    
+    NSLog(@"%@", TestAsseementArray);
+    
+    NSMutableArray * AssessmentTypeTest;
+    NSMutableArray * AssessmentNameArray;
+    
+    for (int i = 0; i <TestAsseementArray.count; i++)
+    {
+        
+        
+        AssessmentNameArray =[[NSMutableArray alloc]init];
+        NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
+        [objDic setValue:[[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i] forKey:@"TestTypeCode"];
+        [objDic setValue:[[TestAsseementArray valueForKey:@"TestName"] objectAtIndex:i] forKey:@"TestTypeName"];
+        
+        NSString *assessmentTestCode = [[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i];
+        //NSString *assessmentTestName = [[TestAsseementArray valueForKey:@"TestName"] objectAtIndex:i];//test names
+        
+        
+        NSString * Screenid =  [self.objDBconnection ScreenId:self.assessmentCodeStr :assessmentTestCode ];
+        NSLog(@"%@", Screenid);
+        [objDic setValue:Screenid forKey:@"ScreenID"];
+        
+        
+        [AssessmentNameArray addObject:objDic];
+        
+        NSString * Screencount =  [self.objDBconnection ScreenCount :self.assessmentCodeStr :assessmentTestCode];
+        
+        
+        int count = [Screencount intValue];
+        
+        
+        if(count>0)
+        {
+            
+            AssessmentTypeTest = [self.objDBconnection AssementForm :Screenid :clientCode:self.ModuleCodeStr:self.assessmentCodeStr :assessmentTestCode ];
+        }
+        
+        for(int j=0;j<AssessmentTypeTest.count;j++)
+        {
+            
+            [AssessmentNameArray addObject:[AssessmentTypeTest objectAtIndex:j]];
+            
+        }
+        [ComArray addObject: AssessmentNameArray];
+        
+    }
+    [self.objContenArray addObject:ComArray];
+    [self.tableview reloadData];
+    
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -120,32 +166,31 @@
     {
         return YES;
     }
-
+    
     return NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"SKSTableViewCell";
-
+    
     SKSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-//    if(isPlayer==YES)
-//    {
-        if (!cell)
-            cell = [[SKSTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
-        cell.textLabel.text = self.objContenArray[indexPath.section][indexPath.row][0];
-        cell.textLabel.textColor =[UIColor whiteColor];
-        cell.textLabel.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
-
+    
+    if (!cell)
+        cell = [[SKSTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    NSDictionary * objDic = self.objContenArray[indexPath.section][indexPath.row][0];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [objDic valueForKey:@"TestTypeName"]];
+    cell.textLabel.textColor =[UIColor whiteColor];
+    cell.textLabel.font = (IS_IPAD)? [UIFont fontWithName:@"Helvetica" size:15]:[UIFont fontWithName:@"Helvetica" size:13];
+    
     NSInteger row = indexPath.row;
-
+    
     if (indexPath.section == 0 && (indexPath.row == row))
         cell.expandable = YES;
-        else
+    else
         cell.expandable = NO;
-        cell.backgroundColor =[UIColor colorWithRed:(17/255.0f) green:(24/255.0f) blue:(67/255.0f) alpha:0.9];
+    cell.backgroundColor =[UIColor colorWithRed:(17/255.0f) green:(24/255.0f) blue:(67/255.0f) alpha:0.9];
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     return cell;
 }
@@ -153,14 +198,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"UITableViewCell";
-
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    
     if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.objContenArray[indexPath.section][indexPath.row][indexPath.subRow]];
-   //cell.backgroundColor =[UIColor colorWithRed:(17/255.0f) green:(24/255.0f) blue:(67/255.0f) alpha:1.0];
+    
+    NSDictionary * objStr = self.objContenArray [indexPath.section][indexPath.row][indexPath.subRow];
+    
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[objStr valueForKey:@"TestTypeName"]] ;//[NSString stringWithFormat:@"%@", self.objContenArray [indexPath.section][indexPath.row][indexPath.subRow]];
     cell.backgroundColor =[UIColor clearColor];
     cell.textLabel.textColor =[UIColor blackColor];
     [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size: (IS_IPAD ? 15 : 14)]];
@@ -171,140 +218,47 @@
 {
     return 60.0f;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    NSLog(@"didSelectRow");
+    NSDictionary * objDic = self.objContenArray[indexPath.section][indexPath.row][0];
+    self.SelectTestCodeStr = [objDic valueForKey:@"TestTypeCode"];
+    self.SelectTestNameStr = [objDic valueForKey:@"TestTypeName"];
+    self.SelectScreenId    =[objDic valueForKey:@"ScreenID"];
 }
 
 - (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-}
-
-
-
-
-
-
-
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//   return [self.groupedArray countAllSections];
-//}
-//
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//        return [self.groupedArray countObjectsInSectionAtIndex:section];
-//}
-
-//- (UITableViewCell *)tableView:(UITableView *)tableView
-//         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *cellid=@"Cellid";
-//
-//        //INTUFruit *fruit = [self.groupedArray objectAtIndexPath:indexPath];
-//        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-//        cell.textLabel.text = fruit.name;
-//        cell.backgroundColor = [UIColor clearColor];
-//        cell.textColor = [UIColor whiteColor];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return cell;
-//
-//}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-
-        return 50;
-
-}
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//
-//        INTUFruitCategory *fruitCategory = [self.groupedArray sectionAtIndex:section];
-//        return fruitCategory.displayName;
-//
-//}
-//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-//{
-//
-//        UITableViewHeaderFooterView *v = (UITableViewHeaderFooterView *)view;
-//        v.backgroundView.backgroundColor = [UIColor colorWithRed:(28/255.0f) green:(26/255.0f) blue:(68/255.0f) alpha:1.0f];
-//        v.textLabel.textColor = [UIColor whiteColor];
-//        v.textLabel.textAlignment = UITextAlignmentCenter;
-//
-//}
-
-
-
--(void)tableValuesMethod
-{
-   
-    DBAConnection *Db = [[DBAConnection alloc]init];
-    self.objContenArray =[[NSMutableArray alloc]init];
-    NSMutableArray * ComArray = [[NSMutableArray alloc]init];
-    NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-   // NSString *userCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-   // NSString *userRef = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    
-    NSMutableArray * TestAsseementArray =  [Db TestByAssessment:clientCode :self.assessmentCodeStr :self.ModuleCodeStr ];
-    
-    NSLog(@"%@", TestAsseementArray);
-    
-   // NSMutableArray * AssessmentEntry =  [Db AssessmentEntryByDate :self.assessmentCodeStr :userCode :self.ModuleCodeStr:self.selectDate:clientCode];
-    
-    
-//    NSMutableArray * playersArray2 =  [Db PlayersByCoach:clientCode :userRef];
-//    NSLog(@"%@", playersArray2);
-//
-    
-    NSMutableArray * AssessmentTypeTest;
-    NSMutableArray * AssessmentNameArray;
-//#if __has_feature(objc_generics)
-//    INTUMutableGroupedArray<INTUFruitCategory *, INTUFruit *> *groupedArray = [INTUMutableGroupedArray new];
-//#else
-//    INTUMutableGroupedArray *groupedArray = [INTUMutableGroupedArray new];
-//#endif
-    for (int i = 0; i <TestAsseementArray.count; i++)
+    NSLog(@"didSelectSubRow");
+    NSDictionary * objDic  = self.objContenArray[indexPath.section][indexPath.row][indexPath.subRow];
+    NSString * TestTypeCode =[objDic valueForKey:@"TestTypeCode"];
+    NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
+    isEdit = NO;
+    if(objArray.count>0)
     {
-        AssessmentNameArray =[[NSMutableArray alloc]init];
-        NSString *assessmentTestCode = [[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i];
-        NSString *assessmentTestName = [[TestAsseementArray valueForKey:@"TestName"] objectAtIndex:i];//test names
-        
-        [AssessmentNameArray addObject:assessmentTestName];
-        NSString * Screenid =  [Db ScreenId:self.assessmentCodeStr :assessmentTestCode ];
-        NSLog(@"%@", Screenid);
-        
-        NSString * Screencount =  [Db ScreenCount :self.assessmentCodeStr :assessmentTestCode];
-        
-        
-        int count = [Screencount intValue];
-        
-        
-        if(count>0)
-        {
-            AssessmentTypeTest = [Db AssementForm :Screenid :clientCode:self.ModuleCodeStr:self.assessmentCodeStr :assessmentTestCode ];
-        }
-        
-        for(int j=0;j<AssessmentTypeTest.count;j++)
-        {
-            [AssessmentNameArray addObject:[[AssessmentTypeTest valueForKey:@"TestTypeName"] objectAtIndex:j]];
-           // [self.objContenArray addObject:[[AssessmentTypeTest valueForKey:@"TestTypeName"] objectAtIndex:j]];
-        }
-        [ComArray addObject: AssessmentNameArray];
-    
+        isEdit= YES;
     }
-    [self.objContenArray addObject:ComArray];
-    [self.tableview reloadData];
+    
+    TestAssessmentEntryVC * objAssessmentVC =[[TestAssessmentEntryVC alloc]init];
+    objAssessmentVC = (TestAssessmentEntryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"TestAssessmentEntryVC"];
+    objAssessmentVC.selectAllValueDic =self.SelectDetailDic;
+    objAssessmentVC.SectionTestCodeStr = self.SelectTestCodeStr;
+    objAssessmentVC.SelectTestStr = [objDic valueForKey:@"TestTypeName"];
+    objAssessmentVC.ModuleStr = self.ModuleCodeStr;
+    objAssessmentVC.IsEdit    =isEdit;
+    objAssessmentVC.SelectTestTypecode = TestTypeCode;
+    objAssessmentVC.SelectScreenId =self.SelectScreenId;
+    [self.navigationController pushViewController:objAssessmentVC animated:YES];
     
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 @end
+

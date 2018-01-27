@@ -58,10 +58,25 @@
     self.playerTxt.delegate = self;
     [self datePickermethod];
     [self allviewSetborder];
-    [self moduleWebservice];
-//    objWebService=[[WebService alloc]init];
-//
-//    [self GetAssessmentTitleMethod];
+    NSMutableDictionary *coachdict = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [coachdict setValue:@"Coach" forKey:@"ModuleName"];
+    [coachdict setValue:@"MSC084" forKey:@"ModuleCode"];
+    
+    NSMutableDictionary *physiodict = [[NSMutableDictionary alloc]initWithCapacity:2];
+    
+    [physiodict setValue:@"Physio" forKey:@"ModuleName"];
+    [physiodict setValue:@"MSC085" forKey:@"ModuleCode"];
+    
+    NSMutableDictionary *Sandcdict = [[NSMutableDictionary alloc]initWithCapacity:2];
+    
+    [Sandcdict setValue:@"S and C" forKey:@"ModuleName"];
+    [Sandcdict setValue:@"MSC086" forKey:@"ModuleCode"];
+    
+    
+    ModuleArray = [[NSMutableArray alloc]initWithObjects:coachdict,physiodict,Sandcdict, nil];
+    
+    //[self moduleWebservice];
+    
     calendar.hidden = YES;
 }
 -(void)allviewSetborder
@@ -95,159 +110,76 @@
     NSString *userCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     
     
-    _AssessmentTitleArray = [[NSMutableArray alloc]init];
-    _AssessmentTitleArray =  [Db AssessmentTestType:clientCode :userCode :self.moduleStr ];
+    self.AssessmentTitleArray = [[NSMutableArray alloc]init];
+    self.AssessmentTitleArray =  [Db AssessmentTestType:clientCode :userCode :self.moduleStr ];
     
-//    NSLog(@"%@", myNewDouble);
-    
-    
-//
-//    assmntCodeArray = [[NSMutableArray alloc]init];
-//
-//    for(int i=0;i<myNewDouble.count;i++)
-//    {
-//        NSString * name = [[myNewDouble valueForKey:@"AssessmentName"] objectAtIndex:i];
-//        NSString * assesmentCode = [[myNewDouble valueForKey:@"AssessmentCode"] objectAtIndex:i];
-//        NSLog(@"%@", name);
-//        //NSDictionary * assessmentDic = [[NSDictionary alloc]init];
-//        [aslist addObject:name];
-//        [assmntCodeArray addObject:assesmentCode];
-//    }
-//
-//    //[self.New sendActionsForControlEvents:UIControlEventTouchUpInside];
-//    poplistArray = aslist;
 }
 
 
--(void)moduleWebservice
-{
-    [COMMON loadingIcon:self];
-    if([COMMON isInternetReachable])
-    {
-        NSString *URLString = @"http://192.168.1.84:8044/AGAPTService.svc/FETCHASSESSMENTENTRY"; //[URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FetchModuleKey]];
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
-        manager.requestSerializer = requestSerializer;
-
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if([AppCommon GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Createdby"];
-        if([AppCommon GetClientCode])   [dic    setObject:@"CLI0000001"     forKey:@"Clientcode"];
-        if([AppCommon GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Modifiedby"];
-        if([AppCommon GetuserReference])   [dic    setObject:@"AMR0000001"    forKey:@"Userreferencecode"];
-
-
-        NSLog(@"parameters : %@",dic);
-        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response ; %@",responseObject);
-
-            if(responseObject >0)
-            {
-                NSLog(@"%@",responseObject);
-                ModuleArray = [[NSMutableArray alloc]init];
-
-
-                //FetchModule
-                NSMutableArray * objmoduleArray= [responseObject valueForKey:@"lstAssessmentEntryModule"];
-                NSMutableDictionary * moduleDict = [[NSMutableDictionary alloc]init];
-                [moduleDict setObject:@"" forKey:@"Module"];
-                [moduleDict setObject:@"All Module" forKey:@"ModuleName"];
-                [ModuleArray addObject:moduleDict];
-
-                //FetchTeamArray
-//                NSMutableArray * objTeamArray= [responseObject valueForKey:@"lstAssessmentEntryTeam"];
-//                NSMutableDictionary * teamDict = [[NSMutableDictionary alloc]init];
-//                [teamDict setObject:@"" forKey:@"Teamcode"];
-//                [teamDict setObject:@"All Team" forKey:@"Teamname"];
-//                [TeamArray addObject:teamDict];
-
-                //FetchAssessment
-
-//                NSMutableArray * objAssessmentArray= [responseObject valueForKey:@"lstAssessmentEntryAssessment"];
-//                NSMutableDictionary * AssessmentDict = [[NSMutableDictionary alloc]init];
-//                [AssessmentDict setObject:@"" forKey:@"Assessment"];
-//                [AssessmentDict setObject:@"All Assessment" forKey:@"AssessmentName"];
-//                [AssessmentTitleArray addObject:AssessmentDict];
-
-                //FetchPlayer
-
-               // NSMutableArray * objPlayerArray= [responseObject valueForKey:@"lstAssessmentEntryPlayer"];
-
-                for(int i=0; objmoduleArray.count>i;i++)
-                {
-                    NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init]; //[objAlleventArray objectAtIndex:i];
-
-                    NSString * moduleCodeStr = [self checkNull:[[objmoduleArray valueForKey:@"Module"] objectAtIndex:i]];
-                    NSString * modulenameStr = [self checkNull:[[objmoduleArray valueForKey:@"ModuleName"] objectAtIndex:i]];
-                    [objDic setObject:moduleCodeStr forKey:@"Module"];
-                    [objDic setObject:modulenameStr forKey:@"ModuleName"];
-
-                    [ModuleArray addObject:objDic];
-                }
-
-//                for(int i=0; objTeamArray.count>i;i++)
+//-(void)moduleWebservice
+//{
+//    [COMMON loadingIcon:self];
+//    if([COMMON isInternetReachable])
+//    {
+//        NSString *URLString = @"http://192.168.1.84:8044/AGAPTService.svc/FETCHASSESSMENTENTRY"; //[URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FetchModuleKey]];
+//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+//        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//
+//        manager.requestSerializer = requestSerializer;
+//
+//        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+//        if([AppCommon GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Createdby"];
+//        if([AppCommon GetClientCode])   [dic    setObject:@"CLI0000001"     forKey:@"Clientcode"];
+//        if([AppCommon GetUsercode])   [dic    setObject:@"USM0000002"     forKey:@"Modifiedby"];
+//        if([AppCommon GetuserReference])   [dic    setObject:@"AMR0000001"    forKey:@"Userreferencecode"];
+//
+//
+//        NSLog(@"parameters : %@",dic);
+//        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            NSLog(@"response ; %@",responseObject);
+//
+//            if(responseObject >0)
+//            {
+//                NSLog(@"%@",responseObject);
+//                ModuleArray = [[NSMutableArray alloc]init];
+//
+//
+//                //FetchModule
+//                NSMutableArray * objmoduleArray= [responseObject valueForKey:@"lstAssessmentEntryModule"];
+//                NSMutableDictionary * moduleDict = [[NSMutableDictionary alloc]init];
+//                [moduleDict setObject:@"" forKey:@"Module"];
+//                [moduleDict setObject:@"All Module" forKey:@"ModuleName"];
+//                [ModuleArray addObject:moduleDict];
+//
+//
+//                for(int i=0; objmoduleArray.count>i;i++)
 //                {
-//                    NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
-//                    NSString * teamCodeStr = [self checkNull:[[objTeamArray valueForKey:@"Teamcode"] objectAtIndex:i]];
-//                    NSString * teamnameStr = [self checkNull:[[objTeamArray valueForKey:@"Teamname"] objectAtIndex:i]];
-//                    [objDic setObject:teamCodeStr forKey:@"Teamcode"];
-//                    [objDic setObject:teamnameStr forKey:@"Teamname"];
+//                    NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init]; //[objAlleventArray objectAtIndex:i];
 //
-//                    [TeamArray addObject:objDic];
-//                }
-
-//                for(int i=0; objAssessmentArray.count>i;i++)
-//                {
-//                    NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
-//
-//                    NSString * moduleCodeStr = [self checkNull:[[objAssessmentArray valueForKey:@"Module"] objectAtIndex:i]];
-//
-//                    NSString * modulenameStr = [self checkNull:[[objAssessmentArray valueForKey:@"ModuleName"] objectAtIndex:i]];
-//
-//                    NSString * teamCodeStr = [self checkNull:[[objAssessmentArray valueForKey:@"Assessment"] objectAtIndex:i]];
-//                    NSString * teamnameStr = [self checkNull:[[objAssessmentArray valueForKey:@"AssessmentName"] objectAtIndex:i]];
-//
+//                    NSString * moduleCodeStr = [self checkNull:[[objmoduleArray valueForKey:@"Module"] objectAtIndex:i]];
+//                    NSString * modulenameStr = [self checkNull:[[objmoduleArray valueForKey:@"ModuleName"] objectAtIndex:i]];
 //                    [objDic setObject:moduleCodeStr forKey:@"Module"];
 //                    [objDic setObject:modulenameStr forKey:@"ModuleName"];
-//                    [objDic setObject:teamCodeStr forKey:@"Assessment"];
-//                    [objDic setObject:teamnameStr forKey:@"AssessmentName"];
 //
-//                    [AssessmentTitleArray addObject:objDic];
+//                    [ModuleArray addObject:objDic];
 //                }
-
-//                for(int i=0; objPlayerArray.count>i;i++)
-//                {
-//                    NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
-//                    NSString * teamCodeStr = [self checkNull:[[objPlayerArray valueForKey:@"Player"] objectAtIndex:i]];
-//                    NSString * teamnameStr = [self checkNull:[[objPlayerArray valueForKey:@"PlayerName"] objectAtIndex:i]];
-//                    NSString * recoverystatus = [self checkNull:[[objPlayerArray valueForKey:@"RecoveryStatus"] objectAtIndex:i]];
-//                    NSString * playerphoto = [self checkNull:[[objPlayerArray valueForKey:@"playerPhoto"] objectAtIndex:i]];
-//                    NSString * colorcode   = [self checkNull:[[objPlayerArray valueForKey:@"StatusColor"] objectAtIndex:i]];
-//                    [objDic setObject:teamCodeStr forKey:@"Player"];
-//                    [objDic setObject:teamnameStr forKey:@"PlayerName"];
-//                    [objDic setObject:recoverystatus forKey:@"RecoveryStatus"];
-//                    [objDic setObject:playerphoto forKey:@"playerPhoto"];
-//                    [objDic setObject:colorcode forKey:@"StatusColor"];
+//            }
 //
-//                    [playerArray addObject:objDic];
-//                }
-            }
-
-            [COMMON RemoveLoadingIcon];
-            //[self SearchViewMethod];
-            [self setUserInteractionEnabled:YES];
-            isplayerlist=YES;
-            [self.playerTbl reloadData];
-
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"failed");
-            [COMMON webServiceFailureError];
-            [self setUserInteractionEnabled:YES];
-
-        }];
-    }
-}
+//            [COMMON RemoveLoadingIcon];
+//            //[self SearchViewMethod];
+//            [self setUserInteractionEnabled:YES];
+//            isplayerlist=YES;
+//            [self.playerTbl reloadData];
+//
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            NSLog(@"failed");
+//            [COMMON webServiceFailureError];
+//            [self setUserInteractionEnabled:YES];
+//
+//        }];
+//    }
+//}
 
 #pragma uibuttonAction
 -(IBAction)didClickModuleAction:(id)sender
@@ -257,7 +189,7 @@
     self.popviewyposition.constant = self.moduleView.frame.origin.y;
     self.popviewXposition.constant = self.moduleView.frame.origin.x;
     self.popviewWidth.constant = self.moduleView.frame.size.width;
-
+    
     if(isModule == NO)
     {
         commonArray = [[NSMutableArray alloc]init];
@@ -266,7 +198,7 @@
         isModule =YES;
         [self showAnimate];
         [self.popTblView reloadData];
-
+        
     } else {
         self.popTblView.hidden = YES;
         isModule = NO;
@@ -286,7 +218,7 @@
     self.popviewWidth.constant = self.titleView.frame.size.width;
     self.popviewXposition.constant = self.titleView.frame.origin.x;
     
-
+    
     if(isTittle == NO)
     {
         commonArray = [[NSMutableArray alloc]init];
@@ -295,7 +227,7 @@
         isTittle =YES;
         [self showAnimate];
         [self.popTblView reloadData];
-
+        
     } else {
         self.popTblView.hidden = YES;
         isTittle = NO;
@@ -314,7 +246,7 @@
     self.popviewyposition.constant = self.teamView.frame.origin.y;
     self.popviewXposition.constant = self.teamView.frame.origin.x;
     self.popviewWidth.constant =  self.teamView.frame.size.width;
-
+    
     if(isTeam == NO)
     {
         commonArray = [[NSMutableArray alloc]init];
@@ -323,7 +255,7 @@
         isTeam =YES;
         [self showAnimate];
         [self.popTblView reloadData];
-
+        
     } else {
         self.popTblView.hidden = YES;
         isTeam =NO;
@@ -353,15 +285,15 @@
     
     if(isDatePicker==NO)
     {
-     calendar.transform = CGAffineTransformMakeScale(1.3, 1.3);
-     calendar.alpha = 0;
-     [UIView animateWithDuration:.25 animations:^{
-        calendar.alpha = 1;
-        calendar.transform = CGAffineTransformMakeScale(1, 1);
-         isDatePicker=YES;
-        
-         calendar.hidden = NO;
-    }];
+        calendar.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        calendar.alpha = 0;
+        [UIView animateWithDuration:.25 animations:^{
+            calendar.alpha = 1;
+            calendar.transform = CGAffineTransformMakeScale(1, 1);
+            isDatePicker=YES;
+            
+            calendar.hidden = NO;
+        }];
     }
     else
     {
@@ -377,7 +309,7 @@
             }
         }];
     }
-     isTeam = NO;
+    isTeam = NO;
     isTittle = NO;
     isModule = NO;
     self.popTblView.hidden=YES;
@@ -388,12 +320,12 @@
     NSString * selectdate =[NSString stringWithFormat:@"%d-%02d-%02d",year,month,day];
     
     self.datelbl.text = selectdate;
-   
+    
     [UIView animateWithDuration:.25 animations:^{
         calendar.transform = CGAffineTransformMakeScale(1.3, 1.3);
-       
+        
         calendar.alpha = 0.0;;
-
+        
     } completion:^(BOOL finished) {
         if (finished) {
             // [self.popTblView removeFromSuperview];
@@ -473,7 +405,6 @@
     
     if(isplayerlist)
     {
-        // cell.textLabel.text = [self.ExerciseTitle objectAtIndex:indexPath.row];
         static NSString * AssessmentCellIdentifier = @"AssessmentcellIdentifier";
         
         // init the CRTableViewCell
@@ -487,18 +418,18 @@
         cell.playername_lbl.text = [[commonPlayerArray valueForKey:@"PLAYERNAME"] objectAtIndex:indexPath.row];
         //cell.title_lbl.text = [[playerArray valueForKey:@"RecoveryStatus"] objectAtIndex:indexPath.row];
         NSLog(@"RecoveryStatus:%@", cell.title_lbl.text);
-//        NSString * imgStr1 = ([[playerArray objectAtIndex:indexPath.row] valueForKey:@"playerPhoto"]==[NSNull null])?@"":[[playerArray objectAtIndex:indexPath.row] valueForKey:@"playerPhoto"];
-//        
-//        
-//        [self downloadImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",URL_FOR_AssessmentPlayer,imgStr1]] completionBlock:^(BOOL succeeded, UIImage *image) {
-//            if (succeeded) {
-//                // change the image in the cell
-//                cell.player_Img.image = image;
-//                
-//                // cache the image for use later (when scrolling up)
-//                cell.player_Img.image = image;
-//            }
-//        }];
+        //        NSString * imgStr1 = ([[playerArray objectAtIndex:indexPath.row] valueForKey:@"playerPhoto"]==[NSNull null])?@"":[[playerArray objectAtIndex:indexPath.row] valueForKey:@"playerPhoto"];
+        //
+        //
+        //        [self downloadImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",URL_FOR_AssessmentPlayer,imgStr1]] completionBlock:^(BOOL succeeded, UIImage *image) {
+        //            if (succeeded) {
+        //                // change the image in the cell
+        //                cell.player_Img.image = image;
+        //
+        //                // cache the image for use later (when scrolling up)
+        //                cell.player_Img.image = image;
+        //            }
+        //        }];
         
         return cell;
     }
@@ -512,13 +443,8 @@
             
             cell = [[PopViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            cell.textLabel.font = [UIFont fontWithName:@"ArialMT" size:12];
-//            cell.textLabel.textColor=[UIColor blackColor];
-//            cell.textLabel.textAlignment = NSTextAlignmentCenter;
-//            // [cell setBackgroundColor:[UIColor clearColor]];
         }
         
-        //cell.imageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:indexPath.row]];
         NSString * displayStr;
         if(isModule)
         {
@@ -545,13 +471,20 @@
 {
     if(isplayerlist)
     {
-        //player tbl selection
-        self.playerTxt.text = [[_searchResult valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
-        NSDictionary * objDic = [self.searchResult objectAtIndex:indexPath.row];
+        self.playerTxt.text = [[commonPlayerArray valueForKey:@"PLAYERNAME"] objectAtIndex:indexPath.row];
+        NSDictionary * objDic = [commonPlayerArray objectAtIndex:indexPath.row];
         [self.playerTxt resignFirstResponder];
         self.playerTbl.hidden = YES;
-        NSString * selectTitleStr =[NSString stringWithFormat:@"%@ - %@ %@",self.moduleLbl.text,self.titleLbl.text,self.teamLbl.text];
-        [self.AssessmentFilterDelegate SelectPlayerMovetoAnother:objDic :self.assessmentCode :selectTitleStr];
+        NSMutableDictionary * objSelectDic =[[NSMutableDictionary alloc]init];
+        [objSelectDic setValue:self.moduleLbl.text forKey:@"Module"];
+        [objSelectDic setValue:self.titleLbl.text forKey:@"AssessmentTitle"];
+        [objSelectDic setValue:self.assessmentCode forKey:@"AssessmentCode"];
+        [objSelectDic setValue:self.teamLbl.text forKey:@"Team"];
+        [objSelectDic setValue:self.playerTxt.text forKey:@"PlayerName"];
+        [objSelectDic setValue:[objDic valueForKey:@"ATHLETECODE"] forKey:@"PlayerCode"];
+        [objSelectDic setValue:self.datelbl.text forKey:@"SelectDate"];
+        
+        [self.AssessmentFilterDelegate SelectPlayerMovetoAnother:objDic: self.assessmentCode: objSelectDic];
     } else {
         self.popTblView.hidden = YES;
         isPoPlist = NO;
@@ -559,18 +492,10 @@
         if (isModule)
         {
             self.moduleLbl.text = [[commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
-            NSString * moduleCode =  [[commonArray valueForKey:@"Module"] objectAtIndex:indexPath.row];
-            //isModule =NO;
-//            FetchAssessTitleArray = [[NSMutableArray alloc]init];
-//            for(int i=0; i<_AssessmentTitleArray.count; i++)
-//            {
-//                NSDictionary * objDic = [_AssessmentTitleArray objectAtIndex:i];
-//                if([[objDic valueForKey:@"Module"] isEqualToString:moduleCode])
-//                {
-//                    [FetchAssessTitleArray addObject:objDic];
-//                }
-//            }
+            self.moduleStr = [[commonArray valueForKey:@"ModuleCode"] objectAtIndex:indexPath.row];
+            //NSString * moduleCode =  [[commonArray valueForKey:@"Module"] objectAtIndex:indexPath.row];
             
+            [self GetAssessmentTitleMethod];
             
         }
         else if (isTittle) {
@@ -593,9 +518,9 @@
             self.teamLbl.text = [[commonArray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
             NSString *userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
             NSString *clientcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-
+            
             DBAConnection *Db = [[DBAConnection alloc]init];
-
+            
             playerArray = [[NSMutableArray alloc]init];
             commonPlayerArray = [[NSMutableArray alloc]init];
             playerArray =  [Db AssessmentPlayerListDetail:userref:clientcode];
@@ -631,7 +556,7 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText
 {
-  
+    
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"PLAYERNAME CONTAINS[c] %@", searchText];
     _searchResult = [playerArray filteredArrayUsingPredicate:resultPredicate];
     

@@ -85,7 +85,7 @@
     //[COMMON AddMenuView:self.view];
     
     objWebService=[[WebService alloc]init];
-
+    
     poplistArray = [[NSMutableArray alloc]init];
     addedArray = [[NSMutableArray alloc]init];
     [self setview];
@@ -98,10 +98,10 @@
     [self.detailsTbl reloadData];
     [self.pop_view reloadData];
     
-   // self.detailsTbl.hidden=YES;
+    // self.detailsTbl.hidden=YES;
     self.colorlbl.hidden = YES;
     self.colorlbl_xposition.constant = self.Pending.frame.origin.x;
-     self.colorLblWidth.constant = self.New.frame.size.width;
+    self.colorLblWidth.constant = self.New.frame.size.width;
     
     self.AssesView.layer.borderWidth=1.0f;
     self.AssesView.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
@@ -153,29 +153,29 @@
     NSString *userCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     //[Db AssessmentTestType:clientCode:userCode:self.ModuleCode];
     aslist = [[NSMutableArray alloc]init];
-
+    
     aslist =  [Db AssessmentTestType:clientCode :userCode :self.ModuleCode ];
     
     
     
     
-//    NSLog(@"%@", myNewDouble);
-//    aslist = [[NSMutableArray alloc]init];
-//
-//    assmntCodeArray = [[NSMutableArray alloc]init];
-//
-//    for(int i=0;i<myNewDouble.count;i++)
-//    {
-//        NSString * name = [[myNewDouble valueForKey:@"AssessmentName"] objectAtIndex:i];
-//        NSString * assesmentCode = [[myNewDouble valueForKey:@"AssessmentCode"] objectAtIndex:i];
-//        NSLog(@"%@", name);
-//        //NSDictionary * assessmentDic = [[NSDictionary alloc]init];
-//        [aslist addObject:name];
-//        [assmntCodeArray addObject:assesmentCode];
-//    }
-//
-//    //[self.New sendActionsForControlEvents:UIControlEventTouchUpInside];
-//    poplistArray = aslist;
+    //    NSLog(@"%@", myNewDouble);
+    //    aslist = [[NSMutableArray alloc]init];
+    //
+    //    assmntCodeArray = [[NSMutableArray alloc]init];
+    //
+    //    for(int i=0;i<myNewDouble.count;i++)
+    //    {
+    //        NSString * name = [[myNewDouble valueForKey:@"AssessmentName"] objectAtIndex:i];
+    //        NSString * assesmentCode = [[myNewDouble valueForKey:@"AssessmentCode"] objectAtIndex:i];
+    //        NSLog(@"%@", name);
+    //        //NSDictionary * assessmentDic = [[NSDictionary alloc]init];
+    //        [aslist addObject:name];
+    //        [assmntCodeArray addObject:assesmentCode];
+    //    }
+    //
+    //    //[self.New sendActionsForControlEvents:UIControlEventTouchUpInside];
+    //    poplistArray = aslist;
 }
 
 -(IBAction)didselectAssesment:(id)sender
@@ -184,15 +184,15 @@
     {
         isAses=YES;
         isgrid=NO;
-    //self.popview_xposition.constant = self.AssesView.frame.origin.x;
-    //self.popview_yposition.constant = self.AssesView.frame.origin.y+20;
-    self.pop_view.hidden =NO;
-       
+        //self.popview_xposition.constant = self.AssesView.frame.origin.x;
+        //self.popview_yposition.constant = self.AssesView.frame.origin.y+20;
+        self.pop_view.hidden =NO;
+        
         self.tblWidth.constant = self.AssesView.frame.size.width;
         
         NSLog(@"%@", poplistArray);
         //poplistArray = aslist;
-  [self.pop_view reloadData];
+        [self.pop_view reloadData];
         
     }
     else
@@ -209,16 +209,16 @@
     SACalendar *calendar = [[SACalendar alloc]initWithFrame:CGRectMake(self.AssesView.frame.origin.x+20,self.calView.frame.origin.y+self.calView.frame.size.height+5,self.view.frame.size.width-50,self.view.frame.size.height-250) scrollDirection:ScrollDirectionVertical pagingEnabled:NO];
     
     calendar.delegate = self;
-//    NSString * currentDate =[NSString stringWithFormat:@"%d-%02d-%02d",year,month,day];
-//    self.callbl.text = currentDate;
-   
+    //    NSString * currentDate =[NSString stringWithFormat:@"%d-%02d-%02d",year,month,day];
+    //    self.callbl.text = currentDate;
+    
     [self.view addSubview:calendar];
     
 }
 -(void) SACalendar:(SACalendar*)calendar didSelectDate:(int)day month:(int)month year:(int)year
 {
     NSString * selectdate =[NSString stringWithFormat:@"%d-%02d-%02d",year,month,day];
-
+    
     self.callbl.text = selectdate;
     actualdate = selectdate;
     calendar.hidden = YES;
@@ -237,35 +237,35 @@
     
     
     [objWebService getAssesmentlist :AssementKey :cliendcode :module :userref success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"responseObject=%@",responseObject);
-            if(responseObject >0)
-            {
-                list = [[NSMutableArray alloc]init];
-                //aslist = [[NSMutableArray alloc]init];
-                
-                 list = [responseObject valueForKey:@"fetchAssessmentList"];
-                
-                aslist = ([[list valueForKey:@"assessmentName"] isEqual:[NSNull null]])?@"":[list valueForKey:@"assessmentName"];
-                
-                
-                
-               
-            }
+        NSLog(@"responseObject=%@",responseObject);
+        if(responseObject >0)
+        {
+            list = [[NSMutableArray alloc]init];
+            //aslist = [[NSMutableArray alloc]init];
+            
+            list = [responseObject valueForKey:@"fetchAssessmentList"];
+            
+            aslist = ([[list valueForKey:@"assessmentName"] isEqual:[NSNull null]])?@"":[list valueForKey:@"assessmentName"];
+            
+            
+            
+            
+        }
         isgrid=NO;
         [self.pop_view reloadData];
         
         
-        } failure:^(AFHTTPRequestOperation *operation, id error) {
-            NSLog(@"failed");
-            [COMMON webServiceFailureError];
-        }];
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError];
+    }];
     
-    }
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if(isgrid==YES)
     {
-    return [self.groupedArray countAllSections];
+        return [self.groupedArray countAllSections];
     }
     else
     {
@@ -282,9 +282,9 @@
     }
     else if(isAses==YES)
     {
-       return poplistArray.count;
+        return poplistArray.count;
     }
- return nil;
+    return nil;
     
 }
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -311,25 +311,25 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //cell.detailTextLabel.text = fruit.color;
         return cell;
-
-
+        
+        
     }
-   if(isAses==YES)
+    if(isAses==YES)
     {
-
+        
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
         if (cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:MyIdentifier];
+                                          reuseIdentifier:MyIdentifier];
         }
         
         
         cell.textLabel.text = poplistArray[indexPath.row] ;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+        
         return cell;
-     }
+    }
     return nil;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -358,8 +358,8 @@
         [self tableValuesMethod];
     }
     
-   
-
+    
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -387,8 +387,8 @@
 {
     if(isgrid==YES)
     {
-    INTUFruitCategory *fruitCategory = [self.groupedArray sectionAtIndex:section];
-    return fruitCategory.displayName;
+        INTUFruitCategory *fruitCategory = [self.groupedArray sectionAtIndex:section];
+        return fruitCategory.displayName;
     }
     return nil;
 }
@@ -396,10 +396,10 @@
 {
     if(isgrid==YES)
     {
-    UITableViewHeaderFooterView *v = (UITableViewHeaderFooterView *)view;
-    v.backgroundView.backgroundColor = [UIColor colorWithRed:(28/255.0f) green:(26/255.0f) blue:(68/255.0f) alpha:1.0f];
-    v.textLabel.textColor = [UIColor whiteColor];
-    v.textLabel.textAlignment = UITextAlignmentCenter;
+        UITableViewHeaderFooterView *v = (UITableViewHeaderFooterView *)view;
+        v.backgroundView.backgroundColor = [UIColor colorWithRed:(28/255.0f) green:(26/255.0f) blue:(68/255.0f) alpha:1.0f];
+        v.textLabel.textColor = [UIColor whiteColor];
+        v.textLabel.textAlignment = UITextAlignmentCenter;
     }
 }
 
@@ -413,7 +413,7 @@
     
     asblist = [[NSMutableArray alloc]init];
     asbblist = [[NSMutableArray alloc]init];
-
+    
     
     DBAConnection *Db = [[DBAConnection alloc]init];
     NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
@@ -466,8 +466,8 @@
             
             for(int j =0 ;j<AssessmentTypeTest.count;j++)
             {
-            int completed = 0;
-            int remaining = 0;
+                int completed = 0;
+                int remaining = 0;
                 
                 for(int k =0 ;k<playersArray2.count;k++)
                 {
@@ -484,9 +484,9 @@
                         NSMutableArray *EntryCheck6 = [playersArray2 valueForKey:@"PlayerCode"];
                         
                         if([[EntryCheck1 objectAtIndex:l] isEqualToString:[EntryCheck2 objectAtIndex:j]] && [[EntryCheck3 objectAtIndex:l] isEqualToString:[EntryCheck4 objectAtIndex:i]] && [[EntryCheck5 objectAtIndex:l] isEqualToString:[EntryCheck6 objectAtIndex:k]])
-                            {
-                                completed++;
-                            }
+                        {
+                            completed++;
+                        }
                     }
                 }
                 
@@ -514,14 +514,14 @@
             [groupedArray addObject:[INTUFruit fruitWithName:[[AssessmentTypeTest valueForKey:@"TestTypeName"] objectAtIndex:j] color:@""] toSection:smallRoundCategory];
             
         }
-
         
-
+        
+        
     }
     
     
-
-  self.groupedArray = groupedArray;
+    
+    self.groupedArray = groupedArray;
     
     [self.detailsTbl reloadData];
     
@@ -550,10 +550,10 @@
 
 - (IBAction)NewBtn:(id)sender
 {
-   
+    
     self.colorlbl_xposition.constant = self.New.frame.origin.x;
     self.colorLblWidth.constant = self.New.frame.size.width;
-     self.colorlbl.hidden = NO;
+    self.colorlbl.hidden = NO;
     self.detailsTbl.hidden=NO;
 }
 
@@ -583,13 +583,12 @@
     return frame;
 }
 
--(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode:(NSString*)selectTitleStr;
-{
+-(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode:(NSDictionary *) selectTitleStr{
     ExpandAssessmentVC * objExpandVC =[[ExpandAssessmentVC alloc]init];
     objExpandVC = (ExpandAssessmentVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ExpendAssessment"];
     objExpandVC.assessmentCodeStr = AssessmentCode;
     objExpandVC.ModuleCodeStr = self.ModuleCode;
-    objExpandVC.TitleStr = selectTitleStr;
+    objExpandVC.SelectDetailDic = selectTitleStr;
     [self.navigationController pushViewController:objExpandVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
@@ -600,3 +599,4 @@
 
 
 @end
+

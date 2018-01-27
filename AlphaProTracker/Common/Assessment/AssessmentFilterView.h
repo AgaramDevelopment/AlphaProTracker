@@ -10,7 +10,7 @@
 #import "SACalendar.h"
 
 @protocol AssessmentFilterDelegate
--(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode:(NSString*)selectTitleStr;
+-(void)SelectPlayerMovetoAnother:(NSDictionary *) playerDetail:(NSString *)AssessmentCode:(NSDictionary *) selectTitleStr;
 @end
 
 @interface AssessmentFilterView : UIView <SACalendarDelegate, UITextFieldDelegate>
@@ -45,3 +45,4 @@
 @property (nonatomic, strong) NSArray *searchResult;
 @property(assign) BOOL searchEnabled;
 @end
+

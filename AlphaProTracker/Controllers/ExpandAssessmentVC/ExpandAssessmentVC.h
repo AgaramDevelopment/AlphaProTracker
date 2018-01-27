@@ -11,8 +11,9 @@
 @interface ExpandAssessmentVC : UIViewController
 @property(nonatomic,strong)IBOutlet SKSTableView * tableview;
 
-@property (nonatomic,strong) NSString * TitleStr;
+@property (nonatomic,strong) NSDictionary * SelectDetailDic;
 @property (nonatomic,strong) NSString * assessmentCodeStr;
 @property (nonatomic,strong) NSString * ModuleCodeStr;
 @property (nonatomic,strong) NSString * selectDate;
 @end
+
