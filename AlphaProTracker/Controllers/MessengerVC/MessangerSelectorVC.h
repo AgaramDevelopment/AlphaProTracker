@@ -20,6 +20,7 @@
     BOOL isContacts;
     BOOL isGroups;
 }
+
 @property (strong, nonatomic)  NSString *referenceKey;
 @property (strong, nonatomic) IBOutlet UIButton *inboxBtn;
 @property (strong, nonatomic) IBOutlet UIButton *contactsBtn;

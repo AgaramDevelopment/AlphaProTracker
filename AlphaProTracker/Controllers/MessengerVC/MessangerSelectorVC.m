@@ -15,6 +15,7 @@
 
 @interface MessangerSelectorVC ()
 {
+    CustomNavigation * objCustomNavigation;
     GroupChat *objGroup;
 }
 
@@ -27,7 +28,8 @@
     // Do any additional setup after loading the view from its nib.
     [self customnavigationmethod];
     commonArray = [[NSMutableArray alloc] init];
-
+    self.messangerTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     [self fetchMessagesPageLoadWebservice];
     
 //    [self.inboxBtn setBackgroundColor:[UIColor whiteColor]];
@@ -35,7 +37,6 @@
 
 -(void)customnavigationmethod
 {
-    CustomNavigation * objCustomNavigation;
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     [self.naviView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"Messages";
@@ -191,7 +192,8 @@
 }
 
 - (IBAction)inboxAction:(id)sender {
-    
+
+    objCustomNavigation.home_btn.hidden = YES;
     
     [self resetButtonStatus];
     if (!isInbox) {
@@ -211,6 +213,15 @@
 }
 - (IBAction)contactsAction:(id)sender {
     
+    
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    
+    if([rolecode isEqualToString:@"ROL0000002"])
+    {
+        objCustomNavigation.home_btn.hidden = YES;
+    } else {
+        objCustomNavigation.home_btn.hidden = NO;
+    }
     [self resetButtonStatus];
     if (!isContacts) {
         isContacts = YES;
@@ -227,6 +238,15 @@
 }
 
 - (IBAction)groupsAction:(id)sender {
+    
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    
+    if([rolecode isEqualToString:@"ROL0000002"])
+    {
+        objCustomNavigation.home_btn.hidden = YES;
+    } else {
+        objCustomNavigation.home_btn.hidden = NO;
+    }
     
     [self resetButtonStatus];
     if (!isGroups) {
