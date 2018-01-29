@@ -133,7 +133,10 @@
             {
                 self.InjuryListArray =[[NSMutableArray alloc] init];
                 self.InjuryListArray =[responseObject valueForKey:@"InjuryWebs"];
+                if(self.InjuryListArray.count>0)
+                {
                 [self.injuryTbl reloadData];
+                }
             }
             
             [COMMON RemoveLoadingIcon];

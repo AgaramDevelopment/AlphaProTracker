@@ -161,7 +161,15 @@
     self.multiseliectPopView.hidden = NO;
     self.selectedMarks = [[NSMutableArray alloc]init];
     self.commonArray = [[NSMutableArray alloc]init];
-    self.commonArray = self.injurySideArray;
+    
+    NSString * select = @"Select All";
+    [self.commonArray addObject:select];
+    for(int i = 0; i<self.injurySideArray.count;i++)
+    {
+        [self.commonArray addObject:[self.injurySideArray objectAtIndex:i]];
+    }
+    
+    //self.commonArray = self.injurySideArray;
     [self.multiSelectTbl reloadData];
 }
 -(IBAction)SiteAction:(id)sender
@@ -174,7 +182,14 @@
     self.multiseliectPopView.hidden = NO;
     self.selectedMarks = [[NSMutableArray alloc]init];
     self.commonArray = [[NSMutableArray alloc]init];
-    self.commonArray = self.injurySiteArray;
+    NSString * select = @"Select All";
+    [self.commonArray addObject:select];
+   
+    for(int i = 0; i<self.injurySiteArray.count;i++)
+    {
+        [self.commonArray addObject:[self.injurySiteArray objectAtIndex:i]];
+    }
+     //self.commonArray = self.injurySiteArray;
     [self.multiSelectTbl reloadData];
 }
 -(IBAction)CauseAction:(id)sender
@@ -188,7 +203,19 @@
     self.multiseliectPopView.hidden = NO;
     self.commonArray = [[NSMutableArray alloc]init];
     self.selectedMarks = [[NSMutableArray alloc]init];
-    self.commonArray = self.injuryCauseArray;
+    
+    NSString * select = @"Select All";
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:select forKey:@"InjuryMetaDataTypeCode"];
+    [dic setValue:@"" forKey:@"InjuryMetaSubCode"];
+    [self.commonArray addObject:dic];
+    
+    for(int i = 0; i<self.injuryCauseArray.count;i++)
+    {
+        [self.commonArray addObject:[self.injuryCauseArray objectAtIndex:i]];
+    }
+
+   // self.commonArray = self.injuryCauseArray;
     [self.multiSelectTbl reloadData];
 }
 -(IBAction)locationAction:(id)sender
@@ -201,7 +228,19 @@
     self.multiseliectPopView.hidden = NO;
     self.commonArray = [[NSMutableArray alloc]init];
     self.selectedMarks = [[NSMutableArray alloc]init];
-    self.commonArray = self.injuryLocationArray;
+    
+    NSString * select = @"Select All";
+   
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:select forKey:@"InjuryMetaDataTypeCode"];
+    [dic setValue:@"" forKey:@"InjuryMetaSubCode"];
+    [self.commonArray addObject:dic];
+    for(int i = 0; i<self.injuryLocationArray.count;i++)
+    {
+        [self.commonArray addObject:[self.injuryLocationArray objectAtIndex:i]];
+    }
+    
+    //self.commonArray = self.injuryLocationArray;
     [self.multiSelectTbl reloadData];
 }
 -(IBAction)TypeAction:(id)sender
@@ -214,7 +253,19 @@
     self.multiseliectPopView.hidden = NO;
     self.commonArray = [[NSMutableArray alloc]init];
     self.selectedMarks = [[NSMutableArray alloc]init];
-    self.commonArray = self.injuryTypeArray;
+    
+    NSString * select = @"Select All";
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:select forKey:@"InjuryMetaDataTypeCode"];
+    [dic setValue:@"" forKey:@"InjuryMetaSubCode"];
+    [self.commonArray addObject:dic];
+    for(int i = 0; i<self.injuryTypeArray.count;i++)
+    {
+        [self.commonArray addObject:[self.injuryTypeArray objectAtIndex:i]];
+    }
+    
+   // self.commonArray = self.injuryTypeArray;
     [self.multiSelectTbl reloadData];
 }
 
@@ -364,11 +415,16 @@
             NSString *text = [self.commonArray objectAtIndex:indexPath.row];
             NSString *SideCode;
             
+       
             if(indexPath.row == 0)
+            {
+                SideCode = @"";
+            }
+            if(indexPath.row == 1)
             {
                 SideCode = @"MSC169";
             }
-            if(indexPath.row == 1)
+            if(indexPath.row == 2)
             {
                 SideCode = @"MSC170";
             }
@@ -381,19 +437,25 @@
             NSString *text = [self.commonArray objectAtIndex:indexPath.row];
             NSString *SiteCode;
             
+        
             if(indexPath.row == 0)
+            {
+                SiteCode = @"";
+            }
+            
+            if(indexPath.row == 1)
             {
                 SiteCode = @"MSC165";
             }
-            if(indexPath.row == 1)
+            if(indexPath.row == 2)
             {
                 SiteCode = @"MSC167";
             }
-            if(indexPath.row == 2)
+            if(indexPath.row == 3)
             {
                 SiteCode = @"MSC166";
             }
-            if(indexPath.row == 3)
+            if(indexPath.row == 4)
             {
                 SiteCode = @"MSC168";
             }
@@ -447,20 +509,37 @@
             
             NSString *SideCode;
             
-            if(indexPath.row == 0)
+            if(indexPath.row == 1)
             {
                 SideCode = @"MSC169";
             }
-            if(indexPath.row == 1)
+            if(indexPath.row == 2)
             {
                 SideCode = @"MSC170";
             }
             
-            text = [self.commonArray objectAtIndex:indexPath.row];
-            if ([self.selectedMarks containsObject:SideCode])// Is selected?
-            [self.selectedMarks removeObject:SideCode];
+            if (!indexPath.row  && !self.selectedMarks.count) {
+                [self.selectedMarks removeAllObjects];
+                [self.selectedMarks addObjectsFromArray:@[@"",@"MSC169",@"MSC170"]];
+            }
+            else if(!indexPath.row)
+            {
+                [self.selectedMarks removeAllObjects];
+            }
+            else if ([self.selectedMarks containsObject:SideCode])// Is selected?
+                [self.selectedMarks removeObject:SideCode];
             else
-            [self.selectedMarks addObject:SideCode];
+                [self.selectedMarks addObject:SideCode];
+
+            [self.multiSelectTbl reloadData];
+            
+            
+            
+//            text = [self.commonArray objectAtIndex:indexPath.row];
+//            if ([self.selectedMarks containsObject:SideCode])// Is selected?
+//            [self.selectedMarks removeObject:SideCode];
+//            else
+//            [self.selectedMarks addObject:SideCode];
             
             NSLog(@"%@",_selectedMarks);
             
@@ -472,32 +551,51 @@
         
         if(isSite==YES)
         {
-            
             NSString *SiteCode;
-            
+           
             if(indexPath.row == 0)
             {
-                SiteCode = @"MSC165";
+                SiteCode = @"";
             }
             if(indexPath.row == 1)
             {
-                SiteCode = @"MSC167";
+                SiteCode = @"MSC165";
             }
             if(indexPath.row == 2)
             {
-                SiteCode = @"MSC166";
+                SiteCode = @"MSC167";
             }
             if(indexPath.row == 3)
+            {
+                SiteCode = @"MSC166";
+            }
+            if(indexPath.row == 4)
             {
                 SiteCode = @"MSC168";
             }
             
-            text = [self.commonArray objectAtIndex:indexPath.row];
-            if ([self.selectedMarks containsObject:SiteCode])// Is selected?
-            [self.selectedMarks removeObject:SiteCode];
+            if (!indexPath.row  && !self.selectedMarks.count) {
+                [self.selectedMarks removeAllObjects];
+                [self.selectedMarks addObjectsFromArray:@[@"",@"MSC165",@"MSC167",@"MSC166",@"MSC168"]];
+            }
+            else if(!indexPath.row)
+            {
+                [self.selectedMarks removeAllObjects];
+            }
+            else if ([self.selectedMarks containsObject:SiteCode])// Is selected?
+                [self.selectedMarks removeObject:SiteCode];
             else
-            [self.selectedMarks addObject:SiteCode];
+                [self.selectedMarks addObject:SiteCode];
+
+            [self.multiSelectTbl reloadData];
+
             
+            
+//            text = [self.commonArray objectAtIndex:indexPath.row];
+//            if ([self.selectedMarks containsObject:SiteCode])// Is selected?
+//            [self.selectedMarks removeObject:SiteCode];
+//            else
+//            [self.selectedMarks addObject:SiteCode];
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
@@ -509,11 +607,36 @@
         {
             
             NSString *locationcode = [[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row];
-            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
-            if ([self.selectedMarks containsObject:locationcode])// Is selected?
-            [self.selectedMarks removeObject:locationcode];
+            
+            
+            if (!indexPath.row  && !self.selectedMarks.count) {
+                [self.selectedMarks removeAllObjects];
+                //[self.selectedMarks addObjectsFromArray:@[@"",@"MSC165",@"MSC167",@"MSC166",@"MSC168"]];
+                
+                NSMutableArray *arrayy=[[NSMutableArray alloc]init];
+                for(int i=0;i<self.commonArray.count;i++)
+                {
+                [arrayy addObject:[[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:i]];
+                }
+                [self.selectedMarks addObjectsFromArray:arrayy];
+            }
+            else if(!indexPath.row)
+            {
+                [self.selectedMarks removeAllObjects];
+            }
+            else if ([self.selectedMarks containsObject:locationcode])// Is selected?
+                [self.selectedMarks removeObject:locationcode];
             else
-            [self.selectedMarks addObject:locationcode];
+                [self.selectedMarks addObject:locationcode];
+            
+            [self.multiSelectTbl reloadData];
+            
+            
+//            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
+//            if ([self.selectedMarks containsObject:locationcode])// Is selected?
+//            [self.selectedMarks removeObject:locationcode];
+//            else
+//            [self.selectedMarks addObject:locationcode];
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
@@ -525,11 +648,39 @@
         {
             
             NSString *causecode = [[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row];
-            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
-            if ([self.selectedMarks containsObject:causecode])// Is selected?
-            [self.selectedMarks removeObject:causecode];
+            
+            
+            
+            if (!indexPath.row  && !self.selectedMarks.count) {
+                [self.selectedMarks removeAllObjects];
+                //[self.selectedMarks addObjectsFromArray:@[@"",@"MSC165",@"MSC167",@"MSC166",@"MSC168"]];
+//                [self.selectedMarks addObject:@""];
+//                [self.selectedMarks addObject:[[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row]];
+                
+                NSMutableArray *arrayy=[[NSMutableArray alloc]init];
+                for(int i=0;i<self.commonArray.count;i++)
+                {
+                    [arrayy addObject:[[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:i]];
+                }
+                [self.selectedMarks addObjectsFromArray:arrayy];
+            }
+            else if(!indexPath.row)
+            {
+                [self.selectedMarks removeAllObjects];
+            }
+            else if ([self.selectedMarks containsObject:causecode])// Is selected?
+                [self.selectedMarks removeObject:causecode];
             else
-            [self.selectedMarks addObject:causecode];
+                [self.selectedMarks addObject:causecode];
+            
+            [self.multiSelectTbl reloadData];
+            
+            
+//            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
+//            if ([self.selectedMarks containsObject:causecode])// Is selected?
+//            [self.selectedMarks removeObject:causecode];
+//            else
+//            [self.selectedMarks addObject:causecode];
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
@@ -540,11 +691,37 @@
         {
             
             NSString *typecode = [[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row];
-            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
-            if ([self.selectedMarks containsObject:typecode])// Is selected?
-            [self.selectedMarks removeObject:typecode];
+            
+            
+            
+            if (!indexPath.row  && !self.selectedMarks.count) {
+                [self.selectedMarks removeAllObjects];
+                //[self.selectedMarks addObjectsFromArray:@[@"",@"MSC165",@"MSC167",@"MSC166",@"MSC168"]];
+//                [self.selectedMarks addObject:@""];
+//                [self.selectedMarks addObject:[[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row]];
+                NSMutableArray *arrayy=[[NSMutableArray alloc]init];
+                for(int i=0;i<self.commonArray.count;i++)
+                {
+                    [arrayy addObject:[[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:i]];
+                }
+                [self.selectedMarks addObjectsFromArray:arrayy];
+            }
+            else if(!indexPath.row)
+            {
+                [self.selectedMarks removeAllObjects];
+            }
+            else if ([self.selectedMarks containsObject:typecode])// Is selected?
+                [self.selectedMarks removeObject:typecode];
             else
-            [self.selectedMarks addObject:typecode];
+                [self.selectedMarks addObject:typecode];
+            
+            [self.multiSelectTbl reloadData];
+            
+//            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
+//            if ([self.selectedMarks containsObject:typecode])// Is selected?
+//            [self.selectedMarks removeObject:typecode];
+//            else
+//            [self.selectedMarks addObject:typecode];
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
@@ -558,6 +735,12 @@
     }
 }
 
+- (IBAction)editButtonTapped:(id)sender {
+    
+        for (NSInteger r = 0; r < [self.multiSelectTbl numberOfRowsInSection:0]; r++) {
+            [self tableView:self.multiSelectTbl didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:r inSection:0]];
+        }
+    }
 
 
 -(void)tablevalueAddWebservice
@@ -574,7 +757,11 @@
         
         manager.requestSerializer = requestSerializer;
         
-        
+        [self.SideCodeArray removeObjectAtIndex:0];
+        [self.SiteCodeArray removeObjectAtIndex:0];
+        [self.CauseCodeArray removeObjectAtIndex:0];
+        [self.TypeCodeArray removeObjectAtIndex:0];
+        [self.LocCodeArray removeObjectAtIndex:0];
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(self.injuryName)   [dic    setObject:self.injuryName     forKey:@"InjuryName"];
