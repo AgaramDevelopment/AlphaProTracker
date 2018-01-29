@@ -1808,5 +1808,192 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         return assessment;
     }
 }
+-(NSMutableArray *) getSpecWithEnrty:(NSString*) version:(NSString*) assessmentCode:(NSString*) moduleCode:(NSString*) assessmentTestCode:(NSString *) clientCode: (NSString*) createdBy:(NSString*) player:(NSString*) assessmentDate:(NSString*) testTypeCode {
+    @synchronized ([Utitliy syncId])  {
+        int retVal;
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+        NSMutableArray *assessment = [[NSMutableArray alloc]init];
+        if(retVal ==0){
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT  SPEC.CLIENTCODE,SPEC.TESTCODE,SPEC.REGION,SPEC.TESTNAME,SPEC.SIDE,SPEC.RESULT,SPEC.RECORDSTATUS,SPEC.CREATEDBY,SPEC.CREATEDDATE,SPEC.MODIFIEDBY,SPEC.MODIFIEDDATE,        MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,AE.INFERENCE,MDRESULT.METASUBCODEDESCRIPTION AS RESULTNAME,                      AE.[LEFT],AE.[RIGHT],AE.[CENTRAL],AE.REMARKS,AE.VERSION      ,AE.ASSESSMENTENTRYCODE,AE.IGNORED    FROM TESTSPECIAL SPEC INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE=SPEC.SIDE                         INNER JOIN METADATA MDRESULT ON MDRESULT.METASUBCODE=SPEC.RESULT INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@'   AND ASREG.CREATEDBY = '%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION ='%@' AND ASREG.RECORDSTATUS='MSC001' INNER JOIN ASSESSMENTENTRY AE ON AE.ASSESSMENTTESTTYPECODE = ASREG.ASSESSMENTTESTTYPECODE AND        AE.ASSESSMENTTESTTYPECODE = '%@' AND AE.CLIENTCODE = ASREG.CLIENTCODE AND AE.MODULECODE = ASREG.MODULECODE AND SPEC.TESTCODE=AE.ASSESSMENTTESTTYPECODE AND AE.CREATEDBY = ASREG.CREATEDBY AND AE.ASSESSMENTTESTCODE = ASREG.ASSESSMENTTESTCODE AND ('%@' = '' OR AE.PLAYERCODE = '%@') AND ('%@' = '' OR  AE.ASSESSMENTENTRYDATE = date('%@')) AND AE.VERSION ='%@' WHERE SPEC.RECORDSTATUS='MSC001' AND SPEC.CLIENTCODE='%@' AND SPEC.TESTCODE IN (SELECT  ASSESSMENTTESTTYPECODE FROM    ASSESSMENTREGISTER ASREG WHERE  ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION = '%@'  AND ASREG.CREATEDBY = '%@' AND ASREG.RECORDSTATUS='MSC001')",clientCode,moduleCode,assessmentCode,createdBy,assessmentTestCode,version,testTypeCode,player,player,assessmentDate,assessmentDate,version,clientCode,clientCode,moduleCode,assessmentCode,assessmentTestCode,version,createdBy];
+            
+            NSLog(@"%@",query);
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSLog(@"Success");
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString * ClientCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,0)];
+                    NSString * TestCode   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                    NSString * SpecialRegion   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                    NSString * SpecialTestName   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                    NSString * SpecialSide   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,4)];
+                    NSString * SpecialResult   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                    NSString * RecordStatus   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                    NSString * CreatedBy   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                    NSString * CreatedDate   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                    NSString * ModifiedBy   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                    NSString * ModifiedDate   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                    NSString * SpecialSideName   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                    NSString * SpecialResultName   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                    NSString * SpecialResultLeft   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
+                    NSString * SpecialResultRight   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+                    NSString * SpecialResultCenter   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
+                    NSString * Remarks   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
+                    NSString * Version   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
+                    NSString * AssessmentEntryCode   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
+                    NSString * Ignored   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
+                    
+                    [dic setObject:ClientCode forKey:@"ClientCode"];
+                    [dic setObject:TestCode forKey:@"TestCode"];
+                    [dic setObject:SpecialRegion forKey:@"SpecialRegion"];
+                    [dic setObject:SpecialTestName forKey:@"SpecialTestName"];
+                    [dic setObject:SpecialSide forKey:@"SpecialSide"];
+                    [dic setObject:SpecialResult forKey:@"SpecialResult"];
+                    [dic setObject:RecordStatus forKey:@"RecordStatus"];
+                    [dic setObject:CreatedBy forKey:@"CreatedBy"];
+                    [dic setObject:CreatedDate forKey:@"CreatedDate"];
+                    [dic setObject:ModifiedBy forKey:@"ModifiedBy"];
+                    [dic setObject:ModifiedDate forKey:@"ModifiedDate"];
+                    [dic setObject:SpecialSideName forKey:@"SpecialSideName"];
+                    [dic setObject:SpecialResultName forKey:@"SpecialResultName"];
+                    [dic setObject:SpecialResultLeft forKey:@"SpecialResultLeft"];
+                    [dic setObject:SpecialResultRight forKey:@"SpecialResultRight"];
+                    [dic setObject:SpecialResultCenter forKey:@"SpecialResultCenter"];
+                    [dic setObject:Remarks forKey:@"Remarks"];
+                    [dic setObject:Version forKey:@"Version"];
+                    [dic setObject:AssessmentEntryCode forKey:@"AssessmentEntryCode"];
+                    [dic setObject:Ignored forKey:@"Ignored"];
+                    [assessment addObject:dic];
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        NSLog(@"%@", assessment);
+        
+        return assessment;
+    }
+}
+-(NSMutableArray *)getSpecWithoutEnrty: (NSString*) version:(NSString*) assessmentCode:(NSString*) moduleCode:(NSString*) assessmentTestCode:(NSString *) clientCode:(NSString *) testTypeCode {
+    
+    @synchronized ([Utitliy syncId])  {
+        int retVal;
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+        NSMutableArray *assessment = [[NSMutableArray alloc]init];
+        if(retVal ==0){
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT  SPEC.CLIENTCODE,SPEC.TESTCODE,SPEC.REGION,SPEC.TESTNAME,SPEC.SIDE,SPEC.RESULT,SPEC.RECORDSTATUS,SPEC.CREATEDBY,SPEC.CREATEDDATE,SPEC.MODIFIEDBY,SPEC.MODIFIEDDATE,MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,MDRESULT.METASUBCODEDESCRIPTION AS RESULTNAME,'' as LEFT,'' as RIGHT,'' as CENTRAL,'' as REMARKS,'' as INFERENCE,ASREG.VERSION FROM    TESTSPECIAL SPEC INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE=SPEC.CLIENTCODE AND ASREG.ASSESSMENTTESTTYPECODE=SPEC.TESTCODE AND VERSION ='%@' AND ASREG.RECORDSTATUS='MSC001' AND ASREG.ASSESSMENTCODE = '%@' AND ASREG.MODULECODE = '%@' INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE=SPEC.SIDE INNER JOIN METADATA MDRESULT ON MDRESULT.METASUBCODE=SPEC.RESULT WHERE SPEC.RECORDSTATUS='MSC001' AND SPEC.CLIENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND SPEC.TESTCODE = '%@'",version,assessmentCode,moduleCode,clientCode,assessmentTestCode,testTypeCode];
+            
+            NSLog(@"%@",query);
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSLog(@"Success");
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString * ClientCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,0)];
+                    NSString * TestCode   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                    NSString * SpecialRegion   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                    NSString * SpecialTestName   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                    NSString * SpecialSide   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,4)];
+                    NSString * SpecialResult   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                    NSString * RecordStatus   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                    NSString * CreatedBy   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                    NSString * CreatedDate   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                    NSString * ModifiedBy   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                    NSString * ModifiedDate   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                    NSString * SpecialSideName   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                    NSString * SpecialResultName   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                    
+                    
+                    [dic setObject:ClientCode forKey:@"ClientCode"];
+                    [dic setObject:TestCode forKey:@"TestCode"];
+                    [dic setObject:SpecialRegion forKey:@"SpecialRegion"];
+                    [dic setObject:SpecialTestName forKey:@"SpecialTestName"];
+                    [dic setObject:SpecialSide forKey:@"SpecialSide"];
+                    [dic setObject:SpecialResult forKey:@"SpecialResult"];
+                    [dic setObject:RecordStatus forKey:@"RecordStatus"];
+                    [dic setObject:CreatedBy forKey:@"CreatedBy"];
+                    [dic setObject:CreatedDate forKey:@"CreatedDate"];
+                    [dic setObject:ModifiedBy forKey:@"ModifiedBy"];
+                    [dic setObject:ModifiedDate forKey:@"ModifiedDate"];
+                    [dic setObject:SpecialSideName forKey:@"SpecialSideName"];
+                    [dic setObject:SpecialResultName forKey:@"SpecialResultName"];
+                    [dic setObject:@"" forKey:@"SpecialResultLeft"];
+                    [dic setObject:@"" forKey:@"SpecialResultRight"];
+                    [dic setObject:@"" forKey:@"SpecialResultCenter"];
+                    [dic setObject:@"" forKey:@"Remarks"];
+                    [dic setObject:@"" forKey:@"Inference"];
+                    [assessment addObject:dic];
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        NSLog(@"%@", assessment);
+        
+        return assessment;
+    }
+}
+
+-(NSMutableArray *)getTestcode:(NSString *)kpiStr
+{
+    @synchronized ([Utitliy syncId])  {
+        int retVal;
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+        NSMutableArray *assessment = [[NSMutableArray alloc]init];
+        if(retVal ==0){
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT  TESTCODE,DESCRIPTION,KPI FROM  TESTCOACHING  WHERE RECORDSTATUS='MSC001'"];
+            
+            NSLog(@"%@",query);
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSLog(@"Success");
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString *  TestCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,0)];
+                    NSString *  Description=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                    NSString *  kpi=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,2)];
+                    
+                    [dic setObject:TestCode forKey:@"TestCode"];
+                    [dic setObject:Description forKey:@"Description"];
+                    [dic setObject:kpi forKey:@"kpi"];
+                    
+                    [assessment addObject:dic];
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        NSLog(@"%@", assessment);
+        
+        return assessment;
+    }
+}
 
 @end

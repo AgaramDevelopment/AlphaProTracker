@@ -19,6 +19,7 @@
 @property (nonatomic,assign) BOOL IsEdit;
 @property (nonatomic,strong) NSString * ModuleStr;
 
+@property (weak, nonatomic) IBOutlet UITextField *valueTxt;
 
 @property (nonatomic,strong) IBOutlet UILabel * AssessmentLbl;
 @property (nonatomic,strong) IBOutlet UILabel * SectionLbl;
@@ -33,8 +34,8 @@
 @property (nonatomic,strong) IBOutlet UIView *centrl1view;
 @property (nonatomic,strong) IBOutlet UIView *centrl2view;
 @property (nonatomic,strong) IBOutlet UIView *descview;
-@property (nonatomic,strong) IBOutlet UIView *interfaceview;
-@property (nonatomic,strong) IBOutlet UIView *valueview;
+//@property (nonatomic,strong) IBOutlet UIView *interfaceview;
+//@property (nonatomic,strong) IBOutlet UIView *valueview;
 @property (nonatomic,strong) IBOutlet UIView *remarksview;
 @property (weak, nonatomic) IBOutlet UIScrollView *CommScroll;
 
@@ -59,7 +60,8 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * interfaceCombYposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * ValueViewYposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * RemarkViewYposition;
-
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewwidth;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewYposition;
 
 
 @property (nonatomic,strong) IBOutlet UITextField * remark_Txt;
@@ -67,8 +69,9 @@
 @property (nonatomic,strong) IBOutlet UITextField * left_Txt;
 @property (nonatomic,strong) IBOutlet UITextField * centeral_Txt;
 @property (nonatomic,strong) IBOutlet UITextField * interface_Txt;
-@property (nonatomic,strong) IBOutlet UILabel      * value_lbl;
 @property (nonatomic,strong) IBOutlet UILabel    * description_lbl;
+@property (nonatomic,strong) IBOutlet UILabel * right_lbl;
+@property (nonatomic,strong) IBOutlet UILabel * left_lbl;
 
 @property (nonatomic,strong) IBOutlet UITableView * popTbl;
 

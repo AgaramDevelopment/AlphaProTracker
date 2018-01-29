@@ -28,16 +28,26 @@
 {
     NSString *clientCode;
     NSString * usercode;
+    BOOL isLeft;
+    BOOL isRight;
+    BOOL isDescription;
+    BOOL isCentral;
+    BOOL isValue;
+    BOOL isInterface;
 }
 @property (nonatomic,strong) NSMutableArray * ObjSelectTestArray;
 @property (nonatomic,strong) DBAConnection * objDBConnection;
 @property (nonatomic,strong) NSString *version;
 @property (nonatomic,strong) NSString * ingnoreStatus;
 
+@property (nonatomic,strong) NSMutableArray * CommonCombArray;
+
 @property (nonatomic,strong) NSMutableArray * AssessmentTypeMMT;
 @property (nonatomic,strong) NSMutableArray * AssessmentTypeGaint;
 @property (nonatomic,strong) NSMutableArray * assessmentTestTypePosture;
 @property (nonatomic,strong) NSMutableArray * assessmentTestTypeSpecial;
+@property (nonatomic,strong) NSMutableArray * assessmentTestTypeCoach;
+
 
 @property (nonatomic,strong) IBOutlet UIButton * IngoreBtn;
 @property (nonatomic,strong) IBOutlet UIButton * saveBtn;
@@ -87,14 +97,14 @@
     self.descview.layer.borderWidth=0.5f;
     self.descview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
-    self.valueview.layer.borderWidth=0.5f;
-    self.valueview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
-    
+    //    self.valueview.layer.borderWidth=0.5f;
+    //    self.valueview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
+    //
     self.remarksview.layer.borderWidth=0.5f;
     self.remarksview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
-    self.interfaceview.layer.borderWidth=0.5f;
-    self.interfaceview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
+    //    self.interfaceview.layer.borderWidth=0.5f;
+    //    self.interfaceview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
     [self customnavigationmethod];
     
@@ -132,8 +142,8 @@
     self.centralcombView.hidden =YES;
     self.descriptionCombView.hidden =YES;
     self.centralview.hidden =YES;
-    self.interfaceview.hidden =YES;
-    self.valueview.hidden =YES;
+    //self.interfaceview.hidden =YES;
+    // self.valueview.hidden =YES;
     self.interfacecombView.hidden = YES;
     self.valueCombView.hidden = YES;
 }
@@ -162,13 +172,13 @@
         {
             [self.saveBtn setTitle:@"Update" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray = [self.objDBConnection getSCWithEnrty:self.version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr :self.SelectTestStr :clientCode :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray = [self.objDBConnection getSpecWithEnrty:self.version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr :self.SectionTestCodeStr :clientCode :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode]; //[self.objDBConnection getSCWithEnrty:self.version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr :self.SectionTestCodeStr :clientCode :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
         }
         else
         {
             [self.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray = [self.objDBConnection getSCWithoutEnrty:self.version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr :self.SelectTestStr :clientCode :self.SelectTestTypecode];
+            self.ObjSelectTestArray = [self.objDBConnection getSpecWithoutEnrty:self.version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr :self.SectionTestCodeStr :clientCode :self.SelectTestTypecode];  //[self.objDBConnection getSCWithoutEnrty:self.version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr :self.SectionTestCodeStr :clientCode :self.SelectTestTypecode];
         }
         
     }
@@ -180,13 +190,13 @@
         {
             [self.saveBtn setTitle:@"Update" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray = [self.objDBConnection getMMTWithEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray = [self.objDBConnection getMMTWithEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
         }
         else
         {
             [self.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray = [self.objDBConnection getMMTWithoutEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray = [self.objDBConnection getMMTWithoutEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SelectTestTypecode];
         }
     }
     else if ([SCREEN_CODE_GAINT  isEqual: self.SelectScreenId])
@@ -197,13 +207,13 @@
         {
             [self.saveBtn setTitle:@"Update" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray =[self.objDBConnection getGaintWithEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"SelectDate"] :[self.selectAllValueDic valueForKey:@"PlayerCode"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray =[self.objDBConnection getGaintWithEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"SelectDate"] :[self.selectAllValueDic valueForKey:@"PlayerCode"] :self.SelectTestTypecode];
         }
         else
         {
             [self.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray =[self.objDBConnection getGaintWithoutEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray =[self.objDBConnection getGaintWithoutEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SelectTestTypecode];
         }
     }
     else if ([SCREEN_CODE_S_C  isEqual: self.SelectScreenId])
@@ -212,7 +222,7 @@
         {
             [self.saveBtn setTitle:@"Update" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray = [self.objDBConnection getSCWithEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"SelectDate"] :[self.selectAllValueDic valueForKey:@"PlayerCode"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray = [self.objDBConnection getSCWithEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"SelectDate"] :[self.selectAllValueDic valueForKey:@"PlayerCode"] :self.SelectTestTypecode];
         }
         else
         {
@@ -230,22 +240,24 @@
         {
             [self.saveBtn setTitle:@"Update" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray =[self.objDBConnection getPostureWithEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray =[self.objDBConnection getPostureWithEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
         }
         else
         {
             [self.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray = [self.objDBConnection getPostureWithoutEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray = [self.objDBConnection getPostureWithoutEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SelectTestTypecode];
         }
     }
     else if ([SCREEN_CODE_COACHING  isEqual: self.SelectScreenId])
     {
+        self.assessmentTestTypeCoach =[[NSMutableArray alloc]init];
         if(IsEdit == YES)
         {
             [self.saveBtn setTitle:@"Update" forState:UIControlStateNormal];
             
-            self.ObjSelectTestArray =[self.objDBConnection getTestCoachWithEnrty:self.version :self.ModuleStr :self.SelectTestStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"SelectDate"] :[self.selectAllValueDic valueForKey:@"PlayerCode"] :self.SelectTestTypecode];
+            self.ObjSelectTestArray =[self.objDBConnection getTestCoachWithEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"]:self.SelectTestTypecode];
+            
         }
         else
         {
@@ -253,6 +265,8 @@
             
             self.ObjSelectTestArray =[self.objDBConnection getTestCoachWithoutEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SelectTestTypecode];
         }
+        self.assessmentTestTypeCoach = [self.objDBConnection getTestcode:[[self.ObjSelectTestArray valueForKey:@"Kpi"] objectAtIndex:0]];
+        
     }
     [self DesignTextMethod];
 }
@@ -296,42 +310,58 @@
     else if([SCREEN_CODE_MMT isEqualToString:self.SelectScreenId])
     {
         NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
-        if([[objDic valueForKey:@"romSideName"] isEqualToString:@"RIGHT & LEFT"])
+        if([[objDic valueForKey:@"MmtSideName"] isEqualToString:@"RIGHT & LEFT"])
         {
             self.rightCombview.hidden = NO;
             self.leftCombView.hidden = NO;
-            [self.popTbl reloadData];
+            self.popTbl.hidden = YES;
+            self.popviewwidth.constant = self.view.frame.size.width/2;
+            self.rightCombViewYposition.constant = 10;
+            self.leftCombViewYposition.constant  = self.rightCombViewYposition.constant-30;
+            self.RemarkViewYposition.constant = self.leftCombViewYposition.constant-220;
+            
+            self.CommonCombArray =[[NSMutableArray alloc]init];
+            self.CommonCombArray = self.AssessmentTypeMMT;
             if(self.ObjSelectTestArray.count > 0)
             {
                 for(int i=0; i< _AssessmentTypeMMT.count; i++)
                 {
-                    if([[_AssessmentTypeMMT valueForKey:@"SpectialResultCode"] isEqualToString:[objDic valueForKey:@"MMTRight"]])
+                    if([[[_AssessmentTypeMMT valueForKey:@"RESULTNAME"]objectAtIndex:i] isEqualToString:[objDic valueForKey:@"MmtRight"]])
                     {
                         //setvalue
+                        self.right_lbl.text = [[self.AssessmentTypeMMT valueForKey:@"RESULTNAME"] objectAtIndex:i];
+                        
                         break;
                     }
                 }
                 for(int i=0; i<_AssessmentTypeMMT.count; i++)
                 {
-                    if([[_AssessmentTypeMMT valueForKey:@"SpectialResultCode"] isEqualToString:[objDic valueForKey:@"MMTLeft"]])
+                    if([[[_AssessmentTypeMMT valueForKey:@"RESULTNAME"]objectAtIndex:i] isEqualToString:[objDic valueForKey:@"MmtLeft"]])
                     {
                         //setvalue
+                        self.left_lbl.text = [[self.AssessmentTypeMMT valueForKey:@"RESULTNAME"] objectAtIndex:i];
+                        
                         break;
                     }
                 }
             }
         }
-        else if([[objDic valueForKey:@"romSideName"] isEqualToString:@"CENTRAL"])
+        else if([[objDic valueForKey:@"MmtSideName"] isEqualToString:@"CENTRAL"])
         {
             self.centralcombView.hidden = NO;
-            [self.popTbl reloadData];
+            self.CommonCombArray =[[NSMutableArray alloc]init];
+            
+            
             if(self.ObjSelectTestArray.count>0)
             {
                 for(int i=0; i<_AssessmentTypeMMT.count; i++)
                 {
-                    if([[_AssessmentTypeMMT valueForKey:@"SpectialResultCode"] isEqualToString:[objDic valueForKey:@"MMTCentral"]])
+                    if([[_AssessmentTypeMMT valueForKey:@"RESULTNAME"] isEqualToString:[objDic valueForKey:@"MmtCenter"]])
                     {
                         //setvalue
+                        self.centeral_Txt.text = [[self.AssessmentTypeMMT valueForKey:@"RESULTNAME"] objectAtIndex:i];
+                        
+                        
                         break;
                     }
                 }
@@ -348,6 +378,7 @@
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
             self.ingnoreStatus =@"false";
         }
+        
     }
     else if ([SCREEN_CODE_S_C isEqualToString:self.SelectScreenId])
     {
@@ -379,30 +410,38 @@
     else if ([SCREEN_CODE_GAINT isEqualToString:self.SelectScreenId])
     {
         NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
-        self.remark_Txt.text =[objDic valueForKey:@"Remark"];
-        self.value_lbl.text =[objDic valueForKey:@"Value"];
-        if([[objDic valueForKey:@"romSideName"] isEqualToString:@"RIGHT & LEFT"])
+        
+        self.popviewwidth.constant = self.view.frame.size.width/2;
+        self.popTbl.hidden = YES;
+        self.rightCombViewYposition.constant = 10;
+        self.leftCombViewYposition.constant  = self.rightCombViewYposition.constant-45;
+        self.ValueViewYposition.constant     = self.leftCombViewYposition.constant-180;
+        self.RemarkViewYposition.constant    = self.ValueViewYposition.constant+220;
+        
+        self.remark_Txt.text =[objDic valueForKey:@"ResultRemarks"];
+        self.valueTxt.text =[objDic valueForKey:@"ResultValues"];
+        if([[objDic valueForKey:@"SideName"] isEqualToString:@"RIGHT & LEFT"])
         {
             self.rightCombview.hidden = NO;
             self.leftCombView.hidden = NO;
-            [self.popTbl reloadData];
+            self.CommonCombArray = [[NSMutableArray alloc]init];
+            self.CommonCombArray = self.AssessmentTypeGaint;
+            
             if(self.ObjSelectTestArray.count>0)
             {
                 for (int i = 0; i < self.AssessmentTypeGaint.count; i++) {
                     
-                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultCode"] objectAtIndex:i]isEqualToString:[objDic valueForKey:@"ResultRight"]]) {
-                        
-                        //spnRight.setSelection(i);
+                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultName"]objectAtIndex:i]isEqualToString:[objDic valueForKey:@"ResultRight"]]) {
+                        self.right_lbl.text = [[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:i];
                         break;
                     }
                 }
                 
                 for (int j = 0; j < self.AssessmentTypeGaint.count; j++) {
                     
-                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultCode"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"ResultLeft"]]) {
+                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"ResultLeft"]]) {
                         
-                        
-                        //spnLeft.setSelection(j);
+                        self.left_lbl.text = [[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:j];
                         break;
                     }
                 }
@@ -412,13 +451,19 @@
         {
             //relSpnCentral.setVisibility(View.VISIBLE);
             //spnCentral.setAdapter(new AssessmentResultAdapter(getActivity(), assessmentTestTypeGait));
+            self.CommonCombArray =[[NSMutableArray alloc]init];
+            self.CommonCombArray = self.AssessmentTypeGaint;
             if (self.ObjSelectTestArray.count>0) {
                 
                 for (int i = 0; i < self.AssessmentTypeGaint.count; i++) {
                     
-                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultCode"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultCentral"]]) {
+                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultCentral"]]) {
                         
                         //spnCentral.setSelection(i);
+                        //[self.CommonCombArray addObject:[self.AssessmentTypeGaint objectAtIndex:i]];
+                        self.centeral_Txt.text = [[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:i];
+                        
+                        
                         break;
                     }
                 }
@@ -439,23 +484,28 @@
     else if([SCREEN_CODE_POSTURE isEqualToString:self.SelectScreenId])
     {
         NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
-        self.remark_Txt.text =[objDic valueForKey:@"Remark"];
-        self.value_lbl.text =[objDic valueForKey:@"Value"];
+        self.popviewwidth.constant = self.view.frame.size.width/2;
+        self.popTbl.hidden = YES;
         
-        if ([[objDic valueForKey:@"romSideName"] isEqualToString:@"RIGHT & LEFT"]) {
+        self.rightCombViewYposition.constant = 10;
+        self.leftCombViewYposition.constant  = self.rightCombViewYposition.constant-45;
+        self.ValueViewYposition.constant     = self.leftCombViewYposition.constant-180;
+        self.RemarkViewYposition.constant    = self.ValueViewYposition.constant+220;
+        self.remark_Txt.text =[objDic valueForKey:@"Remarks"];
+        self.valueTxt.text =[objDic valueForKey:@"Values"];
+        
+        
+        if ([[objDic valueForKey:@"SideName"] isEqualToString:@"RIGHT & LEFT"]) {
             self.rightCombview.hidden = NO;
             self.leftCombView.hidden = NO;
-            
-            //spnRight.setAdapter(new AssessmentResultAdapter(getActivity(), assessmentTestTypePosture));
-            //spnLeft.setAdapter(new AssessmentResultAdapter(getActivity(), assessmentTestTypePosture));
-            
+            self.CommonCombArray = [[NSMutableArray alloc]init];
+            self.CommonCombArray = self.assessmentTestTypePosture;
             if (self.ObjSelectTestArray.count >0) {
                 
                 for (int i = 0; i < self.assessmentTestTypePosture.count; i++) {
                     
-                    if ([[[self.assessmentTestTypePosture valueForKey:@"ResultCode"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultRight"]]) {
-                        
-                        // spnRight.setSelection(i);
+                    if ([[[self.assessmentTestTypePosture valueForKey:@"ResultName"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultRight"]]) {
+                        self.right_lbl.text = [[self.assessmentTestTypePosture valueForKey:@"ResultName"] objectAtIndex:i];
                         
                         break;
                     }
@@ -465,8 +515,9 @@
                 
                 for (int j = 0; j < self.assessmentTestTypePosture.count; j++) {
                     
-                    if ([[[self.assessmentTestTypePosture valueForKey:@"ResultCode"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"ResultLeft"]]) {
+                    if ([[[self.assessmentTestTypePosture valueForKey:@"ResultName"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"ResultLeft"]]) {
                         // spnLeft.setSelection(j);
+                        self.left_lbl.text = [[self.assessmentTestTypePosture valueForKey:@"ResultName"] objectAtIndex:j];
                         
                         break;
                     }
@@ -476,16 +527,18 @@
                 
             }
             
-        } else if ([[objDic valueForKey:@"romSideName"] isEqualToString:@"CENTRAL"]) {
+        } else if ([[objDic valueForKey:@"SideName"] isEqualToString:@"CENTRAL"]) {
             self.centralcombView.hidden = NO;
-            
-            //spnCentral.setAdapter(new AssessmentResultAdapter(getActivity(), assessmentTestTypePosture));
+            self.CommonCombArray =[[NSMutableArray alloc]init];
+            self.CommonCombArray = self.assessmentTestTypePosture;
             if (self.ObjSelectTestArray.count>0) {
                 
                 for (int i = 0; i < self.assessmentTestTypePosture.count; i++) {
                     
-                    if ([[[self.assessmentTestTypePosture valueForKey:@"ResultCode"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultCenter"]]) {
-                        //spnCentral.setSelection(i);
+                    if ([[[self.assessmentTestTypePosture valueForKey:@"ResultName"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultCenter"]]) {
+                        
+                        self.centeral_Txt.text = [[self.assessmentTestTypePosture valueForKey:@"ResultName"] objectAtIndex:i];
+                        
                         break;
                     }
                     
@@ -495,7 +548,7 @@
             
         }
         
-        self.valueview.hidden = NO;
+        self.valueCombView.hidden = NO;
         
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
@@ -511,22 +564,26 @@
     else if ([SCREEN_CODE_SPECIAL isEqualToString:self.SelectScreenId])
     {
         NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
-        
-        if ([[objDic valueForKey:@"romSideName"] isEqualToString:@"RIGHT & LEFT"]) {
+        self.popTbl.hidden = YES;
+        self.popviewwidth.constant = self.view.frame.size.width/2;
+        self.rightCombViewYposition.constant = 10;
+        self.leftCombViewYposition.constant  = self.rightCombViewYposition.constant-30;
+        self.RemarkViewYposition.constant = self.leftCombViewYposition.constant-220;
+        self.right_Txt.text = [objDic valueForKey:@"Remarks"];
+        if ([[objDic valueForKey:@"SpecialSideName"] isEqualToString:@"RIGHT & LEFT"]) {
             self.rightCombview .hidden = NO;
             self.leftCombView.hidden  = NO;
             
-            // spnRight.setAdapter(new AssessmentResultAdapter(getActivity(), assessmentTestTypeSpecial));
-            // spnLeft.setAdapter(new AssessmentResultAdapter(getActivity(), assessmentTestTypeSpecial));
+            
+            self.CommonCombArray =[[NSMutableArray alloc]init];
+            self.CommonCombArray = self.assessmentTestTypeSpecial;
             
             if (self.ObjSelectTestArray.count>0 ) {
                 
                 for (int i = 0; i < self.assessmentTestTypeSpecial.count; i++) {
                     
-                    if ([[[self.assessmentTestTypeSpecial valueForKey:@"ResultCode"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultRight"]]) {
-                        
-                        //spnRight.setSelection(i);
-                        
+                    if ([[[self.assessmentTestTypeSpecial valueForKey:@"ResultName"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"SpecialResultRight"]]) {
+                        self.right_lbl.text = [[self.assessmentTestTypeSpecial valueForKey:@"ResultName"] objectAtIndex:i];
                         break;
                     }
                     
@@ -535,28 +592,33 @@
                 
                 for (int j = 0; j <self.assessmentTestTypeSpecial.count; j++) {
                     
-                    if ([[[self.assessmentTestTypeSpecial valueForKey:@"ResultCode"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"ResultLeft"]]) {
+                    if ([[[self.assessmentTestTypeSpecial valueForKey:@"ResultName"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"SpecialResultLeft"]]) {
                         
                         // spnLeft.setSelection(j);
+                        self.left_lbl.text = [[self.assessmentTestTypeSpecial valueForKey:@"ResultName"] objectAtIndex:j];
+                        
                         
                         break;
                     }
                 }
             }
             
-        } else if ([[objDic valueForKey:@"romSideName"] isEqualToString:@"CENTRAL"]) {
+        } else if ([[objDic valueForKey:@"SpecialSideName"] isEqualToString:@"CENTRAL"]) {
             
             self.centralcombView.hidden = NO;
             //relSpnCentral.setVisibility(View.VISIBLE);
+            self.CommonCombArray =[[NSMutableArray alloc]init];
+            self.CommonCombArray = self.assessmentTestTypeSpecial;
             //  spnCentral.setAdapter(new AssessmentResultAdapter(getActivity(), assessmentTestTypeSpecial));
             
             if (self.ObjSelectTestArray.count>0) {
                 
                 for (int i = 0; i < self.assessmentTestTypeSpecial.count; i++) {
                     
-                    if ([[self.assessmentTestTypeSpecial valueForKey:@"ResultCenter"] objectAtIndex:i]) {
+                    if ([[[self.assessmentTestTypeSpecial valueForKey:@"ResultName"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"SpecialResultCenter"]]) {
                         
                         //spnCentral.setSelection(i);
+                        self.centeral_Txt.text = [[self.assessmentTestTypeSpecial valueForKey:@"ResultName"] objectAtIndex:i];
                         break;
                     }
                     
@@ -584,18 +646,20 @@
     {
         NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
         
+        self.CommonCombArray =[[NSMutableArray alloc]init];
+        self.CommonCombArray = self.assessmentTestTypeCoach;
         self.descriptionCombView.hidden = NO;
+        self.descriptionCombViewYposition.constant =-200;
+        self.RemarkViewYposition.constant = self.descriptionCombViewYposition.constant+50;
+        self.popTbl.hidden =YES;
         self.remark_Txt.text = [objDic valueForKey:@"Remark"];
-        //relSpnDsc.setVisibility(View.VISIBLE);
-        // editRemarks.setText(selectTest.getRemarks());
-        //spnDsc.setAdapter(new CoachDescriptionAdapter(getActivity(), selectTest.getCoachDescriptionList()));
         
         if (self.ObjSelectTestArray.count>0) {
             
             for (int j = 0; j < self.ObjSelectTestArray.count; j++) {
                 
-                if ([[[objDic valueForKey:@"TestCode"] objectAtIndex:j] isEqualToString:self.SectionTestCodeStr]) {
-                    //spnDsc.setSelection(j);
+                if ([[[self.assessmentTestTypeCoach valueForKey:@"kpi"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"Kpi"]]) {
+                    self.description_lbl.text =[[self.assessmentTestTypeCoach valueForKey:@"kpi"] objectAtIndex:j];
                     break;
                 }
                 
@@ -657,23 +721,338 @@
         
         if(IsEdit == YES)
         {
-            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.value_lbl.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
         }
         else
         {
-            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.value_lbl.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
         }
         self.right_Txt.text = @"";
         self.left_Txt.text = @"";
         self.remark_Txt.text =@"";
     }
+    else if ([SCREEN_CODE_MMT isEqualToString:self.SelectScreenId])
+    {
+        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        
+        if(IsEdit == YES)
+        {
+            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        else
+        {
+            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        self.left_lbl.text = @"";
+        self.right_lbl.text = @"";
+        self.remark_Txt.text =@"";
+    }
+    else if ([SCREEN_CODE_GAINT isEqualToString:self.SelectScreenId])
+    {
+        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        
+        if(IsEdit == YES)
+        {
+            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        else
+        {
+            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        self.left_lbl.text = @"";
+        self.right_lbl.text = @"";
+        self.valueTxt.text =@"";
+        self.remark_Txt.text =@"";
+    }
+    else if ([SCREEN_CODE_POSTURE isEqualToString:self.SelectScreenId])
+    {
+        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        
+        if(IsEdit == YES)
+        {
+            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        else
+        {
+            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        self.left_lbl.text = @"";
+        self.right_lbl.text = @"";
+        self.valueTxt.text =@"";
+        self.remark_Txt.text =@"";
+    }
+    else if ([SCREEN_CODE_SPECIAL isEqualToString:self.SelectScreenId])
+    {
+        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        
+        if(IsEdit == YES)
+        {
+            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        else
+        {
+            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        self.left_lbl.text = @"";
+        self.right_lbl.text = @"";
+        self.remark_Txt.text =@"";
+    }
+    else if ([SCREEN_CODE_COACHING isEqualToString:self.SelectScreenId])
+    {
+        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        
+        if(IsEdit == YES)
+        {
+            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        else
+        {
+            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        self.description_lbl.text = @"";
+        self.remark_Txt.text =@"";
+    }
 }
+
+
+
+#pragma  mark Table DataSource Methods
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return  self.CommonCombArray.count;
+    
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
+#pragma mark Table Delegate Methods
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    static NSString * AssessmentCellIdentifier = @"AssessmentcellIdentifier";
+    
+    // init the CRTableViewCell
+    UITableViewCell * cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:AssessmentCellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AssessmentCellIdentifier];
+    }
+    if([SCREEN_CODE_MMT isEqualToString:self.SelectScreenId])
+    {
+        cell.textLabel.text = [[self.CommonCombArray valueForKey:@"RESULTNAME"] objectAtIndex:indexPath.row];
+        
+    }
+    else if ([SCREEN_CODE_GAINT isEqualToString:self.SelectScreenId])
+    {
+        cell.textLabel.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+        
+    }
+    else if ([SCREEN_CODE_POSTURE isEqualToString:self.SelectScreenId])
+    {
+        cell.textLabel.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+        
+    }
+    else if ([SCREEN_CODE_SPECIAL isEqualToString:self.SelectScreenId])
+    {
+        cell.textLabel.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+        
+    }
+    else if ([SCREEN_CODE_COACHING isEqualToString:self.SelectScreenId])
+    {
+        cell.textLabel.text = [[self.CommonCombArray valueForKey:@"Description"] objectAtIndex:indexPath.row];
+        
+    }
+    
+    return cell;
+    
+    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(isRight== YES && [SCREEN_CODE_MMT isEqualToString:self.SelectScreenId])
+    {
+        self.right_lbl.text = [[self.CommonCombArray valueForKey:@"RESULTNAME"] objectAtIndex:indexPath.row];
+        isRight = NO;
+    }
+    else if (isLeft == YES && [SCREEN_CODE_MMT isEqualToString:self.SelectScreenId])
+    {
+        self.left_lbl.text = [[self.CommonCombArray valueForKey:@"RESULTNAME"] objectAtIndex:indexPath.row];
+        isLeft = NO;
+    }
+    else if (isLeft== YES && [SCREEN_CODE_GAINT isEqualToString:self.SelectScreenId])
+    {
+        self.left_lbl.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+    }
+    else if (isRight == YES && [SCREEN_CODE_GAINT isEqualToString:self.SelectScreenId])
+    {
+        self.right_lbl.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+        
+    }
+    else if (isRight == YES && [SCREEN_CODE_POSTURE isEqualToString:self.SelectScreenId])
+    {
+        self.right_lbl.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+        
+    }
+    else if (isLeft== YES && [SCREEN_CODE_POSTURE isEqualToString:self.SelectScreenId])
+    {
+        self.left_lbl.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+    }
+    else if (isRight == YES && [SCREEN_CODE_SPECIAL isEqualToString:self.SelectScreenId])
+    {
+        self.right_lbl.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+        
+    }
+    else if (isLeft== YES && [SCREEN_CODE_SPECIAL isEqualToString:self.SelectScreenId])
+    {
+        self.left_lbl.text = [[self.CommonCombArray valueForKey:@"ResultName"] objectAtIndex:indexPath.row];
+    }
+    else if ([SCREEN_CODE_COACHING isEqualToString:self.SelectScreenId])
+    {
+        self.description_lbl.text = [[self.CommonCombArray valueForKey:@"Description"] objectAtIndex:indexPath.row];
+    }
+    self.popTbl.hidden = YES;
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
-
+#pragma DropDown Button Action
+-(IBAction)didClickLeftBtnAction:(id)sender
+{
+    if(isLeft == NO)
+    {
+        isLeft = YES;
+        self.popTbl.hidden = NO;
+        self.popviewYposition.constant= self.leftView.frame.origin.y-50;
+        
+        
+        [self.popTbl reloadData];
+    }
+    else
+    {
+        isLeft = NO;
+        self.popTbl.hidden = YES;
+        
+    }
+    isRight= NO;
+    isDescription = NO;
+    isCentral = NO;
+    isValue = NO;
+    isInterface = NO;
+}
+-(IBAction)didClickRightBtnAction:(id)sender
+{
+    if(isRight == NO)
+    {
+        isRight = YES;
+        self.popTbl.hidden= NO;
+        self.popviewYposition.constant= self.rightView.frame.origin.y-50;
+        [self.popTbl reloadData];
+    }
+    else
+    {
+        isRight = NO;
+        self.popTbl.hidden = YES;
+    }
+    isLeft= NO;
+    isDescription = NO;
+    isCentral = NO;
+    isValue = NO;
+    isInterface = NO;
+}
+-(IBAction)didClickCentralBtnAction:(id)sender
+{
+    if(isCentral == NO)
+    {
+        isCentral = YES;
+        self.popTbl.hidden = NO;
+        self.popviewYposition.constant= self.centralcombView.frame.origin.y;
+        
+        [self.popTbl reloadData];
+    }
+    else
+    {
+        isCentral = NO;
+        self.popTbl.hidden = YES;
+    }
+    isLeft= NO;
+    isDescription = NO;
+    isRight = NO;
+    isValue = NO;
+    isInterface = NO;
+}
+-(IBAction)didClickDescriptionBtnAction:(id)sender
+{
+    if(isDescription == NO)
+    {
+        isDescription = YES;
+        self.popTbl.hidden = NO;
+        self.popviewYposition.constant = self.descriptionCombView.frame.origin.y;
+        [self.popTbl reloadData];
+    }
+    else
+    {
+        isDescription = NO;
+        self.popTbl.hidden = YES;
+    }
+    isLeft= NO;
+    isCentral = NO;
+    isRight = NO;
+    isValue = NO;
+    isInterface = NO;
+}
+-(IBAction)didClickInterfaceBtnAction:(id)sender
+{
+    if(isInterface == NO)
+    {
+        isInterface = YES;
+        self.popTbl.hidden = NO;
+        self.popviewYposition.constant = self.interfacecombView.frame.origin.y;
+        [self.popTbl reloadData];
+    }
+    else
+    {
+        isInterface = NO;
+        self.popTbl.hidden = YES;
+    }
+    isLeft= NO;
+    isCentral = NO;
+    isRight = NO;
+    isValue = NO;
+    isDescription = NO;
+}
+-(IBAction)didClickValueBtnAction:(id)sender
+{
+    if(isValue == NO)
+    {
+        isValue = YES;
+        self.popTbl.hidden = NO;
+        self.popviewYposition.constant = self.valueCombView.frame.origin.y;
+        [self.popTbl reloadData];
+    }
+    else
+    {
+        isValue = NO;
+        self.popTbl.hidden= YES;
+    }
+    isLeft= NO;
+    isCentral = NO;
+    isRight = NO;
+    isInterface = NO;
+    isDescription = NO;
+}
 @end
 
