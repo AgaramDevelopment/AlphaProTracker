@@ -14,6 +14,7 @@
 #import "AppCommon.h"
 #import "Config.h"
 #import "WebService.h"
+#import "IQKeyboardManager.h"
 
 
 
@@ -34,7 +35,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+
+
     storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
@@ -131,7 +135,7 @@
     //and create new timer with async call:
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //run function methodRunAfterBackground
-        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
     });

@@ -114,6 +114,7 @@
 		04CA66421F6F8A0C009F109E /* HACBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA66401F6F8A0C009F109E /* HACBarLayer.m */; };
 		04CA66481F6FA567009F109E /* FoodDairy.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA66461F6FA567009F109E /* FoodDairy.m */; };
 		04CA66491F6FA567009F109E /* FoodDairy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CA66471F6FA567009F109E /* FoodDairy.xib */; };
+		04D97298201CAB7900AE0355 /* agapt_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04D97297201CAB7900AE0355 /* agapt_database.sqlite */; };
 		04DB75281F7A5997001CB710 /* IllnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB75271F7A5996001CB710 /* IllnessVC.m */; };
 		04DB752D1F7A5E64001CB710 /* IllnessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB752B1F7A5E64001CB710 /* IllnessCell.m */; };
 		04DB752E1F7A5E64001CB710 /* IllnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DB752C1F7A5E64001CB710 /* IllnessCell.xib */; };
@@ -138,7 +139,6 @@
 		04F1B95E1F94843C00EFA4A9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1B95D1F94843C00EFA4A9 /* libsqlite3.0.tbd */; };
 		04F1B9621F9484E100EFA4A9 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */; };
 		04FBEE741F7E7D7E007C5BF8 /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */; };
-		18935356201B13D1001EC0B5 /* agapt_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18935355201B13D1001EC0B5 /* agapt_database.sqlite */; };
 		189663CB2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189663C62012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.xib */; };
 		189663CC2012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189663C82012FE3F00A8BFE1 /* ExcerciseParameterTVC.xib */; };
 		189663CD2012FE3F00A8BFE1 /* ExcerciseParameterTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189663C92012FE3F00A8BFE1 /* ExcerciseParameterTVC.m */; };
@@ -458,6 +458,7 @@
 		04CA66451F6FA567009F109E /* FoodDairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoodDairy.h; path = Subview/FoodDairyCell/FoodDairy.h; sourceTree = "<group>"; };
 		04CA66461F6FA567009F109E /* FoodDairy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoodDairy.m; path = Subview/FoodDairyCell/FoodDairy.m; sourceTree = "<group>"; };
 		04CA66471F6FA567009F109E /* FoodDairy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FoodDairy.xib; path = Subview/FoodDairyCell/FoodDairy.xib; sourceTree = "<group>"; };
+		04D97297201CAB7900AE0355 /* agapt_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = agapt_database.sqlite; sourceTree = "<group>"; };
 		04DB75261F7A5996001CB710 /* IllnessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IllnessVC.h; path = Controllers/IllnessVC/IllnessVC.h; sourceTree = "<group>"; };
 		04DB75271F7A5996001CB710 /* IllnessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IllnessVC.m; path = Controllers/IllnessVC/IllnessVC.m; sourceTree = "<group>"; };
 		04DB752A1F7A5E64001CB710 /* IllnessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IllnessCell.h; path = Subview/IllnessCell/IllnessCell.h; sourceTree = "<group>"; };
@@ -505,7 +506,6 @@
 		04F1B9611F9484E100EFA4A9 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBMANAGERSYNC.m; path = AppCommon/dbmanagerSync/DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		04FBEE721F7E7D7E007C5BF8 /* PieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieChartView.h; path = Helper/PieChart/PieChartView.h; sourceTree = "<group>"; };
 		04FBEE731F7E7D7E007C5BF8 /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PieChartView.m; path = Helper/PieChart/PieChartView.m; sourceTree = "<group>"; };
-		18935355201B13D1001EC0B5 /* agapt_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = agapt_database.sqlite; sourceTree = "<group>"; };
 		189663C52012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseAttachmentCVC.h; path = Subview/ExcirsizeDetails/ExcerciseAttachmentCVC.h; sourceTree = "<group>"; };
 		189663C62012FE3E00A8BFE1 /* ExcerciseAttachmentCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExcerciseAttachmentCVC.xib; path = Subview/ExcirsizeDetails/ExcerciseAttachmentCVC.xib; sourceTree = "<group>"; };
 		189663C72012FE3F00A8BFE1 /* ExcerciseParameterTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExcerciseParameterTVC.h; path = Subview/ExcirsizeDetails/ExcerciseParameterTVC.h; sourceTree = "<group>"; };
@@ -876,7 +876,7 @@
 		043B23011F4B1B3800036604 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				18935355201B13D1001EC0B5 /* agapt_database.sqlite */,
+				04D97297201CAB7900AE0355 /* agapt_database.sqlite */,
 				043B23021F4B1B3800036604 /* main.m */,
 				04CA66431F6F8A51009F109E /* AlphaProTracker-Bridging-Header.h */,
 			);
@@ -2115,7 +2115,6 @@
 				045A49F91FA22192008C1630 /* MonthlyCalendar.png in Resources */,
 				04F11D9A200F70F9004A4218 /* MultiInjurylistCell.xib in Resources */,
 				AC1BC8161F8665A60047AECC /* AAHighchartsMore.js in Resources */,
-				18935356201B13D1001EC0B5 /* agapt_database.sqlite in Resources */,
 				ACBD4AD81F56CFBC00AFA25D /* SubAssessmentCell.xib in Resources */,
 				04055A8F1F711F870014DC5B /* InjuryListCell.xib in Resources */,
 				045A49F71FA22192008C1630 /* blackCircle.png in Resources */,
@@ -2123,6 +2122,7 @@
 				ACBBA18C1F614642000F9DC9 /* RecentFitness.xib in Resources */,
 				AC87CD9E1F55A74D002AA80E /* assemntCell.xib in Resources */,
 				0441B7801F6A4DE900A28E19 /* AddParticipantCell.xib in Resources */,
+				04D97298201CAB7900AE0355 /* agapt_database.sqlite in Resources */,
 				18EC758F2019F4AC007D50AA /* MessangerSendVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2145,7 +2145,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3E1FA74BB05856F9F0A4C58C /* [CP] Embed Pods Frameworks */ = {
