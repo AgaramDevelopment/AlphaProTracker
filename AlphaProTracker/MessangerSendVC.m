@@ -18,7 +18,7 @@
 {
     NSMutableArray* mainArray;
     NSMutableArray* chatArray;
-    NSString *imgData;
+    NSString *imgData,* imgFileName;
     NSMutableArray* contactList;
     NSMutableArray* multiSelect;
 }
@@ -39,22 +39,22 @@
     if (!_isBroadCastMsg) {
         [self loadMessage];
     }
+    else{
+        [_btnToName sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
 
-    imgData = @"";
-    _txtMessage.text = @"";
-    
+    [self resetImageData];
     dispatch_async(dispatch_get_main_queue(), ^{
         ImgViewBottomConst.constant = -imgView.frame.size.height;
         [imgView updateConstraintsIfNeeded];
     });
     
-    _tblChatList.estimatedRowHeight = 500;
-    _tblChatList.rowHeight = UITableViewAutomaticDimension;
+    _tblChatList.estimatedRowHeight = UITableViewAutomaticDimension;
     
     multiSelect = [NSMutableArray new];
+    
 
 }
 
@@ -88,6 +88,9 @@
     
 }
 
+#pragma mark customnavigationmethod
+
+
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation = [[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
@@ -95,9 +98,7 @@
     objCustomNavigation.tittle_lbl.text=@"";
     objCustomNavigation.btn_back.hidden =NO;
     objCustomNavigation.menu_btn.hidden = YES;
-//    [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.btn_back addTarget:self action:@selector(BackBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -120,6 +121,8 @@
     
 }
 
+#pragma mark UITableView Delagates
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == tblContactLIst) {
         return contactList.count;
@@ -133,15 +136,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tblContactLIst == tableView) {
-        return 44;
-    }
-    else
-    {
-        return 80;
 
-    }
-    return 0;
+    return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -153,9 +149,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DEFAULT"];
         }
         cell.textLabel.text = [[contactList objectAtIndex:indexPath.row]valueForKey:@"receivername"];
-//        cell.textLabel.text = [[contactList objectAtIndex:indexPath.row]valueForKey:@"receivercode"];
-
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
         
         return cell;
     }
@@ -167,19 +161,46 @@
         NSString* name=[[chatArray objectAtIndex:indexPath.row] valueForKey:@"receivefromname"];
         if ([[AppCommon GetUserName] isEqualToString:name]) // your message
         {
-            cell = arr[1];
-            cell.lblYourMessage.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"message"];
-            cell.lblSendDate.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"msgDateTime"];
-//            cell.lblReceivedDate.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"msgDateTime"];
+            cell = arr[0];
+            cell.SenderMsg.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"message"];
+            cell.SenderDate.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"msgDateTime"];
+            NSString* IMG=[[chatArray objectAtIndex:indexPath.row] valueForKey:@"messagAttachment"];
+
+            if (![IMG isEqualToString:@"MessagePhotos/"]) {
+                cell.SenderIMGHeight.constant = cell.SenderIMG.frame.size.width;
+                [cell.SenderIMG updateConstraintsIfNeeded];
+                NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMAGE_URL,IMG]];
+                [cell.SenderIMG sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
+            }else
+            {
+                cell.SenderIMGHeight.constant = 20;
+                [cell.SenderIMG updateConstraintsIfNeeded];
+            }
+            
 
         }
         else
         {
-            cell = arr[0];
-            cell.lblSenderName.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"receivefromname"];
-            cell.lblReceivedDate.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"msgDateTime"];
-            cell.lblReceivedMsg.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"message"];
+            cell = arr[1];
+            cell.ReceiverName.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"receivefromname"];
+            cell.ReceiverDate.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"msgDateTime"];
+            cell.ReceiverMsg.text = [[chatArray objectAtIndex:indexPath.row] valueForKey:@"message"];
+            
+            NSString* IMG=[[chatArray objectAtIndex:indexPath.row] valueForKey:@"messagAttachment"];
+            
+            if (![IMG isEqualToString:@"MessagePhotos/"]) {
+                cell.ReceiverIMGHeight.constant = cell.SenderIMG.frame.size.width;
+                [cell.SenderIMG updateConstraintsIfNeeded];
+                NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMAGE_URL,IMG]];
+                [cell.ReceiverIMG sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
+            }else
+            {
+                cell.ReceiverIMGHeight.constant = 40;
+                [cell.ReceiverIMG updateConstraintsIfNeeded];
+            }
+
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
     }
@@ -202,33 +223,85 @@
             [multiSelect addObject:value];
 
         }
+        NSString* names = [[multiSelect valueForKey:@"receivername"] componentsJoinedByString:@","];
+        [_btnToName setTitle:([names isEqualToString:@""] ? @"Please Select Your Contacts" : names )forState:UIControlStateNormal];
     }
 }
 
--(NSInteger)getMessageType:(NSDictionary *)dict
+#pragma mark UIImagePickerController Delegates
+
+
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+- (void)imagePickerController:(UIImagePickerController *)picker
+        didFinishPickingImage:(UIImage *)image
+                  editingInfo:(NSDictionary *)editingInfo
+
 {
-    NSInteger result = 0;
-    NSString* name=[dict valueForKey:@"receivefromname"];
-    NSString* Img=[dict valueForKey:@"messagAttachment"];
-
-    if ([[AppCommon GetUserName] isEqualToString:name] && [Img isEqualToString:@""]) // your message text only
-    {
-        result = 0;
-    }else if([[AppCommon GetUserName] isEqualToString:name] && ![Img isEqualToString:@""]) // your message with img and text
-    {
-        result = 1;
-    }else if(![[AppCommon GetUserName] isEqualToString:name] && [Img isEqualToString:@""]) // Received message text only
-    {
-        result = 2;
-    }
-    else if(![[AppCommon GetUserName] isEqualToString:name] && ![Img isEqualToString:@""]) // your message with img and text
-    {
-        result = 3;
-    }
+//    NSDictionary * dict = [editingInfo valueForKey:UIImagePickerControllerOriginalImage];
     
-    return result;
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString * objPath =[[picker valueForKey:@"mediaTypes"] objectAtIndex:0];
+//    NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
+    
+    imgData = [self encodeToBase64String:image];
+    imgFileName = [[editingInfo valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
+    [self dismissViewControllerAnimated:YES completion:^{
+        ImgViewBottomConst.constant = imgView.frame.size.height;
+        [imgView updateConstraintsIfNeeded];
+        currentlySelectedImage.image = image;
+
+    }];
+
+
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+#pragma mark Webservice and MSG Send Actions
+
+- (IBAction)actionSendMessage:(id)sender {
+    if ([sender tag]) {
+        
+        [self openAttachMentOptions:sender];
+    }
+    else
+    {
+        if (_isBroadCastMsg) {
+            
+            if (multiSelect.count == 0) {
+                [AppCommon showAlertWithMessage:@"Please Select Atleast one contact to send message"];
+            }
+            else if([_txtMessage.text isEqualToString:@""] && [imgData isEqualToString:@""])
+            {
+                [AppCommon showAlertWithMessage:@"Please type Your message"];
+            }
+            else
+            {
+                [self sendBroadcatingMessage];
+            }
+        }
+        else
+        {
+            if([_txtMessage.text isEqualToString:@""] && [imgData isEqualToString:@""])
+            {
+                [AppCommon showAlertWithMessage:@"Please type Your message"];
+            }
+            else
+            {
+                [self sendReplyMessageWebService];
+            }
+
+        }
+    }
+}
 
 -(void)loadMessage
 {
@@ -280,8 +353,8 @@
                 [self.tblChatList reloadData];
             });
             
-//            [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chatArray.count inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-
+            //            [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chatArray.count inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
         }
         [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -289,62 +362,6 @@
     }];
     
     
-}
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-- (void)imagePickerController:(UIImagePickerController *)picker
-        didFinishPickingImage:(UIImage *)image
-                  editingInfo:(NSDictionary *)editingInfo
-
-{
-//    NSDictionary * dict = [editingInfo valueForKey:UIImagePickerControllerOriginalImage];
-    
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString * objPath =[[picker valueForKey:@"mediaTypes"] objectAtIndex:0];
-//    NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
-    
-    imgData = [self encodeToBase64String:image];
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-        ImgViewBottomConst.constant = imgView.frame.size.height;
-        [imgView updateConstraintsIfNeeded];
-        currentlySelectedImage.image = image;
-
-    }];
-
-
-    
-}
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (NSString *)encodeToBase64String:(UIImage *)image {
-    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-}
-
-
-- (IBAction)actionSendMessage:(id)sender {
-    if ([sender tag]) {
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc]init];
-        imagePickerController.delegate = self;
-        imagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePickerController.allowsEditing = YES;
-        [self presentViewController:imagePickerController animated:YES completion:nil];
-    }
-    else
-    {
-        if (_isBroadCastMsg) {
-            [self sendBroadcatingMessage];
-
-        }
-        else
-        {
-            
-        }
-        [self sendReplyMessageWebService];
-    }
 }
 
 
@@ -377,7 +394,7 @@
     [dic setObject:_CommID forKey:@"commId"];
     [dic setObject:_txtMessage.text forKey:@"newmessage"];
     [dic setObject:imgData forKey:@"newmessagephoto"];
-    [dic setObject:([imgData isEqualToString:@""] ? @"" : @"testing_file.png")  forKey:@"fileName"];
+    [dic setObject:imgFileName  forKey:@"fileName"];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
@@ -391,9 +408,7 @@
         [formData appendPartWithFileURL:filePath name:@"image" error:nil];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
-        imgData = @"";
-        _txtMessage.text = @"";
-        [_txtMessage resignFirstResponder];
+        [self resetImageData];
         
         mainArray = [NSMutableArray new];
         mainArray = responseObject;
@@ -411,6 +426,7 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AppCommon hideLoading];
+        [self resetImageData];
         NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
         [COMMON webServiceFailureError];
     }];
@@ -428,25 +444,13 @@
      SENDNEWMESSAGES_ANDROID
      
      {
-     Clientcode
-     UserCode
-     Userreferencecode
-     receivercodes : []
-     newmessage
-     newmessagephoto
+         Clientcode
+         UserCode
+         Userreferencecode
+         receivercodes : [USM0000011,USM0000012,USM0000013]
+         newmessage
+         newmessagephoto
      }
-     
-     
-     "receivercode": "USM0000011",
-     "receivername": "Rohan Kunnummal",
-     
-     
-     "receivercode": "USM0000012",
-     "receivername": "Vishnu Vinod",
-     
-     
-     "receivercode": "USM0000013",
-     "receivername": "Mohammed Azharudeen",
      */
     if(![COMMON isInternetReachable])
         return;
@@ -460,16 +464,13 @@
     if([AppCommon GetUsercode]) [dic setObject:[AppCommon GetUsercode] forKey:@"UserCode"];
 
     if (multiSelect.count > 0) {
-        NSString* code= [multiSelect componentsJoinedByString:@","];
-//        [dic setObject:@"USM0000011,USM0000012,USM0000013" forKey:@"receivercodes"];
+        NSString* code= [[multiSelect valueForKey:@"receivercode"]componentsJoinedByString:@","];
         [dic setObject:code forKey:@"receivercodes"];
 
     }
     [dic setObject:_txtMessage.text forKey:@"newmessage"];
     [dic setObject:imgData forKey:@"newmessagephoto"];
-    [dic setObject:([imgData isEqualToString:@""] ? @"" : @"testing_file.png")  forKey:@"fileName"];
-    
-    
+    [dic setObject:imgFileName  forKey:@"fileName"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -488,7 +489,7 @@
         [formData appendPartWithFileURL:filePath name:@"image" error:nil];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
-        imgData = @"";
+        [self resetImageData];
         [AppCommon hideLoading];
         
         
@@ -496,12 +497,23 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AppCommon hideLoading];
-        imgData = @"";
+        [self resetImageData];
         NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
         [COMMON webServiceFailureError];
     }];
 
 }
+
+-(void)resetImageData
+{
+    imgData = @"";
+    imgFileName = @"";
+    _txtMessage.text = @"";
+
+}
+
+#pragma mark UITextField Delagates
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
 //    self.viewBottomSpace.constant = 0;
@@ -533,6 +545,8 @@
 }
 // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
 
+#pragma mark Attachments and Contact DropDowns
+
 - (IBAction)actionShowContactList:(id)sender {
     
     if(_arrReceiverCodes.count == 0)
@@ -540,11 +554,19 @@
         
     
     if (![self.view.subviews containsObject:viewTolist]) {
+        
+        
         contactList = [NSMutableArray new];
-//        [contactList addObjectsFromArray:@[@"ONE",@"TWO",@"THREE",@"FOUR",@"FIVE",@"SIX"]];
         [contactList addObjectsFromArray:_arrReceiverCodes];
-        [viewTolist setFrame:CGRectMake(10, [sender superview].frame.origin.y+[sender frame].size.height, self.view.frame.size.width-10, self.view.frame.size.height)];
-        [tblContactLIst setFrame:CGRectMake(0,0,viewTolist.frame.size.width, contactList.count*44)];
+        [viewTolist setFrame:CGRectMake(0, [sender superview].frame.origin.y+[sender frame].size.height, self.view.frame.size.width, self.view.frame.size.height)];
+        CGFloat height = (contactList.count > 5 ? 5*44 : contactList.count*44);
+        [tblContactLIst setFrame:CGRectMake(0,0,viewTolist.frame.size.width, height)];
+        
+        for (UIView*  view in viewTolist.subviews) {
+            if (view.tag == 1) {
+                view.frame = viewTolist.frame;
+            }
+        }
 
         [self.view addSubview:viewTolist];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -561,5 +583,45 @@
 -(IBAction)removeDropDown:(id)sender
 {
     [viewTolist removeFromSuperview];
+}
+
+-(void)openAttachMentOptions:(id)sender
+{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+
+    
+    UIAlertController* alert =[UIAlertController alertControllerWithTitle:APP_NAME message:@"Choose Your Attachment" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* CameraAction = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        imagePickerController.sourceType =  UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+
+        
+    }];
+    UIAlertAction* GalleryAction = [UIAlertAction actionWithTitle:@"Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        imagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+
+        
+    }];
+    UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+
+    [alert addAction:CameraAction];
+    [alert addAction:GalleryAction];
+    [alert addAction:CancelAction];
+    
+    
+    [alert setModalPresentationStyle:UIModalPresentationPopover];
+    UIPopoverPresentationController *popPresenter = [alert popoverPresentationController];
+    popPresenter.sourceView = sender;
+    popPresenter.sourceRect = [sender bounds]; // You can set position of popover
+    
+    [self presentViewController:alert animated:TRUE completion:nil];
+
+    
+    
 }
 @end

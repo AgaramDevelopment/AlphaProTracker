@@ -704,16 +704,16 @@
         NSString *STARTmnts = componentsSTART[1];
         
         //date
-        NSString *dddd=@"7-11-2017";
-        NSMutableArray *arr = [[NSMutableArray alloc]init];
-        [arr addObject:dddd];
-        [arr replaceObjectAtIndex:0 withObject:datee];
+//        NSString *dddd=@"7-11-2017";
+//        NSMutableArray *arr = [[NSMutableArray alloc]init];
+//        [arr addObject:dddd];
+//        [arr replaceObjectAtIndex:0 withObject:datee];
         NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
         [dateFormatter1 setDateFormat:@"dd-MM-yyyy"];
-//        NSDate *dateFromString1 = [dateFormatter1 dateFromString:[arr objectAtIndex:0]];
-//        self.reqDate = [dateFromString1 copy];
         NSDate *dateFromString1 = [dateFormatter1 dateFromString:datee];
         self.reqDate = [dateFromString1 copy];
+//        NSDate *dateFromString1 = [dateFormatter1 dateFromString:datee];
+//        self.reqDate = [dateFromString1 copy];
 
         //time
         

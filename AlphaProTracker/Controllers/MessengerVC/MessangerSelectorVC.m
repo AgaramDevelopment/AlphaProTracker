@@ -453,8 +453,8 @@
         msObj.iSread = @"NO";
         msObj.isBroadCastMsg = YES;
 //        msObj.CommID = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"commId"];
-        NSString* selectedName = [[commonArray valueForKey:@"receivername"]componentsJoinedByString:@","];
-        msObj.SelectedName = selectedName;
+//        NSString* selectedName = [[commonArray valueForKey:@"receivername"]componentsJoinedByString:@","];
+        msObj.SelectedName = @"Select your contacts";
         [self.navigationController pushViewController:msObj animated:YES];
         return;
         

@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIView *customChartView;
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 - (IBAction)actionViewGraph:(id)sender;

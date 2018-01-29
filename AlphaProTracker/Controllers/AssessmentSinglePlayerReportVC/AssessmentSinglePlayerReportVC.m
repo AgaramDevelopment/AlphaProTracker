@@ -12,9 +12,11 @@
 #import "CustomNavigation.h"
 #import "Config.h"
 #import "WebService.h"
+#import "DatePickerViewController.h"
+#import "MultiSelectTableViewCell.h"
 
 
-@interface AssessmentSinglePlayerReportVC ()
+@interface AssessmentSinglePlayerReportVC () <DatePickerProtocol>
 {
     NSMutableArray* dropdownArray;
     NSString* selectedDropDown;
@@ -117,71 +119,81 @@
     [self WebService];
 }
 
-- (IBAction)actionShowDropDown:(id)sender {
-    dropDownView.frame = CGRectMake(dropDownView.frame.origin.x, dropDownView.frame.origin.x, dropDownView.frame.size.height,self.view.frame.size.height-60);
-    [self.mainView.superview bringSubviewToFront:dropDownView];
+//- (IBAction)actionShowDropDown:(id)sender {
+//    dropDownView.frame = CGRectMake(dropDownView.frame.origin.x, dropDownView.frame.origin.x, dropDownView.frame.size.height,self.view.frame.size.height-60);
+//    [self.mainView.superview bringSubviewToFront:dropDownView];
+//
+//    [dropDownView setHidden:NO];
+//    selectedButton = [sender tag];
+//    switch ([sender tag]) {
+//        case 0:
+//            [_tblDropDown setHidden:NO];
+//            [customView setHidden:YES];
+//
+//            selectedDropDown = @"lstGame";
+//            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, 100);
+//            break;
+//        case 1:
+//            [_tblDropDown setHidden:NO];
+//            [customView setHidden:YES];
+//
+//            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, 100);
+//
+//            selectedDropDown = @"lstTeam";
+//            break;
+//        case 2:
+//            [_tblDropDown setHidden:NO];
+//            [customView setHidden:YES];
+//
+//            _tblDropDown.frame = CGRectMake(lblPlayerName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, 100);
+//
+//            selectedDropDown = @"lstPlayer";
+//            break;
+//        case 3:
+//            [_tblDropDown setHidden:YES];
+//            [customView setHidden:NO];
+//            [self openDatePickerVC];
+//            break;
+//        case 4:
+//            [_tblDropDown setHidden:YES];
+//            [customView setHidden:NO];
+//            [self openDatePickerVC];
+//            break;
+//        case 5:
+//            [_tblDropDown setHidden:NO];
+//            [customView setHidden:YES];
+//
+//            _tblDropDown.frame = CGRectMake(lblAssessmentValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, 100);
+//            selectedDropDown = @"AssessmentTests";
+//            break;
+//        case 6:
+//            [_tblDropDown setHidden:NO];
+//            [customView setHidden:YES];
+//
+//            _tblDropDown.frame = CGRectMake(lblAssessmentValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, 100);
+//            selectedDropDown = @"AssessmentTests";
+//            break;
+//
+//
+//        default:
+//            break;
+//    }
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.tblDropDown reloadData];
+//    });
+//
+//
+//}
 
-    [dropDownView setHidden:NO];
-    selectedButton = [sender tag];
-    switch ([sender tag]) {
-        case 0:
-            [_tblDropDown setHidden:NO];
-            [customView setHidden:YES];
-
-            selectedDropDown = @"lstGame";
-            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, 100);
-            break;
-        case 1:
-            [_tblDropDown setHidden:NO];
-            [customView setHidden:YES];
-
-            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, 100);
-
-            selectedDropDown = @"lstTeam";
-            break;
-        case 2:
-            [_tblDropDown setHidden:NO];
-            [customView setHidden:YES];
-
-            _tblDropDown.frame = CGRectMake(lblPlayerName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, 100);
-
-            selectedDropDown = @"lstPlayer";
-            break;
-        case 3:
-            [_tblDropDown setHidden:YES];
-            [customView setHidden:NO];
-            [self openDatePickerView];
-            break;
-        case 4:
-            [_tblDropDown setHidden:YES];
-            [customView setHidden:NO];
-            [self openDatePickerView];
-            break;
-        case 5:
-            [_tblDropDown setHidden:NO];
-            [customView setHidden:YES];
-
-            _tblDropDown.frame = CGRectMake(lblAssessmentValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, 100);
-            selectedDropDown = @"AssessmentTests";
-            break;
-        case 6:
-            [_tblDropDown setHidden:NO];
-            [customView setHidden:YES];
-
-            _tblDropDown.frame = CGRectMake(lblAssessmentValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, 100);
-            selectedDropDown = @"AssessmentTests";
-            break;
-
-
-        default:
-            break;
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tblDropDown reloadData];
-    });
-
+-(void)openDatePickerVC
+{
+    DatePickerViewController  * objTabVC = (DatePickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DatePickerVC"];
+    objTabVC.datePickerFormat = @"yyy-MM-dd";
+    objTabVC.datePickerDelegate = self;
+    [self presentViewController:objTabVC animated:YES completion:nil];
     
 }
+
 -(void)FetchDropDownValuesWebService
 {
     /*
@@ -339,11 +351,8 @@
         
     }
     
-    NSDate* fromDate = [self str2Date:lblFromDate.text];
-    if(fromDate) [dic setObject:lblFromDate.text forKey:@"FromDate"];
-    
-    NSDate* toDate = [self str2Date:lblToDate.text];
-    if(toDate) [dic setObject:lblToDate.text forKey:@"ToDate"];
+    if(lblFromDate.text) [dic setObject:lblFromDate.text forKey:@"FromDate"];
+    if(lblToDate.text) [dic setObject:lblToDate.text forKey:@"ToDate"];
     
     if(lblAssessmentValue1.text)
     {
@@ -396,51 +405,16 @@
     [dropDownView setHidden:YES];
 }
 
-- (IBAction)HideDatePicker:(id)sender {
-    
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyy-MM-dd"];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [datePickerChang setLocale:locale];
-    
-    switch (selectedButton) {
-        case 3:
-            lblFromDate.text = [dateFormatter stringFromDate:[datePickerChang date]];
-            break;
-        case 4:
-            lblToDate.text = [dateFormatter stringFromDate:[datePickerChang date]];
-            break;
-            
-        default:
-            break;
-    }
-
-    
-    [UIView animateWithDuration:0.5
-                          delay:0.1
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         self.customView.frame = CGRectMake(0, -self.view.frame.size.height, self.customView.frame.size.width, self.customView.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                         [dropDownView setHidden:YES];
-                     }];
-}
-
--(void)openDatePickerView
+-(void)selectedDate:(NSString *)Date
 {
-    [UIView animateWithDuration:0.5
-                          delay:0.1
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         self.customView.frame = CGRectMake(0, self.view.frame.size.height-self.customView.frame.size.height, self.customView.frame.size.width, self.customView.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                         
-                     }];
-
+    if (selectedButton == 3) {
+        lblFromDate.text = Date;
+    }
+    NSLog(@"selcted date %@",Date);
+    
 }
+
+
 -(NSDate *)str2Date:(NSString *)str
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -603,6 +577,58 @@
     return nil;
 }
 
+- (IBAction)actionShowDropDown:(id)sender {
+    [self.scrollView setScrollEnabled:NO];
+
+    selectedButton = [sender tag];
+    switch ([sender tag]) {
+        case 0:
+            [_tblDropDown setHidden:NO];
+
+            selectedDropDown = @"GameMultiPlayer";
+            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, 100);
+            break;
+        case 1:
+            [_tblDropDown setHidden:NO];
+
+            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, 100);
+
+            selectedDropDown = @"TeamMultiPlayers";
+            break;
+        case 2:
+            [_tblDropDown setHidden:NO];
+
+            _tblDropDown.frame = CGRectMake(lblPlayerName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, 100);
+
+            selectedDropDown = @"PlayerMultiPlayers";
+            break;
+        case 3:
+            [_tblDropDown setHidden:YES];
+            [self openDatePickerVC];
+
+            break;
+        case 4:
+            [_tblDropDown setHidden:NO];
+
+            _tblDropDown.frame = CGRectMake(lblAssessmentValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, 100);
+            selectedDropDown = @"AssessmentTests";
+            break;
+        case 5:
+            [_tblDropDown setHidden:NO];
+
+            _tblDropDown.frame = CGRectMake(lblAssessmentValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, 100);
+            selectedDropDown = @"AssessmentTests";
+            break;
+
+
+        default:
+            break;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tblDropDown reloadData];
+    });
+
+}
 
 
 @end

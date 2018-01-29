@@ -71,6 +71,10 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    if ([[arrayExcersizeList valueForKey:@"lstExcercise_Details"] count] == 0) {
+        return  0;
+    }
+
     return [[arrayExcersizeList valueForKey:@"lstExcercise_programs"] count];
 }
 
@@ -85,12 +89,12 @@
     if([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
         HeaderCollectionReusableView * cell = [excersizeCollection dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Second" forIndexPath:indexPath];
-        self.lblHeaderName.text = [[[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.row]valueForKey:@"programName"];
+//        self.lblHeaderName.text = [[[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.row]valueForKey:@"programName"];
         
         UILabel* label= [[UILabel alloc] initWithFrame:CGRectMake(10, 0, cell.frame.size.width, cell.frame.size.height)];
         label.text = [[[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.section] valueForKey:@"programName"];
         [label setTextColor:[UIColor whiteColor]];
-//        [cell addSubview:label];
+        [cell addSubview:label];
         
 
         UICollectionViewFlowLayout* lay1 = (UICollectionViewFlowLayout *)excersizeCollection.collectionViewLayout;
@@ -136,6 +140,9 @@
 
 -(NSArray *)getValueSectionWise:(NSIndexPath *)indexPath
 {
+    if (arrayExcersizeList.count == 0) {
+        return  nil;
+    }
     NSArray *arr = [[arrayExcersizeList valueForKey:@"lstExcercise_programs"] objectAtIndex:indexPath.section];
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"programcode == %@",[arr valueForKey:@"programcode"]];
     NSArray *resultArray = [[arrayExcersizeList valueForKey:@"lstExcercise_Details"] filteredArrayUsingPredicate:predicate];

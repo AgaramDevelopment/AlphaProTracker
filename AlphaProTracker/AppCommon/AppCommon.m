@@ -519,6 +519,7 @@ AppCommon *sharedCommon = nil;
         }
     }
    
+    [self swipeHandlerLeft];
 }
 
 -(void)ShowAlterMsg:(NSString*) MsgStr
@@ -650,7 +651,7 @@ AppCommon *sharedCommon = nil;
 
     }
     
-    
+    [self swipeHandlerLeft];
 }
 
 -(void)redirectSelectview:(NSString *)selectViewcontroller

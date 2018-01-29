@@ -22,7 +22,6 @@
     NSInteger selectedButton;
     NSMutableArray* GraphArray;
     NSMutableArray* selectedPlayers;
-    UIButton* btn;
 
 }
 
@@ -70,13 +69,24 @@
     self.chartView = [[AAChartView alloc]init];
     self.customChartView.backgroundColor = [UIColor clearColor];
     self.chartView.backgroundColor = [UIColor clearColor];
-    self.chartView.frame = CGRectMake(0, 0, self.customChartView.frame.size.width, self.customChartView.frame.size.height);
-    [self.chartView setContentMode:UIViewContentModeScaleAspectFit];
+    self.chartView.contentWidth = self.view.frame.size.width;
+    self.chartView.contentHeight = self.view.frame.size.height-100;
+//    self.chartView.frame = CGRectMake(0, 0, self.customChartView.frame.size.width, self.customChartView.frame.size.height);
+    self.chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+
+//    [self.chartView setContentMode:UIViewContentModeScaleAspectFit];
     [self.customChartView addSubview:self.chartView];
     selectedPlayers = [NSMutableArray new];
-    btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _tblDropDown.frame.size.width, 100)];
-    btn.backgroundColor = [UIColor yellowColor];
-    [btn setTitle:@"Done" forState:UIControlStateNormal];
+    
+    
+    /*
+     CGFloat chartViewWidth  = self.view.frame.size.width;
+     CGFloat chartViewHeight = self.view.frame.size.height-250;
+     self.aaChartView = [[AAChartView alloc]init];
+     self.aaChartView.frame = CGRectMake(0, 60, chartViewWidth, chartViewHeight);
+     self.aaChartView.delegate = self;
+
+     */
     
 }
 
@@ -148,6 +158,30 @@
     
     return [[dropdownArray valueForKey:selectedDropDown] count];
 }
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (selectedButton == 2)
+    {
+        UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.rowHeight)];
+        btn.backgroundColor = [UIColor yellowColor];
+        [btn setTitle:@"Done" forState:UIControlStateNormal];
+        
+        return btn;
+    }
+    
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (selectedButton == 2)
+    {
+        return  _tblDropDown.rowHeight;
+    }
+    else
+        return 0;
+
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"paramTVC";
@@ -164,25 +198,24 @@
         
         objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"TeamName"];
     }else if ([selectedDropDown isEqualToString:@"PlayerMultiPlayers"]) {
-//        objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
+        objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
         
-        [_tblDropDown addSubview:btn];
-        MultiSelectTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
-        if (cell == nil) {
-            cell = [[MultiSelectTableViewCell alloc] init];
-        }
-        cell.lblPlayerName.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
-        
-        if ([[selectedPlayers valueForKey:@"PlayerName"]containsObject:cell.lblPlayerName.text]) {
-            [cell.btnCheck setBackgroundColor:[UIColor redColor]];
-        }else
-        {
-            [cell.btnCheck setBackgroundColor:[UIColor clearColor]];
-
-        }
-        cell.btnCheck.tag = indexPath.row;
-        [cell.btnCheck addTarget:self action:@selector(buttonCheckAction:) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
+//        MultiSelectTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+//        if (cell == nil) {
+//            cell = [[MultiSelectTableViewCell alloc] init];
+//        }
+//        cell.lblPlayerName.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
+//
+//        if ([[selectedPlayers valueForKey:@"PlayerName"]containsObject:cell.lblPlayerName.text]) {
+//            [cell.btnCheck setBackgroundColor:[UIColor redColor]];
+//        }else
+//        {
+//            [cell.btnCheck setBackgroundColor:[UIColor clearColor]];
+//
+//        }
+//        cell.btnCheck.tag = indexPath.row;
+//        [cell.btnCheck addTarget:self action:@selector(buttonCheckAction:) forControlEvents:UIControlEventTouchUpInside];
+//        return cell;
 
     }else if ([selectedDropDown isEqualToString:@"AssessmentTests"]) {
         objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"TestName"];
@@ -231,6 +264,20 @@
         case 2:
             lblPlayersName.text = cell.textLabel.text;
             lblPlayersName.tag = indexPath.row;
+        {
+            id value = [dropdownArray objectAtIndex:indexPath.row];
+            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+//                [multiSelect removeObject:value];
+                
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//                [multiSelect addObject:value];
+                
+            }
+
+        }
             
             break;
         case 4:
@@ -376,26 +423,26 @@
 
 - (IBAction)actionShowDropDown:(id)sender {
     [self.scrollView setScrollEnabled:NO];
-
+    CGFloat tableHeight = (IS_IPAD ? 250 : 150);
     selectedButton = [sender tag];
     switch ([sender tag]) {
         case 0:
             [_tblDropDown setHidden:NO];
 
             selectedDropDown = @"GameMultiPlayer";
-            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, 100);
+            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, tableHeight);
             break;
         case 1:
             [_tblDropDown setHidden:NO];
 
-            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, 100);
+            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, tableHeight);
             
             selectedDropDown = @"TeamMultiPlayers";
             break;
         case 2:
             [_tblDropDown setHidden:NO];
 
-            _tblDropDown.frame = CGRectMake(lblPlayersName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, 100);
+            _tblDropDown.frame = CGRectMake(lblPlayersName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, tableHeight);
             
             selectedDropDown = @"PlayerMultiPlayers";
             break;
@@ -407,13 +454,13 @@
         case 4:
             [_tblDropDown setHidden:NO];
             
-            _tblDropDown.frame = CGRectMake(lblAssValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, 100);
+            _tblDropDown.frame = CGRectMake(lblAssValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, tableHeight);
             selectedDropDown = @"AssessmentTests";
             break;
         case 5:
             [_tblDropDown setHidden:NO];
 
-            _tblDropDown.frame = CGRectMake(lblAssValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, 100);
+            _tblDropDown.frame = CGRectMake(lblAssValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, tableHeight);
             selectedDropDown = @"AssessmentTests";
             break;
             

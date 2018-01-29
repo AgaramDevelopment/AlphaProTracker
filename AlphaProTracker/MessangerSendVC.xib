@@ -50,7 +50,7 @@
                                 <action selector="actionShowContactList:" destination="-1" eventType="touchUpInside" id="FoV-Rp-2Bn"/>
                             </connections>
                         </button>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1H0-BA-4zu">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1H0-BA-4zu">
                             <rect key="frame" x="0.0" y="40" width="375" height="481.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -172,10 +172,17 @@
         </view>
         <view contentMode="scaleToFill" id="s2K-Tr-fKs">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uRR-o8-rgb">
+                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7W-pO-37a">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="uOH-ll-bGx" appends="YES" id="PJ1-HE-V4x"/>
+                    </connections>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uRR-o8-rgb">
+                    <rect key="frame" x="0.0" y="20" width="375" height="304"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
@@ -184,12 +191,16 @@
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="S7W-pO-37a" firstAttribute="leading" secondItem="CVL-VH-y7y" secondAttribute="leading" id="GOf-h9-kpm"/>
+                <constraint firstItem="CVL-VH-y7y" firstAttribute="trailing" secondItem="S7W-pO-37a" secondAttribute="trailing" id="R1s-hh-McJ"/>
+                <constraint firstItem="CVL-VH-y7y" firstAttribute="top" secondItem="S7W-pO-37a" secondAttribute="top" constant="20" id="Rfn-Ty-coN"/>
+                <constraint firstItem="CVL-VH-y7y" firstAttribute="bottom" secondItem="S7W-pO-37a" secondAttribute="bottom" id="ygX-rM-h5l"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="CVL-VH-y7y"/>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="uOH-ll-bGx" appends="YES" id="kAr-tT-rCK"/>
-            </connections>
+            <point key="canvasLocation" x="33.5" y="698.5"/>
         </view>
         <tapGestureRecognizer id="uOH-ll-bGx">
             <connections>
