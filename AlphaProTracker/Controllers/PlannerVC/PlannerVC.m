@@ -52,6 +52,8 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * TabbarPosition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * TabbarWidth;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * tableHeight;
+
 @property (nonatomic, strong) FFEditEventPopoverController *popoverControllerEditar;
 @property (nonatomic, strong) FFYearCalendarView *viewCalendarYear;
 @property (nonatomic, strong) FFMonthCalendarView *viewCalendarMonth;
@@ -125,7 +127,6 @@
     [viewCalendarDay setCollectionDidSelectDelegate:self];
     loadedCalendrType = 0;
     arrayButtons = @[self.MONTH, self.WEEK, self.DAY];
-
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -136,10 +137,11 @@
         [self buttonTodayAction:nil];
     }
     
+    [self EventTypeWebservice];
     self.TabbarPosition.constant = self.MONTH.frame.origin.x;
     self.TabbarWidth.constant = self.MONTH.frame.size.width;
     [COMMON AddMenuView:self.view];
-    [self EventTypeWebservice];
+    
 }
 
 -(IBAction)MonthAction:(id)sender
@@ -155,6 +157,7 @@
     [viewCalendarWeek removeFromSuperview];
     [viewCalendarDay removeFromSuperview];
     [self addMonthCalendar];
+    
 }
 
 -(IBAction)WeekAction:(id)sender
@@ -228,7 +231,10 @@
     {
         self.eventTbl.hidden =NO;
         isEvent=YES;
-
+        
+        CGFloat height = MIN(self.view.bounds.size.height, self.eventTbl.contentSize.height);
+        self.tableHeight.constant = height-100;
+        [self.view layoutIfNeeded];
        // [self EventTypeWebservice :usercode:cliendcode:userref];
     }
     else{
@@ -318,7 +324,7 @@
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         manager.requestSerializer = requestSerializer;
-        
+    startDate = @"12-31-2017 12:14:01 PM";
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(startDate)   [dic    setObject:startDate     forKey:@"start"];
         if(endDate)   [dic    setObject:endDate     forKey:@"end"];
@@ -336,6 +342,7 @@
                 self.AllEventDetailListArray = [[NSMutableArray alloc]init];
             
                 [self.AllEventDetailListArray addObjectsFromArray:[responseObject valueForKey:@"lstEventDetailsEntity"]];
+                self.eventArray = self.AllEventDetailListArray;
                 [self setArrayWithEvents:[self arrayWithEvents]];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -457,26 +464,57 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString * selectStr = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
-    NSString * eventTypeCode =[[self.AllEventListArray valueForKey:@"EventTypeCode"] objectAtIndex:indexPath.row];
-    self.eventLbl.text = selectStr;
-    self.eventTbl.hidden =YES;
-    isEvent =NO;
-
-    self.AllEventDetailListArray = [[NSMutableArray alloc]init];
-    for(int i=0;self.eventArray.count>i;i++)
+    if(indexPath.row==0)
     {
-        NSDictionary * objDic =[self.eventArray objectAtIndex:i];
-        NSString * eventType = [objDic valueForKey:@"eventtype"];
-        if([eventTypeCode isEqualToString:eventType])
+        NSString * selectStr = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
+        NSString * eventTypeCode =[[self.AllEventListArray valueForKey:@"EventTypeCode"] objectAtIndex:indexPath.row];
+        self.eventLbl.text = selectStr;
+        self.eventTbl.hidden =YES;
+        isEvent =NO;
+        
+        self.AllEventDetailListArray = [[NSMutableArray alloc]init];
+        self.AllEventDetailListArray = self.eventArray;
+        
+        [self setArrayWithEvents:[self arrayWithEvents]];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIButton* button = [arrayButtons objectAtIndex:loadedCalendrType];
+            [button sendActionsForControlEvents:UIControlEventTouchUpInside];
+            
+        });
+        
+    }
+    else
+    {
+        NSString * selectStr = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
+        NSString * eventTypeCode =[[self.AllEventListArray valueForKey:@"EventTypeCode"] objectAtIndex:indexPath.row];
+        self.eventLbl.text = selectStr;
+        self.eventTbl.hidden =YES;
+        isEvent =NO;
+    
+        self.AllEventDetailListArray = [[NSMutableArray alloc]init];
+        for(int i=0;self.eventArray.count>i;i++)
         {
-            [self.AllEventDetailListArray addObject:objDic];
+            NSDictionary * objDic =[self.eventArray objectAtIndex:i];
+            NSString * eventType = [objDic valueForKey:@"eventtype"];
+            if([eventTypeCode isEqualToString:eventType])
+            {
+                [self.AllEventDetailListArray addObject:objDic];
+            }
         }
+    
+        [self setArrayWithEvents:[self arrayWithEvents]];
+    
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIButton* button = [arrayButtons objectAtIndex:loadedCalendrType];
+            [button sendActionsForControlEvents:UIControlEventTouchUpInside];
+        
+        });
     }
     
     if(indexPath.row ==0)
     {
-        self.eventview.backgroundColor=[UIColor colorWithRed:(37/255.0f) green:(187/255.0f) blue:(151/255.0f) alpha:1.0f];
+        //self.eventview.backgroundColor=[UIColor colorWithRed:(37/255.0f) green:(187/255.0f) blue:(151/255.0f) alpha:1.0f];
     }
     else if(indexPath.row ==1)
     {
