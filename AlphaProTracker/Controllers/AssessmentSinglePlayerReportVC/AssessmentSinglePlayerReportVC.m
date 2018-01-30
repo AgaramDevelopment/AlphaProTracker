@@ -14,14 +14,17 @@
 #import "WebService.h"
 #import "DatePickerViewController.h"
 #import "MultiSelectTableViewCell.h"
+#import "DropDownViewController.h"
 
 
-@interface AssessmentSinglePlayerReportVC () <DatePickerProtocol>
+@interface AssessmentSinglePlayerReportVC () <DatePickerProtocol,DropDownProtocol>
 {
     NSMutableArray* dropdownArray;
     NSString* selectedDropDown;
     NSInteger selectedButton;
     NSMutableArray* GraphArray;
+    NSMutableArray* playerDropDown;
+
 
 }
 
@@ -42,9 +45,12 @@
     self.chartView = [[AAChartView alloc]init];
     self.customChartView.backgroundColor = [UIColor clearColor];
     self.chartView.backgroundColor = [UIColor clearColor];
-    self.chartView.frame = CGRectMake(0, 0, self.customChartView.frame.size.width, self.customChartView.frame.size.height);
     [self.chartView setContentMode:UIViewContentModeScaleAspectFit];
+    self.chartView.contentWidth = self.view.frame.size.width;
+    self.chartView.contentHeight = self.view.frame.size.height-100;
+    self.chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.customChartView.frame.size.height);
     [self.customChartView addSubview:self.chartView];
+
 
     //[COMMON AddMenuView:self.view];
 //    self.teamview.layer.borderWidth=0.5f;
@@ -67,6 +73,8 @@
 //
 //    self.asv2view.layer.borderWidth=0.5f;
 //    self.asv2view.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
+    
+    playerDropDown = [NSMutableArray new];
 
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
@@ -116,7 +124,7 @@
     if ([lblGameName.text isEqualToString:@""]) {
         [AppCommon showAlertWithMessage:@"Please select Game"];
     }
-    [self WebService];
+    [self graphWebService];
 }
 
 //- (IBAction)actionShowDropDown:(id)sender {
@@ -316,7 +324,7 @@
 
 }
 
--(void)WebService
+-(void)graphWebService
 {
     /*
      API URL : http://192.168.1.84:8029/AGAPTSERVICE.svc/SINGLEPLAYERCHART
@@ -409,6 +417,11 @@
 {
     if (selectedButton == 3) {
         lblFromDate.text = Date;
+    }
+    else
+    {
+        lblToDate.text = Date;
+
     }
     NSLog(@"selcted date %@",Date);
     
@@ -577,58 +590,181 @@
     return nil;
 }
 
-- (IBAction)actionShowDropDown:(id)sender {
-    [self.scrollView setScrollEnabled:NO];
+//- (IBAction)actionShowDropDown:(id)sender {
+//
+//    selectedButton = [sender tag];
+//    switch ([sender tag]) {
+//        case 0:
+//            [_tblDropDown setHidden:NO];
+//
+//            selectedDropDown = @"GameMultiPlayer";
+//            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, 100);
+//            break;
+//        case 1:
+//            [_tblDropDown setHidden:NO];
+//
+//            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, 100);
+//
+//            selectedDropDown = @"TeamMultiPlayers";
+//            break;
+//        case 2:
+//            [_tblDropDown setHidden:NO];
+//
+//            _tblDropDown.frame = CGRectMake(lblPlayerName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, 100);
+//
+//            selectedDropDown = @"PlayerMultiPlayers";
+//            break;
+//        case 3:
+//            [_tblDropDown setHidden:YES];
+//            [self openDatePickerVC];
+//
+//            break;
+//        case 4:
+//            [_tblDropDown setHidden:NO];
+//
+//            _tblDropDown.frame = CGRectMake(lblAssessmentValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, 100);
+//            selectedDropDown = @"AssessmentTests";
+//            break;
+//        case 5:
+//            [_tblDropDown setHidden:NO];
+//
+//            _tblDropDown.frame = CGRectMake(lblAssessmentValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, 100);
+//            selectedDropDown = @"AssessmentTests";
+//            break;
+//
+//
+//        default:
+//            break;
+//    }
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.tblDropDown reloadData];
+//    });
+//
+//}
 
+- (IBAction)actionShowDropDown:(id)sender {
+    
+    
+    /*
+     
+     if ([selectedDropDown isEqualToString:@"lstGame"]) {
+     objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"GameName"];
+     }else if ([selectedDropDown isEqualToString:@"lstTeam"]) {
+     objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"TeamName"];
+     }else if ([selectedDropDown isEqualToString:@"lstPlayer"]) {
+     objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
+     }else if ([selectedDropDown isEqualToString:@"AssessmentTests"]) {
+     objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"TestName"];
+     }
+
+     */
+    
+    DropDownViewController* VC = (DropDownViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DropDownVC"];
+    VC.dropDownDelegate = self;
+    VC.view.frame = _scrollView.frame;
+    
+    
+    CGFloat tableHeight = (IS_IPAD ? 250 : 150);
     selectedButton = [sender tag];
     switch ([sender tag]) {
         case 0:
-            [_tblDropDown setHidden:NO];
-
-            selectedDropDown = @"GameMultiPlayer";
-            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, 100);
+            VC.tableArray = [dropdownArray valueForKey:@"lstGame"];
+            VC.KeyName = @"GameName";
+            VC.tblDropDown.frame = CGRectMake(gameview.frame.origin.x, CGRectGetMaxY(gameview.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+            
+            
             break;
         case 1:
-            [_tblDropDown setHidden:NO];
-
-            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, 100);
-
-            selectedDropDown = @"TeamMultiPlayers";
+            VC.tableArray = [dropdownArray valueForKey:@"lstTeam"];
+            VC.KeyName = @"TeamName";
+            
+            VC.tblDropDown.frame = CGRectMake(teamview.frame.origin.x, CGRectGetMaxY(teamview.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+            
+            
             break;
         case 2:
-            [_tblDropDown setHidden:NO];
-
-            _tblDropDown.frame = CGRectMake(lblPlayerName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, 100);
-
-            selectedDropDown = @"PlayerMultiPlayers";
+            VC.tblDropDown.frame = CGRectMake(playerview.frame.origin.x, CGRectGetMaxY(playerview.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+            VC.KeyName = @"PlayerName";
+            VC.tableArray = [dropdownArray valueForKey:@"lstPlayer"];
+            
             break;
         case 3:
-            [_tblDropDown setHidden:YES];
             [self openDatePickerVC];
-
+            
             break;
         case 4:
-            [_tblDropDown setHidden:NO];
-
-            _tblDropDown.frame = CGRectMake(lblAssessmentValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, 100);
-            selectedDropDown = @"AssessmentTests";
+            [self openDatePickerVC];
+            
             break;
         case 5:
-            [_tblDropDown setHidden:NO];
-
-            _tblDropDown.frame = CGRectMake(lblAssessmentValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, 100);
-            selectedDropDown = @"AssessmentTests";
+            VC.tblDropDown.frame = CGRectMake(asv1view.frame.origin.x, CGRectGetMaxY(asv1view.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+            
+            VC.tableArray = [dropdownArray valueForKey:@"AssessmentTests"];
+            VC.KeyName = @"TestName";
+            
+            
             break;
-
-
+            
+        case 6:
+            VC.tableArray = [dropdownArray valueForKey:@"AssessmentTests"];
+            VC.KeyName = @"TestName";
+            
+            VC.tblDropDown.frame = CGRectMake(asv2view.frame.origin.x, CGRectGetMaxY(asv2view.frame)+80, lblGameName.frame.size.width, tableHeight);
+            
+            
+            break;
+            
+            
         default:
             break;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tblDropDown reloadData];
-    });
-
+    [self presentViewController:VC animated:YES completion:nil];
 }
 
+
+-(void)selectedtableValue:(NSString *)selectedValue andIndex:(NSIndexPath *)indexPath
+{
+    NSLog(@"VALUE %@ ",selectedValue);
+    
+    switch (selectedButton) {
+        case 0:
+            lblGameName.text = selectedValue;
+            lblGameName.tag = indexPath.row;
+            
+            break;
+        case 1:
+            lblTeamName.text = selectedValue;
+            lblTeamName.tag = indexPath.row;
+            
+            break;
+        case 2:
+            lblPlayerName.text = selectedValue;
+            lblPlayerName.tag = indexPath.row;
+            
+            break;
+        case 5:
+            lblAssessmentValue1.text = selectedValue;
+            lblAssessmentValue1.tag = indexPath.row;
+            
+            break;
+        case 6:
+            lblAssessmentValue2.text = selectedValue;
+            lblAssessmentValue2.tag = indexPath.row;
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+-(void)multiSelectedValue:(NSString *)MultiString andRelatedCollection:(NSArray *)array
+{
+//    [selectedPlayers removeAllObjects];
+//    [selectedPlayers addObjectsFromArray:array];
+    NSLog(@"multiSelectedValue %@",MultiString);
+//    lblPlayersName.text = MultiString;
+}
 
 @end

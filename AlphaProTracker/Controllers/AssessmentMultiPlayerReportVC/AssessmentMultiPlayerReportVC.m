@@ -14,14 +14,16 @@
 #import "WebService.h"
 #import "DatePickerViewController.h"
 #import "MultiSelectTableViewCell.h"
+#import "DropDownViewController.h"
 
-@interface AssessmentMultiPlayerReportVC () <DatePickerProtocol>
+@interface AssessmentMultiPlayerReportVC () <DatePickerProtocol,DropDownProtocol>
 {
     NSMutableArray* dropdownArray;
-    NSString* selectedDropDown;
     NSInteger selectedButton;
     NSMutableArray* GraphArray;
     NSMutableArray* selectedPlayers;
+    NSDictionary* DropdownKeyValue;
+    NSMutableArray* playerDropDown;
 
 }
 
@@ -69,14 +71,15 @@
     self.chartView = [[AAChartView alloc]init];
     self.customChartView.backgroundColor = [UIColor clearColor];
     self.chartView.backgroundColor = [UIColor clearColor];
+    [self.chartView setContentMode:UIViewContentModeScaleAspectFit];
     self.chartView.contentWidth = self.view.frame.size.width;
     self.chartView.contentHeight = self.view.frame.size.height-100;
-//    self.chartView.frame = CGRectMake(0, 0, self.customChartView.frame.size.width, self.customChartView.frame.size.height);
-    self.chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-
-//    [self.chartView setContentMode:UIViewContentModeScaleAspectFit];
+    self.chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.customChartView.frame.size.height);
     [self.customChartView addSubview:self.chartView];
+    
     selectedPlayers = [NSMutableArray new];
+    playerDropDown = [NSMutableArray new];
+
     
     
     /*
@@ -154,9 +157,16 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     
-    return [[dropdownArray valueForKey:selectedDropDown] count];
+    if (selectedButton == 2)
+    {
+        return playerDropDown.count;
+
+    }
+
+    return [[dropdownArray valueForKey:[DropdownKeyValue allKeys].firstObject] count];
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -165,20 +175,26 @@
         UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.rowHeight)];
         btn.backgroundColor = [UIColor yellowColor];
         [btn setTitle:@"Done" forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(closeMultiselect) forControlEvents:UIControlEventTouchUpInside];
         
         return btn;
     }
-    
+    NSLog(@"BUTTON CALLED");
     return nil;
+}
+
+-(void)closeMultiselect
+{
+    [_tblDropDown setHidden:YES];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (selectedButton == 2)
     {
-        return  _tblDropDown.rowHeight;
+        return  30;
     }
-    else
         return 0;
 
 }
@@ -191,56 +207,61 @@
     {
         objCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    if ([selectedDropDown isEqualToString:@"GameMultiPlayer"]) {
-        objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"GameName"];
-    }else if ([selectedDropDown isEqualToString:@"TeamMultiPlayers"]) {
-        
-        
-        objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"TeamName"];
-    }else if ([selectedDropDown isEqualToString:@"PlayerMultiPlayers"]) {
-        objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
-        
-//        MultiSelectTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
-//        if (cell == nil) {
-//            cell = [[MultiSelectTableViewCell alloc] init];
-//        }
-//        cell.lblPlayerName.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
-//
-//        if ([[selectedPlayers valueForKey:@"PlayerName"]containsObject:cell.lblPlayerName.text]) {
-//            [cell.btnCheck setBackgroundColor:[UIColor redColor]];
-//        }else
-//        {
-//            [cell.btnCheck setBackgroundColor:[UIColor clearColor]];
-//
-//        }
-//        cell.btnCheck.tag = indexPath.row;
-//        [cell.btnCheck addTarget:self action:@selector(buttonCheckAction:) forControlEvents:UIControlEventTouchUpInside];
-//        return cell;
-
-    }else if ([selectedDropDown isEqualToString:@"AssessmentTests"]) {
-        objCell.textLabel.text = [[[dropdownArray valueForKey:selectedDropDown] objectAtIndex:indexPath.row]valueForKey:@"TestName"];
-    }
     
-    [self.tableTopView removeFromSuperview];
+    if (selectedButton == 2)
+    {
+        objCell.textLabel.text = [[playerDropDown objectAtIndex:indexPath.row]valueForKey:@"PlayerName"];
+
+        if ([[selectedPlayers valueForKey:@"PlayerName"] containsObject:objCell.textLabel.text]) {
+            objCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }else
+        {
+            objCell.accessoryType = UITableViewCellAccessoryNone;
+        }
+
+    }
+    else
+    {
+        objCell.accessoryType = UITableViewCellAccessoryNone;
+        objCell.textLabel.text = [[[dropdownArray valueForKey:[DropdownKeyValue allKeys].firstObject] objectAtIndex:indexPath.row]valueForKey:[DropdownKeyValue allValues].firstObject];
+    }
+
+
     return objCell;
 }
 
--(void)buttonCheckAction:(id)sender
+-(void)buttonCheckAction:(NSIndexPath *)indexPath
 {
-    id value = [[dropdownArray valueForKey:@"PlayerMultiPlayers"] objectAtIndex:[sender tag]];
-    if ([[selectedPlayers valueForKey:@"PlayerName"]containsObject:[value valueForKey:@"PlayerName"]]) {
+    id value = [playerDropDown objectAtIndex:indexPath.row];
+    
+    if (selectedPlayers.count == 0 && indexPath.row == 0)
+    {
+        [selectedPlayers removeAllObjects];
+        [selectedPlayers addObjectsFromArray:playerDropDown];
+        
+    }else if (selectedPlayers.count > 0 && indexPath.row == 0)
+    {
+        [selectedPlayers removeAllObjects];
+    }
+    else if ([selectedPlayers containsObject:value])
+    {
         [selectedPlayers removeObject:value];
-    }else{
+    }
+    else
+    {
         [selectedPlayers addObject:value];
     }
     
-    if (selectedPlayers.count > 0) {
+    if (selectedPlayers.count > 0)
+    {
+        if (selectedPlayers.count == playerDropDown.count) {
+            NSArray* arr = [selectedPlayers subarrayWithRange:NSMakeRange(1, selectedPlayers.count-1)];
+            lblPlayersName.text = [[arr valueForKey:@"PlayerName"] componentsJoinedByString:@","];
+            return;
+        }
         lblPlayersName.text = [[selectedPlayers valueForKey:@"PlayerName"] componentsJoinedByString:@","];
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tblDropDown reloadData];
-    });
 
 }
 
@@ -251,46 +272,31 @@
         case 0:
             lblGameName.text = cell.textLabel.text;
             lblGameName.tag = indexPath.row;
-            [_tblDropDown setHidden:YES];
+            [self closeMultiselect];
 
             break;
         case 1:
             lblTeamName.text = cell.textLabel.text;
             lblTeamName.tag = indexPath.row;
-            [_tblDropDown setHidden:YES];
+            [self closeMultiselect];
 
-            
             break;
         case 2:
             lblPlayersName.text = cell.textLabel.text;
             lblPlayersName.tag = indexPath.row;
-        {
-            id value = [dropdownArray objectAtIndex:indexPath.row];
-            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-            if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-//                [multiSelect removeObject:value];
-                
-            } else {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//                [multiSelect addObject:value];
-                
-            }
-
-        }
+            [self buttonCheckAction:indexPath];
             
             break;
         case 4:
             lblAssValue1.text = cell.textLabel.text;
             lblAssValue1.tag = indexPath.row;
-            [_tblDropDown setHidden:YES];
+            [self closeMultiselect];
 
-            
             break;
         case 5:
             lblAssValue2.text = cell.textLabel.text;
             lblAssValue2.tag = indexPath.row;
-            [_tblDropDown setHidden:YES];
+            [self closeMultiselect];
 
             
             break;
@@ -298,7 +304,13 @@
         default:
             break;
     }
+    
         [self.scrollView setScrollEnabled:YES];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tblDropDown reloadData];
+    });
+
     
 }
 
@@ -345,7 +357,7 @@
     }];
     
 }
--(void)WebService
+-(void)GraphWebService
 {
     /*
      API URL : http://192.168.1.84:8029/AGAPTSERVICE.svc/SINGLEPLAYERCHART
@@ -421,57 +433,81 @@
     
 }
 
+-(IBAction)closeView:(id)sender
+{
+    [_tblDropDown.superview setHidden:YES];
+}
+
 - (IBAction)actionShowDropDown:(id)sender {
-    [self.scrollView setScrollEnabled:NO];
+    
+    DropDownViewController* VC = (DropDownViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DropDownVC"];
+    VC.dropDownDelegate = self;
+    VC.view.frame = _scrollView.frame;
+    
+    
     CGFloat tableHeight = (IS_IPAD ? 250 : 150);
     selectedButton = [sender tag];
     switch ([sender tag]) {
         case 0:
-            [_tblDropDown setHidden:NO];
+            VC.tableArray = [dropdownArray valueForKey:@"GameMultiPlayer"];
+            VC.KeyName = @"GameName";
+            VC.tblDropDown.frame = CGRectMake(gameview.frame.origin.x, CGRectGetMaxY(gameview.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+            
 
-            selectedDropDown = @"GameMultiPlayer";
-            _tblDropDown.frame = CGRectMake(lblGameName.superview.frame.origin.x, CGRectGetMaxY(gameview.frame)+2, lblGameName.frame.size.width, tableHeight);
             break;
         case 1:
-            [_tblDropDown setHidden:NO];
+            VC.tableArray = [dropdownArray valueForKey:@"TeamMultiPlayers"];
+            VC.KeyName = @"TeamName";
 
-            _tblDropDown.frame = CGRectMake(lblTeamName.superview.frame.origin.x, CGRectGetMaxY(teamview.frame)+2, lblGameName.frame.size.width, tableHeight);
-            
-            selectedDropDown = @"TeamMultiPlayers";
+            VC.tblDropDown.frame = CGRectMake(teamview.frame.origin.x, CGRectGetMaxY(teamview.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+
+
             break;
         case 2:
-            [_tblDropDown setHidden:NO];
+            VC.tblDropDown.frame = CGRectMake(playerview.frame.origin.x, CGRectGetMaxY(playerview.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+            VC.HeaderRequired = YES;
+            VC.KeyName = @"PlayerName";
 
-            _tblDropDown.frame = CGRectMake(lblPlayersName.superview.frame.origin.x, CGRectGetMaxY(playerview.frame)+2, lblGameName.frame.size.width, tableHeight);
-            
-            selectedDropDown = @"PlayerMultiPlayers";
+            DropdownKeyValue = @{@"PlayerMultiPlayers":@"PlayerName"};
+        {
+            [playerDropDown removeAllObjects];
+            [playerDropDown addObjectsFromArray:[dropdownArray valueForKey:@"PlayerMultiPlayers"]];
+            NSDictionary* dict = @{@"PlayerCode":@"",@"PlayerName":@"Select All"};
+            [playerDropDown insertObject:dict atIndex:0];
+
+        }
+            VC.tableArray = playerDropDown;
+
             break;
         case 3:
-            [_tblDropDown setHidden:YES];
+            [self closeMultiselect];
             [self openDatePickerVC];
             
             break;
         case 4:
-            [_tblDropDown setHidden:NO];
-            
-            _tblDropDown.frame = CGRectMake(lblAssValue1.superview.frame.origin.x, CGRectGetMaxY(asv1view.frame)+2, lblGameName.frame.size.width, tableHeight);
-            selectedDropDown = @"AssessmentTests";
+            VC.tblDropDown.frame = CGRectMake(asv1view.frame.origin.x, CGRectGetMaxY(asv1view.frame)+80+2, lblGameName.frame.size.width, tableHeight);
+
+            VC.tableArray = [dropdownArray valueForKey:@"AssessmentTests"];
+            VC.KeyName = @"TestName";
+
+            DropdownKeyValue = @{@"AssessmentTests":@"TestName"};
+
             break;
         case 5:
-            [_tblDropDown setHidden:NO];
+            VC.tableArray = [dropdownArray valueForKey:@"AssessmentTests"];
+            VC.KeyName = @"TestName";
 
-            _tblDropDown.frame = CGRectMake(lblAssValue2.superview.frame.origin.x, CGRectGetMaxY(asv2view.frame)+2, lblGameName.frame.size.width, tableHeight);
-            selectedDropDown = @"AssessmentTests";
+            VC.tblDropDown.frame = CGRectMake(asv2view.frame.origin.x, CGRectGetMaxY(asv2view.frame)+80, lblGameName.frame.size.width, tableHeight);
+
+            DropdownKeyValue = @{@"AssessmentTests":@"TestName"};
+
             break;
             
             
         default:
             break;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tblDropDown reloadData];
-    });
-
+    [self presentViewController:VC animated:YES completion:nil];
 }
 
 -(void)openDatePickerVC
@@ -485,7 +521,7 @@
 
 - (IBAction)actionViewMultiPlayerChart:(id)sender {
     
-//    [self WebService];
+    [self GraphWebService];
     
 //    self.chartModel = [self configureTheChartModel];
 //    [self.chartView aa_drawChartWithChartModel:self.chartModel];
@@ -612,6 +648,52 @@
 
 
 
+}
+
+-(void)selectedtableValue:(NSString *)selectedValue andIndex:(NSIndexPath *)indexPath
+{
+    NSLog(@"VALUE %@ ",selectedValue);
+    
+    switch (selectedButton) {
+        case 0:
+            lblGameName.text = selectedValue;
+            lblGameName.tag = indexPath.row;
+            
+            break;
+        case 1:
+            lblTeamName.text = selectedValue;
+            lblTeamName.tag = indexPath.row;
+            
+            break;
+        case 2:
+            lblPlayersName.text = selectedValue;
+            lblPlayersName.tag = indexPath.row;
+            
+            break;
+        case 4:
+            lblAssValue1.text = selectedValue;
+            lblAssValue1.tag = indexPath.row;
+            
+            break;
+        case 5:
+            lblAssValue2.text = selectedValue;
+            lblAssValue2.tag = indexPath.row;
+            
+            break;
+            
+        default:
+            break;
+    }
+
+}
+
+-(void)multiSelectedValue:(NSString *)MultiString andRelatedCollection:(NSArray *)array
+{
+    [selectedPlayers removeAllObjects];
+    [selectedPlayers addObjectsFromArray:array];
+    [selectedPlayers removeObjectAtIndex:0];
+    NSLog(@"multiSelectedValue %@",MultiString);
+    lblPlayersName.text = MultiString;
 }
 
 @end
