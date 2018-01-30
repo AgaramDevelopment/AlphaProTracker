@@ -45,6 +45,13 @@
     NSString * selectCauseCode;
     NSString * selectExpertOpinionCode;
     UIImage *imageToPost;
+    
+    NSString *mrData;
+    NSString *ctData;
+    NSString *xrData;
+    NSString *bloodData;
+    
+    CGSize dataSize;
 }
 
 
@@ -187,6 +194,11 @@
     //setting toolbar as inputAccessoryView
     self.onSetLbl.inputAccessoryView = toolbar;
     self.expectedLbl.inputAccessoryView = toolbar;
+    
+    xrData = @"";
+    ctData = @"";
+    bloodData = @"";
+    mrData = @"";
     
     [self allviewSetbordermethod];
     [self startFetchTeamPlayerGameService];
@@ -997,14 +1009,50 @@
     if(selectMainSyntromCode)   [dic    setObject:selectMainSyntromCode     forKey:@"MAINSYMPTOMCODE"];
     if(selectCauseCode)   [dic    setObject:selectCauseCode     forKey:@"CAUSEOFILLNESSSYMPTOMCODE"];
     if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"EXPERTOPINIONTAKEN"];
-    [dic    setObject:@""     forKey:@"XRAYSFILE"];
-    [dic    setObject:@""     forKey:@"XRAYSFILENAME"];
-    [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-    [dic    setObject:@""     forKey:@"CTSCANSFILENAME"];
-    [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-    [dic    setObject:@""     forKey:@"MRISCANSFILENAME"];
-    [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
-    [dic    setObject:@""     forKey:@"BLOODTESTFILENAME"];
+
+        if(xrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"XRAYSFILE"];
+        }
+        else{
+            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+        }
+        [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
+        
+        if(ctData==nil)
+        {
+            [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+        }
+        [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
+        
+        
+        
+        if(mrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+        }
+        [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
+        
+        
+        if(bloodData==nil)
+        {
+            [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
+        }
+        else
+        {
+            [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
+        }
+        [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
+        
+        
     if(self.expectedLbl.text)   [dic    setObject:self.expectedLbl.text     forKey:@"EXPECTEDDATEOFRECOVERY"];
     if(usercode)   [dic    setObject:usercode     forKey:@"CREATEDBY"];
     
@@ -1080,14 +1128,50 @@
         if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"EXPERTOPINIONTAKEN"];
         if(selectIllnessCode)   [dic    setObject:selectIllnessCode     forKey:@"ILLNESSCODE"];
 
-        [dic    setObject:@""     forKey:@"XRAYSFILE"];
-        [dic    setObject:@""     forKey:@"XRAYSFILENAME"];
-        [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-        [dic    setObject:@""     forKey:@"CTSCANSFILENAME"];
-        [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-        [dic    setObject:@""     forKey:@"MRISCANSFILENAME"];
-        [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
-        [dic    setObject:@""     forKey:@"BLOODTESTFILENAME"];
+        if(xrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"XRAYSFILE"];
+        }
+        else{
+            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+        }
+        [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
+        
+        
+        
+        if(ctData==nil)
+        {
+            [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+        }
+        [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
+        
+        
+        
+        if(mrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+        }
+        [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
+        
+        
+        if(bloodData==nil)
+        {
+            [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
+        }
+        else
+        {
+            [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
+        }
+        [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
+        
         if(self.expectedLbl.text)   [dic    setObject:self.expectedLbl.text     forKey:@"EXPECTEDDATEOFRECOVERY"];
         if(usercode)   [dic    setObject:usercode     forKey:@"CREATEDBY"];
         
@@ -1216,7 +1300,6 @@
         self.CTScanLbl.text =@"";
         self.MRILbl.text =@"";
         self.BloodTestLbl.text=@"";
-
     }
     else
     {
