@@ -34,6 +34,7 @@
     BOOL isCentral;
     BOOL isValue;
     BOOL isInterface;
+    UIView * objSandCView;
 }
 @property (nonatomic,strong) NSMutableArray * ObjSelectTestArray;
 @property (nonatomic,strong) DBAConnection * objDBConnection;
@@ -279,6 +280,7 @@
         {
             self.leftView.hidden =NO;
             self.rightView.hidden = NO;
+            self.popTbl.hidden = YES;
             self.left_Txt.text = [objDic valueForKey:@"romLeft"];
             self.right_Txt.text = [objDic valueForKey:@"romRight"];
             self.rightViewYposition.constant = -40;
@@ -383,19 +385,94 @@
     else if ([SCREEN_CODE_S_C isEqualToString:self.SelectScreenId])
     {
         NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
-        self.remark_Txt.text =[objDic valueForKey:@"Remark"];
+        
+        
+        
+        self.remark_Txt.text =[objDic valueForKey:@"Remarks"];
         int noofTrails;
-        NSString * count =[objDic valueForKey:@"NoOfTrails"];
+        NSString * count =[objDic valueForKey:@"Nooftrials"];
         noofTrails =[count intValue];
+        self.popTbl.hidden = YES;
+
+        objSandCView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,noofTrails*90)];
+        if([[objDic valueForKey:@"SideName"] isEqualToString:@"RIGHT & LEFT"])
+        {
+            self.RemarkViewYposition.constant = noofTrails*80-400;
+
         for(int i=0; i< noofTrails; i++)
         {
-            //setDesign
-            if([[objDic valueForKey:@"Units"] isEqualToString:@"MSC320"])
+            
+            UILabel * Rightlbl = (i==0)?[[UILabel alloc]initWithFrame:CGRectMake(10, i*40,self.view.frame.size.width/2, 30)] : [[UILabel alloc]initWithFrame:CGRectMake(10, (i+1)*40,self.view.frame.size.width/2, 30)];
+            Rightlbl.text = (i==0)?@"Right":[NSString stringWithFormat:@"Right%d",i+1];
+            Rightlbl.textColor=[UIColor whiteColor];
+            [objSandCView addSubview:Rightlbl];
+
+            UITextField * trail1 = (i==0)?[[UITextField alloc]initWithFrame:CGRectMake(Rightlbl.frame.size.width+5,i*40,self.view.frame.size.width/2.1,30)] :[[UITextField alloc]initWithFrame:CGRectMake(Rightlbl.frame.size.width+5,(i+1)*40,self.view.frame.size.width/2.1,30)];
+            trail1.textColor=[UIColor whiteColor];
+
+            trail1.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            trail1.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:0.27];
+
+            trail1.layer.borderWidth =0.5;
+            trail1.layer.masksToBounds = YES;
+            [objSandCView addSubview:trail1];
+            
+            UILabel * leftLbl = (i==0)?[[UILabel alloc]initWithFrame:CGRectMake(10, (i+1)*40,self.view.frame.size.width/2,30)]:[[UILabel alloc]initWithFrame:CGRectMake(10, (i+2)*40,self.view.frame.size.width/2,30)];
+            leftLbl.textColor=[UIColor whiteColor];
+
+            leftLbl.text = (i==0)? @"Left":[NSString stringWithFormat:@"Left%d",i+1];
+            [objSandCView addSubview:leftLbl];
+            
+            UITextField * trail2 = (i==0)?[[UITextField alloc]initWithFrame:CGRectMake(leftLbl.frame.size.width+5, (i+1)*40, self.view.frame.size.width/2.1,30)]:[[UITextField alloc]initWithFrame:CGRectMake(leftLbl.frame.size.width+5, (i+2)*40, self.view.frame.size.width/2.1,30)];
+            trail2.textColor=[UIColor whiteColor];
+            trail2.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:0.27];
+            trail2.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            trail2.layer.borderWidth =0.5;
+            trail2.layer.masksToBounds = YES;
+            [objSandCView addSubview:trail2];
+            if(IsEdit == YES)
             {
-                
+                if(i==0)
+                {
+                    trail1.text =[objDic valueForKey:@"left"];
+                    trail2.text = [objDic valueForKey:@"Right"];
+                }
+                else
+                {
+                    trail1.text =[objDic valueForKey:[NSString stringWithFormat:@"left%d",i]];
+                    trail2.text = [objDic valueForKey:[NSString stringWithFormat:@"Right%d",i]];
+                }
             }
         }
-        
+
+        }
+        else if([[objDic valueForKey:@"SideName"] isEqualToString:@"CENTRAL"])
+        {
+            for(int i=0; i< noofTrails; i++)
+            {
+            UILabel * TitleLbl = [[UILabel alloc]initWithFrame:CGRectMake(10, i*40,self.view.frame.size.width/2, 40)];
+            TitleLbl.text = [NSString stringWithFormat:@"Center%d",i];
+            [objSandCView addSubview:TitleLbl];
+            
+            UITextField * trail1 = [[UITextField alloc]initWithFrame:CGRectMake(TitleLbl.frame.size.width+5,i*40,self.view.frame.size.width/2.5,40)];
+            trail1.layer.borderColor = [UIColor whiteColor].CGColor;
+            trail1.layer.borderWidth =1;
+            trail1.layer.masksToBounds = YES;
+            [objSandCView addSubview:trail1];
+                if(IsEdit == YES)
+                {
+                    if(i==0)
+                    {
+                        trail1.text =[objDic valueForKey:@"Cente"];
+                        
+                    }
+                    else
+                    {
+                        trail1.text =[objDic valueForKey:[NSString stringWithFormat:@"Cente%d",i]];
+                    }
+                }
+            }
+        }
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
@@ -406,6 +483,8 @@
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
             self.ingnoreStatus =@"false";
         }
+        [self.CommScroll addSubview:objSandCView];
+
     }
     else if ([SCREEN_CODE_GAINT isEqualToString:self.SelectScreenId])
     {
@@ -808,6 +887,63 @@
         else
         {
             [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        }
+        self.description_lbl.text = @"";
+        self.remark_Txt.text =@"";
+    }
+    else if ([SCREEN_CODE_S_C isEqualToString:self.SelectScreenId])
+    {
+        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        
+        NSMutableArray * obj = [[NSMutableArray alloc]init];
+        
+        for (UIView *subview in  objSandCView.subviews)
+        {
+            if([subview isKindOfClass:[UITextField class]])
+            {
+                NSLog(@"%@",subview);
+                UITextField * strText = subview;
+                NSString * objStr = strText.text;
+                [obj addObject:objStr];
+            }
+        }
+        for(int i=0; i<obj.count;i++)
+        {
+            if(i==0)
+            {
+                NSString * objStr = ([[obj objectAtIndex:i] isEqualToString:@""])?@"0":[obj objectAtIndex:i];
+                [objDic setValue:[NSNumber numberWithInteger:[objStr integerValue]] forKey:@"left"];
+
+            }
+            else if (i== 1)
+            {
+                NSString * objStr = ([[obj objectAtIndex:i] isEqualToString:@""])?@"0":[obj objectAtIndex:i];
+                
+                [objDic setValue:[NSNumber numberWithInteger:[objStr integerValue]] forKey:@"Right"];
+            }
+            if(i%2==0 && i!=0)
+            {
+                NSString * objStr = ([[obj objectAtIndex:i] isEqualToString:@""])?@"0":[obj objectAtIndex:i];
+
+                [objDic setValue:[NSNumber numberWithInteger:[objStr integerValue]] forKey:[NSString stringWithFormat:@"left%d",i]];
+                
+            }
+            else if(i%2 == 1 && i!=1)
+            {
+                NSString * objStr = ([[obj objectAtIndex:i] isEqualToString:@""])?@"0":[obj objectAtIndex:i];
+
+                [objDic setValue:[NSNumber numberWithInteger:[objStr integerValue]] forKey:[NSString stringWithFormat:@"Right%d",i]];
+            }
+            
+        }
+        
+        if(IsEdit == YES)
+        {
+            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[objDic valueForKey:@"left"] :[objDic valueForKey:@"Right"] :[objDic valueForKey:@"Center"] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :[objDic valueForKey:@"left1"] :[objDic valueForKey:@"Right1"] :[objDic valueForKey:@"Center1"] :[objDic valueForKey:@"left2"] :[objDic valueForKey:@"Right2"] :[objDic valueForKey:@"Center2"] :[objDic valueForKey:@"left3"] :[objDic valueForKey:@"Right3"] :[objDic valueForKey:@"Center3"] :[objDic valueForKey:@"left4"] :[objDic valueForKey:@"Right4"] :[objDic valueForKey:@"Center4"] :[objDic valueForKey:@"left5"] :[objDic valueForKey:@"Right5"] :[objDic valueForKey:@"Center5"] :[objDic valueForKey:@"left6"] :[objDic valueForKey:@"Right6"] :[objDic valueForKey:@"Center6"] :[objDic valueForKey:@"left7"] :[objDic valueForKey:@"Right7"] :[objDic valueForKey:@"Center7"] :[objDic valueForKey:@"left8"] :[objDic valueForKey:@"Right8"] :[objDic valueForKey:@"Center8"] :[objDic valueForKey:@"left9"] :[objDic valueForKey:@"Right9"] :[objDic valueForKey:@"Center9"] :@"0"];
+        }
+        else
+        {
+            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[objDic valueForKey:@"left"] :[objDic valueForKey:@"Right"] :[objDic valueForKey:@"Center"] :self.valueTxt.text :self.remark_Txt.text :self.interface_Txt.text :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :[objDic valueForKey:@"left1"] :[objDic valueForKey:@"Right1"] :[objDic valueForKey:@"Center1"] :[objDic valueForKey:@"left2"] :[objDic valueForKey:@"Right2"] :[objDic valueForKey:@"Center2"] :[objDic valueForKey:@"left3"] :[objDic valueForKey:@"Right3"] :[objDic valueForKey:@"Center3"] :[objDic valueForKey:@"left4"] :[objDic valueForKey:@"Right4"] :[objDic valueForKey:@"Center4"] :[objDic valueForKey:@"left5"] :[objDic valueForKey:@"Right5"] :[objDic valueForKey:@"Center5"] :[objDic valueForKey:@"left6"] :[objDic valueForKey:@"Right6"] :[objDic valueForKey:@"Center6"] :[objDic valueForKey:@"left7"] :[objDic valueForKey:@"Right7"] :[objDic valueForKey:@"Center7"] :[objDic valueForKey:@"left8"] :[objDic valueForKey:@"Right8"] :[objDic valueForKey:@"Center8"] :[objDic valueForKey:@"left9"] :[objDic valueForKey:@"Right9"] :[objDic valueForKey:@"Center9"] :@"0" ];
         }
         self.description_lbl.text = @"";
         self.remark_Txt.text =@"";

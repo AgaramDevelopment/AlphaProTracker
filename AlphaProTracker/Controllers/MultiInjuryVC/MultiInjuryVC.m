@@ -299,8 +299,9 @@
         self.SiteCodeArray = _selectedMarks;
         
         //[self.SiteCodeArray addObjectsFromArray: _selectedMarks];
-        self.sitelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.SiteCodeArray.count];
-        NSLog(@"%@",_SiteCodeArray);
+        
+        //self.sitelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.SiteCodeArray.count];
+        
     }
     if(isSide==YES)
     {
@@ -308,7 +309,7 @@
         self.SideCodeArray = _selectedMarks;
         //[self.SideCodeArray addObjectsFromArray: _selectedMarks];
         
-        self.sidelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.SideCodeArray.count];
+       // self.sidelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.SideCodeArray.count];
         
         NSLog(@"%@",_SideCodeArray);
     }
@@ -317,7 +318,7 @@
         self.CauseCodeArray = [[NSMutableArray alloc]init];
         self.CauseCodeArray = _selectedMarks;
         //[self.CauseCodeArray addObjectsFromArray: _selectedMarks];
-        self.causelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.CauseCodeArray.count];
+        //self.causelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.CauseCodeArray.count];
         NSLog(@"%@",_CauseCodeArray);
     }
     if(isLoc==YES)
@@ -325,7 +326,7 @@
         self.LocCodeArray = [[NSMutableArray alloc]init];
         self.LocCodeArray = _selectedMarks;
         //[self.LocCodeArray addObjectsFromArray: _selectedMarks];
-        self.locationlbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.LocCodeArray.count];
+        //self.locationlbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.LocCodeArray.count];
         NSLog(@"%@",_LocCodeArray);
     }
     if(isType==YES)
@@ -333,7 +334,7 @@
         self.TypeCodeArray = [[NSMutableArray alloc]init];
         self.TypeCodeArray = _selectedMarks;
     //[self.TypeCodeArray addObjectsFromArray: _selectedMarks];
-        self.typelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.TypeCodeArray.count];
+        //self.typelbl.text = [NSString stringWithFormat:@"%lu items selected",(unsigned long)self.TypeCodeArray.count];
         NSLog(@"%@",_TypeCodeArray);
     }
     
@@ -375,7 +376,6 @@
             [[NSBundle mainBundle] loadNibNamed:@"MultiInjurylistCell" owner:self options:nil];
             cell = self.objCell;
         }
-        
         
         cell.sidelbl.text = [[self.commonGridArray valueForKey:@"InjurySide"]objectAtIndex:indexPath.row];
         cell.sitelbl.text = [[self.commonGridArray valueForKey:@"InjurySite"]objectAtIndex:indexPath.row];
@@ -496,11 +496,7 @@
     
     if(tableView == self.multiSelectTbl)
     {
-        //        NSString *text = @"text";
-        //        if ([self.selectedMarks containsObject:text])// Is selected?
-        //            [self.selectedMarks removeObject:text];
-        //        else
-        //            [self.selectedMarks addObject:text];
+      
         
         NSString *text;
         
@@ -530,16 +526,15 @@
                 [self.selectedMarks removeObject:SideCode];
             else
                 [self.selectedMarks addObject:SideCode];
+            
+            
+            
 
             [self.multiSelectTbl reloadData];
             
             
             
-//            text = [self.commonArray objectAtIndex:indexPath.row];
-//            if ([self.selectedMarks containsObject:SideCode])// Is selected?
-//            [self.selectedMarks removeObject:SideCode];
-//            else
-//            [self.selectedMarks addObject:SideCode];
+
             
             NSLog(@"%@",_selectedMarks);
             
@@ -547,6 +542,33 @@
             
             CRTableViewCell *cell = (CRTableViewCell *)[self.multiSelectTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
             cell.isSelected = [self.selectedMarks containsObject:SideCode] ? YES : NO;
+            
+            
+            if(indexPath.row==0)
+            {
+                int a = self.selectedMarks.count;
+                self.sidelbl.text = [NSString stringWithFormat:@"%d items selected", a-1];
+            }else
+            {
+                
+                int a = self.selectedMarks.count;
+                if(a == 0)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.sidelbl.text = @"";
+                }
+                if(a == 1)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.sidelbl.text = [NSString stringWithFormat:@"%d item selected", a];
+                }
+                else
+                {
+                    self.sidelbl.text = [NSString stringWithFormat:@"%d items selected", a];
+                }
+            }
+            
+            
         }
         
         if(isSite==YES)
@@ -589,18 +611,36 @@
 
             [self.multiSelectTbl reloadData];
 
-            
-            
-//            text = [self.commonArray objectAtIndex:indexPath.row];
-//            if ([self.selectedMarks containsObject:SiteCode])// Is selected?
-//            [self.selectedMarks removeObject:SiteCode];
-//            else
-//            [self.selectedMarks addObject:SiteCode];
+
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
             CRTableViewCell *cell = (CRTableViewCell *)[self.multiSelectTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
             cell.isSelected = [self.selectedMarks containsObject:SiteCode] ? YES : NO;
+            
+            if(indexPath.row==0)
+            {
+                int a = self.selectedMarks.count;
+                self.sitelbl.text = [NSString stringWithFormat:@"%d items selected", a-1];
+            }else
+            {
+                
+                int a = self.selectedMarks.count;
+                if(a == 0)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.sitelbl.text = @"";
+                }
+                if(a == 1)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.sitelbl.text = [NSString stringWithFormat:@"%d item selected", a];
+                }
+                else
+                {
+                    self.sitelbl.text = [NSString stringWithFormat:@"%d items selected", a];
+                }
+            }
         }
         
         if(isLoc==YES)
@@ -611,7 +651,7 @@
             
             if (!indexPath.row  && !self.selectedMarks.count) {
                 [self.selectedMarks removeAllObjects];
-                //[self.selectedMarks addObjectsFromArray:@[@"",@"MSC165",@"MSC167",@"MSC166",@"MSC168"]];
+                
                 
                 NSMutableArray *arrayy=[[NSMutableArray alloc]init];
                 for(int i=0;i<self.commonArray.count;i++)
@@ -632,16 +672,36 @@
             [self.multiSelectTbl reloadData];
             
             
-//            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
-//            if ([self.selectedMarks containsObject:locationcode])// Is selected?
-//            [self.selectedMarks removeObject:locationcode];
-//            else
-//            [self.selectedMarks addObject:locationcode];
+
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
             CRTableViewCell *cell = (CRTableViewCell *)[self.multiSelectTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
             cell.isSelected = [self.selectedMarks containsObject:locationcode] ? YES : NO;
+            
+            if(indexPath.row==0)
+            {
+                int a = self.selectedMarks.count;
+                self.locationlbl.text = [NSString stringWithFormat:@"%d items selected", a-1];
+            }else
+            {
+                
+                int a = self.selectedMarks.count;
+                if(a == 0)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.locationlbl.text = @"";
+                }
+                if(a == 1)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.locationlbl.text = [NSString stringWithFormat:@"%d item selected", a];
+                }
+                else
+                {
+                    self.locationlbl.text = [NSString stringWithFormat:@"%d items selected", a];
+                }
+            }
         }
         
         if(isCause==YES)
@@ -653,9 +713,6 @@
             
             if (!indexPath.row  && !self.selectedMarks.count) {
                 [self.selectedMarks removeAllObjects];
-                //[self.selectedMarks addObjectsFromArray:@[@"",@"MSC165",@"MSC167",@"MSC166",@"MSC168"]];
-//                [self.selectedMarks addObject:@""];
-//                [self.selectedMarks addObject:[[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row]];
                 
                 NSMutableArray *arrayy=[[NSMutableArray alloc]init];
                 for(int i=0;i<self.commonArray.count;i++)
@@ -676,16 +733,34 @@
             [self.multiSelectTbl reloadData];
             
             
-//            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
-//            if ([self.selectedMarks containsObject:causecode])// Is selected?
-//            [self.selectedMarks removeObject:causecode];
-//            else
-//            [self.selectedMarks addObject:causecode];
-            
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
             CRTableViewCell *cell = (CRTableViewCell *)[self.multiSelectTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
             cell.isSelected = [self.selectedMarks containsObject:causecode] ? YES : NO;
+            
+            if(indexPath.row==0)
+            {
+                int a = self.selectedMarks.count;
+                self.causelbl.text = [NSString stringWithFormat:@"%d items selected", a-1];
+            }else
+            {
+                
+                int a = self.selectedMarks.count;
+                if(a == 0)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.causelbl.text = @"";
+                }
+                if(a == 1)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.causelbl.text = [NSString stringWithFormat:@"%d item selected", a];
+                }
+                else
+                {
+                    self.causelbl.text = [NSString stringWithFormat:@"%d items selected", a];
+                }
+            }
         }
         if(isType==YES)
         {
@@ -696,9 +771,7 @@
             
             if (!indexPath.row  && !self.selectedMarks.count) {
                 [self.selectedMarks removeAllObjects];
-                //[self.selectedMarks addObjectsFromArray:@[@"",@"MSC165",@"MSC167",@"MSC166",@"MSC168"]];
-//                [self.selectedMarks addObject:@""];
-//                [self.selectedMarks addObject:[[self.commonArray valueForKey:@"InjuryMetaSubCode"]objectAtIndex:indexPath.row]];
+      
                 NSMutableArray *arrayy=[[NSMutableArray alloc]init];
                 for(int i=0;i<self.commonArray.count;i++)
                 {
@@ -717,16 +790,36 @@
             
             [self.multiSelectTbl reloadData];
             
-//            text = [[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"]objectAtIndex:indexPath.row];
-//            if ([self.selectedMarks containsObject:typecode])// Is selected?
-//            [self.selectedMarks removeObject:typecode];
-//            else
-//            [self.selectedMarks addObject:typecode];
+
             
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             
             CRTableViewCell *cell = (CRTableViewCell *)[self.multiSelectTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
             cell.isSelected = [self.selectedMarks containsObject:typecode] ? YES : NO;
+            
+            if(indexPath.row==0)
+            {
+                int a = self.selectedMarks.count;
+                self.typelbl.text = [NSString stringWithFormat:@"%d items selected", a-1];
+            }else
+            {
+                
+                int a = self.selectedMarks.count;
+                if(a == 0)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.typelbl.text = @"";
+                }
+                if(a == 1)
+                {
+                    //NSString *b = [NSString stringWithFormat:@"%d", a];
+                    self.typelbl.text = [NSString stringWithFormat:@"%d item selected", a];
+                }
+                else
+                {
+                    self.typelbl.text = [NSString stringWithFormat:@"%d items selected", a];
+                }
+            }
         }
         
         
@@ -1089,7 +1182,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                 
                 [self.injuryTbl reloadData];
             }
-            
             [COMMON RemoveLoadingIcon];
             [self.view setUserInteractionEnabled:YES];
             

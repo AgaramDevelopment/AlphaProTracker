@@ -718,7 +718,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSMutableArray *assessment = [[NSMutableArray alloc]init];
         if(retVal ==0){
             
-            NSString *query=[NSString stringWithFormat:@"SELECT  SC.CLIENTCODE,SC.TESTCODE,SC.COMPONENT,SC.TESTNAME,SC.SIDE,SC.NOOFTRIALS,SC.UNITS,SC.SCOREEVALUATION,SC.RECORDSTATUS,AE.INFERENCE,SC.CREATEDBY,SC.CREATEDDATE,SC.MODIFIEDBY,SC.MODIFIEDDATE,MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,MDUNITS.METASUBCODEDESCRIPTION AS UNITSNAME,MDSCOREEVALUATION.METASUBCODEDESCRIPTION AS SCOREEVALUATIONNAME,AE.REMARKS,AE.TRIAL1 AS TRIAL1,AE.TRIAL2 AS TRIAL2,AE.TRIAL3 AS TRIAL3,AE.TRIAL4 AS TRIAL4,AE.TRIAL5 AS TRIAL5,AE.TRIAL6 AS TRIAL6,AE.TRIAL7 AS TRIAL7,AE.TRIAL8 AS TRIAL8,AE.TRIAL9 AS TRIAL9,AE.VERSION    ,AE.ASSESSMENTENTRYCODE ,AE.IGNORED FROM    TESTSC SC INNER JOIN METADATA MDUNITS ON MDUNITS.METASUBCODE=SC.UNITS INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION ='%@' AND ASREG.RECORDSTATUS='MSC001' INNER JOIN ASSESSMENTENTRY AE ON AE.ASSESSMENTTESTTYPECODE = ASREG.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTTYPECODE = '%@' AND AE.CLIENTCODE = ASREG.CLIENTCODE AND AE.MODULECODE = ASREG.MODULECODE AND SC.TESTCODE=AE.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTCODE = ASREG.ASSESSMENTTESTCODE AND ('%@' = '' OR AE.PLAYERCODE ='%@') AND ('%@' = '' OR  AE.ASSESSMENTENTRYDATE = date('%@')) AND AE.VERSION ='%@' INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE=SC.SIDE INNER JOIN METADATA MDSCOREEVALUATION ON MDSCOREEVALUATION.METASUBCODE=SC.SCOREEVALUATION WHERE   SC.RECORDSTATUS='MSC001'  AND SC.CLIENTCODE='%@' AND SC.TESTCODE IN (SELECT  ASSESSMENTTESTTYPECODE FROM    ASSESSMENTREGISTER ASREG WHERE  ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION ='%@' AND ASREG.RECORDSTATUS='MSC001' ",clientCode,moduleCode,assessmentCode,assessmentTestCode,version,testTypeCode,player,player,assessmentDate,assessmentDate,version,clientCode,clientCode,moduleCode,assessmentCode,assessmentTestCode,version];
+            NSString *query=[NSString stringWithFormat:@"SELECT  SC.CLIENTCODE,SC.TESTCODE,SC.COMPONENT,SC.TESTNAME,SC.SIDE,SC.NOOFTRIALS,                         SC.UNITS,SC.SCOREEVALUATION,SC.RECORDSTATUS,AE.INFERENCE,SC.CREATEDBY,SC.CREATEDDATE,SC.MODIFIEDBY,SC.MODIFIEDDATE,MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,MDUNITS.METASUBCODEDESCRIPTION AS UNITSNAME,MDSCOREEVALUATION.METASUBCODEDESCRIPTION AS SCOREEVALUATIONNAME,AE.REMARKS,AE.LEFT , RIGHT,AE.CENTRAL , LEFT1,AE.RIGHT1 , CENTRAL1, AE.LEFT2, RIGHT2,AE.CENTRAL2, AE.LEFT3, RIGHT3,AE.CENTRAL3,AE.LEFT4, RIGHT4,AE.CENTRAL4,AE.LEFT5, RIGHT5,AE.CENTRAL5,AE.LEFT6 , RIGHT6,AE.LEFT7, RIGHT7,AE.CENTRAL7,AE.LEFT8 , RIGHT8,AE.CENTRAL8,AE.LEFT9 , RIGHT9,AE.CENTRAL9,AE.CENTRAL6,AE.VERSION  ,AE.ASSESSMENTENTRYCODE ,AE.IGNORED FROM    TESTSC SC INNER JOIN METADATA MDUNITS ON MDUNITS.METASUBCODE=SC.UNITS INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION ='%@' AND ASREG.RECORDSTATUS='MSC001' INNER JOIN ASSESSMENTENTRY AE ON AE.ASSESSMENTTESTTYPECODE = ASREG.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTTYPECODE = '%@' AND AE.CLIENTCODE = ASREG.CLIENTCODE AND AE.MODULECODE = ASREG.MODULECODE AND SC.TESTCODE=AE.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTCODE = ASREG.ASSESSMENTTESTCODE AND ('%@' = '' OR AE.PLAYERCODE ='%@') AND ('%@' = '' OR  AE.ASSESSMENTENTRYDATE = date('%@')) AND AE.VERSION ='%@' INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE=SC.SIDE INNER JOIN METADATA MDSCOREEVALUATION ON MDSCOREEVALUATION.METASUBCODE=SC.SCOREEVALUATION WHERE   SC.RECORDSTATUS='MSC001'  AND SC.CLIENTCODE='%@' AND SC.TESTCODE IN (SELECT  ASSESSMENTTESTTYPECODE FROM    ASSESSMENTREGISTER ASREG WHERE  ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION ='%@'AND ASREG.RECORDSTATUS='MSC001')",clientCode,moduleCode,assessmentCode,assessmentTestCode,version,testTypeCode,player,player,assessmentDate,assessmentDate,version,clientCode,clientCode,moduleCode,assessmentCode,assessmentTestCode,version];
             
             NSLog(@"%@",query);
             stmt=[query UTF8String];
@@ -738,38 +738,71 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     NSString * Units=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
                     NSString * Scoreevaluation=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                     NSString * RecordStatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                    NSString * UnitsName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-                    NSString * CreatedBy=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
-                    NSString * CreatedDate=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
-                    NSString * ModifiedBy=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
-                    NSString * ModifiedDate=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
-                    NSString * SideName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+                    NSString * CreatedBy=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                    NSString * CreatedDate=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                    NSString * ModifiedBy=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                    NSString * ModifiedDate=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                    NSString * SideName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
+                    NSString * UnitsName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+                    
                     NSString * ScoreevaluationName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
                     //NSString * SCInference=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, )];
                     NSString * Remarks=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
                     NSString * left=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
+                    
                     NSString * Right=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
+                    
                     NSString * Center=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
                     NSString * left1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
+                    
                     NSString * Right1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
-                    NSString * Center1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)]; NSString * left2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)];
+                    
+                    NSString * Center1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
+                    NSString * left2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)];
+                    
                     NSString * Right2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)];
-                    NSString * Center2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)]; NSString * left3=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 27)];
+                    
+                    NSString * Center2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)];
+                    NSString * left3=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 27)];
+                    
                     NSString * Right3=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 28)];
-                    NSString * Center3=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 29)]; NSString * left4=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 30)];
+                    NSString * Center3=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 29)];
+                    NSString * left4=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 30)];
+                    
                     NSString * Right4=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 31)];
-                    NSString * Center4=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 32)]; NSString * left5=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 33)];
+                    
+                    NSString * Center4=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 32)];
+                    NSString * left5=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 33)];
+                    
                     NSString * Right5=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 34)];
-                    NSString * Center5=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 35)]; NSString * left6=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 36)];
+                    
+                    NSString * Center5=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 35)];
+                    NSString * left6=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 36)];
+                    
                     NSString * Right6=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 37)];
-                    NSString * Center6=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 38)]; NSString * left7=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 39)];
+                    
+                    NSString * Center6=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 38)];
+                    NSString * left7=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 39)];
+                    
                     NSString * Right7=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 40)];
-                    NSString * Center7=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)]; NSString * left8=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)];
+                    
+                    NSString * Center7=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)];
+                    NSString * left8=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)];
+                    
                     NSString * Right8=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 43)];
+                    
                     NSString * Center8=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 44)];
-                    NSString * Version=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 45)];
-                    NSString * AssessmentEntryCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 46)];
-                    NSString * Ignored=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 47)];
+                    
+                    NSString * left9=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 45)];
+                    
+                    NSString * Right9=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 46)];
+                    
+                    NSString * Center9=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 47)];
+                    
+                    
+                    NSString * Version=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)];
+                    NSString * AssessmentEntryCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)];
+                    NSString * Ignored=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 50)];
                     [dic setObject:ClientCode forKey:@"ClientCode"];
                     [dic setObject:TestCode forKey:@"TestCode"];
                     [dic setObject:Component forKey:@"Component"];
@@ -787,34 +820,37 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     [dic setObject:SideName forKey:@"SideName"];
                     [dic setObject:ScoreevaluationName forKey:@"ScoreevaluationName"];
                     [dic setObject:@"" forKey:@"SCInference"];
-                    [dic setObject:@"" forKey:@"Remarks"];
-                    [dic setObject:@"" forKey:@"left"];
-                    [dic setObject:@"" forKey:@"Right"];
-                    [dic setObject:@"" forKey:@"Center"];
-                    [dic setObject:@"" forKey:@"left1"];
-                    [dic setObject:@"" forKey:@"Right1"];
-                    [dic setObject:@"" forKey:@"Center1"];
-                    [dic setObject:@"" forKey:@"left2"];
-                    [dic setObject:@"" forKey:@"Right2"];
-                    [dic setObject:@"" forKey:@"Center2"];
-                    [dic setObject:@"" forKey:@"left3"];
-                    [dic setObject:@"" forKey:@"Right3"];
-                    [dic setObject:@"" forKey:@"Center3"];
-                    [dic setObject:@"" forKey:@"left4"];
-                    [dic setObject:@"" forKey:@"Right4"];
-                    [dic setObject:@"" forKey:@"Center4"];
-                    [dic setObject:@"" forKey:@"left5"];
-                    [dic setObject:@"" forKey:@"Right5"];
-                    [dic setObject:@"" forKey:@"Center5"];
-                    [dic setObject:@"" forKey:@"left6"];
-                    [dic setObject:@"" forKey:@"Right6"];
-                    [dic setObject:@"" forKey:@"Center6"];
-                    [dic setObject:@"" forKey:@"left7"];
-                    [dic setObject:@"" forKey:@"Right7"];
-                    [dic setObject:@"" forKey:@"Center7"];
-                    [dic setObject:@"" forKey:@"left8"];
-                    [dic setObject:@"" forKey:@"Right8"];
-                    [dic setObject:@"" forKey:@"Center8"];
+                    [dic setObject:Remarks forKey:@"Remarks"];
+                    [dic setObject:left forKey:@"left"];
+                    [dic setObject:Right forKey:@"Right"];
+                    [dic setObject:Center forKey:@"Center"];
+                    [dic setObject:left1 forKey:@"left1"];
+                    [dic setObject:Right1 forKey:@"Right1"];
+                    [dic setObject:Center1 forKey:@"Center1"];
+                    [dic setObject:left2 forKey:@"left2"];
+                    [dic setObject:Right2 forKey:@"Right2"];
+                    [dic setObject:Center2 forKey:@"Center2"];
+                    [dic setObject:left3 forKey:@"left3"];
+                    [dic setObject:Right3 forKey:@"Right3"];
+                    [dic setObject:Center3 forKey:@"Center3"];
+                    [dic setObject:left4 forKey:@"left4"];
+                    [dic setObject:Right4 forKey:@"Right4"];
+                    [dic setObject:Center4 forKey:@"Center4"];
+                    [dic setObject:left5 forKey:@"left5"];
+                    [dic setObject:Right5 forKey:@"Right5"];
+                    [dic setObject:Center5 forKey:@"Center5"];
+                    [dic setObject:left6 forKey:@"left6"];
+                    [dic setObject:Right6 forKey:@"Right6"];
+                    [dic setObject:Center6 forKey:@"Center6"];
+                    [dic setObject:left7 forKey:@"left7"];
+                    [dic setObject:Right7 forKey:@"Right7"];
+                    [dic setObject:Center7 forKey:@"Center7"];
+                    [dic setObject:left8 forKey:@"left8"];
+                    [dic setObject:Right8 forKey:@"Right8"];
+                    [dic setObject:Center8 forKey:@"Center8"];
+                    [dic setObject:left9 forKey:@"left9"];
+                    [dic setObject:Right9 forKey:@"Right9"];
+                    [dic setObject:Center9 forKey:@"Center9"];
                     [dic setObject:@"" forKey:@"Version"];
                     [dic setObject:@"" forKey:@"AssessmentEntryCode"];
                     [dic setObject:@"" forKey:@"Ignored"];
@@ -892,33 +928,36 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     [dic setObject:ScoreevaluationName forKey:@"ScoreevaluationName"];
                     [dic setObject:@"" forKey:@"SCInference"];
                     [dic setObject:@"" forKey:@"Remarks"];
-                    [dic setObject:@"" forKey:@"left"];
-                    [dic setObject:@"" forKey:@"Right"];
-                    [dic setObject:@"" forKey:@"Center"];
-                    [dic setObject:@"" forKey:@"left1"];
-                    [dic setObject:@"" forKey:@"Right1"];
-                    [dic setObject:@"" forKey:@"Center1"];
-                    [dic setObject:@"" forKey:@"left2"];
-                    [dic setObject:@"" forKey:@"Right2"];
-                    [dic setObject:@"" forKey:@"Center2"];
-                    [dic setObject:@"" forKey:@"left3"];
-                    [dic setObject:@"" forKey:@"Right3"];
-                    [dic setObject:@"" forKey:@"Center3"];
-                    [dic setObject:@"" forKey:@"left4"];
-                    [dic setObject:@"" forKey:@"Right4"];
-                    [dic setObject:@"" forKey:@"Center4"];
-                    [dic setObject:@"" forKey:@"left5"];
-                    [dic setObject:@"" forKey:@"Right5"];
-                    [dic setObject:@"" forKey:@"Center5"];
-                    [dic setObject:@"" forKey:@"left6"];
-                    [dic setObject:@"" forKey:@"Right6"];
-                    [dic setObject:@"" forKey:@"Center6"];
-                    [dic setObject:@"" forKey:@"left7"];
-                    [dic setObject:@"" forKey:@"Right7"];
-                    [dic setObject:@"" forKey:@"Center7"];
-                    [dic setObject:@"" forKey:@"left8"];
-                    [dic setObject:@"" forKey:@"Right8"];
-                    [dic setObject:@"" forKey:@"Center8"];
+                    [dic setObject:@"0" forKey:@"left"];
+                    [dic setObject:@"0" forKey:@"Right"];
+                    [dic setObject:@"0" forKey:@"Center"];
+                    [dic setObject:@"0" forKey:@"left1"];
+                    [dic setObject:@"0" forKey:@"Right1"];
+                    [dic setObject:@"0" forKey:@"Center1"];
+                    [dic setObject:@"0" forKey:@"left2"];
+                    [dic setObject:@"0" forKey:@"Right2"];
+                    [dic setObject:@"0" forKey:@"Center2"];
+                    [dic setObject:@"0" forKey:@"left3"];
+                    [dic setObject:@"0" forKey:@"Right3"];
+                    [dic setObject:@"0" forKey:@"Center3"];
+                    [dic setObject:@"0" forKey:@"left4"];
+                    [dic setObject:@"0" forKey:@"Right4"];
+                    [dic setObject:@"0" forKey:@"Center4"];
+                    [dic setObject:@"0" forKey:@"left5"];
+                    [dic setObject:@"0" forKey:@"Right5"];
+                    [dic setObject:@"0" forKey:@"Center5"];
+                    [dic setObject:@"0" forKey:@"left6"];
+                    [dic setObject:@"0" forKey:@"Right6"];
+                    [dic setObject:@"0" forKey:@"Center6"];
+                    [dic setObject:@"0" forKey:@"left7"];
+                    [dic setObject:@"0" forKey:@"Right7"];
+                    [dic setObject:@"0" forKey:@"Center7"];
+                    [dic setObject:@"0" forKey:@"left8"];
+                    [dic setObject:@"0" forKey:@"Right8"];
+                    [dic setObject:@"0" forKey:@"Center8"];
+                    [dic setObject:@"0" forKey:@"left9"];
+                    [dic setObject:@"0" forKey:@"Right9"];
+                    [dic setObject:@"0" forKey:@"Center9"];
                     
                     [assessment addObject:dic];
                 }
@@ -932,7 +971,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         return assessment;
     }
 }
-
 -(NSMutableArray *) getPositiveNegative
 {
     @synchronized ([Utitliy syncId])  {

@@ -434,6 +434,7 @@ AppCommon *sharedCommon = nil;
             [self actionLogOut];
         }
         else{
+           
             [self redirectSelectview:[temp objectAtIndex:indexPath.row]];
 
         }
@@ -517,9 +518,10 @@ AppCommon *sharedCommon = nil;
         {
             [self actionLogOut];
         }
+        
     }
    
-    [self swipeHandlerLeft];
+    //[self swipeHandlerLeft];
 }
 
 -(void)ShowAlterMsg:(NSString*) MsgStr
@@ -693,7 +695,7 @@ AppCommon *sharedCommon = nil;
 }
 -(void)synDataMethod
 {
-    [self loadingIcon:loadingView];
+    [AppCommon showLoading];
     if([COMMON isInternetReachable])
     {
         
@@ -1400,18 +1402,23 @@ AppCommon *sharedCommon = nil;
                     [Dbm SELECTAssementEntry:entrycode];
                     
                 }
+                
+                [self ShowAlterMsg:@"Sync Successful"];
+                
+                [AppCommon hideLoading];
 
             }
             
-            [COMMON RemoveLoadingIcon];
-            [loadingView setUserInteractionEnabled:YES];
+//            [COMMON RemoveLoadingIcon];
+//            [loadingView setUserInteractionEnabled:YES];
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [COMMON webServiceFailureError];
-            [loadingView setUserInteractionEnabled:YES];
-            
+            [self ShowAlterMsg:@"Sync Failed"];
+            //[loadingView setUserInteractionEnabled:YES];
+            [AppCommon hideLoading];
         }];
     }
 

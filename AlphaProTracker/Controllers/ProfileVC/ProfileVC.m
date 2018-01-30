@@ -94,7 +94,8 @@
         
         NSString *cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
        
-        NSString *usercode = @"USM0000002";
+       // NSString *usercode = @"USM0000002";UserCode
+        NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(cliendcode)   [dic    setObject:cliendcode     forKey:@"Clientcode"];

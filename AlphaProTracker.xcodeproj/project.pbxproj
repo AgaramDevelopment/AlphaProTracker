@@ -150,6 +150,7 @@
 		18B97994200DD49E00B94DD4 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97992200DD49E00B94DD4 /* ParallaxHeaderView.m */; };
 		18B97999200E129E00B94DD4 /* PopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B97998200E129E00B94DD4 /* PopViewCell.m */; };
 		18B9799D200E158500B94DD4 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B9799C200E158500B94DD4 /* StepSlider.m */; };
+		18C171832020A9AF00C9864B /* TestAssessmentEntryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C171822020A9AF00C9864B /* TestAssessmentEntryVC.m */; };
 		18EC758E2019F4AC007D50AA /* MessangerSendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC758C2019F4AC007D50AA /* MessangerSendVC.m */; };
 		18EC758F2019F4AC007D50AA /* MessangerSendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */; };
 		AC1BC8041F8663020047AECC /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BC7FC1F8663020047AECC /* AAChartModel.m */; };
@@ -196,7 +197,6 @@
 		AC9F541D1F4D42E600BED5CF /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F541C1F4D42E600BED5CF /* HomeVC.m */; };
 		ACA768591F4C1E8000ECC17A /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA768581F4C1E8000ECC17A /* LoginVC.m */; };
 		ACACEFDB1F5920EA004C28A4 /* WLReportFilterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFDA1F5920EA004C28A4 /* WLReportFilterVC.m */; };
-		ACACEFDF1F596DE1004C28A4 /* TestAssessmentEntryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFDE1F596DE1004C28A4 /* TestAssessmentEntryVC.m */; };
 		ACACEFE21F59740C004C28A4 /* TestAssessmentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFE11F59740C004C28A4 /* TestAssessmentListVC.m */; };
 		ACACEFE51F597425004C28A4 /* TestAssessmentViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFE41F597425004C28A4 /* TestAssessmentViewVC.m */; };
 		ACACEFEB1F597AE1004C28A4 /* TestAssessmentStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ACACEFEA1F597AE1004C28A4 /* TestAssessmentStatusVC.m */; };
@@ -524,6 +524,8 @@
 		18B97998200E129E00B94DD4 /* PopViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PopViewCell.m; path = Subview/PopCell/PopViewCell.m; sourceTree = "<group>"; };
 		18B9799B200E158500B94DD4 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepSlider.h; path = Helper/slider/StepSlider.h; sourceTree = "<group>"; };
 		18B9799C200E158500B94DD4 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepSlider.m; path = Helper/slider/StepSlider.m; sourceTree = "<group>"; };
+		18C171812020A9AE00C9864B /* TestAssessmentEntryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestAssessmentEntryVC.h; path = Controllers/TestAssessmentEntryVC/TestAssessmentEntryVC.h; sourceTree = "<group>"; };
+		18C171822020A9AF00C9864B /* TestAssessmentEntryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestAssessmentEntryVC.m; path = Controllers/TestAssessmentEntryVC/TestAssessmentEntryVC.m; sourceTree = "<group>"; };
 		18EC758B2019F4AC007D50AA /* MessangerSendVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessangerSendVC.h; sourceTree = "<group>"; };
 		18EC758C2019F4AC007D50AA /* MessangerSendVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessangerSendVC.m; sourceTree = "<group>"; };
 		18EC758D2019F4AC007D50AA /* MessangerSendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessangerSendVC.xib; sourceTree = "<group>"; };
@@ -611,8 +613,6 @@
 		ACA768581F4C1E8000ECC17A /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = Controllers/LoginVC/LoginVC.m; sourceTree = "<group>"; };
 		ACACEFD91F5920EA004C28A4 /* WLReportFilterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLReportFilterVC.h; path = Controllers/WLReportFilterVC/WLReportFilterVC.h; sourceTree = "<group>"; };
 		ACACEFDA1F5920EA004C28A4 /* WLReportFilterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLReportFilterVC.m; path = Controllers/WLReportFilterVC/WLReportFilterVC.m; sourceTree = "<group>"; };
-		ACACEFDD1F596DE1004C28A4 /* TestAssessmentEntryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestAssessmentEntryVC.h; path = Controllers/TestAssessmentEntryVC/TestAssessmentEntryVC.h; sourceTree = "<group>"; };
-		ACACEFDE1F596DE1004C28A4 /* TestAssessmentEntryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestAssessmentEntryVC.m; path = Controllers/TestAssessmentEntryVC/TestAssessmentEntryVC.m; sourceTree = "<group>"; };
 		ACACEFE01F59740C004C28A4 /* TestAssessmentListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestAssessmentListVC.h; path = Controllers/TestAssessmentListVC/TestAssessmentListVC.h; sourceTree = "<group>"; };
 		ACACEFE11F59740C004C28A4 /* TestAssessmentListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestAssessmentListVC.m; path = Controllers/TestAssessmentListVC/TestAssessmentListVC.m; sourceTree = "<group>"; };
 		ACACEFE31F597425004C28A4 /* TestAssessmentViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestAssessmentViewVC.h; path = Controllers/TestAssessmentViewVC/TestAssessmentViewVC.h; sourceTree = "<group>"; };
@@ -1627,8 +1627,8 @@
 		ACACEFDC1F596DCC004C28A4 /* TestAssessmentEntryVC */ = {
 			isa = PBXGroup;
 			children = (
-				ACACEFDD1F596DE1004C28A4 /* TestAssessmentEntryVC.h */,
-				ACACEFDE1F596DE1004C28A4 /* TestAssessmentEntryVC.m */,
+				18C171812020A9AE00C9864B /* TestAssessmentEntryVC.h */,
+				18C171822020A9AF00C9864B /* TestAssessmentEntryVC.m */,
 			);
 			name = TestAssessmentEntryVC;
 			sourceTree = "<group>";
@@ -2202,7 +2202,6 @@
 				045A49AC1FA220A8008C1630 /* FFYearCell.m in Sources */,
 				189663CE2012FE3F00A8BFE1 /* ExcerciseAttachmentCVC.m in Sources */,
 				AC1BC8651F8665B40047AECC /* AAYAxis.m in Sources */,
-				ACACEFDF1F596DE1004C28A4 /* TestAssessmentEntryVC.m in Sources */,
 				040B2A8E1F600E0600FB4B93 /* SACalendar.m in Sources */,
 				18B97986200DCEC200B94DD4 /* HomeVCCell.m in Sources */,
 				CEB3631E201CAC9600BCA48E /* MessangerTableViewCell.m in Sources */,
@@ -2316,6 +2315,7 @@
 				045A49611FA21FD3008C1630 /* FFDayHeaderCollectionView.m in Sources */,
 				045A49EF1FA22174008C1630 /* FFEventDetailView.m in Sources */,
 				AC1BC8061F8663020047AECC /* AAJsonConverter.m in Sources */,
+				18C171832020A9AF00C9864B /* TestAssessmentEntryVC.m in Sources */,
 				0441B78A1F6ACB4E00A28E19 /* PlannerListVC.m in Sources */,
 				040B2A8C1F600E0600FB4B93 /* DateUtil.m in Sources */,
 				ACC2A1A41F5FF52A00210422 /* ViewProfile.m in Sources */,
