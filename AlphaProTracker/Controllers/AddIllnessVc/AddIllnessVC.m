@@ -15,7 +15,7 @@
 @interface AddIllnessVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     WebService * objWebservice;
-    NSString *     cliendcode ;
+    NSString * cliendcode ;
     NSString * RoleCode;
     NSString * usercode;
     NSString * selectIllnessCode;
@@ -109,7 +109,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *onSetLbl;
 
-//@property (nonatomic,strong) IBOutlet UILabel * onSetLbl;
 @property (nonatomic,strong) IBOutlet UITextField * illnessNameTxt;
 @property (nonatomic,strong) IBOutlet UITextField * cheifcomplientTxt;
 @property (nonatomic,strong) IBOutlet UILabel * xrayLbl;
@@ -171,8 +170,8 @@
     //Veeresh
     datePicker = [[UIDatePicker alloc] init];
     
-    self.onSetLbl.tintColor = [UIColor clearColor];
-    self.expectedLbl.tintColor = [UIColor clearColor];
+//    self.onSetLbl.tintColor = [UIColor clearColor];
+//    self.expectedLbl.tintColor = [UIColor clearColor];
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
     
@@ -195,6 +194,7 @@
     self.onSetLbl.inputAccessoryView = toolbar;
     self.expectedLbl.inputAccessoryView = toolbar;
     
+    self.onSetLbl.textColor = [UIColor whiteColor];
     xrData = @"";
     ctData = @"";
     bloodData = @"";
@@ -230,8 +230,10 @@
 
 -(void) cancelButtonAction {
     if(isExpected==YES) {
+        self.expectedLbl.text = @"";
         [self.expectedLbl resignFirstResponder];
     } else if(isOnset==YES) {
+        self.onSetLbl.text = @"";
         [self.onSetLbl resignFirstResponder];
     }
     [self.view endEditing:true];
@@ -400,22 +402,23 @@
                 
                 if([RoleCode isEqualToString:@"ROL0000002"])
                 {
-                    
                     self.playerview.hidden=YES;
                     self.playerViewHeightConstraint.constant = 0;
-                    self.coachViewYposition.constant =self.playerView.frame.size.height+5;
+                    [self.playerView updateConstraintsIfNeeded];
+//                    self.coachViewYposition.constant =self.playerView.frame.size.height;
                     self.documentsView.hidden = YES;
                     self.documentViewHeightConstraint.constant = 0;
+                    [self.documentsView updateConstraintsIfNeeded];
                     self.updateBtn.hidden = YES;
                     self.deleteBtn.hidden = YES;
-                    self.popviewYposition.constant = self.popview_Tbl.frame.origin.y+195;
-                }
-                else{
+//                   self.popviewYposition.constant = self.popview_Tbl.frame.origin.y;
+                    
+                } else {
                     self.playerview.hidden=NO;
-                    self.coachViewYposition.constant =10;
+//                    self.coachViewYposition.constant =10;
                     self.documentsView.hidden = NO;
                 }
-
+                
                 [self Fetchillnessloadingwebservice];
             }
             [COMMON RemoveLoadingIcon];
@@ -498,7 +501,8 @@
 {
     if(isGame == NO)
     {
-        self.popviewYposition.constant = self.gameView.frame.origin.y+40;
+        self.popviewYposition.constant = CGRectGetMaxY(self.gameView.frame);
+        //self.gameView.frame.origin.y+40;
         self.popviewwidthSize.constant =self.gameLbl.frame.size.width;
         isGame =YES;
         isPlayer =NO;
@@ -522,7 +526,8 @@
     NSMutableArray * objTeamArray =[[NSMutableArray alloc]init];
     if(isTeam == NO)
     {
-        self.popviewYposition.constant = self.teamView.frame.origin.y+40;
+        self.popviewYposition.constant = CGRectGetMaxY(self.teamView.frame);
+        //self.teamView.frame.origin.y+40;
         self.popviewwidthSize.constant =self.TeamLbl.frame.size.width;
         isGame =NO;
         isPlayer =NO;
@@ -557,7 +562,8 @@
     
     if(isPlayer == NO)
     {
-        self.popviewYposition.constant = self.playerView.frame.origin.y+40;
+        self.popviewYposition.constant = CGRectGetMaxY(self.playerView.frame);
+        //self.playerView.frame.origin.y+40;
         self.popviewwidthSize.constant =self.playerLbl.frame.size.width;
         isGame =NO;
         isPlayer =YES;
@@ -614,7 +620,17 @@
 {
     if(isAffect == NO)
     {
-        self.popviewYposition.constant = self.affectView.frame.origin.y+210;
+    
+    if([RoleCode isEqualToString:@"ROL0000002"])
+        {
+            self.popviewYposition.constant =(IS_IPAD)? self.affectView.frame.origin.y+50:self.affectView.frame.origin.y+50;
+        } else {
+            self.popviewYposition.constant =(IS_IPAD)? self.affectView.frame.origin.y+210:self.affectView.frame.origin.y+210;
+        }
+    
+    //CGRectGetMaxY(self.affectView.frame);
+        //self.affectView.frame.origin.y;//+210;
+//        [self.popview_Tbl setFrame:self.affectView.frame];
         self.popviewwidthSize.constant =self.affectLbl.frame.size.width;
         isGame =NO;
         isPlayer =NO;
@@ -638,7 +654,15 @@
 {
     if(isCause == NO)
     {
-        self.popviewYposition.constant = self.CauseView.frame.origin.y+210;
+    if([RoleCode isEqualToString:@"ROL0000002"])
+        {
+            self.popviewYposition.constant = (IS_IPAD)? self.CauseView.frame.origin.y+50:self.CauseView.frame.origin.y+50;
+        } else {
+            self.popviewYposition.constant = (IS_IPAD)? self.CauseView.frame.origin.y+210:self.CauseView.frame.origin.y+210;
+        }
+    
+    //CGRectGetMaxY(self.CauseView.frame);
+        //self.CauseView.frame.origin.y+210;
         self.popviewwidthSize.constant =self.CauseLbl.frame.size.width;
         isGame =NO;
         isPlayer =NO;
@@ -662,7 +686,15 @@
 {
     if(isMainSymptom == NO)
     {
-        self.popviewYposition.constant = self.mainsyntomView.frame.origin.y+210;
+    if([RoleCode isEqualToString:@"ROL0000002"])
+        {
+            self.popviewYposition.constant = (IS_IPAD)? self.mainsyntomView.frame.origin.y+50:self.mainsyntomView.frame.origin.y+50;
+        } else {
+            self.popviewYposition.constant = (IS_IPAD)? self.mainsyntomView.frame.origin.y+210:self.mainsyntomView.frame.origin.y+210;
+        }
+    
+    //CGRectGetMaxY(self.mainsyntomView.frame);
+        //self.mainsyntomView.frame.origin.y+210;
         self.popviewwidthSize.constant =self.mainSyntomLbl.frame.size.width;
         isGame =NO;
         isPlayer =NO;
@@ -678,8 +710,6 @@
         isMainSymptom =NO;
         self.popview_Tbl.hidden=YES;
     }
-    
-
 }
 -(IBAction)didClickSave:(id)sender
 {
