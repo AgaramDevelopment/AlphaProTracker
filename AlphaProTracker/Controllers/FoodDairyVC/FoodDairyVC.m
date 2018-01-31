@@ -209,8 +209,6 @@
 }
 
 -(void) doneButtonAction {
-//    [self.datelbl resignFirstResponder];
-//    [self.view endEditing:true];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.datelbl resignFirstResponder];
@@ -221,6 +219,7 @@
 
 -(void) cancelButtonAction {
     
+    self.datelbl.text = @"";
     [self.datelbl resignFirstResponder];
     [self.view endEditing:true];
 }

@@ -181,10 +181,13 @@
 
 -(void) cancelButtonAction {
     if(isDate==YES) {
+        self.datelbl.text = @"";
         [self.datelbl resignFirstResponder];
     } else if(isStartTime==YES) {
+        self.starttimelbl.text = @"";
         [self.starttimelbl resignFirstResponder];
     } else {
+        self.endTimelbl.text = @"";
         [self.endTimelbl resignFirstResponder];
     }
     [self.view endEditing:true];
