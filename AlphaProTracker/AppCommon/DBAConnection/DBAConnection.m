@@ -122,30 +122,15 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         retVal=sqlite3_open([dbPath UTF8String], &dataBase);
         NSMutableArray *assessment = [[NSMutableArray alloc]init];
         if(retVal ==0){
-            
-            
-            
-            //NSString * rd = @"MSC001";
-            
-            
+    
             //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
             NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
-            
-            
-            
-            
             NSLog(@"%@",query);
             stmt=[query UTF8String];
             if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     NSLog(@"Success");
-                    
-                    
-                    
-                    //                    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-                    //                    f.numberStyle = NSNumberFormatterDecimalStyle;
-                    //                    // [f numberFromString:
                     
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
                     
@@ -317,12 +302,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     NSLog(@"Success");
-                    
-                    
-                    
-                    //                    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-                    //                    f.numberStyle = NSNumberFormatterDecimalStyle;
-                    //                    // [f numberFromString:
                     
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
                     
@@ -693,7 +672,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     [dic setObject:@"" forKey:@"romValue"];
                     //[dic setObject:@"" forKey:@"Remarks"];
                     [dic setObject:@"" forKey:@"romInference"];
-                    //[dic setObject:@"" forKey:@"ignored"];
+                    [dic setObject:@"" forKey:@"ignored"];
                     [assessment addObject:dic];
                 }
                 sqlite3_reset(statement);
