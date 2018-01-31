@@ -16,7 +16,7 @@
 #import "MultiSelectTableViewCell.h"
 #import "DropDownViewController.h"
 
-@interface AssessmentMultiPlayerReportVC () <DatePickerProtocol,DropDownProtocol>
+@interface AssessmentMultiPlayerReportVC () <DatePickerProtocol,DropDownProtocol,AAChartViewDidFinishLoadDelegate>
 {
     NSMutableArray* dropdownArray;
     NSInteger selectedButton;
@@ -69,12 +69,13 @@
     
     [self FetchDropDownValuesWebService];
     self.chartView = [[AAChartView alloc]init];
+    self.chartView.delegate = self;
     self.customChartView.backgroundColor = [UIColor clearColor];
     self.chartView.backgroundColor = [UIColor clearColor];
-    [self.chartView setContentMode:UIViewContentModeScaleAspectFit];
+//    [self.chartView setContentMode:UIViewContentModeScaleAspectFit];
     self.chartView.contentWidth = self.view.frame.size.width;
-    self.chartView.contentHeight = self.view.frame.size.height-100;
-    self.chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.customChartView.frame.size.height);
+    self.chartView.contentHeight = self.view.frame.size.height-250;
+    self.chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-self.customChartView.frame.origin.y);
     [self.customChartView addSubview:self.chartView];
     
     selectedPlayers = [NSMutableArray new];

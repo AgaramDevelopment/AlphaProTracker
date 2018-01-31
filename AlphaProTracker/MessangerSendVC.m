@@ -13,6 +13,7 @@
 #import "WebService.h"
 #import "MessangerTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "IQKeyboardManager.h"
 
 @interface MessangerSendVC () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -34,6 +35,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+
+
     [self customnavigationmethod];
     
     if (!_isBroadCastMsg) {
@@ -43,8 +48,6 @@
         [_btnToName sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-
     [self resetImageData];
     dispatch_async(dispatch_get_main_queue(), ^{
         ImgViewBottomConst.constant = -imgView.frame.size.height;
@@ -55,7 +58,12 @@
     
     multiSelect = [NSMutableArray new];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
 
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +84,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [COMMON AddMenuView:self.view];
-    [_txtMessage becomeFirstResponder];
+//    [_txtMessage becomeFirstResponder];
     
     [self.btnToName setTitle:_SelectedName forState:UIControlStateNormal];
 }
@@ -84,8 +92,29 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     NSLog(@"%f", [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height);
     NSInteger keyboardHeight = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-    self.viewBottomSpace.constant = keyboardHeight+1;
+    if (notification.name == UIKeyboardWillShowNotification) {
+        self.viewBottomSpace.constant = keyboardHeight;
+        [imgView updateConstraintsIfNeeded];
+
+    }else if (notification.name == UIKeyboardDidShowNotification)
+    {
+        if(chatArray.count > 0)
+        {
+            [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chatArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+
+    }
+
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+//    NSLog(@"%f", [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height);
+//    NSInteger keyboardHeight = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
     
+    
+        self.viewBottomSpace.constant = 0;
+        [imgView updateConstraintsIfNeeded];
+
 }
 
 #pragma mark customnavigationmethod
@@ -128,6 +157,7 @@
         return contactList.count;
     }else
     {
+        [_lblNodata setHidden:chatArray.count];
         return [chatArray count]; // lstallmessages
 
     }
@@ -149,7 +179,15 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DEFAULT"];
         }
         cell.textLabel.text = [[contactList objectAtIndex:indexPath.row]valueForKey:@"receivername"];
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        if ([[multiSelect valueForKey:@"receivername"]containsObject:cell.textLabel.text]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+
+        }
         
         return cell;
     }
@@ -168,8 +206,10 @@
 
             if (![IMG isEqualToString:@"MessagePhotos/"]) {
                 cell.SenderIMGHeight.constant = cell.SenderIMG.frame.size.width;
-                [cell.SenderIMG updateConstraintsIfNeeded];
-                NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMAGE_URL,IMG]];
+                [cell.SenderIMG updateConstraintsIfNeeded]; // http://192.168.1.84:8029
+                NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.1.84:8029/%@",IMG]];
+
+//                NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMAGE_URL,IMG]];
                 [cell.SenderIMG sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
             }else
             {
@@ -213,18 +253,46 @@
     if (tableView == tblContactLIst) {
         
         id value = [_arrReceiverCodes objectAtIndex:indexPath.row];
+        
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            [multiSelect removeObject:value];
-            
-        } else {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            [multiSelect addObject:value];
+
+        if (indexPath.row == 0 && cell.accessoryType == UITableViewCellAccessoryNone) // select all
+        {
+            [multiSelect removeAllObjects];
+            [multiSelect addObjectsFromArray:_arrReceiverCodes];
+        }
+        else if (indexPath.row == 0 && cell.accessoryType == UITableViewCellAccessoryCheckmark)
+        {
+            [multiSelect removeAllObjects];
 
         }
-        NSString* names = [[multiSelect valueForKey:@"receivername"] componentsJoinedByString:@","];
-        [_btnToName setTitle:([names isEqualToString:@""] ? @"Please Select Your Contacts" : names )forState:UIControlStateNormal];
+        else if ([multiSelect containsObject:value]) {
+            [multiSelect removeObject:value];
+
+        }
+        else {
+            [multiSelect addObject:value];
+            
+        }
+        
+
+        if (multiSelect.count > 0) {
+            
+            NSMutableArray* arr = multiSelect;
+
+            if ([[multiSelect valueForKey:@"receivername"] containsObject:@"Select All"]) {
+                [arr removeObjectAtIndex:0];
+            }
+            NSString* names = [[arr valueForKey:@"receivername"] componentsJoinedByString:@","];
+            [_btnToName setTitle:([names isEqualToString:@""] ? @"Please Select Your Contacts" : names )forState:UIControlStateNormal];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tblContactLIst reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        });
+
+        
+        
     }
 }
 
@@ -246,6 +314,10 @@
     
     imgData = [self encodeToBase64String:image];
     imgFileName = [[editingInfo valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
+    if (!imgFileName) {
+        
+        imgFileName = [self getFileName];
+    }
     [self dismissViewControllerAnimated:YES completion:^{
         ImgViewBottomConst.constant = imgView.frame.size.height;
         [imgView updateConstraintsIfNeeded];
@@ -324,7 +396,6 @@
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
     NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FetchAllMessageKey]];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -333,12 +404,48 @@
     NSLog(@"Used API URL %@ ",URLString);
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if([AppCommon GetClientCode]) [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
-    if([AppCommon GetuserReference]) [dic setObject:[AppCommon GetuserReference] forKey:@"UserCode"];
-    [dic setObject:_CommID forKey:@"commId"];
-    [dic setObject:_iSread forKey:@"unRead"];
     
+    if([AppCommon GetClientCode])
+    {
+        [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
+    }
+    else
+    {
+        [AppCommon showAlertWithMessage:@"Client code missing in loadMessage API"];
+        return;
+    }
     
+    if([AppCommon GetuserReference])
+    {
+        [dic setObject:[AppCommon GetuserReference] forKey:@"UserCode"];
+    }
+    else
+    {
+        [AppCommon showAlertWithMessage:@"UserCode missing in loadMessage API"];
+        return;
+    }
+    if(self.CommID)
+    {
+        [dic setObject:_CommID forKey:@"commId"];
+    }
+    else
+    {
+        [AppCommon showAlertWithMessage:@"commId missing in loadMessage API"];
+        return;
+    }
+    if(self.iSread)
+    {
+        [dic setObject:_iSread forKey:@"unRead"];
+    }
+    else
+    {
+
+        [dic setObject:@"NO" forKey:@"unRead"];
+    }
+    
+
+    [AppCommon showLoading];
+
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
@@ -350,10 +457,32 @@
             chatArray = [mainArray valueForKey:@"lstallmessages"];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tblChatList reloadData];
+                NSLog(@"FIRST ");
+                [self.tblChatList reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+            });
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"SECOND ");
+                [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chatArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
             });
             
-            //            [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chatArray.count inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
+//             dispatch_queue_t serialQueue = dispatch_queue_create("com.unique.name.queue", DISPATCH_QUEUE_SERIAL);
+//
+//             dispatch_async(serialQueue, ^{
+//                 NSLog(@"FIRST ");
+//                 [self.tblChatList reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+//             });
+//             dispatch_async(serialQueue, ^{
+//                 NSLog(@"SECOND ");
+//                 [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chatArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//             });
+            
+
+            
+
+            
             
         }
         [AppCommon hideLoading];
@@ -385,16 +514,48 @@
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
-    if([AppCommon GetClientCode]) [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
-    if([AppCommon GetUsercode]) [dic setObject:[AppCommon GetUsercode] forKey:@"UserCode"];
-    [dic setObject:_CommID forKey:@"commId"];
+//    if([AppCommon GetClientCode]) [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
+//    if([AppCommon GetUsercode]) [dic setObject:[AppCommon GetUsercode] forKey:@"UserCode"];
+//    [dic setObject:_CommID forKey:@"commId"];
     [dic setObject:_txtMessage.text forKey:@"newmessage"];
     [dic setObject:imgData forKey:@"newmessagephoto"];
     [dic setObject:imgFileName  forKey:@"fileName"];
+    
+    
+    if([AppCommon GetClientCode])
+    {
+        [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
+    }
+    else
+    {
+        [AppCommon showAlertWithMessage:@"Client code missing in loadMessage API"];
+        return;
+    }
+    
+    if([AppCommon GetUsercode])
+    {
+        [dic setObject:[AppCommon GetUsercode] forKey:@"UserCode"];
+    }
+    else
+    {
+        [AppCommon showAlertWithMessage:@"UserCode missing in loadMessage API"];
+        return;
+    }
+    if(self.CommID)
+    {
+        [dic setObject:_CommID forKey:@"commId"];
+    }
+    else
+    {
+        [AppCommon showAlertWithMessage:@"commId missing in loadMessage API"];
+        return;
+    }
+    
+
+    [AppCommon showLoading];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
@@ -418,9 +579,16 @@
             ImgViewBottomConst.constant = -imgView.frame.size.height;
             [imgView updateConstraintsIfNeeded];
             currentlySelectedImage.image = nil;
-            [self.tblChatList reloadData];
-        });
+            
+            if (chatArray.count == 0) {
+                return ;
+            }
+            
+            [self.tblChatList insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:chatArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chatArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
+        });
 
         [AppCommon hideLoading];
 
@@ -455,7 +623,6 @@
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
@@ -464,6 +631,11 @@
     if([AppCommon GetUsercode]) [dic setObject:[AppCommon GetUsercode] forKey:@"UserCode"];
 
     if (multiSelect.count > 0) {
+        
+        if ([[multiSelect valueForKey:@"receivername"] containsObject:@"Select All"]) {
+            [multiSelect removeObjectAtIndex:0];
+        }
+        
         NSString* code= [[multiSelect valueForKey:@"receivercode"]componentsJoinedByString:@","];
         [dic setObject:code forKey:@"receivercodes"];
 
@@ -471,7 +643,8 @@
     [dic setObject:_txtMessage.text forKey:@"newmessage"];
     [dic setObject:imgData forKey:@"newmessagephoto"];
     [dic setObject:imgFileName  forKey:@"fileName"];
-    
+    [AppCommon showLoading];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     //    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -518,8 +691,12 @@
 {
 //    self.viewBottomSpace.constant = 0;
 
-    
+
     return YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -540,37 +717,82 @@
     if (textField.text.length == 0 && [string isEqualToString:@" "]) {
         return NO;
     }
+//    CGRect frame = [self textFieldHeight:[textField.text stringByAppendingString:string]];
+//    CGRect txtFrame = _txtMessage.frame;
+//    txtFrame.size.height = frame.size.height;
+//    _txtMessage.frame = txtFrame;
     
     return YES;
 }
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    return YES;
+}
+- (void)textViewDidChange:(UITextView *)textView
+{
+
+    [self textFieldHeight:textView.text];
+}
+
+-(void)textFieldHeight:(NSString *)string
+{
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:string attributes:@{NSFontAttributeName:_txtview.font}];
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){_txtview.frame.size.width, CGFLOAT_MAX}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    NSLog(@"textfield height %@ ",NSStringFromCGRect(rect));
+    
+    
+    CGFloat MinHeight = 40;
+    CGFloat MaxHeight = 200;
+    
+    if (rect.size.height <= MinHeight) {
+        
+        _MsgToolHeight.constant = MAX(rect.size.height,MinHeight);
+    }
+    
+    if (rect.size.height >= MaxHeight) {
+        
+        _MsgToolHeight.constant = MIN(rect.size.height,MaxHeight);
+    }
+    
+    [_txtview updateConstraintsIfNeeded];
+
+
+//    return rect;
+}
+
 // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
 
 #pragma mark Attachments and Contact DropDowns
 
 - (IBAction)actionShowContactList:(id)sender {
     
+    if (!_isBroadCastMsg && chatArray.count > 0) // scroll for first message
+    {
+        [self.tblChatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+
     if(_arrReceiverCodes.count == 0)
         return;
-        
+    
+    
     
     if (![self.view.subviews containsObject:viewTolist]) {
         
         
         contactList = [NSMutableArray new];
         [contactList addObjectsFromArray:_arrReceiverCodes];
-        [viewTolist setFrame:CGRectMake(0, [sender superview].frame.origin.y+[sender frame].size.height, self.view.frame.size.width, self.view.frame.size.height)];
+//        [viewTolist setFrame:CGRectMake(0, [sender superview].frame.origin.y+[sender frame].size.height, self.view.frame.size.width, self.view.frame.size.height)];
         CGFloat height = (contactList.count > 5 ? 5*44 : contactList.count*44);
-        [tblContactLIst setFrame:CGRectMake(0,0,viewTolist.frame.size.width, height)];
+        [tblContactLIst setFrame:CGRectMake(0,[sender superview].frame.origin.y+[sender frame].size.height,self.view.frame.size.width, height)];
         
-        for (UIView*  view in viewTolist.subviews) {
-            if (view.tag == 1) {
-                view.frame = viewTolist.frame;
-            }
-        }
-
+        
         [self.view addSubview:viewTolist];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tblContactLIst reloadData];
+            [self.tblContactLIst reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         });
     }
     else
@@ -623,5 +845,23 @@
 
     
     
+}
+
+-(NSString *)getFileName
+{
+    
+    /*
+     EEEE, MMM d, yyyy
+     */
+    
+    NSString* filename;
+    NSDateFormatter* df = [NSDateFormatter new];
+    [df setDateFormat:@"EEEE_MMM_d_yyyy_HH_mm_ss"];
+    
+    filename = [df stringFromDate:[NSDate date]];
+    filename=[filename stringByAppendingPathExtension:@"png"];
+    NSLog(@"file name %@ ",filename);
+    
+    return filename;
 }
 @end

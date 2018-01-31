@@ -155,6 +155,7 @@
 //            [dropDownDelegate multiSelectedValue:value];
 //            return;
 //        }
+        
         NSString* value  = [[selectedPlayers valueForKey:KeyName] componentsJoinedByString:@","];
         [dropDownDelegate multiSelectedValue:value andRelatedCollection:selectedPlayers];
 

@@ -13,6 +13,7 @@
 #import "GroupChat.h"
 #import "CustomNavigation.h"
 #import "MessangerSendVC.h"
+#import "IQKeyboardManager.h"
 
 @interface MessangerSelectorVC ()
 {
@@ -34,6 +35,12 @@
     [self fetchMessagesPageLoadWebservice];
     
 //    [self.inboxBtn setBackgroundColor:[UIColor whiteColor]];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+
 }
 
 -(void)customnavigationmethod
@@ -449,11 +456,11 @@
     if(isContacts)
     {
         MessangerSendVC *msObj = [[MessangerSendVC alloc] init];
+        NSDictionary* dict = @{@"receivername":@"Select All",@"receivercode":@""};
         msObj.arrReceiverCodes = commonArray;
+        [msObj.arrReceiverCodes insertObject:dict atIndex:0];
         msObj.iSread = @"NO";
         msObj.isBroadCastMsg = YES;
-//        msObj.CommID = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"commId"];
-//        NSString* selectedName = [[commonArray valueForKey:@"receivername"]componentsJoinedByString:@","];
         msObj.SelectedName = @"Select your contacts";
         [self.navigationController pushViewController:msObj animated:YES];
         return;

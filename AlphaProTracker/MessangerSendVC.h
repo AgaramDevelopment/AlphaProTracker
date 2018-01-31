@@ -26,7 +26,10 @@
 @property (weak, nonatomic) IBOutlet UIView *imgView;
 @property (weak, nonatomic) IBOutlet UIImageView *currentlySelectedImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ImgViewBottomConst;
+@property (weak, nonatomic) IBOutlet UITextView *txtview;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *MsgToolHeight;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblNodata;
 @property (weak, nonatomic) IBOutlet UITextView *txtViewMsg;
 @property (weak, nonatomic) IBOutlet UITableView *tblContactLIst;
 - (IBAction)actionSendMessage:(id)sender;
