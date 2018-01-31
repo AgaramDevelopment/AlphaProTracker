@@ -60,9 +60,9 @@
     [self.view addSubview:objCustomNavigation.view];
     NSString * selectTilteStr = [NSString stringWithFormat:@"%@ - %@ \n %@",[self.SelectDetailDic valueForKey:@"Module"],[self.SelectDetailDic valueForKey:@"AssessmentTitle"],[self.SelectDetailDic valueForKey:@"Team"]];
     objCustomNavigation.tittle_lbl.text= selectTilteStr;
-    objCustomNavigation.btn_back.hidden =YES;
-    objCustomNavigation.menu_btn.hidden = NO;
-    [objCustomNavigation.menu_btn addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.btn_back.hidden =NO;
+    objCustomNavigation.menu_btn.hidden = YES;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(backBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -72,7 +72,8 @@
 }
 -(IBAction)MenuBtnAction:(id)sender
 {
-    [COMMON ShowsideMenuView];
+   // [COMMON ShowsideMenuView];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)HomeBtnAction:(id)sender
@@ -108,9 +109,6 @@
         [objDic setValue:[[TestAsseementArray valueForKey:@"TestName"] objectAtIndex:i] forKey:@"TestTypeName"];
         
         NSString *assessmentTestCode = [[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i];
-        //NSString *assessmentTestName = [[TestAsseementArray valueForKey:@"TestName"] objectAtIndex:i];//test names
-        
-        
         NSString * Screenid =  [self.objDBconnection ScreenId:self.assessmentCodeStr :assessmentTestCode ];
         NSLog(@"%@", Screenid);
         [objDic setValue:Screenid forKey:@"ScreenID"];
@@ -123,21 +121,21 @@
         
         int count = [Screencount intValue];
         
-        
+        AssessmentTypeTest = [[NSMutableArray alloc]init];
         if(count>0)
         {
-            
+
             AssessmentTypeTest = [self.objDBconnection AssementForm :Screenid :clientCode:self.ModuleCodeStr:self.assessmentCodeStr :assessmentTestCode ];
         }
-        
+
         for(int j=0;j<AssessmentTypeTest.count;j++)
         {
-            
+
             [AssessmentNameArray addObject:[AssessmentTypeTest objectAtIndex:j]];
-            
+
         }
-        [ComArray addObject: AssessmentNameArray];
-        
+       [ComArray addObject: AssessmentNameArray];
+
     }
     [self.objContenArray addObject:ComArray];
     [self.tableview reloadData];
@@ -229,6 +227,8 @@
     self.SelectTestCodeStr = [objDic valueForKey:@"TestTypeCode"];
     self.SelectTestNameStr = [objDic valueForKey:@"TestTypeName"];
     self.SelectScreenId    =[objDic valueForKey:@"ScreenID"];
+
+
 }
 
 - (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath
