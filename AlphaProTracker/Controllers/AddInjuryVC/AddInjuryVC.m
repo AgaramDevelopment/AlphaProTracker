@@ -272,6 +272,32 @@
     
     self.datepickerViewWidth.constant =self.view.frame.size.width/1.5;
     self.datepickerViewheight.constant =self.view.frame.size.height/3;
+    
+    if([RoleCode isEqualToString:@"ROL0000003"])
+    {
+        self.playerview.hidden=NO;
+        self.coachViewYposition.constant =10;
+        
+        self.XRayView.hidden = NO;
+        self.CTScansView.hidden = NO;
+        self.MRIScansView.hidden = NO;
+        self.BloodTestView.hidden = NO;
+        
+    }
+    else{
+        self.playerview.hidden=YES;
+        self.coachViewYposition.constant = -160;
+        
+        self.XRayView.hidden = YES;
+        self.CTScansView.hidden = YES;
+        self.MRIScansView.hidden = YES;
+        self.BloodTestView.hidden = YES;
+        
+        self.expectedViewYposition.constant = -150;
+        
+        self.updateBtn.hidden = YES;
+        self.deleteBtn.hidden = YES;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -1907,7 +1907,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             
             if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
             {
-                while(sqlite3_step(statement)==SQLITE_ROW){
+                while(sqlite3_step(statement)== SQLITE_ROW){
                     
                     NSString *aname = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                     
@@ -2007,9 +2007,10 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                 NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
             }
             
-            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
             
             sqlite3_close(dataBase);
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+
         }
         return NO;
     }
@@ -2860,7 +2861,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             
             if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
             {
-                while(sqlite3_step(statement)==SQLITE_ROW){
+                while(sqlite3_step(statement)== SQLITE_ROW){
                     
                     NSString *aname = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                     

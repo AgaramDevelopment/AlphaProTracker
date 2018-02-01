@@ -828,7 +828,12 @@ AppCommon *sharedCommon = nil;
                     
                     DBMANAGERSYNC *Dbm = [[DBMANAGERSYNC alloc]init];
                     Dbm.AssmntTestMaster = Values;
-                    [Dbm SELECTASSESSMENTTESTMASTER:Testcode];
+                    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                        [Dbm SELECTASSESSMENTTESTMASTER:Testcode];
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            //Run UI Updates
+                        });
+                    });
                     
                 }
                 
