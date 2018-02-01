@@ -98,9 +98,9 @@
     self.descview.layer.borderWidth=0.5f;
     self.descview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
-    //    self.valueview.layer.borderWidth=0.5f;
-    //    self.valueview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
-    //
+    self.valueview.layer.borderWidth=0.5f;
+    self.valueview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
+    
     self.remarksview.layer.borderWidth=0.5f;
     self.remarksview.layer.borderColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:0.5f].CGColor;
     
@@ -341,7 +341,7 @@
             {
                 for(int i=0; i< _AssessmentTypeMMT.count; i++)
                 {
-                    if([[[_AssessmentTypeMMT valueForKey:@"RESULTNAME"]objectAtIndex:i] isEqualToString:[objDic valueForKey:@"MmtRight"]])
+                    if([[[_AssessmentTypeMMT valueForKey:@"RESULT"]objectAtIndex:i] isEqualToString:[objDic valueForKey:@"MmtResult"]])
                     {
                         //setvalue
                         self.right_lbl.text = [[self.AssessmentTypeMMT valueForKey:@"RESULTNAME"] objectAtIndex:i];
@@ -351,7 +351,7 @@
                 }
                 for(int i=0; i<_AssessmentTypeMMT.count; i++)
                 {
-                    if([[[_AssessmentTypeMMT valueForKey:@"RESULTNAME"]objectAtIndex:i] isEqualToString:[objDic valueForKey:@"MmtLeft"]])
+                    if([[[_AssessmentTypeMMT valueForKey:@"RESULT"]objectAtIndex:i] isEqualToString:[objDic valueForKey:@"MmtResult"]])
                     {
                         //setvalue
                         self.left_lbl.text = [[self.AssessmentTypeMMT valueForKey:@"RESULTNAME"] objectAtIndex:i];
@@ -371,7 +371,7 @@
             {
                 for(int i=0; i<_AssessmentTypeMMT.count; i++)
                 {
-                    if([[_AssessmentTypeMMT valueForKey:@"RESULTNAME"] isEqualToString:[objDic valueForKey:@"MmtCenter"]])
+                    if([[_AssessmentTypeMMT valueForKey:@"RESULT"] isEqualToString:[objDic valueForKey:@"MmtResult"]])
                     {
                         //setvalue
                         self.centeral_Txt.text = [[self.AssessmentTypeMMT valueForKey:@"RESULTNAME"] objectAtIndex:i];
@@ -386,7 +386,7 @@
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"true";
+            self.ingnoreStatus =@"True";
             self.left_lbl.userInteractionEnabled = NO;
             self.right_lbl.userInteractionEnabled = NO;
             self.centeral_Txt.userInteractionEnabled = NO;
@@ -394,7 +394,7 @@
         else
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"false";
+            self.ingnoreStatus =@"False";
         }
         
     }
@@ -420,9 +420,10 @@
             UILabel * Rightlbl = (i==0)?[[UILabel alloc]initWithFrame:CGRectMake(10, i*40,self.view.frame.size.width/2, 30)] : [[UILabel alloc]initWithFrame:CGRectMake(10, (i+1)*40,self.view.frame.size.width/2, 30)];
             Rightlbl.text = (i==0)?@"Right":[NSString stringWithFormat:@"Right%d",i+1];
             Rightlbl.textColor=[UIColor whiteColor];
+            [Rightlbl setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 14]];
             [objSandCView addSubview:Rightlbl];
 
-            UITextField * trail1 = (i==0)?[[UITextField alloc]initWithFrame:CGRectMake(Rightlbl.frame.size.width+5,i*40,self.view.frame.size.width/2.1,30)] :[[UITextField alloc]initWithFrame:CGRectMake(Rightlbl.frame.size.width+5,(i+1)*40,self.view.frame.size.width/2.1,30)];
+            UITextField * trail1 = (i==0)?[[UITextField alloc]initWithFrame:CGRectMake(Rightlbl.frame.size.width,i*40,self.view.frame.size.width/2.1,30)] :[[UITextField alloc]initWithFrame:CGRectMake(Rightlbl.frame.size.width+5,(i+1)*40,self.view.frame.size.width/2.1,30)];
             trail1.textColor=[UIColor whiteColor];
 
             trail1.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -434,11 +435,12 @@
             
             UILabel * leftLbl = (i==0)?[[UILabel alloc]initWithFrame:CGRectMake(10, (i+1)*40,self.view.frame.size.width/2,30)]:[[UILabel alloc]initWithFrame:CGRectMake(10, (i+2)*40,self.view.frame.size.width/2,30)];
             leftLbl.textColor=[UIColor whiteColor];
+            [leftLbl setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 14]];
 
             leftLbl.text = (i==0)? @"Left":[NSString stringWithFormat:@"Left%d",i+1];
             [objSandCView addSubview:leftLbl];
             
-            UITextField * trail2 = (i==0)?[[UITextField alloc]initWithFrame:CGRectMake(leftLbl.frame.size.width+5, (i+1)*40, self.view.frame.size.width/2.1,30)]:[[UITextField alloc]initWithFrame:CGRectMake(leftLbl.frame.size.width+5, (i+2)*40, self.view.frame.size.width/2.1,30)];
+            UITextField * trail2 = (i==0)?[[UITextField alloc]initWithFrame:CGRectMake(leftLbl.frame.size.width, (i+1)*40, self.view.frame.size.width/2.1,30)]:[[UITextField alloc]initWithFrame:CGRectMake(leftLbl.frame.size.width+5, (i+2)*40, self.view.frame.size.width/2.1,30)];
             trail2.textColor=[UIColor whiteColor];
             trail2.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:0.27];
             trail2.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -463,16 +465,25 @@
         }
         else if([[objDic valueForKey:@"SideName"] isEqualToString:@"CENTRAL"])
         {
+            self.RemarkViewYposition.constant = noofTrails*40-410;
+
             for(int i=0; i< noofTrails; i++)
             {
-            UILabel * TitleLbl = [[UILabel alloc]initWithFrame:CGRectMake(10, i*40,self.view.frame.size.width/2, 40)];
-            TitleLbl.text = [NSString stringWithFormat:@"Center%d",i];
+            UILabel * TitleLbl = [[UILabel alloc]initWithFrame:CGRectMake(10, i*40,self.view.frame.size.width/2.0, 30)];
+                [TitleLbl setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 14]];
+
+                TitleLbl.text = (i==0)?@"Right":[NSString stringWithFormat:@"Right%d",i];
+                TitleLbl.textColor=[UIColor whiteColor];
             [objSandCView addSubview:TitleLbl];
             
-            UITextField * trail1 = [[UITextField alloc]initWithFrame:CGRectMake(TitleLbl.frame.size.width+5,i*40,self.view.frame.size.width/2.5,40)];
-            trail1.layer.borderColor = [UIColor whiteColor].CGColor;
-            trail1.layer.borderWidth =1;
-            trail1.layer.masksToBounds = YES;
+            UITextField * trail1 = [[UITextField alloc]initWithFrame:CGRectMake(TitleLbl.frame.size.width,i*40,self.view.frame.size.width/2.1,30)];
+                trail1.textColor=[UIColor whiteColor];
+                
+                trail1.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                trail1.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:0.27];
+                
+                trail1.layer.borderWidth =0.5;
+                trail1.layer.masksToBounds = YES;
             [objSandCView addSubview:trail1];
                 if(IsEdit == YES)
                 {
@@ -491,12 +502,12 @@
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"true";
+            self.ingnoreStatus =@"True";
         }
         else
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"false";
+            self.ingnoreStatus =@"False";
         }
         [self.CommScroll addSubview:objSandCView];
 
@@ -526,7 +537,7 @@
             {
                 for (int i = 0; i < self.AssessmentTypeGaint.count; i++) {
                     
-                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultName"]objectAtIndex:i]isEqualToString:[objDic valueForKey:@"ResultRight"]]) {
+                    if ([[[self.AssessmentTypeGaint valueForKey:@"Result"]objectAtIndex:i]isEqualToString:[objDic valueForKey:@"Result"]]) {
                         self.right_lbl.text = [[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:i];
                         break;
                     }
@@ -534,7 +545,7 @@
                 
                 for (int j = 0; j < self.AssessmentTypeGaint.count; j++) {
                     
-                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"ResultLeft"]]) {
+                    if ([[[self.AssessmentTypeGaint valueForKey:@"Result"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"Result"]]) {
                         
                         self.left_lbl.text = [[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:j];
                         break;
@@ -552,7 +563,7 @@
                 
                 for (int i = 0; i < self.AssessmentTypeGaint.count; i++) {
                     
-                    if ([[[self.AssessmentTypeGaint valueForKey:@"ResultName"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"ResultCentral"]]) {
+                    if ([[[self.AssessmentTypeGaint valueForKey:@"Result"] objectAtIndex:i] isEqualToString:[objDic valueForKey:@"Result"]]) {
                         
                         //spnCentral.setSelection(i);
                         //[self.CommonCombArray addObject:[self.AssessmentTypeGaint objectAtIndex:i]];
@@ -568,7 +579,7 @@
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"true";
+            self.ingnoreStatus =@"True";
             self.left_lbl.userInteractionEnabled = NO;
             self.right_lbl.userInteractionEnabled = NO;
             self.centeral_Txt.userInteractionEnabled = NO;
@@ -576,7 +587,7 @@
         else
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"false";
+            self.ingnoreStatus =@"False";
         }
     }
     else if([SCREEN_CODE_POSTURE isEqualToString:self.SelectScreenId])
@@ -653,7 +664,7 @@
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"true";
+            self.ingnoreStatus =@"True";
             self.left_lbl.userInteractionEnabled = NO;
             self.right_lbl.userInteractionEnabled = NO;
             self.centeral_Txt.userInteractionEnabled = NO;
@@ -661,7 +672,7 @@
         else
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"false";
+            self.ingnoreStatus =@"False";
         }
     }
     else if ([SCREEN_CODE_SPECIAL isEqualToString:self.SelectScreenId])
@@ -739,7 +750,7 @@
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"true";
+            self.ingnoreStatus =@"True";
             self.left_lbl.userInteractionEnabled = NO;
             self.right_lbl.userInteractionEnabled = NO;
             self.centeral_Txt.userInteractionEnabled = NO;
@@ -747,12 +758,14 @@
         else
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"false";
+            self.ingnoreStatus =@"False";
         }
     }
     else if ([SCREEN_CODE_COACHING isEqualToString:self.SelectScreenId])
     {
         NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        self.popviewwidth.constant = self.view.frame.size.width/2;
+
         self.left_lbl.userInteractionEnabled = YES;
         self.right_lbl.userInteractionEnabled = YES;
         self.centeral_Txt.userInteractionEnabled = YES;
@@ -761,14 +774,14 @@
         self.descriptionCombView.hidden = NO;
         self.descriptionCombViewYposition.constant =-200;
         self.RemarkViewYposition.constant = self.descriptionCombViewYposition.constant+50;
-        self.remark_Txt.text = [objDic valueForKey:@"Remark"];
+        self.remark_Txt.text = [objDic valueForKey:@"Remarks"];
         
         if (self.ObjSelectTestArray.count>0) {
             
             for (int j = 0; j < self.ObjSelectTestArray.count; j++) {
                 
                 if ([[[self.assessmentTestTypeCoach valueForKey:@"kpi"] objectAtIndex:j] isEqualToString:[objDic valueForKey:@"Kpi"]]) {
-                    self.description_lbl.text =[[self.assessmentTestTypeCoach valueForKey:@"kpi"] objectAtIndex:j];
+                    self.description_lbl.text =[[self.assessmentTestTypeCoach valueForKey:@"Description"] objectAtIndex:j];
                     break;
                 }
                 
@@ -779,7 +792,7 @@
         if([objDic valueForKey:@"ignored"] != NULL && [[objDic valueForKey:@"ignored"] isEqualToString:@"true"])
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"true";
+            self.ingnoreStatus =@"True";
             self.left_lbl.userInteractionEnabled = NO;
             self.right_lbl.userInteractionEnabled = NO;
             self.centeral_Txt.userInteractionEnabled = NO;
@@ -787,7 +800,7 @@
         else
         {
             [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-            self.ingnoreStatus =@"false";
+            self.ingnoreStatus =@"False";
         }
         
     }
@@ -817,10 +830,10 @@
     {
         NSLog(@"is the same image");
         [self.IngoreBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        self.ingnoreStatus =@"false";
+        self.ingnoreStatus =@"False";
     }else{
         NSLog(@"is not the same image");
-        self.ingnoreStatus =@"true";
+        self.ingnoreStatus =@"True";
         [self.IngoreBtn setImage:[UIImage imageNamed:@"rightMark"] forState:UIControlStateNormal];
         
     }

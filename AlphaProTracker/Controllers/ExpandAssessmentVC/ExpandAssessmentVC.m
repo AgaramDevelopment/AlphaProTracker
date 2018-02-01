@@ -27,8 +27,8 @@
 }
 
 @property (nonatomic,strong) NSMutableArray * objContenArray;
-@property (nonatomic,strong) NSString * SelectTestCodeStr;
-@property (nonatomic,strong) NSString * SelectTestNameStr;
+//@property (nonatomic,strong) NSString * SelectTestCodeStr;
+//@property (nonatomic,strong) NSString * SelectTestNameStr;
 @property (nonatomic,strong) NSString * SelectScreenId;;
 
 
@@ -70,7 +70,7 @@
 {
     [COMMON AddMenuView:self.view];
 }
--(IBAction)MenuBtnAction:(id)sender
+-(IBAction)backBtnAction:(id)sender
 {
    // [COMMON ShowsideMenuView];
     [self.navigationController popViewControllerAnimated:YES];
@@ -131,7 +131,13 @@
         for(int j=0;j<AssessmentTypeTest.count;j++)
         {
 
-            [AssessmentNameArray addObject:[AssessmentTypeTest objectAtIndex:j]];
+            NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
+            
+            [objDic setValue:[[AssessmentTypeTest valueForKey:@"TestTypeCode"] objectAtIndex:j] forKey:@"TestTypeCode"];
+            [objDic setValue:[[AssessmentTypeTest valueForKey:@"TestTypeName"] objectAtIndex:j] forKey:@"TestTypeName"];
+            [objDic setValue:Screenid forKey:@"ScreenID"];
+
+            [AssessmentNameArray addObject:objDic];
 
         }
        [ComArray addObject: AssessmentNameArray];
@@ -223,10 +229,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"didSelectRow");
-    NSDictionary * objDic = self.objContenArray[indexPath.section][indexPath.row][0];
-    self.SelectTestCodeStr = [objDic valueForKey:@"TestTypeCode"];
-    self.SelectTestNameStr = [objDic valueForKey:@"TestTypeName"];
-    self.SelectScreenId    =[objDic valueForKey:@"ScreenID"];
+    //NSDictionary * objDic = self.objContenArray[indexPath.section][indexPath.row][0];
+    //self.SelectTestCodeStr = [objDic valueForKey:@"TestTypeCode"];
+    //self.SelectTestNameStr = [objDic valueForKey:@"TestTypeName"];
+    //self.SelectScreenId    =[objDic valueForKey:@"ScreenID"];
 
 
 }
@@ -234,9 +240,10 @@
 - (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"didSelectSubRow");
+    NSDictionary * objTitleDic = self.objContenArray[indexPath.section][indexPath.row][0];
     NSDictionary * objDic  = self.objContenArray[indexPath.section][indexPath.row][indexPath.subRow];
     NSString * TestTypeCode =[objDic valueForKey:@"TestTypeCode"];
-    NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
+    NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode :  [objTitleDic valueForKey:@"TestTypeCode"]];
     isEdit = NO;
     if(objArray.count>0)
     {
@@ -246,12 +253,12 @@
     TestAssessmentEntryVC * objAssessmentVC =[[TestAssessmentEntryVC alloc]init];
     objAssessmentVC = (TestAssessmentEntryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"TestAssessmentEntryVC"];
     objAssessmentVC.selectAllValueDic =self.SelectDetailDic;
-    objAssessmentVC.SectionTestCodeStr = self.SelectTestCodeStr;
+    objAssessmentVC.SectionTestCodeStr = [objTitleDic valueForKey:@"TestTypeCode"];
     objAssessmentVC.SelectTestStr = [objDic valueForKey:@"TestTypeName"];
     objAssessmentVC.ModuleStr = self.ModuleCodeStr;
     objAssessmentVC.IsEdit    =isEdit;
     objAssessmentVC.SelectTestTypecode = TestTypeCode;
-    objAssessmentVC.SelectScreenId =self.SelectScreenId;
+    objAssessmentVC.SelectScreenId =[objDic valueForKey:@"ScreenID"];
     [self.navigationController pushViewController:objAssessmentVC animated:YES];
     
 }
