@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessangerSendVC">
             <connections>
                 <outlet property="ImgViewBottomConst" destination="Bk9-kZ-P4t" id="OQD-lK-AZR"/>
-                <outlet property="MsgToolHeight" destination="cgP-Tw-vQ9" id="7E4-7x-GBU"/>
+                <outlet property="MsgToolHeight" destination="vtE-LH-I2a" id="CDu-lP-ABg"/>
                 <outlet property="btnToName" destination="3S2-2r-FdZ" id="sQi-FE-dCJ"/>
                 <outlet property="currentlySelectedImage" destination="2xU-kP-uHn" id="XzL-Tp-5Wi"/>
                 <outlet property="imgView" destination="cL2-Ye-kDD" id="GTO-Ky-Ogz"/>
@@ -65,13 +65,15 @@
                             <rect key="frame" x="0.0" y="524" width="375" height="40"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SHa-6G-pK2">
-                                    <rect key="frame" x="8" y="0.0" width="269" height="40"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="cgP-Tw-vQ9"/>
-                                    </constraints>
+                                    <rect key="frame" x="2" y="1" width="275" height="38"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="ZGM-t4-pk3"/>
                                         <outlet property="pasteDelegate" destination="-1" id="zCb-9S-yMD"/>
@@ -108,15 +110,16 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="SHa-6G-pK2" firstAttribute="height" secondItem="k1l-vl-dbo" secondAttribute="height" id="2Rg-97-m01"/>
                                 <constraint firstItem="eSa-Sn-ewE" firstAttribute="leading" secondItem="6h0-hN-nly" secondAttribute="trailing" constant="10" id="4bj-F4-XWp"/>
                                 <constraint firstAttribute="bottom" secondItem="6h0-hN-nly" secondAttribute="bottom" constant="3" id="Fq9-9V-gZh"/>
                                 <constraint firstAttribute="bottom" secondItem="eSa-Sn-ewE" secondAttribute="bottom" constant="3" id="Vm4-I9-5ks"/>
                                 <constraint firstAttribute="trailing" secondItem="eSa-Sn-ewE" secondAttribute="trailing" constant="8" id="Z1Q-2i-9u9"/>
-                                <constraint firstItem="SHa-6G-pK2" firstAttribute="leading" secondItem="k1l-vl-dbo" secondAttribute="leading" constant="8" id="jQ7-Se-H1y"/>
-                                <constraint firstItem="SHa-6G-pK2" firstAttribute="top" secondItem="k1l-vl-dbo" secondAttribute="top" id="sJ2-1m-aoC"/>
+                                <constraint firstAttribute="bottom" secondItem="SHa-6G-pK2" secondAttribute="bottom" constant="1" id="eIt-v5-r8s"/>
+                                <constraint firstItem="SHa-6G-pK2" firstAttribute="leading" secondItem="k1l-vl-dbo" secondAttribute="leading" constant="2" id="jQ7-Se-H1y"/>
+                                <constraint firstItem="SHa-6G-pK2" firstAttribute="top" secondItem="k1l-vl-dbo" secondAttribute="top" constant="1" id="sJ2-1m-aoC"/>
+                                <constraint firstAttribute="height" constant="40" id="vtE-LH-I2a"/>
                                 <constraint firstItem="6h0-hN-nly" firstAttribute="leading" secondItem="SHa-6G-pK2" secondAttribute="trailing" constant="10" id="yPk-98-WH2"/>
                             </constraints>
                         </view>
@@ -135,11 +138,20 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXN-Nw-Vz2">
+                                    <rect key="frame" x="122" y="2.5" width="131" height="30"/>
+                                    <state key="normal" title="Cancel Attachment"/>
+                                    <connections>
+                                        <action selector="actionCancelAttachment:" destination="-1" eventType="touchUpInside" id="Jhh-Op-F6W"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="2xU-kP-uHn" firstAttribute="top" secondItem="cL2-Ye-kDD" secondAttribute="top" constant="2.8799999999999999" id="3o8-MF-Aot"/>
                                 <constraint firstAttribute="bottom" secondItem="2xU-kP-uHn" secondAttribute="bottom" constant="2.1200000000000001" id="FJs-hu-4VQ"/>
+                                <constraint firstItem="GXN-Nw-Vz2" firstAttribute="centerY" secondItem="cL2-Ye-kDD" secondAttribute="centerY" id="HkZ-gz-DUE"/>
                                 <constraint firstItem="2xU-kP-uHn" firstAttribute="leading" secondItem="cL2-Ye-kDD" secondAttribute="leading" constant="8" id="Xlk-bu-0qK"/>
+                                <constraint firstItem="GXN-Nw-Vz2" firstAttribute="centerX" secondItem="cL2-Ye-kDD" secondAttribute="centerX" id="ibM-Ks-Ah9"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please start your conversation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRZ-gd-WTI">
