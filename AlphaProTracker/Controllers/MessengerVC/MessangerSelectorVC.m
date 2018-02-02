@@ -282,65 +282,73 @@
 // number of row in the section, I assume there is only 1 row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
+    if (commonArray.count) {
+        self.messageLbl.hidden = YES;
+        self.messangerTableView.hidden = NO;
         return commonArray.count;
+    } else {
+        self.messageLbl.hidden = NO;
+        self.messangerTableView.hidden = YES;
+        
+        if (isInbox) {
+            self.messageLbl.text = @"You don't have any Messages.";
+        } else if (isContacts) {
+            self.messageLbl.text = @"You don't have any Contacts.";
+        } else if (isGroups) {
+            self.messageLbl.text = @"You are not belong to any Group";
+        }
+    }
+    
+    return 0;
 }
 // the cell will be returned to the tableView
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (isInbox) {
-        
-        static NSString *inboxCell = @"inboxCell";
-        InboxTableViewCell * objCell = [tableView dequeueReusableCellWithIdentifier:@"inboxCell"];
-        NSArray* arr = [[NSBundle mainBundle] loadNibNamed:@"InboxTableViewCell" owner:self options:nil];
-         objCell = arr[0];
-        
-        if (objCell == nil) {
-            objCell = [[InboxTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:inboxCell];
+        if (isInbox) {
+            
+            static NSString *inboxCell = @"inboxCell";
+            InboxTableViewCell * objCell = [tableView dequeueReusableCellWithIdentifier:@"inboxCell"];
+            NSArray* arr = [[NSBundle mainBundle] loadNibNamed:@"InboxTableViewCell" owner:self options:nil];
+            objCell = arr[0];
+            
+            if (objCell == nil) {
+                objCell = [[InboxTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:inboxCell];
+            }
+            
+            objCell.backgroundColor = [UIColor clearColor];
+            objCell.textLabel.textColor = [UIColor blackColor];
+            
+//                        objCell.unreadMssgLbl.text = @"1 Unread message(s) from Veeresh";
+//                        objCell.messageLbl.text = @"Last Message: Hii";
+//                        objCell.dateTimeLbl.text = @"msgDateTime: Jan 26 2018 Fri 8:31 PM";
+            objCell.unreadMssgLbl.text = [NSString stringWithFormat:@"%@ Unread message(s) from %@",[[commonArray objectAtIndex:indexPath.row] valueForKey:@"msgCount"], [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivefromname"]];
+            objCell.messageLbl.text = [NSString stringWithFormat:@"Last Message: %@",[[commonArray objectAtIndex:indexPath.row] valueForKey:@"message"]];
+            objCell.dateTimeLbl.text = [NSString stringWithFormat:@"%@",[[commonArray objectAtIndex:indexPath.row] valueForKey:@"msgDateTime"]];
+            
+            return objCell;
         }
         
-        objCell.backgroundColor = [UIColor clearColor];
-//        UIView *bgColorView = [[UIView alloc] init];
-//        bgColorView.backgroundColor = [UIColor colorWithRed:(8/255.0f) green:(26/255.0f) blue:(77/255.0f) alpha:1.0f];
-//        objCell.selectedBackgroundView = bgColorView;
-        objCell.textLabel.textColor = [UIColor blackColor];
+        static NSString *cellIdentifier = @"messangerSelectorCell";
         
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
-//        objCell.unreadMssgLbl.text = @"1 Unread message(s) from Veeresh";
-//        objCell.messageLbl.text = @"Last Message: Hii";
-//        objCell.dateTimeLbl.text = @"msgDateTime: Jan 26 2018 Fri 8:31 PM";
-        objCell.unreadMssgLbl.text = [NSString stringWithFormat:@"%@ Unread message(s) from %@",[[commonArray objectAtIndex:indexPath.row] valueForKey:@"msgCount"], [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivefromname"]];
-        objCell.messageLbl.text = [NSString stringWithFormat:@"Last Message: %@",[[commonArray objectAtIndex:indexPath.row] valueForKey:@"message"]];
-        objCell.dateTimeLbl.text = [NSString stringWithFormat:@"%@",[[commonArray objectAtIndex:indexPath.row] valueForKey:@"msgDateTime"]];
+        if(cell == nil){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
         
-        return objCell;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [UIColor blackColor];
         
-    }
-    
-    static NSString *cellIdentifier = @"messangerSelectorCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if(cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    
-    cell.backgroundColor = [UIColor clearColor];
-    
-    
-//    UIView *bgColorView = [[UIView alloc] init];
-//    bgColorView.backgroundColor = [UIColor colorWithRed:(8/255.0f) green:(26/255.0f) blue:(77/255.0f) alpha:1.0f];
-//    cell.selectedBackgroundView = bgColorView;
-    cell.textLabel.textColor = [UIColor blackColor];
-    
-    if (isContacts) {
-        cell.textLabel.text = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivername"];
-    } else if(isGroups) {
-        cell.textLabel.text = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivername"];
-    }
-    
-    return cell;
+        if (isContacts) {
+            cell.textLabel.text = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivername"];
+        } else if(isGroups) {
+            cell.textLabel.text = [[commonArray objectAtIndex:indexPath.row] valueForKey:@"receivername"];
+        }
+        
+        return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -382,7 +390,7 @@
 }
 
 
--(void) setInningsBySelection: (NSString*) innsNo{
+-(void) setInningsBySelection: (NSString*) innsNo {
     
     [self setInningsButtonUnselect:self.inboxBtn];
     [self setInningsButtonUnselect:self.contactsBtn];
@@ -430,14 +438,14 @@
     return color;
 }
 
--(void) setInningsButtonSelect : (UIButton*) innsBtn{
+-(void) setInningsButtonSelect : (UIButton*) innsBtn {
     // innsBtn.layer.cornerRadius = 25;
     UIColor *extrasBrushBG = [self colorWithHexString : @"#FFFFFF"];
     innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
     [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
--(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn {
     //  innsBtn.layer.cornerRadius = 25;
     UIColor *extrasBrushBG = [self colorWithHexString : @"#333333"];
     
@@ -471,11 +479,27 @@
     //RcntPer.Playercode = plycde;
     objGroup.view.frame = CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height);
     objGroup.playerListArray =   recipientsArray;
-   // [objGroup.multiSelectBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:objGroup.view];
+//    [self.view addSubview:objGroup.view];
+/*
+    self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    self.view.alpha = 0;
+    [UIView animateWithDuration:.5 animations:^{
+        self.view.alpha = 1;
+        self.view.transform = CGAffineTransformMakeScale(1, 1);
+        [self.view addSubview:objGroup.view];
+    }];
+*/
+    [UIView transitionWithView:self.view duration:5.0
+                       options:UIViewAnimationOptionCurveLinear 
+                    animations:^{
+                        [self.view addSubview:objGroup.view];
+                    }
+                    completion:nil];
     
+ 
 }
 
+    
 //- (void)buttonPressed:(id)sender
 //{
 //    objGroup.multiSelectViewView.hidden = false;

@@ -14,6 +14,7 @@
                 <outlet property="contactsBtn" destination="GO6-rl-Slw" id="x1H-bo-u1B"/>
                 <outlet property="groupsBtn" destination="qlz-TE-rM5" id="MFj-s4-dJx"/>
                 <outlet property="inboxBtn" destination="kJk-9l-t6o" id="UTQ-CH-PzJ"/>
+                <outlet property="messageLbl" destination="Ddg-88-DaU" id="sKT-wG-pXd"/>
                 <outlet property="messangerTableView" destination="ZAz-ZW-6s9" id="XLm-e1-YKI"/>
                 <outlet property="naviView" destination="WvU-bp-8rj" id="4SK-DR-xth"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -35,6 +36,19 @@
                                 <outlet property="delegate" destination="-1" id="WwC-d9-5A9"/>
                             </connections>
                         </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddg-88-DaU">
+                            <rect key="frame" x="0.0" y="284" width="375" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="s9h-Yf-pQd">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                </constraint>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            </variation>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVy-Sv-uqT">
                             <rect key="frame" x="0.0" y="553" width="375" height="44"/>
                             <subviews>
@@ -44,6 +58,9 @@
                                     <state key="normal" title="Inbox">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    </variation>
                                     <connections>
                                         <action selector="inboxAction:" destination="-1" eventType="touchUpInside" id="QwM-7V-tWt"/>
                                     </connections>
@@ -54,6 +71,9 @@
                                     <state key="normal" title="Contacts">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    </variation>
                                     <connections>
                                         <action selector="contactsAction:" destination="-1" eventType="touchUpInside" id="whP-SO-cea"/>
                                     </connections>
@@ -64,15 +84,20 @@
                                     <state key="normal" title="Groups">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    </variation>
                                     <connections>
                                         <action selector="groupsAction:" destination="-1" eventType="touchUpInside" id="6jN-QG-qOH"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.98653465510000005" green="0.64009028670000001" blue="0.22932592030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="kJk-9l-t6o" firstAttribute="width" secondItem="GO6-rl-Slw" secondAttribute="width" id="8e8-sz-jo7"/>
-                                <constraint firstAttribute="height" constant="44" id="9Yj-LK-262"/>
+                                <constraint firstAttribute="height" constant="44" id="9Yj-LK-262">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="54"/>
+                                </constraint>
                                 <constraint firstItem="qlz-TE-rM5" firstAttribute="leading" secondItem="GO6-rl-Slw" secondAttribute="trailing" id="A0x-Fr-qkg"/>
                                 <constraint firstItem="GO6-rl-Slw" firstAttribute="leading" secondItem="kJk-9l-t6o" secondAttribute="trailing" id="FNa-NH-ayX"/>
                                 <constraint firstItem="GO6-rl-Slw" firstAttribute="top" secondItem="yVy-Sv-uqT" secondAttribute="top" id="I5V-bk-Q1X"/>
@@ -92,10 +117,14 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="yVy-Sv-uqT" secondAttribute="trailing" id="6Tv-6z-vGA"/>
                         <constraint firstAttribute="trailing" secondItem="ZAz-ZW-6s9" secondAttribute="trailing" id="8So-vY-peD"/>
+                        <constraint firstAttribute="trailing" secondItem="Ddg-88-DaU" secondAttribute="trailing" id="N6e-3Z-eyP"/>
+                        <constraint firstItem="Ddg-88-DaU" firstAttribute="centerY" secondItem="Qgi-Xj-nxN" secondAttribute="centerY" id="Qup-Ea-BC3"/>
                         <constraint firstItem="ZAz-ZW-6s9" firstAttribute="leading" secondItem="Qgi-Xj-nxN" secondAttribute="leading" id="TNc-kT-bto"/>
                         <constraint firstItem="yVy-Sv-uqT" firstAttribute="top" secondItem="ZAz-ZW-6s9" secondAttribute="bottom" id="eBo-Rm-ZY5"/>
                         <constraint firstAttribute="bottom" secondItem="yVy-Sv-uqT" secondAttribute="bottom" id="fMK-DS-slK"/>
                         <constraint firstItem="ZAz-ZW-6s9" firstAttribute="top" secondItem="Qgi-Xj-nxN" secondAttribute="top" id="gKd-hc-16t"/>
+                        <constraint firstItem="Ddg-88-DaU" firstAttribute="leading" secondItem="Qgi-Xj-nxN" secondAttribute="leading" id="gUR-v3-04H"/>
+                        <constraint firstItem="Ddg-88-DaU" firstAttribute="centerX" secondItem="Qgi-Xj-nxN" secondAttribute="centerX" id="guA-oq-LWD"/>
                         <constraint firstItem="yVy-Sv-uqT" firstAttribute="leading" secondItem="Qgi-Xj-nxN" secondAttribute="leading" id="nkp-Cp-u5j"/>
                     </constraints>
                 </view>

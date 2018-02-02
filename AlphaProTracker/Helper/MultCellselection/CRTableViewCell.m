@@ -54,8 +54,8 @@
     
     CGFloat posY = (rect.size.height/2) - kCircleRadioUnselected/2;
     
-    CGRect unselectedCircleRect = CGRectMake(self.frame.size.width-80, posY, kCircleRadioUnselected, kCircleRadioUnselected);
-    CGRect imageViewRect = CGRectMake(self.frame.size.width-83, rect.size.height/2 - kCircleLeftMargin - 3, kMarkCell/2, kMarkCell/2);
+    CGRect unselectedCircleRect = CGRectMake(self.frame.size.width-70, posY, kCircleRadioUnselected, kCircleRadioUnselected);
+    CGRect imageViewRect = CGRectMake(self.frame.size.width-73, rect.size.height/2 - kCircleLeftMargin - 3, kMarkCell/2, kMarkCell/2);
     
     imageView.frame = imageViewRect; // Center the imageView
     
@@ -88,7 +88,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(50, .0, self.frame.size.width - kMarkCell, self.frame.size.height)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(40, .0, self.frame.size.width - kMarkCell, self.frame.size.height)];
         label.textColor = [UIColor blackColor];
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
         label.textAlignment = UITextAlignmentLeft;

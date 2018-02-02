@@ -211,10 +211,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzo-XV-hvU">
-                    <rect key="frame" x="67" y="183.5" width="240" height="300"/>
+                    <rect key="frame" x="5" y="183.5" width="365" height="300"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lVy-Zq-7MB">
-                            <rect key="frame" x="0.0" y="10" width="240" height="235"/>
+                            <rect key="frame" x="0.0" y="10" width="365" height="235"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="tF8-ji-Kam"/>
@@ -222,7 +222,7 @@
                             </connections>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jfm-a4-Cyd">
-                            <rect key="frame" x="10" y="255" width="105" height="35"/>
+                            <rect key="frame" x="10" y="255" width="167.5" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="ZPk-74-tGL"/>
                             </constraints>
@@ -235,7 +235,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYu-sl-Nsn">
-                            <rect key="frame" x="125" y="255" width="105" height="35"/>
+                            <rect key="frame" x="187.5" y="255" width="167.5" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="qdd-aA-rLq"/>
                             </constraints>
@@ -266,11 +266,15 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Zzo-XV-hvU" secondAttribute="trailing" constant="68" id="5XG-Zj-tVn"/>
+                <constraint firstAttribute="trailing" secondItem="Zzo-XV-hvU" secondAttribute="trailing" constant="5" id="5XG-Zj-tVn">
+                    <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="UZb-GE-Mjy" secondAttribute="trailing" constant="5" id="8zl-wp-5bR"/>
                 <constraint firstItem="UZb-GE-Mjy" firstAttribute="leading" secondItem="zVB-OO-i4r" secondAttribute="leading" constant="5" id="CfH-G2-rbe"/>
                 <constraint firstItem="Zzo-XV-hvU" firstAttribute="centerY" secondItem="zVB-OO-i4r" secondAttribute="centerY" id="Dpb-Ej-uA1"/>
-                <constraint firstItem="Zzo-XV-hvU" firstAttribute="leading" secondItem="zVB-OO-i4r" secondAttribute="leading" constant="67" id="V6t-Yy-rpb"/>
+                <constraint firstItem="Zzo-XV-hvU" firstAttribute="leading" secondItem="zVB-OO-i4r" secondAttribute="leading" constant="5" id="V6t-Yy-rpb">
+                    <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                </constraint>
                 <constraint firstItem="Zzo-XV-hvU" firstAttribute="centerX" secondItem="zVB-OO-i4r" secondAttribute="centerX" id="kGR-Ie-Ucm"/>
                 <constraint firstItem="UZb-GE-Mjy" firstAttribute="centerX" secondItem="zVB-OO-i4r" secondAttribute="centerX" id="vlU-fe-ZMd"/>
                 <constraint firstItem="UZb-GE-Mjy" firstAttribute="centerY" secondItem="zVB-OO-i4r" secondAttribute="centerY" constant="-24" id="yYH-B9-84a"/>

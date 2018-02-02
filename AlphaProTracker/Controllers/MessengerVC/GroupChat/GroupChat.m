@@ -38,7 +38,6 @@
     if([COMMON isInternetReachable])
     {
         
-        
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@", GroupChatKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -135,7 +134,7 @@
     cell.isSelected = [self.selectedMarks containsObject:Excode] ? YES : NO;
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    int a = self.selectedMarks.count;
+    int a = (int) self.selectedMarks.count;
     if(a == 0)
     {
         //NSString *b = [NSString stringWithFormat:@"%d", a];
@@ -157,8 +156,16 @@
 - (IBAction)onClickBtn:(id)sender {
     NSLog(@"HI");
     //objGroup.multiSelectViewView.hidden = false;
-    self.multiSelectViewView.hidden = NO;
+//    self.multiSelectViewView.hidden = NO;
     self.selectedMarks = [[NSMutableArray alloc]init];
+    
+    self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    self.view.alpha = 0;
+    [UIView animateWithDuration:.2 animations:^{
+        self.view.alpha = 1;
+        self.view.transform = CGAffineTransformMakeScale(1, 1);
+         self.multiSelectViewView.hidden = NO;
+    }];
 
 }
 
@@ -174,7 +181,16 @@
 }
 -(IBAction)cancelAction:(id)sender
 {
-    self.multiSelectViewView.hidden = YES;
+//    self.multiSelectViewView.hidden = YES;
+    
+    [UIView animateWithDuration:.2 animations:^{
+//        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+//        self.view.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            self.multiSelectViewView.hidden = YES;
+        }
+    }];
 }
 
 -(IBAction)createAction:(id)sender
@@ -186,7 +202,23 @@
 //    MessangerSelectorVC * objMess = [[MessangerSelectorVC alloc] initWithNibName:@"MessangerSelectorVC" bundle:nil];
 //    objMess.referenceKey = @"yes";
 //    [appDel.navigationController pushViewController:objMess animated:YES];
-    [self.view removeFromSuperview];
+/*
+    [UIView animateWithDuration:.5 animations:^{
+//        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+//        self.view.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.view removeFromSuperview];
+        }
+    }];
+*/
+    [UIView transitionWithView:self.view duration:5.0
+                       options: UIViewAnimationOptionCurveLinear
+                    animations:^{
+                        [self.view removeFromSuperview];
+                    }
+                    completion:nil];
+//    [self.view removeFromSuperview];
 }
 
 
