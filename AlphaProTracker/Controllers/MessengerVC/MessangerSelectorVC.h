@@ -27,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *groupsBtn;
 @property (strong, nonatomic) IBOutlet UITableView *messangerTableView;
 //@property (strong, nonatomic) IBOutlet InboxTableViewCell *reqcell;
+@property (strong, nonatomic) IBOutlet UILabel *messageLbl;
 
 @property (strong, nonatomic) IBOutlet UIView *naviView;
 

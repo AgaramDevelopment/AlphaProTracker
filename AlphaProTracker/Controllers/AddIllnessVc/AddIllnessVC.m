@@ -408,7 +408,7 @@
 //                    self.coachViewYposition.constant =self.playerView.frame.size.height;
                     self.documentsView.hidden = YES;
                     self.documentViewHeightConstraint.constant = 0;
-                    [self.documentsView updateConstraintsIfNeeded];
+                    [self.documentsView updateConstraintsIfNeeded];  //layoutIfNeeded
                     self.updateBtn.hidden = YES;
                     self.deleteBtn.hidden = YES;
 //                   self.popviewYposition.constant = self.popview_Tbl.frame.origin.y;
@@ -601,14 +601,33 @@
         
         selectExpertOpinionCode=@"MSC215";
     }
-    else{
+    /*else {
         [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
         
         selectExpertOpinionCode=@"MSC216";
     }
-    
+     */
 }
+
+-(IBAction)didClickExpertNoOpinion:(id)sender
+{
+    if([self.expertNoBtn.currentImage isEqual:[UIImage imageNamed:@"radio_off"]])
+        {
+        [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+        [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+        
+        selectExpertOpinionCode=@"MSC216";
+        }
+    /*else {
+            [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+            [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+            
+            selectExpertOpinionCode=@"MSC215";
+        }
+     */
+}
+
 -(IBAction)didClickOnset:(id)sender
 {
     isExpected =NO;
