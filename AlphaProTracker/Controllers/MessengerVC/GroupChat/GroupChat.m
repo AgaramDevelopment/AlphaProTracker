@@ -134,21 +134,7 @@
     cell.isSelected = [self.selectedMarks containsObject:Excode] ? YES : NO;
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    int a = (int) self.selectedMarks.count;
-    if(a == 0)
-    {
-        //NSString *b = [NSString stringWithFormat:@"%d", a];
-        self.selectedPlayerlbl.text = @"";
-    }
-    if(a == 1)
-    {
-        //NSString *b = [NSString stringWithFormat:@"%d", a];
-        self.selectedPlayerlbl.text = [NSString stringWithFormat:@"%d Player selected", a];
-    }
-    else
-    {
-        self.selectedPlayerlbl.text = [NSString stringWithFormat:@"%d Players selected", a];
-    }
+    
     
     
 }
@@ -157,16 +143,13 @@
     NSLog(@"HI");
     //objGroup.multiSelectViewView.hidden = false;
 //    self.multiSelectViewView.hidden = NO;
-    self.selectedMarks = [[NSMutableArray alloc]init];
-    
-    self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
-    self.view.alpha = 0;
-    [UIView animateWithDuration:.2 animations:^{
-        self.view.alpha = 1;
-        self.view.transform = CGAffineTransformMakeScale(1, 1);
-         self.multiSelectViewView.hidden = NO;
-    }];
-
+//    self.selectedMarks = [[NSMutableArray alloc]init];
+    [UIView transitionWithView:self.view duration:1.0
+                       options: UIViewAnimationOptionShowHideTransitionViews
+                    animations:^{
+                        self.multiSelectViewView.hidden = NO;
+                    }
+                    completion:nil];
 }
 
 -(IBAction)groupmemeberAction:(id)sender
@@ -177,20 +160,33 @@
 {
     self.multiSelectViewView.hidden = YES;
     NSLog(@"%@", self.selectedMarks);
+    int a = (int) self.selectedMarks.count;
+    if(a == 0)
+        {
+            //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.selectedPlayerlbl.text = @"";
+        }
+    if(a == 1)
+        {
+            //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.selectedPlayerlbl.text = [NSString stringWithFormat:@"%d Player selected", a];
+        }
+    else
+        {
+        self.selectedPlayerlbl.text = [NSString stringWithFormat:@"%d Players selected", a];
+        }
     
 }
 -(IBAction)cancelAction:(id)sender
 {
 //    self.multiSelectViewView.hidden = YES;
-    
-    [UIView animateWithDuration:.2 animations:^{
-//        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
-//        self.view.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            self.multiSelectViewView.hidden = YES;
-        }
-    }];
+
+    [UIView transitionWithView:self.view duration:.2
+                       options: UIViewAnimationOptionShowHideTransitionViews
+                    animations:^{
+                        self.multiSelectViewView.hidden = YES;
+                    }
+                    completion:nil];
 }
 
 -(IBAction)createAction:(id)sender
@@ -212,13 +208,12 @@
         }
     }];
 */
-    [UIView transitionWithView:self.view duration:5.0
-                       options: UIViewAnimationOptionCurveLinear
+    [UIView transitionWithView:self.view duration:.2
+                       options: UIViewAnimationOptionShowHideTransitionViews
                     animations:^{
                         [self.view removeFromSuperview];
                     }
                     completion:nil];
-//    [self.view removeFromSuperview];
 }
 
 

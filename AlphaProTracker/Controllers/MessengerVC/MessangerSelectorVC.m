@@ -474,23 +474,19 @@
         return;
         
     }
+    
+    if(objGroup.view != nil){
+        [objGroup.view removeFromSuperview];
+    }
      objGroup = [[GroupChat alloc] initWithNibName:@"GroupChat" bundle:nil];
     //RcntPer.Teamcode = tmecde;
     //RcntPer.Playercode = plycde;
     objGroup.view.frame = CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height);
     objGroup.playerListArray =   recipientsArray;
 //    [self.view addSubview:objGroup.view];
-/*
-    self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
-    self.view.alpha = 0;
-    [UIView animateWithDuration:.5 animations:^{
-        self.view.alpha = 1;
-        self.view.transform = CGAffineTransformMakeScale(1, 1);
-        [self.view addSubview:objGroup.view];
-    }];
-*/
-    [UIView transitionWithView:self.view duration:5.0
-                       options:UIViewAnimationOptionCurveLinear 
+
+    [UIView transitionWithView:self.view duration:.2
+                       options: UIViewAnimationOptionShowHideTransitionViews//UIViewAnimationOptionTransitionFlipFromLeft
                     animations:^{
                         [self.view addSubview:objGroup.view];
                     }

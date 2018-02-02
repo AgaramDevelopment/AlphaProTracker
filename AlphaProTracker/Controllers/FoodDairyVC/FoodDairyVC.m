@@ -102,7 +102,6 @@
     //Veeresh
     datePicker = [[UIDatePicker alloc] init];
     
-//    self.datelbl.tintColor = [UIColor clearColor];
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
     

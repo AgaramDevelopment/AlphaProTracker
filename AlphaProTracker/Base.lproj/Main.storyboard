@@ -2535,7 +2535,7 @@ _placeholderLabel.textColor</string>
                                                                 </constraints>
                                                                 <state key="normal" image="radio_off"/>
                                                                 <connections>
-                                                                    <action selector="didClickExpertOpinion:" destination="QHR-fb-iw1" eventType="touchUpInside" id="mnj-aO-NAq"/>
+                                                                    <action selector="didClickExpertNoOpinion:" destination="QHR-fb-iw1" eventType="touchUpInside" id="4IN-kc-3Mv"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>

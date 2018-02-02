@@ -72,9 +72,9 @@
     //Veeresh
     datePicker = [[UIDatePicker alloc] init];
 
-    self.datelbl.tintColor = [UIColor clearColor];
-    self.starttimelbl.tintColor = [UIColor clearColor];
-    self.endTimelbl.tintColor = [UIColor clearColor];
+//    self.datelbl.tintColor = [UIColor clearColor];
+//    self.starttimelbl.tintColor = [UIColor clearColor];
+//    self.endTimelbl.tintColor = [UIColor clearColor];
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
     
@@ -129,9 +129,14 @@
         self.fooddetailTxv.userInteractionEnabled=NO;
         self.foodsizeTxv.userInteractionEnabled=NO;
         self.dateBtn.userInteractionEnabled =NO;
+        self.datelbl.userInteractionEnabled = NO;
         self.starttimeBtn.userInteractionEnabled=NO;
+        self.starttimelbl.userInteractionEnabled = NO;
         self.endtimeBtn.userInteractionEnabled=NO;
+        self.endTimelbl.userInteractionEnabled = NO;
         self.scrollView.scrollEnabled = NO;
+    
+    
     }
     else{
         if(_Isupdate ==YES)
