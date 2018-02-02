@@ -49,6 +49,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your message" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KB-IU-dGz">
                                 <rect key="frame" x="10" y="70" width="190" height="25"/>
+                                <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -77,7 +78,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="JNI-Nm-QoQ" secondAttribute="trailing" constant="10" id="bhR-RV-4oK"/>
                     <constraint firstItem="JNI-Nm-QoQ" firstAttribute="leading" secondItem="HL6-RM-OVe" secondAttribute="leading" constant="100" id="lH2-OT-xxI">
-                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                        <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                     </constraint>
                     <constraint firstAttribute="bottom" secondItem="JNI-Nm-QoQ" secondAttribute="bottom" constant="5" id="nea-35-cLQ"/>
                     <constraint firstItem="JNI-Nm-QoQ" firstAttribute="top" secondItem="HL6-RM-OVe" secondAttribute="top" constant="5" id="tKo-O8-QrT"/>
@@ -154,7 +155,7 @@
                 <constraints>
                     <constraint firstItem="h9k-O4-yLA" firstAttribute="top" secondItem="5gv-qG-VfI" secondAttribute="top" constant="5" id="ET1-Dm-o3j"/>
                     <constraint firstAttribute="trailing" secondItem="h9k-O4-yLA" secondAttribute="trailing" constant="100" id="V8n-kA-CeO">
-                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                        <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                     </constraint>
                     <constraint firstAttribute="bottom" secondItem="h9k-O4-yLA" secondAttribute="bottom" constant="5" id="dOT-AF-0GJ"/>
                     <constraint firstItem="h9k-O4-yLA" firstAttribute="leading" secondItem="5gv-qG-VfI" secondAttribute="leading" constant="5" id="jbP-uu-rLn"/>

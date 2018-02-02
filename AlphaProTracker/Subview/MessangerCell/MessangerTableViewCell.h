@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ReceiverIMGHeight;
 
 
+-(void)calculateMsgSize;
 
 
 

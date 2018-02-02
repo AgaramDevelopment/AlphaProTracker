@@ -211,6 +211,9 @@
 
 //                NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMAGE_URL,IMG]];
                 [cell.SenderIMG sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_image"]];
+                [self calculateMsgSize:cell.SenderMsg];
+//                [cell.SenderMsg sizeToFit];
+//                [cell.SenderMsg updateConstraintsIfNeeded];
             }else
             {
                 cell.SenderIMGHeight.constant = 20;
@@ -247,6 +250,25 @@
     
     return nil;
 }
+
+-(void)calculateMsgSize:(UILabel *)label
+{
+    [label invalidateIntrinsicContentSize];
+    NSLog(@"TEXT %@ ",label.text);
+    CGSize size = label.intrinsicContentSize;
+    NSLog(@"calculateMsgSize %@",NSStringFromCGSize(size));
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:label.text attributes:@{NSFontAttributeName:label.font}];
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){label.frame.size.width, CGFLOAT_MAX}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    
+    NSLog(@"SenderMsg height %@ ",NSStringFromCGRect(rect));
+    
+    //    SenderMsg.layout
+    
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -311,10 +333,31 @@
 //    NSString *documentsDirectory = [paths objectAtIndex:0];
 //    NSString * objPath =[[picker valueForKey:@"mediaTypes"] objectAtIndex:0];
 //    NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
+    NSLog(@"info[UIImagePickerControllerMediaType] %@",info[UIImagePickerControllerMediaType]);
+    UIImage* image;
+    NSData* imgDatas; // = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:info[@"UIImagePickerControllerImageURL"]]];
+    if([info[UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
+    {
+//        image = info[UIImagePickerControllerReferenceURL];
+        NSString* str = info[@"UIImagePickerControllerImageURL"];
+//        NSURL* url = (NSURL *)[info valueForKey:UIImagePickerControllerImageURL];
+        imgDatas = [[NSData alloc] initWithContentsOfFile:str];
+        imgFileName = [[info valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
+
+    }
+    else
+    {
+        NSURL* url = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
+        imgDatas = [[NSData alloc] initWithContentsOfURL:url];
+
+//        imgDatas = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:info[@"UIImagePickerControllerMediaURL"]]];
+        imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
+
+        image = info[UIImagePickerControllerOriginalImage];
+    }
     
-    UIImage* image = info[UIImagePickerControllerOriginalImage];
-    imgData = [self encodeToBase64String:image];
-    imgFileName = [[info valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
+//    imgData = [self encodeToBase64String:image];
+    imgData = [imgDatas base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (!imgFileName) {
         
         imgFileName = [self getFileName];
