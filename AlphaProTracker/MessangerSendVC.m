@@ -299,10 +299,10 @@
 #pragma mark UIImagePickerController Delegates
 
 
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-- (void)imagePickerController:(UIImagePickerController *)picker
-        didFinishPickingImage:(UIImage *)image
-                  editingInfo:(NSDictionary *)editingInfo
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+//- (void)imagePickerController:(UIImagePickerController *)picker
+//        didFinishPickingImage:(UIImage *)image
+//                  editingInfo:(NSDictionary *)editingInfo
 
 {
 //    NSDictionary * dict = [editingInfo valueForKey:UIImagePickerControllerOriginalImage];
@@ -312,8 +312,9 @@
 //    NSString * objPath =[[picker valueForKey:@"mediaTypes"] objectAtIndex:0];
 //    NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
     
+    UIImage* image = info[UIImagePickerControllerOriginalImage];
     imgData = [self encodeToBase64String:image];
-    imgFileName = [[editingInfo valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
+    imgFileName = [[info valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
     if (!imgFileName) {
         
         imgFileName = [self getFileName];
@@ -351,7 +352,7 @@
             if (multiSelect.count == 0) {
                 [AppCommon showAlertWithMessage:@"Please Select Atleast one contact to send message"];
             }
-            else if([_txtMessage.text isEqualToString:@""] && [imgData isEqualToString:@""])
+            else if(!_txtview.hasText && [imgData isEqualToString:@""])
             {
                 [AppCommon showAlertWithMessage:@"Please type Your message"];
             }
@@ -362,7 +363,7 @@
         }
         else
         {
-            if([_txtMessage.text isEqualToString:@""] && [imgData isEqualToString:@""])
+            if(!_txtview.hasText && [imgData isEqualToString:@""])
             {
                 [AppCommon showAlertWithMessage:@"Please type Your message"];
             }
@@ -520,7 +521,8 @@
 //    if([AppCommon GetClientCode]) [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
 //    if([AppCommon GetUsercode]) [dic setObject:[AppCommon GetUsercode] forKey:@"UserCode"];
 //    [dic setObject:_CommID forKey:@"commId"];
-    [dic setObject:_txtMessage.text forKey:@"newmessage"];
+    
+    [dic setObject:_txtview.text forKey:@"newmessage"];
     [dic setObject:imgData forKey:@"newmessagephoto"];
     [dic setObject:imgFileName  forKey:@"fileName"];
     
@@ -640,7 +642,7 @@
         [dic setObject:code forKey:@"receivercodes"];
 
     }
-    [dic setObject:_txtMessage.text forKey:@"newmessage"];
+    [dic setObject:_txtview.text forKey:@"newmessage"];
     [dic setObject:imgData forKey:@"newmessagephoto"];
     [dic setObject:imgFileName  forKey:@"fileName"];
     [AppCommon showLoading];
@@ -681,60 +683,62 @@
 {
     imgData = @"";
     imgFileName = @"";
-    _txtMessage.text = @"";
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _txtview.text = @"";
+    });
+//    _MsgToolHeight.constant = 40;
+//    [_txtview updateConstraintsIfNeeded];
 }
 
-#pragma mark UITextField Delagates
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-//    self.viewBottomSpace.constant = 0;
-
-
-    return YES;
-}
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    return YES;
-}// called when 'return' key pressed. return NO to ignore.
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    self.viewBottomSpace.constant = 0;
-
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField.text.length == 0 && [string isEqualToString:@" "]) {
-        return NO;
-    }
-//    CGRect frame = [self textFieldHeight:[textField.text stringByAppendingString:string]];
-//    CGRect txtFrame = _txtMessage.frame;
-//    txtFrame.size.height = frame.size.height;
-//    _txtMessage.frame = txtFrame;
-    
-    return YES;
-}
+#pragma mark UITextView Delagates
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    if (textView.text.length == 0 && [text isEqualToString:@" "]) {
+        return NO;
+    }
+    
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+    }
+
     return YES;
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
-
-    [self textFieldHeight:textView.text];
+    
+    [textView invalidateIntrinsicContentSize];
+    [textView setScrollEnabled:NO];
+    CGFloat MinHeight = 40.0;
+    CGFloat MaxHeight = 200;
+    
+    CGFloat height;
+    if (textView.intrinsicContentSize.height <= MinHeight) {
+        NSLog(@"MIN");
+        height = MAX(textView.intrinsicContentSize.height,MinHeight);
+    }
+    else  if (textView.intrinsicContentSize.height >= MaxHeight) {
+        NSLog(@"MAX");
+        height = MIN(textView.intrinsicContentSize.height,MaxHeight);
+    }
+    else
+    {
+        NSLog(@"NORMAL");
+        height = textView.intrinsicContentSize.height;
+    }
+    
+    _MsgToolHeight.constant = height;
+    [textView updateConstraintsIfNeeded];
+    [textView setScrollEnabled:YES];
+    
 }
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    NSLog(@"textViewDidEndEditing called");
 
+    self.viewBottomSpace.constant = 0;
+
+}
 -(void)textFieldHeight:(NSString *)string
 {
     
@@ -817,6 +821,8 @@
     UIAlertController* alert =[UIAlertController alertControllerWithTitle:APP_NAME message:@"Choose Your Attachment" preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction* CameraAction = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         imagePickerController.sourceType =  UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
+
         [self presentViewController:imagePickerController animated:YES completion:nil];
 
         
@@ -844,6 +850,14 @@
     [self presentViewController:alert animated:TRUE completion:nil];
 
     
+    
+}
+- (IBAction)actionCancelAttachment:(id)sender {
+    imgData = @"";
+    imgFileName = @"";
+    currentlySelectedImage = nil;
+    ImgViewBottomConst.constant = -imgView.frame.size.height;
+    [imgView updateConstraintsIfNeeded];
     
 }
 

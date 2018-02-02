@@ -27,6 +27,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>For chat attachments</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>record video</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app want to see</string>
 	<key>UIBackgroundModes</key>

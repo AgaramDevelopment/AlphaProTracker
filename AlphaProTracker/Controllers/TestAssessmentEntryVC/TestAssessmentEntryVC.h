@@ -35,7 +35,7 @@
 @property (nonatomic,strong) IBOutlet UIView *centrl2view;
 @property (nonatomic,strong) IBOutlet UIView *descview;
 //@property (nonatomic,strong) IBOutlet UIView *interfaceview;
-//@property (nonatomic,strong) IBOutlet UIView *valueview;
+@property (nonatomic,strong) IBOutlet UIView *valueview;
 @property (nonatomic,strong) IBOutlet UIView *remarksview;
 @property (weak, nonatomic) IBOutlet UIScrollView *CommScroll;
 

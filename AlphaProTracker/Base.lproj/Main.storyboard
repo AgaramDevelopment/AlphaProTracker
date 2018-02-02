@@ -11074,6 +11074,7 @@ portion Size</string>
                         <outlet property="saveBtn" destination="7Wt-mD-PFc" id="sml-q5-d3J"/>
                         <outlet property="valueCombView" destination="1ol-Wc-kos" id="hlK-x7-NUr"/>
                         <outlet property="valueTxt" destination="R9J-ox-53I" id="Ls6-b8-HLh"/>
+                        <outlet property="valueview" destination="qJ9-GH-Jc3" id="VKq-cp-u9H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zIO-FZ-ggU" userLabel="First Responder" sceneMemberID="firstResponder"/>
